@@ -177,6 +177,20 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .smaspjald .sp-efni{margin:0;padding:6px 14px 14px;overflow-y:auto;overscroll-behavior:contain;font-size:14px;line-height:1.45}
 .pinni.valinn{transform:scale(1.25);box-shadow:0 0 0 4px var(--fokus),0 2px 8px rgba(0,0,0,.4)}
 .pinni{transition:transform .15s}
+.taknskyring{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 18px;margin:4px 0 6px}
+.tk{display:flex;gap:10px;align-items:center;font-size:14px;line-height:1.35}
+.tk-i{width:34px;flex:none;display:flex;justify-content:center;font-size:19px}
+.tk-i .stigpill{font-size:12px;min-width:32px;padding:1px 6px}
+.tk-pinni{width:24px;height:24px;font-size:12px;margin:0}
+.tk-blar{width:18px;height:18px;cursor:auto}
+.tk-i .vidv-litur{width:16px;height:16px;margin:0}
+#sida h4{font-size:15px;margin:18px 0 6px}
+.maeling{font-size:13px;background:var(--chip);border-radius:7px;padding:5px 8px;margin:6px 0}
+#vi-stada h4,.lk-titill{font-size:13px;margin:10px 0 4px}
+.vi-listi{list-style:none;margin:0 0 4px;padding:0}
+.vi-listi li{display:flex;gap:8px;border:0;padding:3px 0;font-size:13px;cursor:auto;grid-template-columns:none}
+.vi-listi li.ok>span:first-child{color:#2f9e44;font-weight:700}
+.vi-listi li.ekki{color:var(--muted)}
 .naest{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
 .naest-titill{font-weight:500;font-size:13px;margin-bottom:4px}
 .naest ul{list-style:none;margin:0;padding:0;font-size:13px}
@@ -346,6 +360,8 @@ details .likan small{color:var(--muted)}
   <div id="heimildir"></div>
   <details id="stillingar">
     <summary data-i18n="stillingar">Stillingar</summary>
+    <div id="vi-stada"></div>
+    <h4 class="lk-titill" data-i18n="lk_titill">Veðurlíkön (í gegnum Open-Meteo)</h4>
     <div id="likon-val"></div>
     <p class="skyring" data-i18n="likonBreyting">Breytingar á líkönum taka gildi þegar þú sækir spá næst.</p>
   </details>
@@ -1146,6 +1162,32 @@ for(const[mal,[fyrirsogn,texti]]of Object.entries(SAMBAND)){const L=I18N[mal];if
 const SP_TEXTAR={is:['Loka','Brjóta saman eða opna'],en:['Close','Collapse or expand'],da:['Luk','Fold sammen eller ud'],sv:['Stäng','Fäll ihop eller ut'],
   pl:['Zamknij','Zwiń lub rozwiń'],fr:['Fermer','Réduire ou développer'],zh:['关闭','收起或展开'],es:['Cerrar','Contraer o expandir']};
 for(const[mal,[a,b]]of Object.entries(SP_TEXTAR))if(I18N[mal]){I18N[mal].sp_loka=a;I18N[mal].sp_brjota=b;}
+const HREINSA={is:'↺ Hreinsa leit',en:'↺ Clear search',da:'↺ Nulstil søgning',sv:'↺ Rensa sökning',pl:'↺ Wyczyść wyszukiwanie',fr:'↺ Effacer la recherche',zh:'↺ 清除搜索',es:'↺ Borrar búsqueda'};
+for(const[mal,v]of Object.entries(HREINSA))if(I18N[mal])I18N[mal].hreinsa=v;
+// ---------------------------------------------------------------- Þýðingar: Veðurstofa Íslands í stillingum og mælingar
+const VI_L=['vi_titill','vi_spa','vi_mael','vi_vidv','vi_ekki','lk_titill','mael'];
+const I18N_VI={
+is:['Veðurstofa Íslands (vedur.is)','Stöðvaspár frá {n} stöðvum, teknar með í útreikning staða innan 20 km','Nýjustu mælingar frá {n} stöðvum, sýndar við nálæga staði','Viðvaranir Veðurstofunnar birtar á kortinu','Ekki tengt enn. Gögnin berast þegar sjálfvirknin á GitHub hefur keyrt.','Veðurlíkön (í gegnum Open-Meteo)','Mælt kl. {t} á {s}: {x}'],
+en:['Icelandic Met Office (vedur.is)','Station forecasts from {n} stations, included for places within 20 km','Latest measurements from {n} stations, shown for nearby places','Met Office warnings shown on the map','Not connected yet. The data arrives once the automation on GitHub has run.','Weather models (via Open-Meteo)','Measured at {t} at {s}: {x}'],
+da:['Islands vejrtjeneste (vedur.is)','Stationsprognoser fra {n} stationer, medregnet for steder inden for 20 km','Seneste målinger fra {n} stationer, vist ved nærliggende steder','Vejrtjenestens varsler vist på kortet','Ikke forbundet endnu. Data kommer, når automatikken på GitHub har kørt.','Vejrmodeller (via Open-Meteo)','Målt kl. {t} på {s}: {x}'],
+sv:['Isländska meteorologiska institutet (vedur.is)','Stationsprognoser från {n} stationer, medräknade för platser inom 20 km','Senaste mätningar från {n} stationer, visade vid närliggande platser','Institutets varningar visas på kartan','Inte anslutet än. Data kommer när automatiseringen på GitHub har körts.','Vädermodeller (via Open-Meteo)','Uppmätt kl. {t} vid {s}: {x}'],
+pl:['Islandzki Instytut Meteorologiczny (vedur.is)','Prognozy z {n} stacji, uwzględniane dla miejsc w promieniu 20 km','Najnowsze pomiary z {n} stacji, pokazywane przy pobliskich miejscach','Ostrzeżenia instytutu pokazane na mapie','Jeszcze niepołączone. Dane pojawią się po uruchomieniu automatyzacji na GitHub.','Modele pogodowe (przez Open-Meteo)','Pomiar o {t} na stacji {s}: {x}'],
+fr:['Office météorologique islandais (vedur.is)','Prévisions de {n} stations, prises en compte pour les lieux à moins de 20 km','Dernières mesures de {n} stations, affichées pour les lieux proches','Alertes de l’Office affichées sur la carte','Pas encore connecté. Les données arriveront après l’exécution de l’automatisation sur GitHub.','Modèles météo (via Open-Meteo)','Mesuré à {t} à {s} : {x}'],
+zh:['冰岛气象局（vedur.is）','来自 {n} 个站点的预报，用于 20 公里内地点的计算','来自 {n} 个站点的最新实测数据，显示在附近地点','气象局预警显示在地图上','尚未连接。GitHub 上的自动任务运行后将获取数据。','天气模型（经由 Open-Meteo）','{s} 于 {t} 实测：{x}'],
+es:['Oficina Meteorológica de Islandia (vedur.is)','Previsiones de {n} estaciones, incluidas para lugares a menos de 20 km','Últimas mediciones de {n} estaciones, mostradas en lugares cercanos','Avisos de la Oficina mostrados en el mapa','Aún no conectado. Los datos llegarán cuando se ejecute la automatización en GitHub.','Modelos meteorológicos (vía Open-Meteo)','Medido a las {t} en {s}: {x}']};
+for(const[mal,v]of Object.entries(I18N_VI))if(I18N[mal])VI_L.forEach((k,i)=>I18N[mal][k]=v[i]);
+// ---------------------------------------------------------------- Þýðingar: tákn og merkingar (á „Um síðuna“)
+const TK_L=['tk_titill','tk_vedur','tk_gildi','tk_annad','tk_einkunn','tk_rautt','tk_blar','tk_stjarna','tk_mael','tk_hal','tk_svaedi','tk_frab','tk_god','tk_saem','tk_sidri','tk_haett','tk_flokkar'];
+const I18N_TK={
+is:['Tákn og merkingar','Veðurtákn','Gildi','Önnur tákn','Litir einkunna og viðvarana','Bestu staðirnir, númeraðir eftir einkunn','Þín staðsetning (dragðu til að leiðrétta)','Besti bletturinn innan reits, úr nákvæmari leit','Nýjasta mæling Veðurstofunnar á nálægri stöð','Viðvörun: hálendisvegur eða veðurviðvörun','Velja svæði á kortinu','Frábært (80–100)','Gott (60–79)','Sæmilegt (40–59)','Síðra (undir 40)','Í flokkunum Snjóflóðahætta og Versta veðrið eru há gildi slæm.','Flokkar'],
+en:['Symbols and meanings','Weather symbols','Values','Other symbols','Score and warning colours','The best places, numbered by score','Your location (drag to correct)','Best spot within a cell, from the detailed search','Latest Icelandic Met Office measurement at a nearby station','Warning: highland road or weather warning','Select an area on the map','Excellent (80–100)','Good (60–79)','Fair (40–59)','Poorer (below 40)','In the Avalanche danger and Worst weather categories, high values are bad.','Categories'],
+da:['Symboler og betydninger','Vejrsymboler','Værdier','Andre symboler','Farver for scorer og varsler','De bedste steder, nummereret efter score','Din placering (træk for at rette)','Bedste sted i et felt, fra den detaljerede søgning','Seneste måling fra den islandske vejrtjeneste ved en nærliggende station','Advarsel: højlandsvej eller vejrvarsel','Vælg et område på kortet','Fremragende (80–100)','Godt (60–79)','Rimeligt (40–59)','Dårligere (under 40)','I kategorierne Lavinefare og Værste vejr er høje værdier dårlige.','Kategorier'],
+sv:['Symboler och betydelser','Vädersymboler','Värden','Andra symboler','Färger för poäng och varningar','De bästa platserna, numrerade efter poäng','Din plats (dra för att rätta)','Bästa platsen i en ruta, från den detaljerade sökningen','Senaste mätningen från isländska meteorologiska institutet vid en närliggande station','Varning: högländsväg eller vädervarning','Välj ett område på kartan','Utmärkt (80–100)','Bra (60–79)','Hyggligt (40–59)','Sämre (under 40)','I kategorierna Lavinrisk och Sämsta vädret är höga värden dåliga.','Kategorier'],
+pl:['Symbole i ich znaczenie','Symbole pogody','Wartości','Inne symbole','Kolory wyników i ostrzeżeń','Najlepsze miejsca, ponumerowane według wyniku','Twoja lokalizacja (przeciągnij, aby poprawić)','Najlepsze miejsce w polu, z dokładniejszego wyszukiwania','Najnowszy pomiar Islandzkiego Instytutu Meteorologicznego z pobliskiej stacji','Uwaga: droga w interiorze lub ostrzeżenie pogodowe','Wybierz obszar na mapie','Doskonale (80–100)','Dobrze (60–79)','Przeciętnie (40–59)','Słabiej (poniżej 40)','W kategoriach Zagrożenie lawinowe i Najgorsza pogoda wysokie wartości są złe.','Kategorie'],
+fr:['Symboles et significations','Symboles météo','Valeurs','Autres symboles','Couleurs des notes et des alertes','Les meilleurs endroits, numérotés selon leur note','Votre position (faites glisser pour corriger)','Meilleur endroit d’une case, issu de la recherche détaillée','Dernière mesure de l’Office météorologique islandais à une station proche','Attention : route des hautes terres ou alerte météo','Choisir une zone sur la carte','Excellent (80–100)','Bon (60–79)','Correct (40–59)','Moins bon (moins de 40)','Dans les catégories Risque d’avalanche et Pire météo, les valeurs élevées sont mauvaises.','Catégories'],
+zh:['符号说明','天气符号','数值','其他符号','评分和预警颜色','最佳地点，按评分编号','你的位置（可拖动修正）','网格内的最佳地点，来自精细搜索','附近站点的冰岛气象局最新实测','注意：高地道路或天气预警','在地图上选择区域','极佳（80–100）','良好（60–79）','一般（40–59）','较差（40 以下）','在“雪崩危险”和“最差天气”类别中，数值越高越不利。','类别'],
+es:['Símbolos y significados','Símbolos del tiempo','Valores','Otros símbolos','Colores de puntuaciones y avisos','Los mejores lugares, numerados según su puntuación','Tu ubicación (arrastra para corregir)','Mejor punto de una celda, de la búsqueda detallada','Última medición de la Oficina Meteorológica de Islandia en una estación cercana','Atención: carretera de las tierras altas o aviso meteorológico','Elegir una zona en el mapa','Excelente (80–100)','Bueno (60–79)','Aceptable (40–59)','Peor (menos de 40)','En las categorías Peligro de aludes y Peor tiempo, los valores altos son malos.','Categorías']};
+for(const[mal,v]of Object.entries(I18N_TK))if(I18N[mal])TK_L.forEach((k,i)=>I18N[mal][k]=v[i]);
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1331,6 +1373,7 @@ const SOL_ORD=[["heiðskírt",1],["léttskýjað",.75],["hálfskýjað",.55],["a
 function baetaVidVedurIs(vi,gogn){
   // Spá Veðurstofunnar fyrir stöð verður aukameðlimur í samsafni grindarpunkta innan 20 km
   for(const st of vi.stodvar){
+    if(!st.spa?.length)continue;
     const T=[],W=[],P=[],SL=[];
     for(let k=0;k<S.timar.length;k++){
       const t=Date.parse(S.timar[k]+'Z');let besta=null,bd=7200001;
@@ -1363,7 +1406,7 @@ async function saekjaAllt(){
   if(heimildir.length){
     S.demo=false;
     const vi=await saekjaVedurIs();
-    if(vi){baetaVidVedurIs(vi,gogn);heimildir.push('@vi');}
+    S.vi=vi;if(vi){baetaVidVedurIs(vi,gogn);heimildir.push('@vi');}
   }else{
     S.demo=true;gerviGogn(gogn);heimildir.push('@gervi');
   }
@@ -1618,6 +1661,7 @@ function syna(i,fljuga=true){
     ${a.vidv?`<p class="vidv-merki"><i class="vidv-litur vl-${a.vidv}"></i>${t('vid_stad',{x:t(VID_HEITI[a.vidv])})}</p>`:''}
     ${f.haetta?`<p class="smatt">${t('haettaSmatt')}</p>`:''}
     ${a.stod?`<p class="smatt">${t('stodMed',{s:a.stod})}</p>`:''}
+    ${maelingTexti(a)}
     <p class="smatt">${hnitTexti(a)}${a.haed!=null?', '+t('haed',{h:Math.round(a.haed)}):''}${f.stadir||a.hl?'':'<br>'+t('reitur')}</p>
     ${f.stadir||f.haetta||f.ofugt||a.hl?'':`<button type="button" class="nakvaemt">${t('finna')}</button>`}
     <button type="button" class="kl-her">${t('kl_her')}</button>${tenglar(a)}`;
@@ -1681,6 +1725,10 @@ function teikna(skilabod){
   const fa=document.getElementById('flokksathugasemd');fa.hidden=!ath;fa.innerHTML=ath;fa.classList.toggle('haetta',!!f.haetta);
   document.getElementById('skyring').innerHTML=`<p>${t(f.haetta?'sk_haetta':f.ofugt?'sk_verst':f.stadir?'sk_skidi':'sk_almennt')}</p>`;
   document.getElementById('heimildir').innerHTML=heimildakassi();
+  {const st=S.vi?.stodvar||[],nS=st.filter(x=>x.spa?.length).length,nM=st.filter(x=>x.maeling).length,vv=S.vidv&&!S.vidv.villa;
+   const lina=(ok,txt)=>`<li class="${ok?'ok':'ekki'}"><span aria-hidden="true">${ok?'✓':'–'}</span><span>${txt}</span></li>`;
+   document.getElementById('vi-stada').innerHTML=`<h4>🇮🇸 ${t('vi_titill')}</h4><ul class="vi-listi">${
+     lina(nS>0,nS?t('vi_spa',{n:nS}):t('hk_stod')+': '+t('vi_ekki'))}${lina(nM>0,nM?t('vi_mael',{n:nM}):'')}${lina(vv,vv?t('vi_vidv'):t('hk_vidv')+': '+t('vi_ekki'))}</ul>`.replace(/<li class="ekki"><span aria-hidden="true">–<\/span><span><\/span><\/li>/,'');}
   const tk=document.getElementById('tilkynning');
   tk.style.display=S.demo?'block':'none';
   tk.textContent=S.demo?t('demo'):'';
@@ -1725,6 +1773,37 @@ function naestHtml(ut){
   const lina=(takn,fl)=>{const x=ut?.[fl];return`<li><span aria-hidden="true">${takn}</span><span>${t('on_'+fl)}: ${x?`<a href="https://www.google.com/maps/dir/?api=1&destination=${x.lat.toFixed(5)},${x.lon.toFixed(5)}" target="_blank" rel="noopener">${x.nafn||t('on_'+fl)}</a>, ${fm(x.d,1)} km`:`<em>${t('on_ekkert')}</em>`}</span></li>`;};
   return`<div class="naest-titill">🛟 ${t('on_titill')}</div>${ut?`<ul>${lina('🏨','gisting')}${lina('🛖','skali')}${lina('🏘️','byggd')}</ul><p class="kl-smatt">${t('on_beint')}</p>`:`<p class="kl-smatt">${t('on_villa')}</p>`}
     <a class="neyd" href="tel:112">🆘 ${t('on_neyd')}</a>`;
+}
+function maelingTexti(a){
+  let b=null,d=21;
+  for(const st of S.vi?.stodvar||[]){if(!st.maeling)continue;const x=km(a,st);if(x<d){d=x;b=st;}}
+  if(!b)return'';
+  const m=b.maeling,aldur=(Date.now()-Date.parse(m.t+'Z'))/36e5;if(aldur>6)return'';
+  const sol=SOL_ORD.find(([o])=>(m.W||'').toLowerCase().includes(o));
+  const x=[m.T!=null?`${fm(m.T)} °C`:null,m.F!=null?`${fm(m.F,0)} m/s`:null,m.W||null].filter(Boolean).join(', ');
+  return`<p class="maeling">📡 ${t('mael',{t:m.t.slice(11,16),s:b.nafn,x})}</p>`;
+}
+function taknskyring(){
+  const an=x=>(x||'').replace(/^[^\p{L}\p{N}]+/u,'').trim(),stor=x=>x?x[0].toUpperCase()+x.slice(1):x;
+  const r=(i,txt)=>`<div class="tk"><span class="tk-i" aria-hidden="true">${i}</span><span>${txt}</span></div>`;
+  const kafli=(titill,rodir)=>`<h4>${titill}</h4><div class="taknskyring">${rodir.join('')}</div>`;
+  return `<h3>${t('tk_titill')}</h3>`+
+    kafli(t('tk_flokkar'),Object.entries(FLOKKAR).map(([k,f])=>r(f.takn,flT(k,0))))+
+    kafli(t('tk_vedur'),[['☀️','sol'],['🌤️','lett'],['⛅','skyjad'],['☁️','alsk'],['🌧️','rigning'],['🌨️','slydda'],['❄️','snjokoma'],['🌫️','thoka'],['🌙','heid'],['💨','hvasst']].map(([i,k])=>r(i,stor(vt(k)))))+
+    kafli(t('tk_gildi'),[['🌡️','hiti'],['💨','vindur'],['🌬️','hvidur'],['💧','urkoma'],['☀️','sol'],['☁️','sky'],['📏','snjor'],['🌙','nott'],['❄️','nysnjor'],['🌧️','regnSnjo']].map(([i,k])=>r(i,lb(k))))+
+    kafli(t('tk_annad'),[
+      r('<span class="pinni tk-pinni">1</span>',t('tk_rautt')),r('<span class="minn-punktur tk-blar"></span>',t('tk_blar')),
+      r('<span class="pinni litill tk-pinni">★</span>',t('tk_stjarna')),r('📡',t('tk_mael')),r('🛟',t('on_titill')),
+      r('🏨',t('on_gisting')),r('🛖',t('on_skali')),r('🏘️',t('on_byggd')),r('🆘',t('on_neyd')),
+      r('🧭',an(t('lf_hnappur'))),r('🚗',t('lf_faerd')),r('⚠️',t('tk_hal')),r('👕',an(t('kl_hnappur'))),
+      r('⬚',t('tk_svaedi')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),
+      r('🎿',t('sk_vefur')),r('🇮🇸',t('vi_titill')),r('💡',t('kl_gottAdVita'))])+
+    kafli(t('tk_einkunn'),[
+      r('<span class="stigpill st-frab">85</span>',t('tk_frab')),r('<span class="stigpill st-god">70</span>',t('tk_god')),
+      r('<span class="stigpill st-saem">50</span>',t('tk_saem')),r('<span class="stigpill st-sidri">30</span>',t('tk_sidri')),
+      r('<i class="vidv-litur vl-gul"></i>',t('vid_gul')),r('<i class="vidv-litur vl-appelsinugul"></i>',t('vid_appels')),
+      r('<i class="vidv-litur vl-raud"></i>',t('vid_raud'))])+
+    `<p class="kl-smatt">${t('tk_haett')}</p>`;
 }
 function vidvSprettur(v){
   return `<strong><i class="vidv-litur vl-${v.litur}"></i>${t(VID_HEITI[v.litur])}: ${txt(v.atburdur)}</strong>
@@ -2051,7 +2130,7 @@ function stadaListi(lykill){
 const SV={velja:false,byrjun:null,px:null,dragt:null,rammi:null};
 const SvaediStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar svaedistjorn');
-  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="sv-hreinsa" data-i18n="sv_hreinsa" hidden>Allt landið</button>`;
+  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button>`;
   L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d;}});
 new SvaediStjorn({position:'topleft'}).addTo(kort);
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
@@ -2098,7 +2177,17 @@ kortEl.addEventListener('pointerup',e=>{
 },true);
 addEventListener('keydown',e=>{if(e.key==='Escape'&&SV.velja)svLjuka();});
 document.getElementById('sv-velja').onclick=svHefja;
-document.getElementById('sv-hreinsa').onclick=()=>hreinsaSvaedi();
+document.getElementById('sv-hreinsa').onclick=()=>hreinsaLeit();
+// Byrja upp á nýtt: hreinsa svæði, nákvæmari leit, spjald og val á korti; flokkur, dagur og staðsetning haldast
+function hreinsaLeit(){
+  if(SV.velja)svLjuka();
+  KL.velja=false;kortEl.classList.remove('velja');
+  nakvLag.clearLayers();kort.closePopup();
+  if(typeof lokaSpjaldi==='function')lokaSpjaldi();
+  if(S.svaedi){S.svaedi=null;if(SV.rammi){kort.removeLayer(SV.rammi);SV.rammi=null;}reikna();}
+  kort.flyToBounds([[63.3,-24.6],[66.6,-13.4]],{duration:.7});
+  klTeikna();
+}
 
 function gerviSvaedi(pts,gogn){
   for(const p of pts){
@@ -2123,7 +2212,6 @@ async function veljaSvaedi(b){
   }
   if(SV.rammi)kort.removeLayer(SV.rammi);
   SV.rammi=L.rectangle(b,{className:'svaedisrammi',interactive:false}).addTo(kort);
-  document.getElementById('sv-hreinsa').hidden=false;
   kort.flyToBounds(b,{padding:[20,20],duration:.7});
   if(!pts.length&&!SKIDASVAEDI.some(x=>b.contains([x.lat,x.lon]))){S.svaedi={b,pts:[],gogn:{},saekir:false,tomt:true};reikna();return;}
   S.svaedi={b,pts,gogn:null,saekir:true};reikna();
@@ -2140,7 +2228,6 @@ async function veljaSvaedi(b){
 }
 function hreinsaSvaedi(){
   S.svaedi=null;if(SV.rammi){kort.removeLayer(SV.rammi);SV.rammi=null;}
-  document.getElementById('sv-hreinsa').hidden=true;
   kort.flyToBounds([[63.3,-24.6],[66.6,-13.4]],{duration:.7});reikna();
 }
 function teiknaSvaediKassa(){
@@ -2215,7 +2302,8 @@ function leid(){
   document.body.classList.toggle('a-sidu',!!sida);
   const el=document.getElementById('sida');el.hidden=!sida;
   document.querySelectorAll('.valmynd a').forEach(a=>a.dataset.sida===sida?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
-  if(sida){document.getElementById('sida-efni').innerHTML=(L_().sidur||I18N.is.sidur)[sida];el.scrollTop=0;window.scrollTo(0,0);el.focus({preventScroll:true});}
+  if(sida){document.getElementById('sida-efni').innerHTML=(L_().sidur||I18N.is.sidur)[sida];
+    if(sida==='um'){const sb=document.querySelector('#sida-efni .samband')?.previousElementSibling;if(sb)sb.insertAdjacentHTML('beforebegin',taknskyring());else document.getElementById('sida-efni').insertAdjacentHTML('beforeend',taknskyring());}el.scrollTop=0;window.scrollTo(0,0);el.focus({preventScroll:true});}
   else setTimeout(()=>kort.invalidateSize(),30);
 }
 addEventListener('hashchange',leid);
