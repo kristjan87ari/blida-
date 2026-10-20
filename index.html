@@ -2082,9 +2082,9 @@ const ISL_BOX='63.2,-24.6,66.6,-13.4';
 const OSM_FYRIRSPURNIR={
   sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|customers|no)$"](${ISL_BOX});`+
        `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
-       `nwr["amenity"="public_bath"](${ISL_BOX}););out center tags;`,
-  golf:`[out:json][timeout:60];(nwr["leisure"="golf_course"](${ISL_BOX}););out center tags;`,
-  tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out center tags;`};
+       `nwr["amenity"="public_bath"](${ISL_BOX}););out tags geom;`,
+  golf:`[out:json][timeout:60];(nwr["leisure"="golf_course"](${ISL_BOX}););out tags geom;`,
+  tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out tags geom;`};
 // Varalisti ef OpenStreetMap svarar ekki (hnit eru nálgun)
 const VARALISTAR={
   golf:[["Grafarholtsvöllur",64.1180,-21.7700],["Korpúlfsstaðavöllur",64.1500,-21.7600],["Hvaleyrarvöllur, Hafnarfirði",64.0750,-21.9900],
@@ -2105,22 +2105,55 @@ const VARALISTAR={
 const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is',golf:'https://rastimar.golf.is/vellir'};
 const LISTA_TAKN={sund:['♨️','ls_sund'],tjald:['⛺','ls_tjalda'],golf:['⛳','ls_golf']};
 const LISTAR={};
+// Punktur innan útlína (ekki miðja umlykjandi ferhyrnings, sem lendir oft úti á sjó við strönd)
+function innriPunktur(hringir){
+  const h=hringir.reduce((a,b)=>b.length>a.length?b:a),n=h.length;
+  let A=0,cx=0,cy=0;
+  for(let i=0;i<n;i++){const[x1,y1]=h[i],[x2,y2]=h[(i+1)%n],c=x1*y2-x2*y1;A+=c;cx+=(x1+x2)*c;cy+=(y1+y2)*c;}
+  if(Math.abs(A)>1e-14){cx/=3*A;cy/=3*A;}else{cx=h.reduce((s,p)=>s+p[0],0)/n;cy=h.reduce((s,p)=>s+p[1],0)/n;}
+  if(innanHrings(cy,cx,h))return[cy,cx];
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const[x,y]of h){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);}
+  let best=null,bd=1e18;const N=15;
+  for(let i=1;i<N;i++)for(let j=1;j<N;j++){
+    const x=x0+(x1-x0)*i/N,y=y0+(y1-y0)*j/N;if(!innanHrings(y,x,h))continue;
+    // næst miðju, en helst ekki alveg við jaðar: mæla fjarlægð í næsta horn útlínu
+    let jadar=1e18;for(const[px,py]of h){const d=(px-x)**2+(py-y)**2;if(d<jadar)jadar=d;}
+    const kostn=(x-cx)**2+(y-cy)**2-.5*jadar;
+    if(kostn<bd){bd=kostn;best=[y,x];}
+  }
+  return best||[h[0][1],h[0][0]];
+}
+function stadsetningOSM(e){
+  if(e.type==='node')return e.lat!=null?[e.lat,e.lon]:null;
+  const hr=[];
+  if(e.geometry)hr.push(e.geometry.filter(Boolean).map(g=>[g.lon,g.lat]));
+  if(e.members){
+    const ytri=e.members.filter(m=>m.geometry&&m.role!=='inner').map(m=>m.geometry.filter(Boolean).map(g=>[g.lon,g.lat]));
+    const lokadir=ytri.filter(r=>r.length>=4&&r[0][0]===r[r.length-1][0]&&r[0][1]===r[r.length-1][1]);
+    if(lokadir.length)hr.push(...lokadir);else if(ytri.length)hr.push(ytri.flat());
+  }
+  const gild=hr.filter(h=>h.length>=3);
+  if(gild.length)return innriPunktur(gild);
+  if(e.center)return[e.center.lat,e.center.lon];
+  if(e.bounds)return[(e.bounds.minlat+e.bounds.maxlat)/2,(e.bounds.minlon+e.bounds.maxlon)/2];
+  return null;
+}
 async function saekjaStadi(lykill){
-  const geymt=geyma.get('bs:listi:'+lykill);
+  const geymt=geyma.get('bs:listi2:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(OSM_FYRIRSPURNIR[lykill]));
     if(!r.ok)throw new Error(r.status);
     const j=await r.json(),pts=[];
     for(const e of j.elements||[]){
-      const la=e.lat??e.center?.lat,lo=e.lon??e.center?.lon,tg=e.tags||{};if(la==null)continue;
+      const st=stadsetningOSM(e),tg=e.tags||{};if(!st)continue;const[la,lo]=st;
       const p={id:`${lykill}:${e.type[0]}${e.id}`,lat:+la.toFixed(5),lon:+lo.toFixed(5),nafn:tg.name||tg['name:is']||tg['name:en']||null,vefur:tg.website||tg['contact:website']||null};
       const naer=pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
       if(naer){if(!naer.nafn&&p.nafn)naer.nafn=p.nafn;if(!naer.vefur&&p.vefur)naer.vefur=p.vefur;continue;}
       pts.push(p);
     }
     if(!pts.length)throw new Error('tómt');
-    geyma.set('bs:listi:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi2:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     return{pts:VARALISTAR[lykill].map(([n,la,lo],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,nafn:n,vefur:null})),vara:true};
