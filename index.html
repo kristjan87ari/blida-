@@ -1188,6 +1188,18 @@ fr:['Symboles et significations','Symboles météo','Valeurs','Autres symboles',
 zh:['符号说明','天气符号','数值','其他符号','评分和预警颜色','最佳地点，按评分编号','你的位置（可拖动修正）','网格内的最佳地点，来自精细搜索','附近站点的冰岛气象局最新实测','注意：高地道路或天气预警','在地图上选择区域','极佳（80–100）','良好（60–79）','一般（40–59）','较差（40 以下）','在“雪崩危险”和“最差天气”类别中，数值越高越不利。','类别'],
 es:['Símbolos y significados','Símbolos del tiempo','Valores','Otros símbolos','Colores de puntuaciones y avisos','Los mejores lugares, numerados según su puntuación','Tu ubicación (arrastra para corregir)','Mejor punto de una celda, de la búsqueda detallada','Última medición de la Oficina Meteorológica de Islandia en una estación cercana','Atención: carretera de las tierras altas o aviso meteorológico','Elegir una zona en el mapa','Excelente (80–100)','Bueno (60–79)','Aceptable (40–59)','Peor (menos de 40)','En las categorías Peligro de aludes y Peor tiempo, los valores altos son malos.','Categorías']};
 for(const[mal,v]of Object.entries(I18N_TK))if(I18N[mal])TK_L.forEach((k,i)=>I18N[mal][k]=v[i]);
+// ---------------------------------------------------------------- Þýðingar: golf
+const I18N_GOLF={
+is:{f:null,ui:['Rástímar á golf.is','Sundlaugar, tjaldsvæði og golfvellir','OpenStreetMap. Sjá einnig sundlaugar.is, tjalda.is og golf.is.','Sæki staðsetningar…']},
+en:{f:['Golf','Iceland’s golf courses compared: light wind, dry and mild between 9:00 and 20:00.','Most courses are open from May to September. Check opening and book tee times at golf.is.'],ui:['Tee times at golf.is','Pools, campsites and golf courses','OpenStreetMap. See also sundlaugar.is, tjalda.is and golf.is.','Fetching locations…']},
+da:{f:['Golf','Islands golfbaner sammenlignet: svag vind, tørt og mildt mellem kl. 9 og 20.','De fleste baner har åbent fra maj til september. Tjek åbning og book starttider på golf.is.'],ui:['Starttider på golf.is','Svømmebade, campingpladser og golfbaner','OpenStreetMap. Se også sundlaugar.is, tjalda.is og golf.is.','Henter placeringer…']},
+sv:{f:['Golf','Islands golfbanor jämförda: svag vind, torrt och milt mellan kl. 9 och 20.','De flesta banor har öppet från maj till september. Kolla öppettider och boka starttider på golf.is.'],ui:['Starttider på golf.is','Bad, campingplatser och golfbanor','OpenStreetMap. Se även sundlaugar.is, tjalda.is och golf.is.','Hämtar platser…']},
+pl:{f:['Golf','Porównanie islandzkich pól golfowych: słaby wiatr, sucho i łagodnie między 9 a 20.','Większość pól jest otwarta od maja do września. Sprawdź otwarcie i zarezerwuj czas startu na golf.is.'],ui:['Czasy startu na golf.is','Baseny, pola namiotowe i pola golfowe','OpenStreetMap. Zobacz też sundlaugar.is, tjalda.is i golf.is.','Pobieranie lokalizacji…']},
+fr:{f:['Golf','Comparaison des golfs d’Islande : vent faible, temps sec et doux entre 9 h et 20 h.','La plupart des parcours sont ouverts de mai à septembre. Vérifiez l’ouverture et réservez un départ sur golf.is.'],ui:['Heures de départ sur golf.is','Piscines, campings et golfs','OpenStreetMap. Voir aussi sundlaugar.is, tjalda.is et golf.is.','Récupération des lieux…']},
+zh:{f:['高尔夫','比较冰岛各高尔夫球场：9:00 至 20:00 之间风小、干燥、温和。','大多数球场 5 月至 9 月开放。请在 golf.is 查看开放情况并预订开球时间。'],ui:['在 golf.is 预订开球时间','游泳池、露营地和高尔夫球场','OpenStreetMap。另见 sundlaugar.is、tjalda.is 和 golf.is。','正在获取地点…']},
+es:{f:['Golf','Comparación de los campos de golf de Islandia: viento flojo, seco y templado entre las 9:00 y las 20:00.','La mayoría de los campos abren de mayo a septiembre. Consulta la apertura y reserva hora de salida en golf.is.'],ui:['Horas de salida en golf.is','Piscinas, campings y campos de golf','OpenStreetMap. Ver también sundlaugar.is, tjalda.is y golf.is.','Obteniendo ubicaciones…']}};
+for(const[mal,a]of Object.entries(I18N_GOLF)){const L=I18N[mal];if(!L)continue;
+  ['ls_golf','hk_listar','hk_listarT','ls_saeki'].forEach((k,i)=>L[k]=a.ui[i]);if(a.f&&L.flokkar)L.flokkar.golf=a.f;}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1254,6 +1266,11 @@ const FLOKKAR = {
     athugasemd:'Kannaðu opnunartíma á sundlaugar.is eða vef laugarinnar.',
     haed:()=>1,
     thaettir:m=>[[.40,laegra(m.vindur,2,10)],[.30,laegra(m.urkoma,0,4)],[.15,m.sol],[.15,trap(m.T,-6,6,22,30)]]},
+  golf:{nafn:'Golf',takn:'⛳',fra:9,til:20,stadir:'golf',
+    lysing:'Golfvellir landsins bornir saman: lítill vindur, þurrt og milt milli kl. 9 og 20.',
+    athugasemd:'Flestir vellir eru opnir frá maí fram í september. Kannaðu opnun og bókaðu rástíma á golf.is.',
+    haed:()=>1,
+    thaettir:m=>[[.30,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,2)],[.20,trap(m.T,2,12,22,28)],[.10,m.sol]]},
   alpaskidi:{nafn:'Skíði',takn:'⛷️',fra:10,til:17,stadir:'skidi',
     lysing:'Skíðasvæði landsins borin saman: nægur snjór, lítill vindur svo lyftur gangi, gott skyggni og hæfilegt frost milli kl. 10 og 17.',
     haed:()=>1,
@@ -1665,13 +1682,13 @@ function syna(i,fljuga=true){
     <p class="smatt">${hnitTexti(a)}${a.haed!=null?', '+t('haed',{h:Math.round(a.haed)}):''}${f.stadir||a.hl?'':'<br>'+t('reitur')}</p>
     ${f.stadir||f.haetta||f.ofugt||a.hl?'':`<button type="button" class="nakvaemt">${t('finna')}</button>`}
     <button type="button" class="kl-her">${t('kl_her')}</button>${tenglar(a)}`;
-  d.querySelector('.kl-her').addEventListener('click',()=>{klOpna(true);klSetja(a.lat,a.lon,null,true);
+  d.querySelector('.kl-her').addEventListener('click',()=>{klOpna(true);klSetja(a.lat,a.lon,(a.listi||a.skidasvaedi)?a.nafn:null,true);
     document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
   d.querySelector('.nakvaemt')?.addEventListener('click',e=>finnaNakvaemt(i,e.currentTarget));
   tengjaAfrita(d);
   if(a.listi){const ytri=LISTA_VEFIR[a.listi];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
     (a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'')+
-    `<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${a.listi==='sund'?'♨️':'⛺'} ${t(a.listi==='sund'?'ls_sund':'ls_tjalda')}</a>`);}
+    `<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${LISTA_TAKN[a.listi][0]} ${t(LISTA_TAKN[a.listi][1])}</a>`);}
   if(a.skidasvaedi){const sv=SKIDA_VEFIR[a.nafn];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
     `<a class="skida-vefur" href="${sv||'https://www.google.com/search?q='+encodeURIComponent('Skíðasvæði '+a.nafn)}" target="_blank" rel="noopener">🎿 ${t(sv?'sk_vefur':'sk_leita')}</a>`);}
   d.insertAdjacentHTML('beforeend',`<div class="naest"><div class="naest-titill">🛟 ${t('on_titill')}</div><p class="kl-smatt">${t('on_leita')}</p></div>`);
@@ -1746,7 +1763,7 @@ function heimildakassi(){
     <dt>⚠️ ${t('hk_vidv')}</dt><dd>${t(vidvVirk?'hk_vidvT':'hk_vidvOvirkt')} ${ytri(VID_SLOD,'vedur.is')}</dd>
     ${S.heimildir.includes('@vi')?`<dt>📍 ${t('hk_stod')}</dt><dd>${t('hk_stodT')}</dd>`:''}
     <dt>🏠 ${t('hk_on')}</dt><dd>${t('hk_onT')} ${ytri('https://www.openstreetmap.org','openstreetmap.org')}</dd>
-    <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')}</dd>
+    <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')} ${ytri('https://rastimar.golf.is/vellir','golf.is')}</dd>
     <dt>🗺️ ${t('hk_kort')}</dt><dd>${t('hk_kortT')} ${ytri('https://opentopomap.org','opentopomap.org')}</dd></dl>
     ${S.villur.length?`<p class="villa">${t('hk_villa',{x:S.villur.join('; ')})}</p>`:''}
     <p class="kl-smatt">${tm?t('hk_uppf',{t:tm})+' ':''}<a href="#um">${t('hk_meira')}</a></p></details>`;
@@ -1796,7 +1813,7 @@ function taknskyring(){
       r('<span class="pinni litill tk-pinni">★</span>',t('tk_stjarna')),r('📡',t('tk_mael')),r('🛟',t('on_titill')),
       r('🏨',t('on_gisting')),r('🛖',t('on_skali')),r('🏘️',t('on_byggd')),r('🆘',t('on_neyd')),
       r('🧭',an(t('lf_hnappur'))),r('🚗',t('lf_faerd')),r('⚠️',t('tk_hal')),r('👕',an(t('kl_hnappur'))),
-      r('⬚',t('tk_svaedi')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),
+      r('⬚',t('tk_svaedi')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),
       r('🎿',t('sk_vefur')),r('🇮🇸',t('vi_titill')),r('💡',t('kl_gottAdVita'))])+
     kafli(t('tk_einkunn'),[
       r('<span class="stigpill st-frab">85</span>',t('tk_frab')),r('<span class="stigpill st-god">70</span>',t('tk_god')),
@@ -1912,7 +1929,7 @@ function myrkurFyrir(p){const dR=km(p,{lat:64.13,lon:-21.9}),dA=km(p,{lat:65.68,
 function klaednadur(fk,m,p,g){
   const T=m.T??5,W=m.vindur??3,G=m.hvida??W*1.5,P=m.urkoma??0,SD=m.snjor??0,sol=m.sol??0;
   const F=vindkaeling(T,W),man=new Date(g.a).getUTCMonth(),klst=Math.max(1,(g.b-g.a)/36e5);
-  const virk={fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2}[fk]??0;
+  const virk={fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2}[fk]??0;
   const Te=F+virk+kyrr,fot=new Set(),med=[],vita=[];
   const blautt=P>=1||P/klst>=.3,mjogBlautt=P>=4,hvasst=W>=8||G>=15,snjor=SD>=.05,dimmt=man>=9||man<=1;
   // Efri hluti eftir upplifuðum hita, leiðréttum fyrir hreyfingu
@@ -1960,6 +1977,7 @@ function klaednadur(fk,m,p,g){
     case 'skidi':fot.delete('ulpa');fot.delete('dunulpa');fot.delete('skel');fot.add('vindjakki');fot.add('ullarbolur');med.push('vatn','aukalag');break;
     case 'alpaskidi':fot.add('hjalmur');fot.add('skidagleraugu');if(Te<0){fot.delete('vettlingar');fot.add('luffur');}break;
     case 'sund':fot.clear();fot.add('sundfot');fot.add('inniskor');if(T<3)fot.add('thykkhufa');vita.push(kn('sund'));break;
+    case 'golf':med.push('vatn');if(sol>=.4)fot.add('derhufa');if(blautt)fot.add('regnbuxur');break;
     case 'snjoflod':med.push('snjoflodabun');break;
     case 'verst':med.unshift('heima');break;
   }
@@ -2065,9 +2083,16 @@ const OSM_FYRIRSPURNIR={
   sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|customers|no)$"](${ISL_BOX});`+
        `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
        `nwr["amenity"="public_bath"](${ISL_BOX}););out center tags;`,
+  golf:`[out:json][timeout:60];(nwr["leisure"="golf_course"](${ISL_BOX}););out center tags;`,
   tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out center tags;`};
 // Varalisti ef OpenStreetMap svarar ekki (hnit eru nálgun)
 const VARALISTAR={
+  golf:[["Grafarholtsvöllur",64.1180,-21.7700],["Korpúlfsstaðavöllur",64.1500,-21.7600],["Hvaleyrarvöllur, Hafnarfirði",64.0750,-21.9900],
+    ["Urriðavöllur, Garðabæ",64.0670,-21.8900],["Hlíðavöllur, Mosfellsbæ",64.1720,-21.7150],["Brautarholtsvöllur",64.2150,-21.8800],
+    ["Hólmsvöllur í Leiru",64.0360,-22.5900],["Garðavöllur, Akranesi",64.3200,-22.0400],["Hamarsvöllur, Borgarnesi",64.5600,-21.8800],
+    ["Svarfhólsvöllur, Selfossi",63.9300,-20.9600],["Strandarvöllur, Hellu",63.8200,-20.3300],["Kiðjabergsvöllur",64.0200,-20.7400],
+    ["Vestmannaeyjavöllur",63.4280,-20.2800],["Jaðarsvöllur, Akureyri",65.6650,-18.1200],["Katlavöllur, Húsavík",66.0350,-17.3300],
+    ["Ekkjufellsvöllur, Fellabæ",65.2900,-14.4500],["Silfurnesvöllur, Höfn",64.2550,-15.2000],["Tungudalsvöllur, Ísafirði",66.0630,-23.1800]],
   sund:[["Laugardalslaug",64.1465,-21.8800],["Sundhöll Reykjavíkur",64.1430,-21.9230],["Vesturbæjarlaug",64.1470,-21.9670],["Sundlaug Kópavogs",64.1110,-21.9050],
     ["Ásvallalaug, Hafnarfirði",64.0560,-21.9900],["Sundlaug Akureyrar",65.6800,-18.0960],["Sundhöll Selfoss",63.9360,-20.9970],["Sundlaugin á Hofsósi",65.8980,-19.4130],
     ["Sundlaugin á Egilsstöðum",65.2640,-14.4050],["Jarðböðin við Mývatn",65.6310,-16.8480],["Gamla laugin, Flúðum",64.1370,-20.3090],["Bláa lónið",63.8800,-22.4490],
@@ -2077,7 +2102,8 @@ const VARALISTAR={
     ["Landmannalaugar",63.9910,-19.0620],["Básar, Þórsmörk",63.6750,-19.4800],["Húsafell",64.6990,-20.8690],["Hamrar, Akureyri",65.6500,-18.1050],
     ["Tjaldsvæðið á Egilsstöðum",65.2630,-14.4000],["Tjaldsvæðið í Vík",63.4200,-19.0000],["Kirkjubæjarklaustur",63.7880,-18.0570],["Tjaldsvæðið á Höfn",64.2560,-15.2050],
     ["Reykjahlíð, Mývatni",65.6450,-16.9150],["Tjaldsvæðið í Stykkishólmi",65.0700,-22.7300],["Tungudalur, Ísafirði",66.0640,-23.1750],["Varmahlíð",65.5530,-19.4500]]};
-const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is'};
+const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is',golf:'https://rastimar.golf.is/vellir'};
+const LISTA_TAKN={sund:['♨️','ls_sund'],tjald:['⛺','ls_tjalda'],golf:['⛳','ls_golf']};
 const LISTAR={};
 async function saekjaStadi(lykill){
   const geymt=geyma.get('bs:listi:'+lykill);
