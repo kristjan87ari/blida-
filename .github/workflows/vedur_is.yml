@@ -1,8 +1,7 @@
-
-name: Sækja spá Veðurstofunnar
+name: Sækja spá og viðvaranir Veðurstofunnar
 on:
   schedule:
-    - cron: "15 * * * *"   # á klukkutíma fresti
+    - cron: "15 */2 * * *"   # á tveggja tíma fresti (Cloudflare Pages leyfir 500 uppfærslur á mánuði)
   workflow_dispatch:        # og handvirkt úr Actions-flipanum
 permissions:
   contents: write
@@ -18,6 +17,6 @@ jobs:
       - run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add vedur_is.json
-          git diff --cached --quiet || git commit -m "Uppfæra spá Veðurstofunnar"
+          git add *.json
+          git diff --cached --quiet || git commit -m "Uppfæra spá og viðvaranir Veðurstofunnar"
           git push
