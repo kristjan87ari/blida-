@@ -116,6 +116,9 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .kl-smatt{font-size:12px;color:var(--muted);margin:6px 0}
 .leaflet-popup-content button.kl-her{display:block;width:100%;margin:0 0 6px;background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:6px 10px}
 .minn-stadur{fill:var(--fokus);fill-opacity:.95;stroke:#fff;stroke-width:3}
+.minn-punktur{width:22px;height:22px;border-radius:50%;background:var(--fokus);border:3px solid #fff;box-shadow:0 0 0 2px var(--fokus),0 2px 6px rgba(0,0,0,.35);cursor:grab}
+.nakv-hringur{fill:var(--fokus);fill-opacity:.08;stroke:var(--fokus);stroke-width:1;stroke-dasharray:4 4}
+.kl-leidretta{font-size:12px;color:var(--muted);background:var(--chip);border-radius:7px;padding:6px 8px;margin:6px 0}
 #kort.velja .leaflet-grab,#kort.velja .leaflet-interactive{cursor:crosshair}
 .svaedistjorn button{display:block;width:100%;background:var(--panel);color:var(--text);border:0;padding:7px 10px;font-size:13px;white-space:nowrap;text-align:left}
 .svaedistjorn button+button{border-top:1px solid var(--line)}
@@ -129,6 +132,59 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .sv-kassi{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;border:1px solid var(--fokus);border-radius:8px;padding:8px 10px;margin:12px 0 0;font-size:13px}
 .sv-kassi button{border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:7px;padding:4px 9px;font-size:13px}
 .timi-farsimi{display:none}
+.hlid-haus{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:3;background:var(--panel);padding:14px 0 10px;border-bottom:1px solid var(--line)}
+.hlid-haus h2{font-size:16px;margin:0;font-weight:700}
+.hlid-haus{flex-wrap:wrap}
+.hlid-haus .topval button{white-space:nowrap;padding:4px 9px}
+#flokksathugasemd{font-size:13px;margin:10px 0 2px;line-height:1.45}
+.athuga.haetta{border-left:4px solid #e8590c;border-radius:0 8px 8px 0}
+#listi{display:grid;gap:2px;margin:8px 0 4px}
+#listi li{grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px 8px;border:0;border-radius:10px;transition:background .15s}
+#listi li:hover,#listi li.virkur{background:var(--chip)}
+#listi li.virkur{box-shadow:inset 3px 0 0 var(--fokus)}
+#listi li:hover .nafn,#listi li.virkur .nafn{text-decoration:none}
+#listi .nr{width:26px;height:26px;font-size:13px;margin-top:1px}
+.li-efni{min-width:0}
+.li-nafn{display:flex;gap:6px;align-items:baseline}
+.li-nafn .nafn{font-weight:500;line-height:1.3}
+#listi .gildi{display:flex;flex-wrap:wrap;gap:1px 10px;margin-top:4px;font-size:12.5px}
+#listi .gi{margin:0}
+#listi .stig{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.stigpill{display:inline-block;min-width:40px;text-align:center;border-radius:999px;padding:2px 8px;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.st-frab{background:#d3f9d8;color:#1b6b2c}.st-god{background:#c5f6fa;color:#0b6475}.st-saem{background:#fff3bf;color:#7a5800}.st-sidri{background:var(--chip);color:var(--muted)}
+.st-mikil{background:#ffe3e3;color:#a51111}.st-midl{background:#ffe8cc;color:#9a4a00}.st-litil{background:#fff3bf;color:#7a5800}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .st-frab{background:#1f3d26;color:#8ce99a}:root:not([data-theme="light"]) .st-god{background:#103a40;color:#66d9e8}
+  :root:not([data-theme="light"]) .st-saem,:root:not([data-theme="light"]) .st-litil{background:#3d3410;color:#ffd43b}:root:not([data-theme="light"]) .st-mikil{background:#4a1818;color:#ffa8a8}:root:not([data-theme="light"]) .st-midl{background:#43290f;color:#ffc078}}
+#listi .stig small{font-size:10.5px;font-weight:400}
+.spjald{border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:12px 0 0;background:var(--bg)}
+.spjald>summary{font-weight:500;cursor:pointer;font-size:14px}
+.spjald .skyring{margin-top:8px}
+.klaedi{margin-top:16px}
+#stillingar{border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:12px 0 0}
+#stillingar summary{font-size:14px}
+.vidv-ovirkt{margin:10px 0 0}
+.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 90px);display:flex;flex-direction:column;
+  background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.22);overflow:hidden}
+.sp-haus{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line);flex:none}
+.sp-brjota{flex:1;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0;background:none;border:0;padding:10px 4px 10px 12px;text-align:left;cursor:default}
+.sp-grip{display:none}
+#sp-titill{display:flex;align-items:center;gap:8px;min-width:0}
+#sp-titill .nr{width:24px;height:24px;font-size:12px;flex:none}
+.sp-nafn{font-weight:700;font-size:15px;flex:1;min-width:0;line-height:1.3;overflow-wrap:anywhere}
+#sp-titill .stigpill{flex:none;font-size:14px}
+.sp-loka{flex:none;width:40px;height:40px;background:none;border:0;font-size:24px;line-height:1;color:var(--muted);margin-right:4px;border-radius:8px}
+.sp-loka:hover{background:var(--chip);color:var(--text)}
+.smaspjald .sp-efni{margin:0;padding:6px 14px 14px;overflow-y:auto;overscroll-behavior:contain;font-size:14px;line-height:1.45}
+.pinni.valinn{transform:scale(1.25);box-shadow:0 0 0 4px var(--fokus),0 2px 8px rgba(0,0,0,.4)}
+.pinni{transition:transform .15s}
+.naest{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.naest-titill{font-weight:500;font-size:13px;margin-bottom:4px}
+.naest ul{list-style:none;margin:0;padding:0;font-size:13px}
+.naest li{display:flex;gap:6px;padding:2px 0;border:0;cursor:auto}
+.naest em{color:var(--muted)}
+.leaflet-popup-content .naest a{color:var(--fokus)}
+.leaflet-popup-content a.neyd{display:inline-block;margin-top:4px;font-weight:700;color:#c92a2a;text-decoration:none}
+.leaflet-popup-content a.skida-vefur{display:block;text-align:center;margin:0 0 6px;background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:6px 10px;text-decoration:none}
 .listahaus{display:flex;align-items:center;gap:8px;margin:14px 0 0;font-size:13px;color:var(--muted)}
 .topval{display:flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
 .topval button{border:0;background:transparent;padding:4px 10px;font-size:13px;color:var(--text)}
@@ -222,7 +278,14 @@ details .likan small{color:var(--muted)}
   .grunnval button{padding:4px 7px;font-size:12px}
   .svaedistjorn button{padding:7px 9px;font-size:12px}
   #sv-hjalp{top:auto;bottom:12px;max-width:calc(100% - 24px);font-size:12px}
-  li{padding:10px 0}
+  .smaspjald{position:fixed;left:0;right:0;bottom:0;width:auto;max-height:58vh;border-radius:16px 16px 0 0;border-width:1px 0 0;
+    box-shadow:0 -6px 24px rgba(0,0,0,.25);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .sp-brjota{cursor:pointer;padding:6px 4px 10px 14px}
+  .sp-grip{display:block;width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 8px}
+  .smaspjald.samanbrotid .sp-efni{display:none}
+  .smaspjald.samanbrotid .sp-haus{border-bottom:0}
+  #listi li{padding:10px 6px}
+  .hlid-haus{position:static;padding:12px 0 8px}
   .stig{font-size:17px}
   .leaflet-popup-content{margin:10px 12px;font-size:13px}
   .leaflet-control-attribution{font-size:9px}
@@ -258,6 +321,15 @@ details .likan small{color:var(--muted)}
 <div id="kort" role="region" data-i18n-aria="kortAria"></div>
 <div id="tilkynning" role="status"></div>
 <aside>
+  <p class="timi-farsimi" id="timi2"></p>
+  <div class="hlid-haus">
+    <h2 id="listatitill">Bestu staðirnir</h2>
+    <div class="topval" role="group" data-i18n-aria="synaTop"><button type="button" data-n="5">Topp 5</button><button type="button" data-n="10">Topp 10</button><button type="button" data-n="20">Topp 20</button></div>
+  </div>
+  <div id="vidv-yfirlit"></div>
+  <div id="sv-kassi" class="sv-kassi" hidden></div>
+  <p id="flokksathugasemd" class="athuga" hidden></p>
+  <ol id="listi"></ol>
   <section class="klaedi">
     <button type="button" id="kl-opna" class="kl-opna" aria-expanded="false" aria-controls="kl-efni" data-i18n="kl_hnappur">👕 Hverju á ég að klæðast?</button>
     <div id="kl-efni" hidden>
@@ -270,14 +342,8 @@ details .likan small{color:var(--muted)}
       <div id="kl-nidurstada" aria-live="polite"></div>
     </div>
   </section>
-  <div id="vidv-yfirlit"></div>
-  <p class="timi-farsimi" id="timi2"></p>
-  <div id="sv-kassi" class="sv-kassi" hidden></div>
-  <div class="listahaus"><span data-i18n="synaTop">Sýna</span>
-    <div class="topval" role="group"><button type="button" data-n="5">Topp 5</button><button type="button" data-n="10">Topp 10</button><button type="button" data-n="20">Topp 20</button></div>
-  </div>
-  <ol id="listi"></ol>
-  <div class="skyring" id="skyring"></div>
+  <details class="spjald"><summary data-i18n="um_einkunnir">Um einkunnirnar</summary><div class="skyring" id="skyring"></div></details>
+  <div id="heimildir"></div>
   <details id="stillingar">
     <summary data-i18n="stillingar">Stillingar</summary>
     <div id="likon-val"></div>
@@ -1022,6 +1088,64 @@ for(const[mal,a]of Object.entries(I18N_TAK)){
   if(L.sidur)for(const s of['um','hvernig'])L.sidur[s]=L.sidur[s].replace(TENGLA_RE,(_,f,u)=>`${f}<a href="https://${u==='vedur.is'?'www.':''}${u}" target="_blank" rel="noopener">${u}</a>`);
 }
 
+// ---------------------------------------------------------------- Þýðingar: hliðarstika, öryggi og skíðavefir
+const HL_L=['lt_best','lt_verst','um_einkunnir','on_titill','on_gisting','on_skali','on_byggd','on_ekkert','on_leita','on_beint','on_neyd','on_villa','hk_on','hk_onT','sk_vefur','sk_leita'];
+const I18N_HL={
+is:['Bestu staðirnir','Hæstu gildin','Um einkunnirnar','Öryggi: næsta aðstoð','Gisting','Skáli eða skýli','Byggð','ekkert innan 40 km','Leita að næstu gistingu og skýlum…','Fjarlægð í beinni línu, ekki eftir vegum.','Í neyð: hringdu í 112','Ekki tókst að sækja upplýsingar um gistingu og skýli.','Gisting og skýli','OpenStreetMap, sótt í gegnum Overpass.','Vefur skíðasvæðisins: opnun og aðstæður','Leita að vef skíðasvæðisins'],
+en:['Best places','Highest values','About the scores','Safety: nearest help','Accommodation','Hut or shelter','Settlement','none within 40 km','Looking for the nearest accommodation and shelters…','Straight-line distance, not by road.','In an emergency: call 112','Could not retrieve accommodation and shelter information.','Accommodation and shelters','OpenStreetMap, retrieved via Overpass.','Ski area website: opening and conditions','Search for the ski area website'],
+da:['Bedste steder','Højeste værdier','Om scorerne','Sikkerhed: nærmeste hjælp','Overnatning','Hytte eller shelter','Bebyggelse','intet inden for 40 km','Søger efter nærmeste overnatning og shelters…','Afstand i luftlinje, ikke ad vej.','I nødstilfælde: ring 112','Kunne ikke hente oplysninger om overnatning og shelters.','Overnatning og shelters','OpenStreetMap, hentet via Overpass.','Skiområdets hjemmeside: åbning og forhold','Søg efter skiområdets hjemmeside'],
+sv:['Bästa platserna','Högsta värdena','Om poängen','Säkerhet: närmaste hjälp','Boende','Stuga eller vindskydd','Bebyggelse','inget inom 40 km','Söker närmaste boende och vindskydd…','Fågelvägen, inte längs väg.','Vid nödläge: ring 112','Kunde inte hämta information om boende och vindskydd.','Boende och vindskydd','OpenStreetMap, hämtat via Overpass.','Skidområdets webbplats: öppettider och förhållanden','Sök efter skidområdets webbplats'],
+pl:['Najlepsze miejsca','Najwyższe wartości','O wynikach','Bezpieczeństwo: najbliższa pomoc','Nocleg','Schronisko lub schron','Miejscowość','brak w promieniu 40 km','Szukanie najbliższych noclegów i schronów…','Odległość w linii prostej, nie drogą.','W nagłym wypadku: dzwoń pod 112','Nie udało się pobrać informacji o noclegach i schronach.','Noclegi i schrony','OpenStreetMap, pobrane przez Overpass.','Strona ośrodka: godziny otwarcia i warunki','Wyszukaj stronę ośrodka narciarskiego'],
+fr:['Meilleurs endroits','Valeurs les plus élevées','À propos des notes','Sécurité : aide la plus proche','Hébergement','Refuge ou abri','Localité','aucun à moins de 40 km','Recherche de l’hébergement et des abris les plus proches…','Distance à vol d’oiseau, pas par la route.','En cas d’urgence : appelez le 112','Impossible de récupérer les informations sur l’hébergement et les abris.','Hébergement et abris','OpenStreetMap, récupéré via Overpass.','Site du domaine skiable : ouverture et conditions','Rechercher le site du domaine skiable'],
+zh:['最佳地点','最高数值','关于评分','安全：最近的求助点','住宿','山屋或避难所','居民点','40 公里内没有','正在查找最近的住宿和避难所…','直线距离，并非道路距离。','紧急情况：拨打 112','无法获取住宿和避难所信息。','住宿和避难所','OpenStreetMap，通过 Overpass 获取。','滑雪场网站：开放时间和雪况','搜索滑雪场网站'],
+es:['Mejores lugares','Valores más altos','Sobre las puntuaciones','Seguridad: ayuda más cercana','Alojamiento','Refugio','Población','nada a menos de 40 km','Buscando el alojamiento y los refugios más cercanos…','Distancia en línea recta, no por carretera.','En caso de emergencia: llama al 112','No se pudo obtener información sobre alojamiento y refugios.','Alojamiento y refugios','OpenStreetMap, obtenido a través de Overpass.','Web de la estación: apertura y condiciones','Buscar la web de la estación de esquí'],
+};
+for(const[mal,v]of Object.entries(I18N_HL)){
+  const L=I18N[mal];if(!L)continue;HL_L.forEach((k,i)=>L[k]=v[i]);
+  if(L.sidur)L.sidur.um=L.sidur.um.replace('</ul>',`<li><strong>${L.hk_on}:</strong> ${L.hk_onT}</li></ul>`);
+}
+
+// ---------------------------------------------------------------- Þýðingar: sundlaugar, tjaldsvæði og leiðrétting staðsetningar
+const LS_L=['ls_saeki','ls_vefur','ls_tjalda','ls_sund','ls_vara','hk_listar','hk_listarT','kl_leidretta','kl_onakvaemt'];
+const I18N_LS={
+is:{ui:['Sæki staðsetningar sundlauga og tjaldsvæða…','Vefsíða staðarins','Nánar á tjalda.is','Nánar á sundlaugar.is','Ekki náðist í heildarlista; sýni þekktustu staðina.','Sundlaugar og tjaldsvæði','OpenStreetMap. Sjá einnig sundlaugar.is og tjalda.is.','Ekki rétt staðsetning? Dragðu bláa punktinn á kortinu, smelltu á „Velja á korti“ eða sláðu inn stað.','GPS-staðsetningin er ónákvæm (um ±{x} km).']},
+en:{ui:['Fetching locations of pools and campsites…','Website','More at tjalda.is','More at sundlaugar.is','The full list could not be retrieved; showing the best-known places.','Pools and campsites','OpenStreetMap. See also sundlaugar.is and tjalda.is.','Wrong location? Drag the blue dot on the map, click “Pick on map” or type a place.','The GPS location is imprecise (about ±{x} km).'],
+ utilega:['Camping','Iceland’s campsites compared: warm day, mild night, calm and dry, from noon until 9:00 the next morning.','Many campsites are only open in summer. Check opening and prices at tjalda.is or the campsite’s website.'],
+ sund:['Pools and hot tubs','Iceland’s swimming pools and baths compared: calm and dry, so it’s pleasant to sit in a hot tub outdoors, between 10:00 and 21:00.','Check opening hours at sundlaugar.is or the pool’s website.']},
+da:{ui:['Henter placeringer af svømmebade og campingpladser…','Hjemmeside','Mere på tjalda.is','Mere på sundlaugar.is','Den fulde liste kunne ikke hentes; viser de mest kendte steder.','Svømmebade og campingpladser','OpenStreetMap. Se også sundlaugar.is og tjalda.is.','Forkert placering? Træk den blå prik på kortet, klik på »Vælg på kortet«, eller skriv et sted.','GPS-placeringen er upræcis (ca. ±{x} km).'],
+ utilega:['Camping','Islands campingpladser sammenlignet: varm dag, mild nat, stille og tørt, fra middag til kl. 9 næste morgen.','Mange campingpladser har kun åbent om sommeren. Tjek åbning og priser på tjalda.is eller pladsens hjemmeside.'],
+ sund:['Svømmebad og hotpots','Islands svømmebade og badesteder sammenlignet: stille og tørt, så det er rart at ligge i en hotpot udendørs, mellem kl. 10 og 21.','Tjek åbningstider på sundlaugar.is eller svømmebadets hjemmeside.']},
+sv:{ui:['Hämtar platser för bad och campingplatser…','Webbplats','Mer på tjalda.is','Mer på sundlaugar.is','Hela listan kunde inte hämtas; visar de mest kända platserna.','Bad och campingplatser','OpenStreetMap. Se även sundlaugar.is och tjalda.is.','Fel plats? Dra den blå pricken på kartan, klicka på ”Välj på kartan” eller skriv en plats.','GPS-positionen är osäker (cirka ±{x} km).'],
+ utilega:['Camping','Islands campingplatser jämförda: varm dag, mild natt, lugnt och torrt, från lunch till kl. 9 nästa morgon.','Många campingplatser har bara öppet på sommaren. Kolla öppettider och priser på tjalda.is eller platsens webbplats.'],
+ sund:['Bad och badtunnor','Islands simhallar och badplatser jämförda: lugnt och torrt, så att det är skönt att ligga i en het pool utomhus, mellan kl. 10 och 21.','Kolla öppettider på sundlaugar.is eller badets webbplats.']},
+pl:{ui:['Pobieranie lokalizacji basenów i pól namiotowych…','Strona internetowa','Więcej na tjalda.is','Więcej na sundlaugar.is','Nie udało się pobrać pełnej listy; pokazuję najbardziej znane miejsca.','Baseny i pola namiotowe','OpenStreetMap. Zobacz też sundlaugar.is i tjalda.is.','Zła lokalizacja? Przeciągnij niebieską kropkę na mapie, kliknij „Wybierz na mapie” lub wpisz miejsce.','Lokalizacja GPS jest niedokładna (ok. ±{x} km).'],
+ utilega:['Biwak','Porównanie islandzkich pól namiotowych: ciepły dzień, łagodna noc, bezwietrznie i sucho, od południa do 9 rano następnego dnia.','Wiele pól namiotowych jest otwartych tylko latem. Sprawdź godziny otwarcia i ceny na tjalda.is lub stronie pola.'],
+ sund:['Baseny i gorące źródła','Porównanie islandzkich basenów i kąpielisk: bezwietrznie i sucho, by przyjemnie było posiedzieć w gorącym basenie na zewnątrz, między 10 a 21.','Sprawdź godziny otwarcia na sundlaugar.is lub stronie basenu.']},
+fr:{ui:['Récupération des piscines et campings…','Site web','Plus sur tjalda.is','Plus sur sundlaugar.is','La liste complète n’a pas pu être récupérée ; affichage des lieux les plus connus.','Piscines et campings','OpenStreetMap. Voir aussi sundlaugar.is et tjalda.is.','Position incorrecte ? Faites glisser le point bleu sur la carte, cliquez sur « Choisir sur la carte » ou saisissez un lieu.','La position GPS est imprécise (environ ±{x} km).'],
+ utilega:['Camping','Comparaison des campings d’Islande : journée chaude, nuit douce, calme et sec, de midi à 9 h le lendemain matin.','Beaucoup de campings ne sont ouverts qu’en été. Vérifiez l’ouverture et les prix sur tjalda.is ou le site du camping.'],
+ sund:['Piscines et bains chauds','Comparaison des piscines et bains d’Islande : calme et sec, pour profiter d’un bain chaud en plein air, entre 10 h et 21 h.','Vérifiez les horaires sur sundlaugar.is ou le site de la piscine.']},
+zh:{ui:['正在获取游泳池和露营地位置…','网站','在 tjalda.is 查看更多','在 sundlaugar.is 查看更多','无法获取完整列表，显示最知名的地点。','游泳池和露营地','OpenStreetMap。另见 sundlaugar.is 和 tjalda.is。','位置不对？在地图上拖动蓝点、点击“在地图上选择”或输入地点。','GPS 定位不精确（约 ±{x} 公里）。'],
+ utilega:['露营','比较冰岛各露营地：白天温暖、夜间温和、无风干燥，从中午到次日 9:00。','许多露营地只在夏季开放。请在 tjalda.is 或营地网站查看开放时间和价格。'],
+ sund:['泳池与温泉','比较冰岛各游泳池和温泉：10:00 至 21:00 之间无风干燥，适合在户外温泉池中放松。','请在 sundlaugar.is 或泳池网站查看开放时间。']},
+es:{ui:['Obteniendo ubicaciones de piscinas y campings…','Sitio web','Más en tjalda.is','Más en sundlaugar.is','No se pudo obtener la lista completa; se muestran los lugares más conocidos.','Piscinas y campings','OpenStreetMap. Ver también sundlaugar.is y tjalda.is.','¿Ubicación incorrecta? Arrastra el punto azul en el mapa, haz clic en «Elegir en el mapa» o escribe un lugar.','La ubicación GPS es imprecisa (unos ±{x} km).'],
+ utilega:['Acampada','Comparación de los campings de Islandia: día cálido, noche suave, sin viento y seco, desde el mediodía hasta las 9:00 del día siguiente.','Muchos campings solo abren en verano. Consulta apertura y precios en tjalda.is o en la web del camping.'],
+ sund:['Piscinas y pozas termales','Comparación de las piscinas y baños de Islandia: sin viento y seco, para disfrutar de una poza caliente al aire libre, entre las 10:00 y las 21:00.','Consulta los horarios en sundlaugar.is o en la web de la piscina.']},
+};
+for(const[mal,a]of Object.entries(I18N_LS)){
+  const L=I18N[mal];if(!L)continue;LS_L.forEach((k,i)=>L[k]=a.ui[i]);
+  if(L.flokkar){if(a.utilega)L.flokkar.utilega=a.utilega;if(a.sund)L.flokkar.sund=a.sund;}
+}
+
+// ---------------------------------------------------------------- Hafa samband (neðst á „Um síðuna“)
+const NETFANG='hello@vedra.is';
+const SAMBAND={is:['Hafa samband','Ábendingar, villur eða spurningar um síðuna? Sendu póst á'],en:['Contact','Suggestions, errors or questions about the site? Email'],
+  da:['Kontakt','Forslag, fejl eller spørgsmål om siden? Skriv til'],sv:['Kontakt','Förslag, fel eller frågor om sidan? Mejla'],
+  pl:['Kontakt','Sugestie, błędy lub pytania dotyczące strony? Napisz na'],fr:['Contact','Suggestions, erreurs ou questions sur le site ? Écrivez à'],
+  zh:['联系我们','对本网站有建议、发现错误或有疑问？请发送邮件至'],es:['Contacto','¿Sugerencias, errores o preguntas sobre la página? Escribe a']};
+for(const[mal,[fyrirsogn,texti]]of Object.entries(SAMBAND)){const L=I18N[mal];if(L?.sidur)L.sidur.um+=`<h3>${fyrirsogn}</h3><p class="samband">${texti} <a href="mailto:${NETFANG}">✉️ ${NETFANG}</a>${mal==='zh'?'。':'.'}</p>`;}
+const SP_TEXTAR={is:['Loka','Brjóta saman eða opna'],en:['Close','Collapse or expand'],da:['Luk','Fold sammen eller ud'],sv:['Stäng','Fäll ihop eller ut'],
+  pl:['Zamknij','Zwiń lub rozwiń'],fr:['Fermer','Réduire ou développer'],zh:['关闭','收起或展开'],es:['Cerrar','Contraer o expandir']};
+for(const[mal,[a,b]]of Object.entries(SP_TEXTAR))if(I18N[mal]){I18N[mal].sp_loka=a;I18N[mal].sp_brjota=b;}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1053,9 +1177,10 @@ const FLOKKAR = {
     lysing:'Hlýjast, lygnast og sólríkast milli kl. 9 og 18.',
     haed:e=>laegra(e,400,800),
     thaettir:m=>[[.30,trap(m.T,0,14,24,30)],[.30,laegra(m.vindur,2,12)],[.25,m.sol],[.15,laegra(m.urkoma,0,6)]]},
-  utilega:{nafn:'Útilega',takn:'⛺',fra:12,til:33,
-    lysing:'Hlýr dagur, mild nótt, logn og þurrt, frá hádegi til kl. 9 næsta morgun.',
-    haed:e=>laegra(e,300,700),
+  utilega:{nafn:'Útilega',takn:'⛺',fra:12,til:33,stadir:'tjald',
+    lysing:'Tjaldsvæði landsins borin saman: hlýr dagur, mild nótt, logn og þurrt, frá hádegi til kl. 9 næsta morgun.',
+    athugasemd:'Mörg tjaldsvæði eru aðeins opin á sumrin. Kannaðu opnun og verð á tjalda.is eða vef svæðisins.',
+    haed:()=>1,
     thaettir:m=>[[.20,trap(m.Tmax,4,14,24,29)],[.15,trap(m.Tmin,-3,6,18,22)],[.25,laegra(m.vindur,3,10)],[.10,laegra(m.hvida,8,18)],[.20,laegra(m.urkoma,.2,8)],[.10,m.sol]]},
   rjupa:{nafn:'Rjúpnaveiði',takn:'🎯',fra:9,til:17,
     lysing:'Hægur vindur, gott skyggni á heiðum og í fjallshlíðum og þurrt. Nýfallinn snjór hjálpar við að rekja slóð.',
@@ -1082,11 +1207,12 @@ const FLOKKAR = {
     skilyrdi:m=>m.snjor==null?.5:Math.max(.05,trap(m.snjor,.02,.15,9,10)),
     thaettir:m=>[[.30,m.snjor==null?null:trap(m.snjor,.05,.25,4,6)],[.15,trap(m.T,-16,-8,-1,2)],[.20,laegra(m.vindur,3,12)],[.10,laegra(m.urkoma,0,4)],[.15,m.sol],[.10,laegra(m.lagsky,20,90)]],
     athugasemd:'Snjódýpt kemur úr veðurlíkönum og getur skeikað miklu. Kannaðu aðstæður á staðnum.'},
-  sund:{nafn:'Sund og pottar',takn:'♨️',fra:10,til:21,
-    lysing:'Logn og þurrt, svo notalegt sé að liggja úti í heitum potti, milli kl. 10 og 21.',
-    haed:e=>laegra(e,300,600),
+  sund:{nafn:'Sund og pottar',takn:'♨️',fra:10,til:21,stadir:'sund',
+    lysing:'Sundlaugar og baðstaðir landsins bornir saman: logn og þurrt, svo notalegt sé að liggja úti í heitum potti, milli kl. 10 og 21.',
+    athugasemd:'Kannaðu opnunartíma á sundlaugar.is eða vef laugarinnar.',
+    haed:()=>1,
     thaettir:m=>[[.40,laegra(m.vindur,2,10)],[.30,laegra(m.urkoma,0,4)],[.15,m.sol],[.15,trap(m.T,-6,6,22,30)]]},
-  alpaskidi:{nafn:'Skíði',takn:'⛷️',fra:10,til:17,stadir:true,
+  alpaskidi:{nafn:'Skíði',takn:'⛷️',fra:10,til:17,stadir:'skidi',
     lysing:'Skíðasvæði landsins borin saman: nægur snjór, lítill vindur svo lyftur gangi, gott skyggni og hæfilegt frost milli kl. 10 og 17.',
     haed:()=>1,
     skilyrdi:m=>m.snjor==null?.6:Math.max(.05,trap(m.snjor,.03,.3,20,30)),
@@ -1109,7 +1235,7 @@ const FLOKKAR = {
 };
 
 // ---------------------------------------------------------------- Staðir
-const BAEIR=[["Reykjavík",64.146,-21.942],["Akureyri",65.683,-18.090],["Egilsstöðum",65.265,-14.395],["Ísafirði",66.075,-23.135],["Höfn",64.254,-15.212],["Vík",63.419,-19.006],["Selfossi",63.933,-21.000],["Borgarnesi",64.539,-21.920],["Stykkishólmi",65.075,-22.729],["Húsavík",66.045,-17.338],["Sauðárkróki",65.746,-19.639],["Blönduósi",65.660,-20.279],["Hólmavík",65.706,-21.679],["Patreksfirði",65.596,-23.989],["Seyðisfirði",65.260,-14.010],["Neskaupstað",65.148,-13.690],["Kirkjubæjarklaustri",63.789,-18.054],["Hellu",63.834,-20.400],["Hvolsvelli",63.752,-20.224],["Mývatni",65.645,-16.910],["Raufarhöfn",66.455,-15.946],["Þórshöfn",66.200,-15.335],["Vopnafirði",65.756,-14.828],["Djúpavogi",64.656,-14.283],["Ásbyrgi",66.010,-16.500],["Þingvöllum",64.256,-21.130],["Flúðum",64.133,-20.310],["Búðardal",65.110,-21.770],["Siglufirði",66.152,-18.910],["Dalvík",65.970,-18.530],["Ólafsvík",64.894,-23.710],["Grindavík",63.843,-22.434],["Skaftafelli",64.016,-16.966],["Hveragerði",64.000,-21.186],["Varmahlíð",65.553,-19.450],["Laugarvatni",64.215,-20.733],["Breiðdalsvík",64.792,-14.010],["Reykholti",64.665,-21.290],["Hvammstanga",65.395,-20.945],["Landmannalaugum",63.990,-19.060],["Kerlingarfjöllum",64.640,-19.290],["Hveravöllum",64.867,-19.560],["Kverkfjöllum",64.740,-16.630],["Herðubreiðarlindum",65.200,-16.220],["Langjökli",64.650,-20.200],["Hofsjökli",64.800,-18.850],["Vatnajökli",64.400,-16.800],["Mýrdalsjökli",63.650,-19.100],["Öskju",65.050,-16.750],["Laka",64.070,-18.230],["Hrafntinnuskeri",63.930,-19.170],["Þórsmörk",63.680,-19.520],["Sprengisandi",64.700,-18.000]];
+const BAEIR=[["Reykjavík",64.146,-21.942],["Kópavogi",64.112,-21.906],["Hafnarfirði",64.067,-21.957],["Garðabæ",64.089,-21.921],["Mosfellsbæ",64.167,-21.700],["Seltjarnarnesi",64.153,-21.995],["Reykjanesbæ",64.000,-22.560],["Akranesi",64.322,-22.075],["Þorlákshöfn",63.856,-21.383],["Grundarfirði",64.925,-23.260],["Bolungarvík",66.157,-23.250],["Ólafsfirði",66.073,-18.650],["Eskifirði",65.074,-14.016],["Reyðarfirði",65.033,-14.218],["Fáskrúðsfirði",64.933,-14.006],["Vestmannaeyjum",63.442,-20.270],["Sandgerði",64.040,-22.710],["Akureyri",65.683,-18.090],["Egilsstöðum",65.265,-14.395],["Ísafirði",66.075,-23.135],["Höfn",64.254,-15.212],["Vík",63.419,-19.006],["Selfossi",63.933,-21.000],["Borgarnesi",64.539,-21.920],["Stykkishólmi",65.075,-22.729],["Húsavík",66.045,-17.338],["Sauðárkróki",65.746,-19.639],["Blönduósi",65.660,-20.279],["Hólmavík",65.706,-21.679],["Patreksfirði",65.596,-23.989],["Seyðisfirði",65.260,-14.010],["Neskaupstað",65.148,-13.690],["Kirkjubæjarklaustri",63.789,-18.054],["Hellu",63.834,-20.400],["Hvolsvelli",63.752,-20.224],["Mývatni",65.645,-16.910],["Raufarhöfn",66.455,-15.946],["Þórshöfn",66.200,-15.335],["Vopnafirði",65.756,-14.828],["Djúpavogi",64.656,-14.283],["Ásbyrgi",66.010,-16.500],["Þingvöllum",64.256,-21.130],["Flúðum",64.133,-20.310],["Búðardal",65.110,-21.770],["Siglufirði",66.152,-18.910],["Dalvík",65.970,-18.530],["Ólafsvík",64.894,-23.710],["Grindavík",63.843,-22.434],["Skaftafelli",64.016,-16.966],["Hveragerði",64.000,-21.186],["Varmahlíð",65.553,-19.450],["Laugarvatni",64.215,-20.733],["Breiðdalsvík",64.792,-14.010],["Reykholti",64.665,-21.290],["Hvammstanga",65.395,-20.945],["Landmannalaugum",63.990,-19.060],["Kerlingarfjöllum",64.640,-19.290],["Hveravöllum",64.867,-19.560],["Kverkfjöllum",64.740,-16.630],["Herðubreiðarlindum",65.200,-16.220],["Langjökli",64.650,-20.200],["Hofsjökli",64.800,-18.850],["Vatnajökli",64.400,-16.800],["Mýrdalsjökli",63.650,-19.100],["Öskju",65.050,-16.750],["Laka",64.070,-18.230],["Hrafntinnuskeri",63.930,-19.170],["Þórsmörk",63.680,-19.520],["Sprengisandi",64.700,-18.000]];
 
 function km(a,b){const r=6371,p1=a.lat*Math.PI/180,p2=b.lat*Math.PI/180,dp=p2-p1,dl=(b.lon-a.lon)*Math.PI/180;
   const h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*r*Math.asin(Math.sqrt(h));}
@@ -1118,7 +1244,7 @@ function innanHrings(lat,lon,h){let inni=false;for(let i=0,j=h.length-1;i<h.leng
 function naestiBaer(p){let best=null,d=1e9;for(const[n,la,lo]of BAEIR){const x=km(p,{lat:la,lon:lo});if(x<d){d=x;best=n;}}
   const nafn=L_().dat?best:(NEFNIFALL[best]||best);
   return t(d<8?'vid':'naelaegt',{b:nafn,d:Math.round(d)});}
-const NEFNIFALL={"Egilsstöðum":"Egilsstaðir","Ísafirði":"Ísafjörður","Selfossi":"Selfoss","Borgarnesi":"Borgarnes","Stykkishólmi":"Stykkishólmur",
+const NEFNIFALL={"Kópavogi":"Kópavogur","Hafnarfirði":"Hafnarfjörður","Garðabæ":"Garðabær","Mosfellsbæ":"Mosfellsbær","Seltjarnarnesi":"Seltjarnarnes","Reykjanesbæ":"Reykjanesbær","Akranesi":"Akranes","Grundarfirði":"Grundarfjörður","Ólafsfirði":"Ólafsfjörður","Eskifirði":"Eskifjörður","Reyðarfirði":"Reyðarfjörður","Fáskrúðsfirði":"Fáskrúðsfjörður","Vestmannaeyjum":"Vestmannaeyjar","Egilsstöðum":"Egilsstaðir","Ísafirði":"Ísafjörður","Selfossi":"Selfoss","Borgarnesi":"Borgarnes","Stykkishólmi":"Stykkishólmur",
   "Sauðárkróki":"Sauðárkrókur","Blönduósi":"Blönduós","Patreksfirði":"Patreksfjörður","Seyðisfirði":"Seyðisfjörður","Neskaupstað":"Neskaupstaður",
   "Kirkjubæjarklaustri":"Kirkjubæjarklaustur","Hellu":"Hella","Hvolsvelli":"Hvolsvöllur","Mývatni":"Mývatn","Vopnafirði":"Vopnafjörður",
   "Djúpavogi":"Djúpivogur","Þingvöllum":"Þingvellir","Flúðum":"Flúðir","Búðardal":"Búðardalur","Siglufirði":"Siglufjörður","Skaftafelli":"Skaftafell",
@@ -1140,6 +1266,9 @@ const SKIDASVAEDI=[["Bláfjöll",63.981,-21.651],["Skálafell",64.233,-21.448],[
   ["Oddsskarð",65.063,-13.865],["Stafdalur",65.267,-14.178],["Tindastóll",65.796,-19.735],["Skarðsdalur, Siglufirði",66.133,-18.957],
   ["Böggvisstaðafjall, Dalvík",65.963,-18.572],["Seljalandsdalur, Ísafirði",66.058,-23.178]]
   .map(([n,la,lo])=>({id:`s:${n}`,lat:la,lon:lo,nafn:n,myrkur:.5,skidasvaedi:true}));
+const SKIDA_VEFIR={"Bláfjöll":"https://skidasvaedi.is","Skálafell":"https://skidasvaedi.is","Hlíðarfjall, Akureyri":"https://www.hlidarfjall.is",
+  "Oddsskarð":"https://www.oddsskard.is","Stafdalur":"https://www.stafdalur.is","Skarðsdalur, Siglufirði":"https://www.skardsdalur.is",
+  "Böggvisstaðafjall, Dalvík":"https://www.skidalvik.is","Tindastóll":null,"Seljalandsdalur, Ísafirði":null};
 const ALLIR_STADIR=PUNKTAR.concat(SKIDASVAEDI);
 
 // ---------------------------------------------------------------- Ástand
@@ -1242,9 +1371,11 @@ async function saekjaAllt(){
   Object.assign(S,{gogn,heimildir,villur,vidv,sott:new Date()});
   takki.disabled=false;document.getElementById('saekja-texti').textContent=t('saekja');
   teiknaDaga();reikna();
-  if(KL.stadur){if(!KL.merki)KL.merki=L.circleMarker([KL.stadur.lat,KL.stadur.lon],{pane:'minn',radius:9,className:'minn-stadur'}).bindTooltip(t('kl_thinn')).addTo(kort);
+  if(KL.stadur){if(!KL.merki)setjaMerki(KL.stadur.lat,KL.stadur.lon);
     klSaekja().then(klTeikna);}
   if(S.svaedi&&!S.svaedi.tomt)veljaSvaedi(S.svaedi.b);
+  for(const k in LISTAR)if(LISTAR[k].pts)LISTAR[k].gogn=null;
+  if(FLOKKAR[S.flokkur].stadir&&FLOKKAR[S.flokkur].stadir!=='skidi')reikna();
 }
 
 // ---------------------------------------------------------------- Gervigögn (þegar ekki næst í Open-Meteo)
@@ -1331,14 +1462,17 @@ function reikna(){
   if(sv?.saekir){S.nidurstada=[];S.allir=[];teikna(t('sv_saeki'));return;}
   if(sv?.tomt){S.nidurstada=[];S.allir=[];teikna(t('sv_ekkert'));return;}
   const allir=[];
-  const frambod=f.stadir?SKIDASVAEDI.filter(x=>!sv||sv.b.contains([x.lat,x.lon])):(sv?sv.pts:PUNKTAR),uppspretta=sv&&!f.stadir?sv.gogn:S.gogn;
+  let frambod,uppspretta;
+  if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
+    frambod=l.pts.filter(x=>!sv||sv.b.contains([x.lat,x.lon]));uppspretta=l.gogn;}
+  else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
   if(!f.ofugt&&!f.haetta){const vg=vidvVirkar(g.a,g.b);
     if(vg.length)for(const a of allir){const v=verstaVidv(a,vg);if(v){a.vidv=v.litur;a.stig=+(a.stig*VID_STUDULL[v.litur]).toFixed(1);}}}
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
-  const rodun=[...allir].sort((a,b)=>b.stig-a.stig),n=f.stadir?SKIDASVAEDI.length:S.fjoldi,
-    minKm=f.stadir?0:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+  const rodun=[...allir].sort((a,b)=>b.stig-a.stig),n=f.stadir==='skidi'?SKIDASVAEDI.length:S.fjoldi,
+    minKm=f.stadir==='skidi'?0:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
@@ -1349,7 +1483,7 @@ function reikna(){
   valdir.sort((a,b)=>b.stig-a.stig);
   geyma.set(lykill,valdir.map(a=>a.id));
   S.nidurstada=valdir;S.virkur=-1;
-  teikna(valdir.length?null:t(f.stadir&&sv?'sv_ekkiSkidi':f.haetta?'tomtHaetta':f.ofugt?'tomtVerst':f.stadir?'tomtSkidi':'tomt'));
+  teikna(valdir.length?null:t(f.stadir==='skidi'&&sv?'sv_ekkiSkidi':f.stadir&&f.stadir!=='skidi'?'tomt':f.haetta?'tomtHaetta':f.ofugt?'tomtVerst':f.stadir?'tomtSkidi':'tomt'));
 }
 
 // ---------------------------------------------------------------- Kort (Leaflet)
@@ -1449,15 +1583,37 @@ function tengjaAfrita(el){
 const merkiTakn=(texti,klasi='')=>L.divIcon({className:'',html:`<div class="pinni ${klasi}">${texti}</div>`,iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-14]});
 let merki=[];
 
+// ---------------------------------------------------------------- Upplýsingaspjald (í stað sprettiglugga)
+const spjald=document.createElement('section');
+spjald.id='smaspjald';spjald.className='smaspjald';spjald.hidden=true;spjald.setAttribute('role','region');spjald.setAttribute('aria-labelledby','sp-titill');
+spjald.innerHTML=`<div class="sp-haus"><button type="button" class="sp-brjota" data-i18n-aria="sp_brjota"><span class="sp-grip" aria-hidden="true"></span><span id="sp-titill"></span></button>
+  <button type="button" class="sp-loka" data-i18n-aria="sp_loka">×</button></div><div class="sp-efni leaflet-popup-content"></div>`;
+kortEl.appendChild(spjald);
+L.DomEvent.disableClickPropagation(spjald);L.DomEvent.disableScrollPropagation(spjald);
+const erSimi=()=>matchMedia('(max-width:820px)').matches;
+function lokaSpjaldi(){
+  spjald.hidden=true;S.virkur=-1;
+  if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
+  document.querySelectorAll('#listi li').forEach(li=>li.classList.remove('virkur'));
+  document.querySelectorAll('.pinni.valinn').forEach(p=>p.classList.remove('valinn'));
+}
+spjald.querySelector('.sp-loka').onclick=lokaSpjaldi;
+spjald.querySelector('.sp-brjota').onclick=()=>{if(erSimi())spjald.classList.toggle('samanbrotid');};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!spjald.hidden&&!SV.velja)lokaSpjaldi();});
+
 function syna(i,fljuga=true){
   const a=S.nidurstada[i];S.virkur=i;
   document.querySelectorAll('#listi li').forEach((li,j)=>li.classList.toggle('virkur',j===i));
+  merki.forEach((m,j)=>m.getElement()?.querySelector('.pinni')?.classList.toggle('valinn',j===i));
+  merki[i]?.setZIndexOffset(1000);merki.forEach((m,j)=>{if(j!==i)m.setZIndexOffset(0);});
   const f=FLOKKAR[S.flokkur];
   if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
   if(!f.stadir)reitaramma=L.rectangle([[a.lat-(a.hl??.125),a.lon-(a.hn??.25)],[a.lat+(a.hl??.125),a.lon+(a.hn??.25)]],{className:'reitarammi',interactive:false}).addTo(kort);
-  const d=document.createElement('div');
+  const sk=a.stig,ofugt=f.haetta||f.ofugt,st=ofugt?(sk>=60?'st-mikil':sk>=40?'st-midl':'st-litil'):(sk>=80?'st-frab':sk>=60?'st-god':sk>=40?'st-saem':'st-sidri');
+  document.getElementById('sp-titill').innerHTML=`<span class="nr">${i+1}</span><span class="sp-nafn">${a.nafn}</span><span class="stigpill ${st}">${fm(a.stig,0)}</span>`;
+  const d=spjald.querySelector('.sp-efni');
   const w=vedurtakn(a.m,erNott());
-  d.innerHTML=`<strong>${i+1}. ${a.nafn}</strong><p class="vt-lina"><span class="vt-stort" aria-hidden="true">${w.takn}</span>${w.ord}</p><p class="gildi-lina">${gildistexti(a)}</p>
+  d.innerHTML=`<p class="vt-lina"><span class="vt-stort" aria-hidden="true">${w.takn}</span>${w.ord}</p><p class="gildi-lina">${gildistexti(a)}</p>
     <p>${t(f.haetta?'haettuvisir':f.ofugt?'ovedursvisir':'stig',{x:fm(a.stig)})} ${ovissa(a)}.</p>
     ${a.vidv?`<p class="vidv-merki"><i class="vidv-litur vl-${a.vidv}"></i>${t('vid_stad',{x:t(VID_HEITI[a.vidv])})}</p>`:''}
     ${f.haetta?`<p class="smatt">${t('haettaSmatt')}</p>`:''}
@@ -1469,17 +1625,34 @@ function syna(i,fljuga=true){
     document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
   d.querySelector('.nakvaemt')?.addEventListener('click',e=>finnaNakvaemt(i,e.currentTarget));
   tengjaAfrita(d);
-  merki[i].unbindPopup().bindPopup(d,{maxWidth:popW(),autoPanPadding:[20,20]});
-  if(!fljuga){merki[i].openPopup();return;}
-  if(matchMedia('(max-width:820px)').matches)kortEl.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  if(a.listi){const ytri=LISTA_VEFIR[a.listi];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
+    (a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'')+
+    `<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${a.listi==='sund'?'♨️':'⛺'} ${t(a.listi==='sund'?'ls_sund':'ls_tjalda')}</a>`);}
+  if(a.skidasvaedi){const sv=SKIDA_VEFIR[a.nafn];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
+    `<a class="skida-vefur" href="${sv||'https://www.google.com/search?q='+encodeURIComponent('Skíðasvæði '+a.nafn)}" target="_blank" rel="noopener">🎿 ${t(sv?'sk_vefur':'sk_leita')}</a>`);}
+  d.insertAdjacentHTML('beforeend',`<div class="naest"><div class="naest-titill">🛟 ${t('on_titill')}</div><p class="kl-smatt">${t('on_leita')}</p></div>`);
+  const nEl=d.querySelector('.naest');
+  saekjaNaest(a).then(ut=>{if(S.virkur===i)nEl.innerHTML=naestHtml(ut);}).catch(()=>{if(S.virkur===i)nEl.innerHTML=naestHtml(null);});
   kort.closePopup();
-  kort.once('moveend',()=>{if(S.virkur===i)merki[i]?.openPopup();});
-  kort.flyTo([a.lat,a.lon],Math.max(kort.getZoom(),9),{duration:.8});
+  spjald.hidden=false;spjald.classList.remove('samanbrotid');d.scrollTop=0;
+  thydaFast&&spjald.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.i18nAria)));
+  if(!fljuga){if(erSimi())midjaFyrirOfanSpjald(a);return;}
+  if(erSimi())kortEl.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  const z=Math.max(kort.getZoom(),9);
+  if(erSimi())kort.once('moveend',()=>midjaFyrirOfanSpjald(a));
+  kort.flyTo([a.lat,a.lon],z,{duration:.8});
+}
+// Í síma: færa valinn stað upp fyrir spjaldið svo hann sjáist
+function midjaFyrirOfanSpjald(a){
+  const h=spjald.classList.contains('samanbrotid')?0:spjald.offsetHeight,k=kortEl.clientHeight;
+  const pt=kort.latLngToContainerPoint([a.lat,a.lon]),mark=Math.max(60,(k-h)/2);
+  kort.panBy([0,pt.y-mark],{duration:.4});
 }
 
 function teikna(skilabod){
   const f=FLOKKAR[S.flokkur];
   reitaLag.clearLayers();punktaLag.clearLayers();nakvLag.clearLayers();teiknaVidvaranir();
+  if(typeof lokaSpjaldi==='function')lokaSpjaldi();
   if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
   kortEl.classList.toggle('haetta',!!(f.haetta||f.ofugt));
   const ls=document.querySelectorAll('.litaskyring span');if(ls.length===2){ls[0].textContent=t(f.haetta||f.ofugt?'minni':'sidra');ls[1].textContent=t(f.haetta||f.ofugt?'meiri':'betra');}
@@ -1492,16 +1665,22 @@ function teikna(skilabod){
   S.nidurstada.forEach((a,i)=>{
     const li=document.createElement('li');li.tabIndex=0;
     const w=vedurtakn(a.m,erNott());
-    li.innerHTML=`<span class="nr">${i+1}</span><span><span class="vt-lita" title="${w.ord}" aria-label="${w.ord}">${w.takn}</span> <span class="nafn">${a.nafn}</span><br><span class="gildi">${gildistexti(a)}</span></span>
-      <span class="stig">${fm(a.stig,0)}<small class="${a.stada==='nýr'?'nytt':''}">${t(a.stada==='nýr'?'nyr':'obreytt')}</small></span>`;
+    const sk=a.stig,ofugt=f.haetta||f.ofugt,
+      st=ofugt?(sk>=60?'st-mikil':sk>=40?'st-midl':'st-litil'):(sk>=80?'st-frab':sk>=60?'st-god':sk>=40?'st-saem':'st-sidri');
+    li.innerHTML=`<span class="nr">${i+1}</span>
+      <span class="li-efni"><span class="li-nafn"><span class="vt-lita" title="${w.ord}" aria-label="${w.ord}">${w.takn}</span><span class="nafn">${a.nafn}</span></span>
+      <span class="gildi">${gildistexti(a)}</span></span>
+      <span class="stig"><span class="stigpill ${st}">${fm(a.stig,0)}</span><small class="${a.stada==='nýr'?'nytt':''}">${t(a.stada==='nýr'?'nyr':'obreytt')}</small></span>`;
     li.onclick=()=>syna(i);li.onkeydown=e=>{if(e.key==='Enter')syna(i);};listi.appendChild(li);
   });
   const g=gluggi(),man=g?new Date(g.a).getUTCMonth():0;
   let ath=flT(S.flokkur,2);
   if(S.flokkur==='nordurljos'&&man>=4&&man<=7)ath=t('bjart')+ath;
-  document.getElementById('skyring').innerHTML=(ath?`<p class="athuga">${ath}</p>`:'')+
-    `<p>${t(f.haetta?'sk_haetta':f.ofugt?'sk_verst':f.stadir?'sk_skidi':'sk_almennt')}</p>`+
-    heimildakassi();
+  document.getElementById('listatitill').textContent=t(f.haetta||f.ofugt?'lt_verst':'lt_best');
+  if(f.stadir&&LISTAR[f.stadir]?.vara)ath=(ath?ath+' ':'')+t('ls_vara');
+  const fa=document.getElementById('flokksathugasemd');fa.hidden=!ath;fa.innerHTML=ath;fa.classList.toggle('haetta',!!f.haetta);
+  document.getElementById('skyring').innerHTML=`<p>${t(f.haetta?'sk_haetta':f.ofugt?'sk_verst':f.stadir?'sk_skidi':'sk_almennt')}</p>`;
+  document.getElementById('heimildir').innerHTML=heimildakassi();
   const tk=document.getElementById('tilkynning');
   tk.style.display=S.demo?'block':'none';
   tk.textContent=S.demo?t('demo'):'';
@@ -1514,13 +1693,38 @@ function teikna(skilabod){
 function heimildakassi(){
   const likon=S.heimildir.filter(h=>!h.startsWith('@')).join(', '),tm=S.sott?`${String(S.sott.getHours()).padStart(2,'0')}:${String(S.sott.getMinutes()).padStart(2,'0')}`:'';
   const vidvVirk=S.vidv&&!S.vidv.villa,ytri=(u,txt)=>`<a href="${u}" target="_blank" rel="noopener">${txt}</a>`;
-  return `<details class="heimildakassi" open><summary>ⓘ ${t('hk_titill')}</summary><dl>
+  return `<details class="heimildakassi spjald"><summary>ⓘ ${t('hk_titill')}</summary><dl>
     <dt>🌦️ ${t('hk_spa')}</dt><dd>${S.demo?t('gervi'):t('hk_spaT',{x:likon||'–'})} ${ytri('https://open-meteo.com','open-meteo.com')}</dd>
     <dt>⚠️ ${t('hk_vidv')}</dt><dd>${t(vidvVirk?'hk_vidvT':'hk_vidvOvirkt')} ${ytri(VID_SLOD,'vedur.is')}</dd>
     ${S.heimildir.includes('@vi')?`<dt>📍 ${t('hk_stod')}</dt><dd>${t('hk_stodT')}</dd>`:''}
+    <dt>🏠 ${t('hk_on')}</dt><dd>${t('hk_onT')} ${ytri('https://www.openstreetmap.org','openstreetmap.org')}</dd>
+    <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')}</dd>
     <dt>🗺️ ${t('hk_kort')}</dt><dd>${t('hk_kortT')} ${ytri('https://opentopomap.org','opentopomap.org')}</dd></dl>
     ${S.villur.length?`<p class="villa">${t('hk_villa',{x:S.villur.join('; ')})}</p>`:''}
     <p class="kl-smatt">${tm?t('hk_uppf',{t:tm})+' ':''}<a href="#um">${t('hk_meira')}</a></p></details>`;
+}
+const NAEST=new Map();
+function saekjaNaest(a){
+  const k=a.lat.toFixed(2)+','+a.lon.toFixed(2);if(NAEST.has(k))return NAEST.get(k);
+  const c=`${a.lat.toFixed(4)},${a.lon.toFixed(4)}`,r=40000;
+  const q=`[out:json][timeout:20];(nwr(around:${r},${c})["tourism"~"^(hotel|guest_house|hostel|motel|apartment|chalet|camp_site)$"];`+
+    `nwr(around:${r},${c})["tourism"~"^(alpine_hut|wilderness_hut)$"];nwr(around:${r},${c})["amenity"="shelter"];`+
+    `node(around:${r},${c})["place"~"^(city|town|village|hamlet|isolated_dwelling|farm)$"];);out center tags 500;`;
+  const loforð=fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(q)).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();}).then(j=>{
+    const ut={gisting:null,skali:null,byggd:null},sleppa=/^(public_transport|picnic_shelter|sun_shelter|field_shelter|bicycle_parking)$/;
+    for(const e of j.elements||[]){
+      const la=e.lat??e.center?.lat,lo=e.lon??e.center?.lon,tg=e.tags||{};if(la==null)continue;
+      if(tg.amenity==='shelter'&&sleppa.test(tg.shelter_type||''))continue;
+      const fl=/^(alpine_hut|wilderness_hut)$/.test(tg.tourism)||tg.amenity==='shelter'?'skali':tg.tourism?'gisting':tg.place?'byggd':null;if(!fl)continue;
+      const d=km(a,{lat:la,lon:lo});if(!ut[fl]||d<ut[fl].d)ut[fl]={d,nafn:tg.name||tg['name:is']||tg['name:en']||null,lat:la,lon:lo};
+    }
+    return ut;});
+  NAEST.set(k,loforð);loforð.catch(()=>NAEST.delete(k));return loforð;
+}
+function naestHtml(ut){
+  const lina=(takn,fl)=>{const x=ut?.[fl];return`<li><span aria-hidden="true">${takn}</span><span>${t('on_'+fl)}: ${x?`<a href="https://www.google.com/maps/dir/?api=1&destination=${x.lat.toFixed(5)},${x.lon.toFixed(5)}" target="_blank" rel="noopener">${x.nafn||t('on_'+fl)}</a>, ${fm(x.d,1)} km`:`<em>${t('on_ekkert')}</em>`}</span></li>`;};
+  return`<div class="naest-titill">🛟 ${t('on_titill')}</div>${ut?`<ul>${lina('🏨','gisting')}${lina('🛖','skali')}${lina('🏘️','byggd')}</ul><p class="kl-smatt">${t('on_beint')}</p>`:`<p class="kl-smatt">${t('on_villa')}</p>`}
+    <a class="neyd" href="tel:112">🆘 ${t('on_neyd')}</a>`;
 }
 function vidvSprettur(v){
   return `<strong><i class="vidv-litur vl-${v.litur}"></i>${t(VID_HEITI[v.litur])}: ${txt(v.atburdur)}</strong>
@@ -1692,7 +1896,14 @@ function klaednadur(fk,m,p,g){
   return{fot:rada(fot),med:rada(einst),vita,F};
 }
 
-const KL={opin:false,stadur:null,p:null,gogn:null,velja:false,saekir:false,merki:null,skilabod:null};
+const KL={opin:false,stadur:null,p:null,gogn:null,velja:false,saekir:false,merki:null,hringur:null,nakv:null,skilabod:null};
+const blarPunktur=L.divIcon({className:'',html:'<div class="minn-punktur"></div>',iconSize:[22,22],iconAnchor:[11,11]});
+function setjaMerki(lat,lon,nakv){
+  if(KL.merki)kort.removeLayer(KL.merki);if(KL.hringur){kort.removeLayer(KL.hringur);KL.hringur=null;}
+  KL.merki=L.marker([lat,lon],{icon:blarPunktur,draggable:true,pane:'minn',keyboard:false,title:t('kl_thinn')}).bindTooltip(t('kl_thinn')).addTo(kort);
+  KL.merki.on('dragend',e=>{const ll=e.target.getLatLng();klSetja(ll.lat,ll.lng,null,true);});
+  if(nakv&&nakv>150)KL.hringur=L.circle([lat,lon],{radius:nakv,pane:'minn',className:'nakv-hringur',interactive:false}).addTo(kort);
+}
 const KL_STADIR=(()=>{const m=new Map();for(const[d,la,lo]of BAEIR)m.set(NEFNIFALL[d]||d,[la,lo]);for(const s of SKIDASVAEDI)m.set(s.nafn,[s.lat,s.lon]);return m;})();
 kort.createPane('minn').style.zIndex=450;
 function klOpna(opna=!KL.opin){
@@ -1717,14 +1928,13 @@ function vidIsland(lat,lon){
   if(STROND.some(h=>innanHrings(lat,lon,h)))return true;
   const p={lat,lon};return STROND.some(h=>h.some(([lo,la])=>km(p,{lat:la,lon:lo})<15));
 }
-async function klSetja(lat,lon,nafn,thekkt=false){
+async function klSetja(lat,lon,nafn,thekkt=false,nakv=null){
   const aIslandi=thekkt||vidIsland(lat,lon);
   if(!aIslandi){KL.skilabod='kl_utanIslands';klTeikna();return;}
   KL.skilabod=null;KL.stadur={lat,lon,nafn:nafn||null};
   const leit=document.getElementById('kl-leit');if(leit.value&&leit.value!==nafn)leit.value='';KL.gogn=null;
   geyma.set('bs:stadur',KL.stadur);
-  if(KL.merki)kort.removeLayer(KL.merki);
-  KL.merki=L.circleMarker([lat,lon],{pane:'minn',radius:9,className:'minn-stadur'}).bindTooltip(t('kl_thinn')).addTo(kort);
+  KL.nakv=nakv;setjaMerki(lat,lon,nakv);
   await klSaekja();klTeikna();
 }
 function klTeikna(){
@@ -1743,6 +1953,7 @@ function klTeikna(){
   const nafn=KL.stadur.nafn||naestiBaer(KL.stadur),atridi=x=>{const k=Array.isArray(x)?x[0]:x;return`<li><span aria-hidden="true">${KL_EMOJI[k]||'•'}</span><span>${kt(k,{x:Array.isArray(x)?x[1]:''})}</span></li>`;};
   box.innerHTML=`<h3>${t('kl_fyrir',{f:`${f.takn} ${flT(S.flokkur,0)}`,b:nafn})}</h3>
     <p class="kl-smatt">${bil(g.a,g.b)}</p>
+    <p class="kl-leidretta">${KL.nakv>1500?`<strong>${t('kl_onakvaemt',{x:fm(KL.nakv/1000,0)})}</strong> `:''}${t('kl_leidretta')}</p>
     <p class="vt-lina"><span class="vt-stort" aria-hidden="true">${vedurtakn(m,erNott()).takn}</span>${vedurtakn(m,erNott()).ord}</p>
     <p class="kl-adst">${t('kl_adstaedur',{T:fm(m.T),F:fm(r.F),W:fm(m.vindur),G:fm(m.hvida,0),P:fm(m.urkoma)})}</p>
     ${a.stig>=1?`<p class="kl-smatt">${t(f.haetta?'haettuvisir':f.ofugt?'ovedursvisir':'stig',{x:fm(a.stig)})}</p>`:''}
@@ -1755,8 +1966,9 @@ function klTeikna(){
 document.getElementById('kl-opna').onclick=()=>klOpna();
 document.getElementById('kl-gps').onclick=()=>{
   if(!navigator.geolocation){KL.skilabod='kl_gpsVilla';klTeikna();return;}
-  navigator.geolocation.getCurrentPosition(pos=>klSetja(pos.coords.latitude,pos.coords.longitude),
-    ()=>{KL.skilabod='kl_gpsVilla';klTeikna();},{enableHighAccuracy:false,timeout:10000,maximumAge:600000});
+  navigator.geolocation.getCurrentPosition(pos=>{const{latitude:la,longitude:lo,accuracy:n}=pos.coords;
+      klSetja(la,lo,null,false,n).then(()=>{if(KL.stadur)kort.flyTo([la,lo],Math.max(kort.getZoom(),n>3000?9:11),{duration:.8});});},
+    ()=>{KL.skilabod='kl_gpsVilla';klTeikna();},{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
 };
 document.getElementById('kl-kort').onclick=()=>{
   KL.velja=true;KL.skilabod=null;kortEl.classList.add('velja');klTeikna();
@@ -1765,8 +1977,75 @@ document.getElementById('kl-kort').onclick=()=>{
 kort.on('click',e=>{if(!KL.velja)return;KL.velja=false;kortEl.classList.remove('velja');klSetja(e.latlng.lat,e.latlng.lng);});
 {const dl=document.getElementById('kl-stadir');for(const n of [...KL_STADIR.keys()].sort((a,b)=>a.localeCompare(b,'is'))){const o=document.createElement('option');o.value=n;dl.appendChild(o);}}
 document.getElementById('kl-leit').addEventListener('change',e=>{const n=e.target.value.trim(),h=KL_STADIR.get(n)||[...KL_STADIR].find(([k])=>k.toLowerCase()===n.toLowerCase())?.[1];
-  if(h)klSetja(h[0],h[1],KL_STADIR.has(n)?n:[...KL_STADIR.keys()].find(k=>k.toLowerCase()===n.toLowerCase()),true);});
+  if(h){klSetja(h[0],h[1],KL_STADIR.has(n)?n:[...KL_STADIR.keys()].find(k=>k.toLowerCase()===n.toLowerCase()),true);kort.flyTo(h,Math.max(kort.getZoom(),10),{duration:.8});}});
 {const v=geyma.get('bs:stadur');if(v&&typeof v.lat==='number')KL.stadur=v;}
+
+// ---------------------------------------------------------------- Sundlaugar og tjaldsvæði (OpenStreetMap)
+const ISL_BOX='63.2,-24.6,66.6,-13.4';
+const OSM_FYRIRSPURNIR={
+  sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|customers|no)$"](${ISL_BOX});`+
+       `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
+       `nwr["amenity"="public_bath"](${ISL_BOX}););out center tags;`,
+  tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out center tags;`};
+// Varalisti ef OpenStreetMap svarar ekki (hnit eru nálgun)
+const VARALISTAR={
+  sund:[["Laugardalslaug",64.1465,-21.8800],["Sundhöll Reykjavíkur",64.1430,-21.9230],["Vesturbæjarlaug",64.1470,-21.9670],["Sundlaug Kópavogs",64.1110,-21.9050],
+    ["Ásvallalaug, Hafnarfirði",64.0560,-21.9900],["Sundlaug Akureyrar",65.6800,-18.0960],["Sundhöll Selfoss",63.9360,-20.9970],["Sundlaugin á Hofsósi",65.8980,-19.4130],
+    ["Sundlaugin á Egilsstöðum",65.2640,-14.4050],["Jarðböðin við Mývatn",65.6310,-16.8480],["Gamla laugin, Flúðum",64.1370,-20.3090],["Bláa lónið",63.8800,-22.4490],
+    ["Sundlaug Húsavíkur",66.0440,-17.3420],["Sundlaugin á Höfn",64.2520,-15.2100],["Sundhöll Ísafjarðar",66.0710,-23.1250],["Sundlaugin í Stykkishólmi",65.0730,-22.7270],
+    ["Krossneslaug",66.0530,-21.5100],["Sundlaug Vestmannaeyja",63.4370,-20.2750]],
+  tjald:[["Tjaldsvæðið í Laugardal",64.1440,-21.8710],["Þingvellir, Leirar",64.2800,-21.0900],["Skaftafell",64.0160,-16.9660],["Ásbyrgi",66.0200,-16.5000],
+    ["Landmannalaugar",63.9910,-19.0620],["Básar, Þórsmörk",63.6750,-19.4800],["Húsafell",64.6990,-20.8690],["Hamrar, Akureyri",65.6500,-18.1050],
+    ["Tjaldsvæðið á Egilsstöðum",65.2630,-14.4000],["Tjaldsvæðið í Vík",63.4200,-19.0000],["Kirkjubæjarklaustur",63.7880,-18.0570],["Tjaldsvæðið á Höfn",64.2560,-15.2050],
+    ["Reykjahlíð, Mývatni",65.6450,-16.9150],["Tjaldsvæðið í Stykkishólmi",65.0700,-22.7300],["Tungudalur, Ísafirði",66.0640,-23.1750],["Varmahlíð",65.5530,-19.4500]]};
+const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is'};
+const LISTAR={};
+async function saekjaStadi(lykill){
+  const geymt=geyma.get('bs:listi:'+lykill);
+  if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
+  try{
+    const r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(OSM_FYRIRSPURNIR[lykill]));
+    if(!r.ok)throw new Error(r.status);
+    const j=await r.json(),pts=[];
+    for(const e of j.elements||[]){
+      const la=e.lat??e.center?.lat,lo=e.lon??e.center?.lon,tg=e.tags||{};if(la==null)continue;
+      const p={id:`${lykill}:${e.type[0]}${e.id}`,lat:+la.toFixed(5),lon:+lo.toFixed(5),nafn:tg.name||tg['name:is']||tg['name:en']||null,vefur:tg.website||tg['contact:website']||null};
+      const naer=pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
+      if(naer){if(!naer.nafn&&p.nafn)naer.nafn=p.nafn;if(!naer.vefur&&p.vefur)naer.vefur=p.vefur;continue;}
+      pts.push(p);
+    }
+    if(!pts.length)throw new Error('tómt');
+    geyma.set('bs:listi:'+lykill,{t:Date.now(),pts});
+    return{pts,vara:false};
+  }catch{
+    return{pts:VARALISTAR[lykill].map(([n,la,lo],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,nafn:n,vefur:null})),vara:true};
+  }
+}
+async function hladaLista(lykill){
+  if(LISTAR[lykill]?.saekir)return;
+  const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
+  const{pts,vara}=fyrri?.pts?{pts:fyrri.pts,vara:fyrri.vara}:await saekjaStadi(lykill);
+  for(const p of pts){p.myrkur=myrkurFyrir(p);p.listi=lykill;}
+  // Veðurgögn sótt fyrir um 5 km net, svo nálægir staðir deili spá
+  const syni=new Map();
+  for(const p of pts){const k=`${(Math.round(p.lat*20)/20).toFixed(2)},${(Math.round(p.lon*20)/20).toFixed(2)}`;p.syni='ls:'+k;
+    if(!syni.has(p.syni))syni.set(p.syni,{id:p.syni,lat:+k.split(',')[0],lon:+k.split(',')[1],haed:null});}
+  const sp=[...syni.values()],gs={};
+  if(S.demo||!S.gogn||!S.heimildir.some(h=>LIKON.some(l=>l.nafn===h)))gerviSvaedi(sp,gs);
+  else{
+    const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
+    await Promise.allSettled(likon.map(id=>saekjaLikan(id,sp).then(sv=>umbreyta(sv,id,gs,sp))));
+    if(!Object.keys(gs).length)gerviSvaedi(sp,gs);
+  }
+  const gogn={};for(const p of pts){if(gs[p.syni])gogn[p.id]=gs[p.syni];p.haed=syni.get(p.syni).haed;if(!p.nafn)p.nafn=naestiBaer(p);}
+  LISTAR[lykill]={pts,gogn,vara,saekir:false};
+  reikna();
+}
+function stadaListi(lykill){
+  if(lykill==='skidi')return{pts:SKIDASVAEDI,gogn:S.gogn};
+  const l=LISTAR[lykill];if(!l?.gogn){if(S.gogn)hladaLista(lykill);return null;}
+  return l;
+}
 
 // ---------------------------------------------------------------- Velja svæði (smellur eða rammi)
 const SV={velja:false,byrjun:null,px:null,dragt:null,rammi:null};
