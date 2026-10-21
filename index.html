@@ -1758,6 +1758,8 @@ async function omSkrifa(k,v){try{const db=await omDb();db.transaction('om','read
 async function omHreinsaGamalt(){try{const db=await omDb();const st=db.transaction('om','readwrite').objectStore('om');const q=st.openCursor();
   q.onsuccess=()=>{const c=q.result;if(!c)return;if(!c.value||Date.now()-c.value.t>3*36e5)c.delete();c.continue();};}catch{}}
 omHreinsaGamalt();
+try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k&&k.startsWith('vedra:meteo:'))localStorage.removeItem(k);}}catch{}
+const omIGangi=new Map(); // sama beiðni í gangi: bíða eftir henni í stað þess að senda tvisvar
 function synaOmStodu(txt){const tk=document.getElementById('tilkynning');if(!tk)return;if(txt){tk.textContent=txt;tk.style.display='block';tk.dataset.om='1';}
   else if(tk.dataset.om){tk.style.display='none';delete tk.dataset.om;}}
 async function biddEftirKvota(n){
@@ -1776,18 +1778,24 @@ async function saekjaLikan(likan,punktar=PUNKTAR){
       ...(b.every(p=>typeof p.ele==='number')?{elevation:b.map(p=>Math.round(p.ele)).join(',')}:{})});
     const geymt=await omLesa(url);
     if(geymt&&Date.now()-geymt.t<(omThvinga?OM_THVINGA:OM_GEYMSLA)){ut.push(...geymt.j);continue;}
+    if(omIGangi.has(url)){try{ut.push(...await omIGangi.get(url));continue;}catch{}}
+    let lokid,brugdist;omIGangi.set(url,new Promise((a,b_)=>{lokid=a;brugdist=b_;}));omIGangi.get(url).catch(()=>{});
     let j=null;
+    try{
     for(let tilraun=0;;tilraun++){
       await biddEftirKvota(b.length);
-      const r=await fetch(url);
+      let r;
+      try{r=await fetch(url);}catch(e){if(geymt){j=geymt.j;break;}throw e;} // netið brást: eldri geymd gögn ef til
       if(r.status===429&&tilraun<2){const bid=(+r.headers.get('Retry-After')||[15,40][tilraun]);synaOmStodu(t('om_upptekin',{s:bid}));await sofa(bid*1000);continue;}
       if(!r.ok){let s_='';try{s_=(await r.json()).reason||'';}catch{}
-        if(r.status===429&&geymt){ut.push(...geymt.j);j=null;break;} // eldri geymd gögn frekar en ekkert
+        if(r.status===429&&geymt){j=geymt.j;break;} // eldri geymd gögn frekar en ekkert
         const v=new Error(s_||`villa ${r.status}`);v.status=r.status;throw v;}
-      j=await r.json();if(!Array.isArray(j))j=[j];break;
+      j=await r.json();if(!Array.isArray(j))j=[j];omSkrifa(url,{t:Date.now(),j});break;
     }
+    }catch(e){brugdist(e);omIGangi.delete(url);throw e;}
     synaOmStodu(null);
-    if(j){omSkrifa(url,{t:Date.now(),j});ut.push(...j);}
+    if(j){lokid(j);ut.push(...j);}else{const g=geymt?.j||[];lokid(g);}
+    omIGangi.delete(url);
   }
   return ut;
 }
