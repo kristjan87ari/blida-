@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Besta veðrið</title>
+<title>Vedra</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%20%3E%0A%20%20%3Ctitle%3EVedra%3C/title%3E%0A%20%20%3Ccircle%20cx%3D%2235%22%20cy%3D%2212%22%20r%3D%225.2%22%20fill%3D%22%23f5b700%22/%3E%0A%20%20%3Cpath%20d%3D%22M2.5%2041%20L18%2014.5%20L25.2%2026.5%20L30.4%2018.5%20L45.5%2041%20Z%22%20fill%3D%22%2316324f%22/%3E%0A%20%20%3Cpath%20d%3D%22M18%2014.5%20L21.9%2021.2%20L19.2%2019.8%20L16.9%2021.6%20L14.6%2020.6%20Z%22%20fill%3D%22%23ffffff%22/%3E%0A%20%20%3Cpath%20d%3D%22M3.5%2031.5%20C%2012.5%2027.2%2C%2019.5%2033.6%2C%2028.8%2029.2%20C%2034.8%2026.4%2C%2037.2%2020.6%2C%2033.2%2018.8%20C%2030.4%2017.6%2C%2028.4%2020.4%2C%2030.4%2022.4%22%20fill%3D%22none%22%20stroke%3D%22%2300b4d8%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%0A%3C/svg%3E%0A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;700&display=swap" rel="stylesheet">
 <style>/* Leaflet 1.9.4 */  .leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } } </style>
@@ -17,9 +18,18 @@
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--text);font:15px/1.5 "Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,390px);grid-template-rows:auto minmax(0,1fr)}
-header{grid-column:1/-1;padding:14px 20px 12px;border-bottom:1px solid var(--line);background:var(--bg);display:grid;gap:10px}
+header{grid-column:1/-1;padding:18px 26px 16px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 60%,var(--panel)) 100%);display:grid;gap:16px}
 .topp{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
 h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.01em}
+.vorumerki{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
+.merki{width:42px;height:42px;flex:none}
+.m-sol{fill:#f5b700}.m-fjall{fill:#16324f}.m-snjor{fill:#fff}
+.m-vindur{fill:none;stroke:#00b4d8;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .m-fjall{fill:#9cc3e6}:root:not([data-theme="light"]) .m-snjor{fill:#16324f}}
+:root[data-theme="dark"] .m-fjall{fill:#9cc3e6}:root[data-theme="dark"] .m-snjor{fill:#16324f}
+.vm-texti{display:flex;flex-direction:column;line-height:1.05}
+.vm-nafn{font-size:25px;font-weight:700;letter-spacing:.03em;color:var(--text)}
+.vm-slagord{font-size:12px;font-weight:400;color:var(--muted);margin-top:4px;letter-spacing:0}
 h1 a{color:inherit;text-decoration:none}
 .valmynd{display:flex;gap:4px 16px;flex-wrap:wrap;margin-right:auto;font-size:14px}
 .valmynd a{color:var(--muted);text-decoration:none;padding:2px 0;border-bottom:2px solid transparent}
@@ -29,6 +39,51 @@ h1 a{color:inherit;text-decoration:none}
 .mal select{font:inherit;font-size:13px;color:var(--text);background:var(--chip);border:1px solid var(--line);border-radius:7px;padding:4px 6px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .kortahluti{display:grid;gap:10px;min-width:0}
+.flokkalina{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;position:relative;z-index:1600}
+.flokkaval{position:relative}
+.flokkahnappur{display:inline-flex;align-items:center;gap:12px;min-width:300px;text-align:left;background:var(--panel);border:2px solid color-mix(in srgb,var(--fokus) 45%,var(--line));border-radius:14px;padding:8px 10px 8px 12px;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.07);transition:box-shadow .15s,transform .15s,border-color .15s;cursor:pointer}
+.flokkahnappur:hover{border-color:var(--fokus);box-shadow:0 4px 14px rgba(0,0,0,.12);transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){.flokkahnappur:hover{transform:none}}
+.fh-takn{font-size:26px;line-height:1;width:34px;height:34px;display:grid;place-items:center;background:var(--chip);border-radius:10px;flex:none}
+.fh-breyta{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:500;color:var(--fokus);background:color-mix(in srgb,var(--fokus) 10%,transparent);border-radius:999px;padding:4px 10px;flex:none}
+.fh-merki{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.fh-val{flex:1;font-weight:700;font-size:17px}
+.fh-or{transition:transform .2s;display:inline-block}
+.flokkahnappur[aria-expanded="true"] .fh-or{transform:rotate(180deg)}
+.flokkar{display:none}
+.flokkar.opid{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:16px;position:absolute;top:calc(100% + 8px);left:0;width:min(780px,calc(100vw - 40px));
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 16px 40px rgba(0,0,0,.22);animation:fellur .14s ease-out}
+@keyframes fellur{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.flokkar.opid{animation:none}}
+.flokkahopur{display:grid;gap:6px;align-content:start}
+.hopheiti{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding:0 4px 2px}
+.hopflokkar{display:grid;gap:4px}
+.flokkar .flokkur{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid transparent;background:transparent;border-radius:10px;padding:8px 10px;font-size:14px}
+.flokkar .flokkur:hover{background:var(--chip);border-color:var(--line)}
+.flokkar .flokkur[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.ft-takn{font-size:20px;width:26px;text-align:center;flex:none}
+.undirval{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.undirval button{border:0;background:transparent;padding:7px 12px;font-size:13.5px;color:var(--text)}
+.undirval button+button{border-left:1px solid var(--line)}
+.undirval button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.mal{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--chip);border-radius:8px;padding:0 0 0 8px;cursor:pointer}
+.mal:hover{border-color:var(--fokus)}
+.mal-takn{font-size:15px}
+.mal select{border:0;background:transparent;padding:5px 6px 5px 2px;cursor:pointer}
+.mal-tillaga{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--fokus);background:var(--panel);color:var(--text);border-radius:999px;padding:4px 6px 4px 10px;font-size:13px;cursor:pointer}
+.mal-tillaga .mt-x{color:var(--muted);font-size:12px;padding:0 4px}
+.kl-spjald{margin:8px 0;border:1px solid var(--line);border-radius:9px;background:var(--chip)}
+.kl-spjald>summary{cursor:pointer;padding:8px 10px;font-weight:500;list-style:none}
+.kl-spjald>summary::-webkit-details-marker{display:none}
+.kl-spjald>summary::after{content:"▾";float:right;color:var(--muted);transition:transform .2s}
+.kl-spjald[open]>summary::after{transform:rotate(180deg)}
+.kl-innihald{padding:0 10px 8px;background:var(--panel);border-radius:0 0 9px 9px}
+.kl-innihald h4{font-size:12.5px;font-weight:500;color:var(--muted);margin:8px 0 2px}
+.kl-innihald ul{list-style:none;margin:0;padding:0}
+.kl-innihald li{display:flex;gap:8px;padding:2px 0;font-size:13.5px;border:0;cursor:auto}
+.kl-innihald li>span:first-child{width:20px;flex:none;text-align:center}
+.li-kl{display:block;margin-top:4px;background:none;border:1px solid var(--line);border-radius:7px;padding:1px 6px;font-size:14px;cursor:pointer;line-height:1.3}
+.li-kl:hover{border-color:var(--fokus);background:var(--chip)}
 .kortahluti>*,header>*{min-width:0}
 header{min-width:0}
 .nedri{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
@@ -61,8 +116,18 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .rod{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
 .flokkur,.dagur{border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:6px 13px;white-space:nowrap;font-size:14px}
 .flokkur[aria-pressed="true"],.dagur[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
-.dagur{padding:4px 11px;font-size:13px}
-.lysing{font-size:14px;color:var(--muted);margin:0}
+.dagur{padding:6px 14px;font-size:13.5px}
+.dagur:hover:not([aria-pressed="true"]){border-color:var(--fokus)}
+.lysing{font-size:14px;color:var(--muted);margin:0;flex:1;min-width:0}
+.skrefalina{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px 34px}
+.skref{display:grid;gap:7px;min-width:0;grid-template-columns:minmax(0,1fr)}
+.skref>*{min-width:0}
+.skref-2{flex:1;min-width:0}
+.skref-titill{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--text)}
+.skref-nr{width:20px;height:20px;border-radius:50%;background:var(--fokus);color:#fff;display:grid;place-items:center;font-size:11.5px;font-weight:700;flex:none}
+.lysing-lina{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 12px 9px 14px}
+.hreinsa2{flex:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:999px;padding:5px 13px;font-size:13px;cursor:pointer}
+.hreinsa2:hover{border-color:var(--fokus);background:var(--chip)}
 #kort{grid-column:1;grid-row:2;position:relative;background:var(--haf);overflow:hidden;min-height:320px}
 .leaflet-container{background:var(--haf);font:inherit}
 #kort.an-flisa .leaflet-tile-pane{display:none}
@@ -131,7 +196,10 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
   border:1px solid var(--fokus);border-radius:8px;padding:7px 12px;font-size:13px;box-shadow:0 3px 10px rgba(0,0,0,.2);width:max-content;max-width:calc(100% - 150px);text-align:center}
 .sv-kassi{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;border:1px solid var(--fokus);border-radius:8px;padding:8px 10px;margin:12px 0 0;font-size:13px}
 .sv-kassi button{border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:7px;padding:4px 9px;font-size:13px}
-.timi-farsimi{display:none}
+.timi-farsimi{display:block;font-size:12px;color:var(--muted);margin:12px 0 0}
+.saekja-hopur .timi{display:none}
+.skref-2 .nedri{flex-wrap:nowrap;min-height:54px;align-items:center}
+.skref-2 .nedri .rod{flex:1 1 auto}
 .hlid-haus{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:3;background:var(--panel);padding:14px 0 10px;border-bottom:1px solid var(--line)}
 .hlid-haus h2{font-size:16px;margin:0;font-weight:700}
 .hlid-haus{flex-wrap:wrap}
@@ -163,7 +231,7 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 #stillingar{border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:12px 0 0}
 #stillingar summary{font-size:14px}
 .vidv-ovirkt{margin:10px 0 0}
-.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 200px);display:flex;flex-direction:column;
+.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 240px);display:flex;flex-direction:column;
   background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.22);overflow:hidden}
 .sp-haus{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line);flex:none}
 .sp-brjota{flex:1;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0;background:none;border:0;padding:10px 4px 10px 12px;text-align:left;cursor:default}
@@ -198,6 +266,11 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .klst-t{color:var(--muted);font-size:11px}
 .klst-i{font-size:18px;line-height:1.2}
 .klst-v{color:var(--muted);font-size:11px}
+.erf{display:inline-block;font-size:11.5px;font-weight:500;border-radius:999px;padding:1px 7px;margin:3px 0 0;white-space:nowrap}
+.erf-1{background:#d3f9d8;color:#1b6b2c}.erf-2{background:#fff3bf;color:#7a5800}.erf-3{background:#ffe3e3;color:#a51111}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .erf-1{background:#1f3d26;color:#8ce99a}:root:not([data-theme="light"]) .erf-2{background:#3d3410;color:#ffd43b}:root:not([data-theme="light"]) .erf-3{background:#4a1818;color:#ffa8a8}}
+.erf-lina{margin:4px 0}
+.veidivefir{font-size:13px;margin:6px 0}.veidivefir a{color:var(--fokus);margin-right:8px}
 .maeling{font-size:13px;background:var(--chip);border-radius:7px;padding:5px 8px;margin:6px 0}
 #vi-stada h4,.lk-titill{font-size:13px;margin:10px 0 4px}
 .vi-listi{list-style:none;margin:0 0 4px;padding:0}
@@ -274,16 +347,37 @@ details .likan small{color:var(--muted)}
   #kort,#tilkynning,aside,#sida{grid-column:1;grid-row:auto}
   #sida{padding:20px 16px 40px}
   #sida h2{font-size:24px}
-  header{padding:10px 12px 8px;gap:8px}
+  header{padding:12px 14px 12px;gap:12px}
+  .skrefalina{gap:12px}
+  .skref-2 .nedri{min-height:0}
+  .skref,.skref-1{width:100%}
+  .lysing-lina{padding:8px 10px}
+  .hreinsa2{padding:4px 11px;font-size:12.5px}
+  .fh-takn{font-size:22px;width:30px;height:30px}
+  .fh-val{font-size:16px}
   .topp{gap:4px 10px}
   h1{font-size:19px}
+  .merki{width:34px;height:34px}
+  .vm-nafn{font-size:21px}
+  .vm-slagord{font-size:11px;margin-top:2px}
   .mal{margin-left:auto}
   .mal select{padding:5px 4px;max-width:120px}
   .gestir{order:3}
   .valmynd{order:4;width:100%;gap:16px;font-size:13px;margin:0}
   .valmynd a{padding:4px 0}
   .kortahluti{gap:8px}
-  .rod{margin:0 -12px;padding:0 12px 2px;scrollbar-width:none;scroll-snap-type:x proximity}
+  .flokkalina{gap:8px}
+  .mal-tillaga{order:5;font-size:12px;padding:3px 6px 3px 9px}
+  .flokkaval{width:100%}
+  .flokkahnappur{display:flex;width:100%;min-width:0}
+  .flokkar.opid{position:fixed;inset:auto 0 0 0;top:auto;width:auto;max-height:82vh;overflow-y:auto;grid-template-columns:1fr;gap:14px;
+    border-radius:18px 18px 0 0;padding:14px 14px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.3);animation:upp .18s ease-out}
+  @keyframes upp{from{transform:translateY(20px);opacity:.6}to{transform:none;opacity:1}}
+  .flokkar.opid .hopflokkar{grid-template-columns:1fr 1fr}
+  .flokkar .flokkur{background:var(--chip);border-color:var(--line)}
+  .undirval{width:100%}.undirval button{flex:1}
+  .mal select{max-width:96px}
+  .rod{margin:0 -14px;padding:0 14px 2px;scrollbar-width:none;scroll-snap-type:x proximity;scroll-padding-left:14px}
   .rod::-webkit-scrollbar{display:none}
   .rod button{scroll-snap-align:start}
   .flokkur{padding:8px 12px;font-size:14px}
@@ -323,17 +417,28 @@ details .likan small{color:var(--muted)}
 <body>
 <header>
   <div class="topp">
-    <h1><a href="#" data-i18n="titill">Besta veðrið</a></h1>
+    <h1 class="vm-h1"><a href="#" class="vorumerki" aria-label="Vedra"><svg class="merki" viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="12" r="5.2" class="m-sol"/><path class="m-fjall" d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z"/><path class="m-snjor" d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z"/><path class="m-vindur" d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4"/></svg><span class="vm-texti"><span class="vm-nafn">Vedra</span><span class="vm-slagord" data-i18n="slagord">Þitt veður. Þitt ævintýri.</span></span></a></h1>
     <nav class="valmynd">
       <a href="#" data-sida="" data-i18n="nav_kort">Kort</a>
       <a href="#hvernig" data-sida="hvernig" data-i18n="nav_hvernig">Hvernig virkar þetta</a>
       <a href="#um" data-sida="um" data-i18n="nav_um">Um síðuna</a>
     </nav>
     <span class="gestir" id="gestir" hidden></span>
-    <label class="mal"><span class="sr" data-i18n="tungumal">Tungumál</span><select id="mal"></select></label>
+    <button type="button" id="mal-tillaga" class="mal-tillaga" hidden></button>
+    <label class="mal" id="mal-merki"><span class="mal-takn" aria-hidden="true">🌐</span><span class="sr" data-i18n="mal_titill">Skipta um tungumál</span><select id="mal"></select></label>
   </div>
   <div class="kortahluti">
-    <div class="rod" id="flokkar" role="group" data-i18n-aria="hvad"></div>
+   <div class="skrefalina">
+    <div class="skref skref-1">
+     <div class="skref-titill"><span class="skref-nr" aria-hidden="true">1</span><span data-i18n="hvad">Hvað ætlarðu að gera?</span></div>
+    <div class="flokkalina">
+      <div class="flokkaval"><button type="button" id="flokkahnappur" class="flokkahnappur" aria-expanded="false" aria-controls="flokkar" aria-haspopup="true"></button>
+        <div id="flokkar" class="flokkar" role="group" data-i18n-aria="hvad"></div></div>
+      <div id="undirval" class="undirval" role="group" hidden></div>
+    </div>
+    </div>
+    <div class="skref skref-2">
+     <div class="skref-titill"><span class="skref-nr" aria-hidden="true">2</span><span data-i18n="hvenaer">Hvenær?</span></div>
     <div class="nedri">
       <div class="rod" id="dagar" role="group" data-i18n-aria="dagur"></div>
       <div class="saekja-hopur">
@@ -341,7 +446,10 @@ details .likan small{color:var(--muted)}
         <button id="saekja" type="button" data-i18n-aria="saekja"><span class="snua" aria-hidden="true"></span><span id="saekja-texti" data-i18n="saekja">Sækja nýjustu spá</span></button>
       </div>
     </div>
-    <p class="lysing" id="lysing"></p>
+    </div>
+   </div>
+    <div class="lysing-lina"><p class="lysing" id="lysing"></p>
+      <button type="button" id="hreinsa2" class="hreinsa2" data-i18n="hreinsa">↺ Hreinsa leit</button></div>
   </div>
 </header>
 <main id="sida" hidden tabindex="-1"><article id="sida-efni"></article><p class="tilbaka"><a href="#" data-i18n="tilBaka">Aftur á kortið</a></p></main>
@@ -357,18 +465,6 @@ details .likan small{color:var(--muted)}
   <div id="sv-kassi" class="sv-kassi" hidden></div>
   <p id="flokksathugasemd" class="athuga" hidden></p>
   <ol id="listi"></ol>
-  <section class="klaedi">
-    <button type="button" id="kl-opna" class="kl-opna" aria-expanded="false" aria-controls="kl-efni" data-i18n="kl_hnappur">👕 Hverju á ég að klæðast?</button>
-    <div id="kl-efni" hidden>
-      <div class="kl-stadur">
-        <button type="button" id="kl-gps" data-i18n="kl_gps">Nota staðsetningu mína</button>
-        <button type="button" id="kl-kort" data-i18n="kl_kort">Velja á korti</button>
-        <input id="kl-leit" list="kl-stadir" autocomplete="off" data-i18n-ph="kl_leita" placeholder="Sláðu inn stað…">
-        <datalist id="kl-stadir"></datalist>
-      </div>
-      <div id="kl-nidurstada" aria-live="polite"></div>
-    </div>
-  </section>
   <details class="spjald"><summary data-i18n="um_einkunnir">Um einkunnirnar</summary><div class="skyring" id="skyring"></div></details>
   <div id="heimildir"></div>
   <details id="stillingar">
@@ -1002,35 +1098,35 @@ const I18N_KL={
 is:{k:['Stuttermabolur','Langermabolur','Ullarnærbolur','Ullarnærbuxur','Flíspeysa eða ullarpeysa','Þykk ullarpeysa','Léttur jakki','Hlý úlpa','Dúnúlpa','Vind- og vatnsheldur skeljajakki','Vindheldur jakki','Regnbuxur','Síðbuxur','Stuttbuxur eða léttar buxur','Göngubuxur (ekki gallabuxur)','Skíðabuxur','Húfa','Hlý ullarhúfa','Derhúfa eða sólhattur','Vettlingar','Hlýjar lúffur','Hálsklútur eða buff','Lambhúshetta','Ullarsokkar','Tvennir ullarsokkar','Þægilegir skór','Vatnsheldir gönguskór','Hlýir, vatnsheldir vetrarskór','Mannbroddar (hálka)','Jöklabroddar og ísöxi','Legghlífar','Sólgleraugu','Skíðagleraugu','Sólarvörn','Höfuðljós','Auka hlýtt lag í bakpokann','Auka sokkar','Svefnpoki sem þolir {x} °C','Tjald sem þolir vind, vel fest','Áberandi appelsínugult vesti eða húfa','Fullhlaðinn sími og aukarafhlaða','Hjálmur','Endurskin og ljós','Hjólahanskar','Handhitarar','Hitabrúsi með heitum drykk','Sundföt og handklæði','Inniskór eða sundskór','Snjóflóðaýlir, skófla og stöng','Vatn og nesti','Íhugaðu að vera heima'],
  n:['Vindurinn lætur {T} °C líða eins og {F} °C.','Á tindi í um {h} m hæð má búast við um {T} °C og meiri vindi.','Þú hitnar á hreyfingu. Byrjaðu svolítið kalt og bættu við lögum í pásum.','Þú stendur lengi kyrr, svo klæddu þig hlýrra en hitinn gefur til kynna.','Forðastu bómull næst líkamanum; hún heldur raka og kælir.','Hiti er um frostmark og úrkoma í kortunum, svo hálka er líkleg.','{x} í gildi á staðnum. Hugsaðu þig vel um áður en þú ferð.','Dagsbirta er stutt á þessum árstíma.','Þegar þú ferð upp úr pottinum kólnar þú hratt í vindi. Hafðu fötin nálægt.'],
  ui:['👕 Hverju á ég að klæðast?','Nota staðsetningu mína','Velja á korti','Sláðu inn stað…','Veldu staðsetningu með GPS, sláðu inn bæ eða smelltu á kortið.','Smelltu á kortið þar sem þú verður.','Ekki tókst að finna staðsetningu þína. Sláðu inn stað eða smelltu á kortið.','Staðsetningin er utan Íslands. Veldu stað á landinu.','{f}: {b}','Í fötin','Taktu með','Gott að vita','{T} °C, upplifaður hiti {F} °C, vindur {W} m/s, hviður {G}, úrkoma {P} mm','Hverju á ég að klæðast hér?','Þín staðsetning','Sæki spá fyrir staðinn…','Uppástungur byggðar á veðurspá. Klæddu þig eftir aðstæðum á staðnum.','Sýna','Topp {n}'],
- hv2:'<h3>Topp 5, 10 eða 20</h3><p>Þú velur hve marga staði þú vilt sjá. Fleiri staðir þýða að neðri sætin hafa lægri einkunn; einkunnin segir alltaf til um gæðin.</p><h3>Hverju á ég að klæðast?</h3><p>Veldu staðsetningu með GPS, með því að slá inn bæ eða smella á kortið. Síðan sækir spá fyrir nákvæmlega þann stað og stingur upp á klæðnaði fyrir valinn flokk og tíma: lög af fötum, hvað á að taka með og hvað er gott að vita. Tekið er tillit til vindkælingar, úrkomu, hálku, hreyfingar og myrkurs. Staðsetningin er aðeins notuð í vafranum þínum og til að sækja spá; hún er ekki send annað. Þetta eru almennar uppástungur; klæddu þig alltaf eftir aðstæðum og reynslu.</p>'},
+ hv2:'<h3>Topp 5, 10 eða 20</h3><p>Þú velur hve marga staði þú vilt sjá. Fleiri staðir þýða að neðri sætin hafa lægri einkunn; einkunnin segir alltaf til um gæðin.</p><h3>Hverju á ég að klæðast?</h3><p>Smelltu á 👕 við stað í listanum, eða opnaðu „👕 Hverju á ég að klæðast?“ í upplýsingaspjaldi staðar eða valins punkts. Þar birtast uppástungur fyrir valinn flokk og tíma: lög af fötum, hvað á að taka með og hvað er gott að vita. Tekið er tillit til vindkælingar, úrkomu, hálku, hreyfingar og myrkurs. Þetta eru almennar uppástungur; klæddu þig alltaf eftir aðstæðum og reynslu.</p>'},
 en:{k:['T-shirt','Long-sleeved top','Wool base layer top','Wool long johns','Fleece or wool jumper','Thick wool jumper','Light jacket','Warm jacket','Down jacket','Wind- and waterproof shell jacket','Windproof jacket','Waterproof trousers','Long trousers','Shorts or light trousers','Hiking trousers (not jeans)','Ski trousers','Hat','Warm wool hat','Cap or sun hat','Gloves','Warm mittens','Neck gaiter or scarf','Balaclava','Wool socks','Two pairs of wool socks','Comfortable shoes','Waterproof hiking boots','Warm, waterproof winter boots','Ice cleats (slippery ground)','Crampons and ice axe','Gaiters','Sunglasses','Ski goggles','Sunscreen','Headlamp','Extra warm layer in your backpack','Spare socks','Sleeping bag rated to {x} °C','Wind-resistant tent, well pegged','High-visibility orange vest or hat','Fully charged phone and power bank','Helmet','Reflectors and lights','Cycling gloves','Hand warmers','Thermos with a hot drink','Swimwear and towel','Flip-flops or pool shoes','Avalanche transceiver, shovel and probe','Water and snacks','Consider staying at home'],
  n:['The wind makes {T} °C feel like {F} °C.','At a summit around {h} m, expect about {T} °C and stronger wind.','You warm up when moving. Start a little cool and add layers during breaks.','You will be standing still for a long time, so dress warmer than the temperature suggests.','Avoid cotton next to your skin; it holds moisture and chills you.','The temperature is around freezing with precipitation forecast, so icy ground is likely.','{x} in effect here. Think carefully before you go.','Daylight is short at this time of year.','Getting out of the hot tub you cool down fast in the wind. Keep your clothes close.'],
  ui:['👕 What should I wear?','Use my location','Pick on map','Type a place…','Choose a location with GPS, type a town or click the map.','Click the map where you will be.','Your location could not be found. Type a place or click the map.','That location is outside Iceland. Choose a place in Iceland.','{f}: {b}','Wear','Bring','Good to know','{T} °C, feels like {F} °C, wind {W} m/s, gusts {G}, precipitation {P} mm','What should I wear here?','Your location','Fetching forecast for the place…','Suggestions based on the forecast. Dress for the conditions you find.','Show','Top {n}'],
- hv2:'<h3>Top 5, 10 or 20</h3><p>You choose how many places to see. More places means the lower ranks have lower scores; the score always tells you the quality.</p><h3>What should I wear?</h3><p>Choose a location with GPS, by typing a town or by clicking the map. The page fetches a forecast for exactly that place and suggests clothing for the selected category and time: layers to wear, what to bring and what is good to know. Wind chill, precipitation, icy ground, activity level and darkness are taken into account. Your location is only used in your browser and to fetch the forecast; it is not sent anywhere else. These are general suggestions; always dress according to conditions and experience.</p>'},
+ hv2:'<h3>Top 5, 10 or 20</h3><p>You choose how many places to see. More places means the lower ranks have lower scores; the score always tells you the quality.</p><h3>What should I wear?</h3><p>Click 👕 next to a place in the list, or open “👕 What should I wear?” in the information panel of a place or a selected point. You will see suggestions for the selected category and time: layers to wear, what to bring and what is good to know. Wind chill, precipitation, icy ground, activity level and darkness are taken into account. These are general suggestions; always dress according to conditions and experience.</p>'},
 da:{k:['T-shirt','Langærmet trøje','Uldundertrøje','Uldunderbukser','Fleece- eller uldtrøje','Tyk uldtrøje','Let jakke','Varm jakke','Dunjakke','Vind- og vandtæt skaljakke','Vindtæt jakke','Regnbukser','Lange bukser','Shorts eller lette bukser','Vandrebukser (ikke jeans)','Skibukser','Hue','Varm uldhue','Kasket eller solhat','Handsker','Varme luffer','Halsedisse eller tørklæde','Elefanthue','Uldsokker','To par uldsokker','Behagelige sko','Vandtætte vandrestøvler','Varme, vandtætte vinterstøvler','Isbrodder (glat føre)','Steigjern og isøkse','Gamacher','Solbriller','Skibriller','Solcreme','Pandelampe','Ekstra varmt lag i rygsækken','Ekstra sokker','Sovepose til {x} °C','Vindstabilt telt, godt forankret','Synlig orange vest eller hue','Fuldt opladet telefon og powerbank','Hjelm','Reflekser og lygter','Cykelhandsker','Håndvarmere','Termokande med varm drik','Badetøj og håndklæde','Klipklappere eller badesko','Lavinesender, skovl og sonde','Vand og mad','Overvej at blive hjemme'],
  n:['Vinden får {T} °C til at føles som {F} °C.','På en top i ca. {h} m kan du forvente ca. {T} °C og mere vind.','Du bliver varm, når du bevæger dig. Start lidt køligt, og tag lag på i pauserne.','Du står stille længe, så klæd dig varmere på, end temperaturen antyder.','Undgå bomuld inderst; det holder på fugt og køler.','Temperaturen er omkring frysepunktet med nedbør i prognosen, så glat føre er sandsynligt.','{x} gælder her. Tænk dig godt om, før du tager af sted.','Dagslyset er kort på denne årstid.','Når du kommer op af hotpotten, bliver du hurtigt kold i vinden. Hav tøjet tæt på.'],
  ui:['👕 Hvad skal jeg have på?','Brug min placering','Vælg på kortet','Skriv et sted…','Vælg en placering med GPS, skriv en by, eller klik på kortet.','Klik på kortet, hvor du skal være.','Din placering kunne ikke findes. Skriv et sted, eller klik på kortet.','Placeringen er uden for Island. Vælg et sted i Island.','{f}: {b}','Tag på','Tag med','Godt at vide','{T} °C, føles som {F} °C, vind {W} m/s, vindstød {G}, nedbør {P} mm','Hvad skal jeg have på her?','Din placering','Henter prognose for stedet…','Forslag baseret på prognosen. Klæd dig efter forholdene på stedet.','Vis','Top {n}'],
- hv2:'<h3>Top 5, 10 eller 20</h3><p>Du vælger, hvor mange steder du vil se. Flere steder betyder, at de nederste pladser har lavere score; scoren viser altid kvaliteten.</p><h3>Hvad skal jeg have på?</h3><p>Vælg en placering med GPS, ved at skrive en by eller ved at klikke på kortet. Siden henter en prognose for netop det sted og foreslår påklædning til den valgte kategori og det valgte tidspunkt: lag, hvad du skal tage med, og hvad der er godt at vide. Der tages højde for vindafkøling, nedbør, glat føre, aktivitetsniveau og mørke. Din placering bruges kun i din browser og til at hente prognosen; den sendes ikke andre steder hen. Det er generelle forslag; klæd dig altid efter forholdene og din erfaring.</p>'},
+ hv2:'<h3>Top 5, 10 eller 20</h3><p>Du vælger, hvor mange steder du vil se. Flere steder betyder, at de nederste pladser har lavere score; scoren viser altid kvaliteten.</p><h3>Hvad skal jeg have på?</h3><p>Klik på 👕 ved et sted i listen, eller åbn »👕 Hvad skal jeg have på?« i informationspanelet for et sted eller et valgt punkt. Der vises forslag til den valgte kategori og det valgte tidspunkt: lag, hvad du skal tage med, og hvad der er godt at vide. Der tages højde for vindafkøling, nedbør, glat føre, aktivitetsniveau og mørke. Det er generelle forslag; klæd dig altid efter forholdene og din erfaring.</p>'},
 sv:{k:['T-shirt','Långärmad tröja','Underställströja i ull','Underställsbyxor i ull','Fleece- eller ulltröja','Tjock ulltröja','Lätt jacka','Varm jacka','Dunjacka','Vind- och vattentät skaljacka','Vindtät jacka','Regnbyxor','Långbyxor','Shorts eller lätta byxor','Vandringsbyxor (inte jeans)','Skidbyxor','Mössa','Varm ullmössa','Keps eller solhatt','Handskar','Varma vantar','Halskrage eller halsduk','Balaklava','Ullstrumpor','Två par ullstrumpor','Bekväma skor','Vattentäta vandringskängor','Varma, vattentäta vinterkängor','Broddar (halt underlag)','Stegjärn och isyxa','Damasker','Solglasögon','Skidglasögon','Solkräm','Pannlampa','Extra varmt lager i ryggsäcken','Extra strumpor','Sovsäck för {x} °C','Vindtåligt tält, väl förankrat','Synlig orange väst eller mössa','Fulladdad telefon och powerbank','Hjälm','Reflexer och lampor','Cykelhandskar','Handvärmare','Termos med varm dryck','Badkläder och handduk','Flipflops eller badskor','Lavinsändare, spade och sond','Vatten och mat','Överväg att stanna hemma'],
  n:['Vinden gör att {T} °C känns som {F} °C.','På en topp på cirka {h} m kan du räkna med cirka {T} °C och mer vind.','Du blir varm när du rör dig. Börja lite svalt och ta på lager i pauserna.','Du står still länge, så klä dig varmare än temperaturen antyder.','Undvik bomull närmast kroppen; den håller fukt och kyler.','Temperaturen ligger kring noll med nederbörd i prognosen, så halka är trolig.','{x} gäller här. Tänk efter noga innan du ger dig av.','Dagsljuset är kort den här tiden på året.','När du kliver ur badtunnan blir du snabbt kall i vinden. Ha kläderna nära.'],
  ui:['👕 Vad ska jag ha på mig?','Använd min plats','Välj på kartan','Skriv en plats…','Välj en plats med GPS, skriv en ort eller klicka på kartan.','Klicka på kartan där du ska vara.','Din plats kunde inte hittas. Skriv en plats eller klicka på kartan.','Platsen ligger utanför Island. Välj en plats på Island.','{f}: {b}','Ta på','Ta med','Bra att veta','{T} °C, känns som {F} °C, vind {W} m/s, byar {G}, nederbörd {P} mm','Vad ska jag ha på mig här?','Din plats','Hämtar prognos för platsen…','Förslag baserade på prognosen. Klä dig efter förhållandena på plats.','Visa','Topp {n}'],
- hv2:'<h3>Topp 5, 10 eller 20</h3><p>Du väljer hur många platser du vill se. Fler platser betyder att de nedre placeringarna har lägre poäng; poängen visar alltid kvaliteten.</p><h3>Vad ska jag ha på mig?</h3><p>Välj en plats med GPS, genom att skriva en ort eller genom att klicka på kartan. Sidan hämtar en prognos för just den platsen och föreslår klädsel för vald kategori och tid: lager att ha på sig, vad du ska ta med och vad som är bra att veta. Hänsyn tas till vindavkylning, nederbörd, halka, aktivitetsnivå och mörker. Din plats används bara i din webbläsare och för att hämta prognosen; den skickas inte någon annanstans. Detta är allmänna förslag; klä dig alltid efter förhållandena och din erfarenhet.</p>'},
+ hv2:'<h3>Topp 5, 10 eller 20</h3><p>Du väljer hur många platser du vill se. Fler platser betyder att de nedre placeringarna har lägre poäng; poängen visar alltid kvaliteten.</p><h3>Vad ska jag ha på mig?</h3><p>Klicka på 👕 vid en plats i listan, eller öppna ”👕 Vad ska jag ha på mig?” i informationspanelen för en plats eller en vald punkt. Där visas förslag för vald kategori och tid: lager att ha på sig, vad du ska ta med och vad som är bra att veta. Hänsyn tas till vindavkylning, nederbörd, halka, aktivitetsnivå och mörker. Detta är allmänna förslag; klä dig alltid efter förhållandena och din erfarenhet.</p>'},
 pl:{k:['Koszulka z krótkim rękawem','Bluzka z długim rękawem','Wełniana koszulka termoaktywna','Wełniane kalesony','Polar lub wełniany sweter','Gruby wełniany sweter','Lekka kurtka','Ciepła kurtka','Kurtka puchowa','Wiatro- i wodoodporna kurtka','Kurtka wiatroszczelna','Spodnie przeciwdeszczowe','Długie spodnie','Szorty lub lekkie spodnie','Spodnie trekkingowe (nie dżinsy)','Spodnie narciarskie','Czapka','Ciepła wełniana czapka','Czapka z daszkiem lub kapelusz','Rękawiczki','Ciepłe rękawice z jednym palcem','Komin lub szalik','Kominiarka','Wełniane skarpety','Dwie pary wełnianych skarpet','Wygodne buty','Wodoodporne buty trekkingowe','Ciepłe, wodoodporne buty zimowe','Raczki (ślisko)','Raki i czekan','Stuptuty','Okulary przeciwsłoneczne','Gogle narciarskie','Krem z filtrem','Czołówka','Dodatkowa ciepła warstwa w plecaku','Zapasowe skarpety','Śpiwór do {x} °C','Namiot odporny na wiatr, dobrze przypięty','Widoczna pomarańczowa kamizelka lub czapka','Naładowany telefon i powerbank','Kask','Odblaski i światła','Rękawiczki rowerowe','Ogrzewacze do rąk','Termos z gorącym napojem','Strój kąpielowy i ręcznik','Klapki lub buty basenowe','Detektor lawinowy, łopata i sonda','Woda i przekąski','Rozważ pozostanie w domu'],
  n:['Wiatr sprawia, że {T} °C odczuwa się jak {F} °C.','Na szczycie na wysokości ok. {h} m spodziewaj się ok. {T} °C i silniejszego wiatru.','W ruchu się rozgrzejesz. Zacznij lekko chłodno i dokładaj warstwy w przerwach.','Będziesz długo stać w miejscu, więc ubierz się cieplej, niż wskazuje temperatura.','Unikaj bawełny przy skórze; zatrzymuje wilgoć i wychładza.','Temperatura jest bliska zera, a prognoza przewiduje opady, więc ślisko jest prawdopodobne.','{x} obowiązuje w tym miejscu. Dobrze się zastanów przed wyjściem.','O tej porze roku dzień jest krótki.','Wychodząc z gorącego basenu, szybko marzniesz na wietrze. Trzymaj ubranie blisko.'],
  ui:['👕 Jak się ubrać?','Użyj mojej lokalizacji','Wybierz na mapie','Wpisz miejsce…','Wybierz lokalizację przez GPS, wpisz miejscowość lub kliknij mapę.','Kliknij na mapie miejsce, w którym będziesz.','Nie udało się ustalić Twojej lokalizacji. Wpisz miejsce lub kliknij mapę.','Ta lokalizacja jest poza Islandią. Wybierz miejsce na Islandii.','{f}: {b}','Załóż','Zabierz','Warto wiedzieć','{T} °C, odczuwalna {F} °C, wiatr {W} m/s, porywy {G}, opady {P} mm','Jak się tu ubrać?','Twoja lokalizacja','Pobieranie prognozy dla miejsca…','Sugestie na podstawie prognozy. Ubierz się stosownie do warunków na miejscu.','Pokaż','Top {n}'],
- hv2:'<h3>Top 5, 10 lub 20</h3><p>Ty wybierasz, ile miejsc chcesz zobaczyć. Więcej miejsc oznacza, że dalsze pozycje mają niższy wynik; wynik zawsze mówi o jakości.</p><h3>Jak się ubrać?</h3><p>Wybierz lokalizację przez GPS, wpisując miejscowość lub klikając mapę. Strona pobiera prognozę dokładnie dla tego miejsca i podpowiada ubiór dla wybranej kategorii i czasu: warstwy, co zabrać i co warto wiedzieć. Uwzględnia temperaturę odczuwalną, opady, gołoledź, poziom aktywności i ciemność. Twoja lokalizacja jest używana tylko w przeglądarce i do pobrania prognozy; nie jest nigdzie indziej wysyłana. To ogólne sugestie; zawsze ubieraj się zgodnie z warunkami i doświadczeniem.</p>'},
+ hv2:'<h3>Top 5, 10 lub 20</h3><p>Ty wybierasz, ile miejsc chcesz zobaczyć. Więcej miejsc oznacza, że dalsze pozycje mają niższy wynik; wynik zawsze mówi o jakości.</p><h3>Jak się ubrać?</h3><p>Kliknij 👕 przy miejscu na liście albo otwórz „👕 Jak się ubrać?” w panelu informacji o miejscu lub wybranym punkcie. Pojawią się sugestie dla wybranej kategorii i czasu: warstwy, co zabrać i co warto wiedzieć. Uwzględniane są temperatura odczuwalna, opady, gołoledź, poziom aktywności i ciemność. To ogólne sugestie; zawsze ubieraj się zgodnie z warunkami i doświadczeniem.</p>'},
 fr:{k:['T-shirt','Haut à manches longues','Sous-vêtement haut en laine','Collant en laine','Polaire ou pull en laine','Gros pull en laine','Veste légère','Veste chaude','Doudoune','Veste coupe-vent et imperméable','Veste coupe-vent','Pantalon imperméable','Pantalon long','Short ou pantalon léger','Pantalon de randonnée (pas de jean)','Pantalon de ski','Bonnet','Bonnet en laine chaud','Casquette ou chapeau de soleil','Gants','Moufles chaudes','Tour de cou ou écharpe','Cagoule','Chaussettes en laine','Deux paires de chaussettes en laine','Chaussures confortables','Chaussures de randonnée imperméables','Bottes d’hiver chaudes et imperméables','Crampons antidérapants (sol glissant)','Crampons et piolet','Guêtres','Lunettes de soleil','Masque de ski','Crème solaire','Lampe frontale','Couche chaude supplémentaire dans le sac','Chaussettes de rechange','Sac de couchage jusqu’à {x} °C','Tente résistante au vent, bien arrimée','Gilet ou bonnet orange bien visible','Téléphone chargé et batterie externe','Casque','Réflecteurs et éclairage','Gants de vélo','Chauffe-mains','Thermos avec une boisson chaude','Maillot de bain et serviette','Tongs ou chaussures de piscine','DVA, pelle et sonde','Eau et en-cas','Envisagez de rester chez vous'],
  n:['Le vent fait que {T} °C semblent {F} °C.','Sur un sommet vers {h} m, attendez-vous à environ {T} °C et plus de vent.','Vous vous réchauffez en bougeant. Partez un peu au frais et ajoutez des couches pendant les pauses.','Vous resterez longtemps immobile : habillez-vous plus chaudement que la température ne le suggère.','Évitez le coton près de la peau ; il retient l’humidité et refroidit.','La température est proche de zéro avec des précipitations prévues : le verglas est probable.','{x} : en vigueur ici. Réfléchissez bien avant de partir.','Les journées sont courtes à cette période de l’année.','En sortant du bain chaud, on se refroidit vite dans le vent. Gardez vos vêtements à portée.'],
  ui:['👕 Comment m’habiller ?','Utiliser ma position','Choisir sur la carte','Saisissez un lieu…','Choisissez un lieu par GPS, saisissez une ville ou cliquez sur la carte.','Cliquez sur la carte à l’endroit où vous serez.','Votre position n’a pas pu être trouvée. Saisissez un lieu ou cliquez sur la carte.','Ce lieu est hors d’Islande. Choisissez un lieu en Islande.','{f} : {b}','À porter','À emporter','Bon à savoir','{T} °C, ressenti {F} °C, vent {W} m/s, rafales {G}, précipitations {P} mm','Comment m’habiller ici ?','Votre position','Récupération de la prévision pour ce lieu…','Suggestions basées sur la prévision. Habillez-vous selon les conditions sur place.','Afficher','Top {n}'],
- hv2:'<h3>Top 5, 10 ou 20</h3><p>Vous choisissez combien d’endroits afficher. Plus il y en a, plus les derniers rangs ont une note basse ; la note indique toujours la qualité.</p><h3>Comment m’habiller ?</h3><p>Choisissez un lieu par GPS, en saisissant une ville ou en cliquant sur la carte. La page récupère une prévision pour ce lieu précis et propose une tenue pour la catégorie et le moment choisis : couches à porter, quoi emporter et bon à savoir. Le refroidissement éolien, les précipitations, le verglas, le niveau d’activité et l’obscurité sont pris en compte. Votre position n’est utilisée que dans votre navigateur et pour récupérer la prévision ; elle n’est envoyée nulle part ailleurs. Ce sont des suggestions générales ; habillez-vous toujours selon les conditions et votre expérience.</p>'},
+ hv2:'<h3>Top 5, 10 ou 20</h3><p>Vous choisissez combien d’endroits afficher. Plus il y en a, plus les derniers rangs ont une note basse ; la note indique toujours la qualité.</p><h3>Comment m’habiller ?</h3><p>Cliquez sur 👕 à côté d’un lieu dans la liste, ou ouvrez « 👕 Comment m’habiller ? » dans le panneau d’information d’un lieu ou d’un point choisi. Vous verrez des suggestions pour la catégorie et le moment choisis : couches à porter, quoi emporter et bon à savoir. Le refroidissement éolien, les précipitations, le verglas, le niveau d’activité et l’obscurité sont pris en compte. Ce sont des suggestions générales ; habillez-vous toujours selon les conditions et votre expérience.</p>'},
 zh:{k:['短袖T恤','长袖上衣','羊毛打底衣','羊毛打底裤','抓绒衣或羊毛衫','厚羊毛衫','轻便外套','保暖外套','羽绒服','防风防水硬壳外套','防风外套','防水裤','长裤','短裤或轻便长裤','徒步裤（不要穿牛仔裤）','滑雪裤','帽子','保暖羊毛帽','鸭舌帽或遮阳帽','手套','保暖连指手套','围脖或围巾','面罩','羊毛袜','两双羊毛袜','舒适的鞋子','防水徒步鞋','保暖防水冬靴','防滑冰爪（路面湿滑）','登山冰爪和冰镐','雪套','太阳镜','滑雪镜','防晒霜','头灯','背包里多带一件保暖层','备用袜子','适用于 {x} °C 的睡袋','抗风帐篷，固定牢靠','醒目的橙色背心或帽子','充满电的手机和充电宝','头盔','反光条和车灯','骑行手套','暖手宝','装热饮的保温瓶','泳衣和毛巾','人字拖或泳池鞋','雪崩信标、铲子和探杆','饮用水和零食','考虑留在家中'],
  n:['风让 {T} °C 感觉像 {F} °C。','在海拔约 {h} 米的山顶，预计约 {T} °C，且风更大。','运动时会发热。出发时稍凉一点，休息时再加衣。','你会长时间静止不动，所以要穿得比气温显示的更暖。','贴身不要穿棉质衣物，它会吸湿并让你着凉。','气温接近冰点且预报有降水，路面很可能结冰。','此地有{x}生效。出发前请慎重考虑。','这个季节白天很短。','从温泉池出来时，风会让你迅速变冷。把衣服放在手边。'],
  ui:['👕 该穿什么？','使用我的位置','在地图上选择','输入地点…','用 GPS 选择位置、输入城镇名或点击地图。','在地图上点击你将要去的地方。','无法获取你的位置。请输入地点或点击地图。','该位置不在冰岛境内。请选择冰岛的地点。','{f}：{b}','穿着','携带','须知','{T} °C，体感 {F} °C，风速 {W} m/s，阵风 {G}，降水 {P} mm','在这里该穿什么？','你的位置','正在获取该地点的预报…','以上建议基于天气预报。请根据现场情况穿衣。','显示','前 {n} 名'],
- hv2:'<h3>前 5、10 或 20 名</h3><p>你可以选择显示多少个地点。地点越多，排名靠后的评分越低；评分始终代表条件好坏。</p><h3>该穿什么？</h3><p>通过 GPS、输入城镇名或点击地图来选择位置。页面会获取该地点的精确预报，并针对所选类别和时间给出穿衣建议：要穿的衣物层次、要携带的物品和须知事项。建议会考虑风寒、降水、路面结冰、活动强度和天黑时间。你的位置只在浏览器中使用并用于获取预报，不会发送到其他地方。这些只是一般性建议，请始终根据实际情况和经验穿衣。</p>'},
+ hv2:'<h3>前 5、10 或 20 名</h3><p>你可以选择显示多少个地点。地点越多，排名靠后的评分越低；评分始终代表条件好坏。</p><h3>该穿什么？</h3><p>点击列表中地点旁的 👕，或在地点或所选地点的信息面板中打开“👕 该穿什么？”。你会看到针对所选类别和时间的建议：要穿的衣物层次、要携带的物品和须知事项。建议会考虑风寒、降水、路面结冰、活动强度和天黑时间。这些只是一般性建议，请始终根据实际情况和经验穿衣。</p>'},
 es:{k:['Camiseta de manga corta','Camiseta de manga larga','Camiseta térmica de lana','Mallas térmicas de lana','Forro polar o jersey de lana','Jersey grueso de lana','Chaqueta ligera','Chaqueta de abrigo','Plumífero','Chaqueta cortavientos e impermeable','Chaqueta cortavientos','Pantalón impermeable','Pantalón largo','Pantalón corto o ligero','Pantalón de senderismo (no vaqueros)','Pantalón de esquí','Gorro','Gorro de lana cálido','Gorra o sombrero para el sol','Guantes','Manoplas cálidas','Braga de cuello o bufanda','Pasamontañas','Calcetines de lana','Dos pares de calcetines de lana','Calzado cómodo','Botas de senderismo impermeables','Botas de invierno cálidas e impermeables','Tacos antideslizantes (suelo resbaladizo)','Crampones y piolet','Polainas','Gafas de sol','Gafas de esquí','Protector solar','Linterna frontal','Capa de abrigo extra en la mochila','Calcetines de repuesto','Saco de dormir para {x} °C','Tienda resistente al viento, bien sujeta','Chaleco o gorro naranja bien visible','Móvil cargado y batería externa','Casco','Reflectantes y luces','Guantes de ciclismo','Calentadores de manos','Termo con bebida caliente','Bañador y toalla','Chanclas o zapatillas de piscina','ARVA, pala y sonda','Agua y algo de comer','Plantéate quedarte en casa'],
  n:['El viento hace que {T} °C se sientan como {F} °C.','En una cumbre a unos {h} m, cuenta con unos {T} °C y más viento.','Al moverte entrarás en calor. Empieza algo fresco y añade capas en las pausas.','Vas a estar mucho tiempo quieto, así que abrígate más de lo que indica la temperatura.','Evita el algodón junto a la piel; retiene la humedad y enfría.','La temperatura ronda los cero grados y se prevé precipitación, así que es probable que haya hielo.','{x}: en vigor aquí. Piénsalo bien antes de salir.','En esta época del año hay pocas horas de luz.','Al salir de la poza caliente te enfrías rápido con el viento. Ten la ropa a mano.'],
  ui:['👕 ¿Qué me pongo?','Usar mi ubicación','Elegir en el mapa','Escribe un lugar…','Elige una ubicación con GPS, escribe un pueblo o haz clic en el mapa.','Haz clic en el mapa donde vayas a estar.','No se pudo encontrar tu ubicación. Escribe un lugar o haz clic en el mapa.','Esa ubicación está fuera de Islandia. Elige un lugar de Islandia.','{f}: {b}','Ponte','Lleva','Conviene saber','{T} °C, sensación {F} °C, viento {W} m/s, rachas {G}, precipitación {P} mm','¿Qué me pongo aquí?','Tu ubicación','Obteniendo la previsión para el lugar…','Sugerencias basadas en la previsión. Vístete según las condiciones del lugar.','Mostrar','Top {n}'],
- hv2:'<h3>Top 5, 10 o 20</h3><p>Tú eliges cuántos lugares ver. Cuantos más lugares, más baja es la puntuación de los últimos puestos; la puntuación siempre indica la calidad.</p><h3>¿Qué me pongo?</h3><p>Elige una ubicación con GPS, escribiendo un pueblo o haciendo clic en el mapa. La página obtiene la previsión para ese lugar exacto y sugiere ropa para la categoría y el momento elegidos: capas que ponerse, qué llevar y qué conviene saber. Se tienen en cuenta la sensación térmica por el viento, la precipitación, el hielo, el nivel de actividad y la oscuridad. Tu ubicación solo se usa en tu navegador y para obtener la previsión; no se envía a ningún otro sitio. Son sugerencias generales; vístete siempre según las condiciones y tu experiencia.</p>'},
+ hv2:'<h3>Top 5, 10 o 20</h3><p>Tú eliges cuántos lugares ver. Cuantos más lugares, más baja es la puntuación de los últimos puestos; la puntuación siempre indica la calidad.</p><h3>¿Qué me pongo?</h3><p>Haz clic en 👕 junto a un lugar de la lista, o abre «👕 ¿Qué me pongo?» en el panel de información de un lugar o de un punto elegido. Verás sugerencias para la categoría y el momento elegidos: capas que ponerse, qué llevar y qué conviene saber. Se tienen en cuenta la sensación térmica por el viento, la precipitación, el hielo, el nivel de actividad y la oscuridad. Son sugerencias generales; vístete siempre según las condiciones y tu experiencia.</p>'},
 };
 for(const[mal,a]of Object.entries(I18N_KL)){
   const L=I18N[mal];if(!L)continue;
@@ -1340,6 +1436,150 @@ const I18N_VP={is:['📍 Velja punkt','Smelltu á kortið þar sem þú vilt sj�
   zh:['📍 选择地点','在地图上点击你想查看天气的位置。','所选地点','全天预报','拖动绿色图钉可查看其他地点。'],
   es:['📍 Elegir punto','Haz clic en el mapa donde quieras ver el tiempo.','Punto elegido','Previsión a lo largo del día','Arrastra el alfiler verde para ver otro lugar.']};
 for(const[mal,v]of Object.entries(I18N_VP))if(I18N[mal])VP_L.forEach((k,i)=>I18N[mal][k]=v[i]);
+// ---------------------------------------------------------------- Þýðingar: frisbígolf, veiði, fjallatindar, erfiðleikastig
+const NY_UI=['ls_folf','ls_veidi','ls_wikiloc','erf_1','erf_2','erf_3','erf_titill','erf_vedur','ls_saeki','hk_listar','hk_listarT'];
+const I18N_NY={
+is:{folf:null,veidi:null,fjall:null,rjupa:null,ui:['Nánar á folf.is','Leyfi og upplýsingar','Leita að gönguleiðum á Wikiloc','Auðvelt','Miðlungs','Krefjandi','Erfiðleikastig','hækkað vegna veðurs','Sæki staðsetningar og spá fyrir hvern stað. Það getur tekið allt að hálfa mínútu í fyrsta sinn.','Staðir í flokkum','Sundlaugar, tjaldsvæði, golf- og frisbígolfvellir, veiðivötn og fjallatindar úr OpenStreetMap. Sjá einnig sundlaugar.is, tjalda.is, golf.is, folf.is og veiðivefi.'],
+ hv:`<h3>Flokkar sem byggja á raunverulegum stöðum</h3><p>Sumir flokkar bera aðeins saman staði af réttri tegund, en ekki allt landið:</p>
+<ul><li>⛺ <strong>Útilega:</strong> aðeins skráð tjaldsvæði. Ef þú ætlar að tjalda utan tjaldsvæða, notaðu „Besta veðrið“ eða „📍 Velja punkt“.</li>
+<li>♨️ <strong>Sund og pottar:</strong> sundlaugar og baðstaðir.</li><li>⛳ <strong>Golf</strong> og 🥏 <strong>Frisbígolf:</strong> skráðir vellir.</li>
+<li>🎣 <strong>Veiði:</strong> þekkt veiðivötn.</li><li>⛰️ <strong>Fjallganga:</strong> fjallatindar, með erfiðleikastigi.</li><li>⛷️ <strong>Skíði:</strong> skíðasvæðin.</li></ul>
+<p>Veldu því þann flokk sem passar við það sem þú ætlar að gera. Aðrir flokkar, til dæmis Norðurljós og Hjólreiðar, bera saman veðrið um allt landið.</p>
+<p>Í þessum flokkum þarf fyrst að sækja staðsetningar og svo sérstaka spá fyrir hvern stað. Í fyrsta sinn getur því tekið allt að hálfa mínútu þar til tölurnar birtast. Eftir það eru staðsetningarnar geymdar í vafranum í viku og birtast hraðar.</p>
+<p>Staðir sem ekki eru skráðir í OpenStreetMap birtast ekki. Til að skoða veðrið á öðrum stað, notaðu „📍 Velja punkt“.</p>
+<h4>Erfiðleikastig fjalla</h4><p>🟢 Auðvelt: lægri tindar, undir um 400 m. 🟡 Miðlungs: um 400–900 m. 🔴 Krefjandi: yfir um 900 m. Stigið hækkar um eitt ef veðrið á tindinum er slæmt: hvassar hviður, mikið frost, úrkoma eða skýjaður tindur. Þetta er gróft mat út frá hæð og veðri, ekki mat á gönguleiðinni sjálfri. Kynntu þér alltaf leiðina áður en þú ferð.</p>`},
+en:{folf:['Disc golf','Iceland’s disc golf courses compared: light wind and few gusts matter most, dry and mild between 9:00 and 21:00.','Most courses are open all year and free to play. More about the courses at folf.is.'],
+ veidi:['Fishing','Fishing lakes compared: light wind matters most for casting and boats, partly cloudy and mild, between 7:00 and 22:00.','Seasons, permits and rules differ between lakes. Check Veiðikortið, Veiðiappið or Veiðiheimar, and respect landowners’ rights.'],
+ fjall:['Hiking','Iceland’s mountain peaks compared: few gusts, cloud-free summits, dry with good visibility between 8:00 and 18:00. Temperature is calculated for the height of the summit.','The difficulty level (🟢 🟡 🔴) is a rough estimate based on summit height and weather, not an assessment of the trail. In winter, check the Icelandic Met Office avalanche forecast and leave a travel plan at safetravel.is.'],
+ rjupa:'Check the permitted hunting days and areas before you set off. Hunters must familiarise themselves with the boundaries of private land and common land; hunting on private land requires the landowner’s permission.',
+ ui:['More at folf.is','Permits and information','Search for trails on Wikiloc','Easy','Moderate','Demanding','Difficulty','raised due to weather','Fetching locations and a forecast for each place. The first time can take up to half a minute.','Places in categories','Pools, campsites, golf and disc golf courses, fishing lakes and mountain peaks from OpenStreetMap. See also sundlaugar.is, tjalda.is, golf.is, folf.is and fishing websites.'],
+ hv:`<h3>Categories based on real places</h3><p>Some categories only compare places of the right type, not the whole country:</p>
+<ul><li>⛺ <strong>Camping:</strong> registered campsites only. If you plan to camp elsewhere, use “Best weather” or “📍 Pick a point”.</li>
+<li>♨️ <strong>Pools and hot tubs:</strong> swimming pools and baths.</li><li>⛳ <strong>Golf</strong> and 🥏 <strong>Disc golf:</strong> registered courses.</li>
+<li>🎣 <strong>Fishing:</strong> well-known fishing lakes.</li><li>⛰️ <strong>Hiking:</strong> mountain peaks, with a difficulty level.</li><li>⛷️ <strong>Skiing:</strong> the ski areas.</li></ul>
+<p>So choose the category that matches what you plan to do. Other categories, such as Northern lights and Cycling, compare the weather across the whole country.</p>
+<p>In these categories the page first fetches the locations and then a separate forecast for each place. The first time it can therefore take up to half a minute before the numbers appear. After that the locations are stored in your browser for a week and load faster.</p>
+<p>Places that are not registered in OpenStreetMap are not shown. To check the weather somewhere else, use “📍 Pick a point”.</p>
+<h4>Mountain difficulty</h4><p>🟢 Easy: lower peaks, below about 400 m. 🟡 Moderate: about 400–900 m. 🔴 Demanding: above about 900 m. The level is raised by one if the weather on the summit is bad: strong gusts, hard frost, precipitation or cloud on the summit. This is a rough estimate based on height and weather, not an assessment of the trail itself. Always research the route before you go.</p>`},
+da:{folf:['Discgolf','Islands discgolfbaner sammenlignet: svag vind og få vindstød betyder mest, tørt og mildt mellem kl. 9 og 21.','De fleste baner er åbne hele året og gratis. Mere om banerne på folf.is.'],
+ veidi:['Fiskeri','Fiskesøer sammenlignet: svag vind betyder mest for kast og båd, let skyet og mildt, mellem kl. 7 og 22.','Sæson, tilladelser og regler varierer fra sø til sø. Tjek Veiðikortið, Veiðiappið eller Veiðiheimar, og respekter lodsejernes rettigheder.'],
+ fjall:['Bjergvandring','Islands bjergtoppe sammenlignet: få vindstød, skyfri toppe, tørt og god sigtbarhed mellem kl. 8 og 18. Temperaturen er beregnet for toppens højde.','Sværhedsgraden (🟢 🟡 🔴) er et groft skøn ud fra toppens højde og vejret, ikke en vurdering af ruten. Om vinteren bør du se den islandske vejrtjenestes lavineprognose og efterlade en rejseplan på safetravel.is.'],
+ rjupa:'Undersøg de tilladte jagtdage og -områder, før du tager af sted. Jægere skal sætte sig grundigt ind i grænserne mellem privat jord og almenning; jagt på privat jord kræver lodsejerens tilladelse.',
+ ui:['Mere på folf.is','Tilladelser og information','Søg efter ruter på Wikiloc','Let','Middel','Krævende','Sværhedsgrad','hævet på grund af vejret','Henter placeringer og en prognose for hvert sted. Første gang kan det tage op til et halvt minut.','Steder i kategorier','Svømmebade, campingpladser, golf- og discgolfbaner, fiskesøer og bjergtoppe fra OpenStreetMap. Se også sundlaugar.is, tjalda.is, golf.is, folf.is og fiskeriwebsteder.'],
+ hv:`<h3>Kategorier baseret på rigtige steder</h3><p>Nogle kategorier sammenligner kun steder af den rette type, ikke hele landet:</p>
+<ul><li>⛺ <strong>Camping:</strong> kun registrerede campingpladser. Hvis du vil telte andre steder, så brug »Bedste vejr« eller »📍 Vælg punkt«.</li>
+<li>♨️ <strong>Svømmebad og hotpots:</strong> svømmebade og badesteder.</li><li>⛳ <strong>Golf</strong> og 🥏 <strong>Discgolf:</strong> registrerede baner.</li>
+<li>🎣 <strong>Fiskeri:</strong> kendte fiskesøer.</li><li>⛰️ <strong>Bjergvandring:</strong> bjergtoppe med sværhedsgrad.</li><li>⛷️ <strong>Skiløb:</strong> skiområderne.</li></ul>
+<p>Vælg derfor den kategori, der passer til det, du vil lave. Andre kategorier, fx Nordlys og Cykling, sammenligner vejret i hele landet.</p>
+<p>I disse kategorier henter siden først placeringerne og derefter en særskilt prognose for hvert sted. Første gang kan det derfor tage op til et halvt minut, før tallene vises. Derefter gemmes placeringerne i din browser i en uge og indlæses hurtigere.</p>
+<p>Steder, der ikke er registreret i OpenStreetMap, vises ikke. For at se vejret et andet sted, så brug »📍 Vælg punkt«.</p>
+<h4>Bjergenes sværhedsgrad</h4><p>🟢 Let: lavere toppe under ca. 400 m. 🟡 Middel: ca. 400–900 m. 🔴 Krævende: over ca. 900 m. Graden hæves med én, hvis vejret på toppen er dårligt: kraftige vindstød, hård frost, nedbør eller skyer på toppen. Det er et groft skøn ud fra højde og vejr, ikke en vurdering af selve ruten. Sæt dig altid ind i ruten, før du tager af sted.</p>`},
+sv:{folf:['Discgolf','Islands discgolfbanor jämförda: svag vind och få byar är viktigast, torrt och milt mellan kl. 9 och 21.','De flesta banor är öppna året runt och gratis. Mer om banorna på folf.is.'],
+ veidi:['Fiske','Fiskesjöar jämförda: svag vind är viktigast för kast och båt, halvklart och milt, mellan kl. 7 och 22.','Säsong, fiskekort och regler skiljer sig mellan sjöar. Kolla Veiðikortið, Veiðiappið eller Veiðiheimar och respektera markägarnas rätt.'],
+ fjall:['Fjällvandring','Islands bergstoppar jämförda: få vindbyar, molnfria toppar, torrt och god sikt mellan kl. 8 och 18. Temperaturen är beräknad för toppens höjd.','Svårighetsgraden (🟢 🟡 🔴) är en grov uppskattning utifrån topphöjd och väder, inte en bedömning av leden. På vintern bör du se isländska meteorologiska institutets lavinprognos och lämna en färdplan på safetravel.is.'],
+ rjupa:'Ta reda på tillåtna jaktdagar och jaktområden innan du ger dig av. Jägare måste noga sätta sig in i gränserna mellan privat mark och allmänning; jakt på privat mark kräver markägarens tillstånd.',
+ ui:['Mer på folf.is','Fiskekort och information','Sök efter leder på Wikiloc','Lätt','Medel','Krävande','Svårighetsgrad','höjd på grund av vädret','Hämtar platser och en prognos för varje plats. Första gången kan det ta upp till en halv minut.','Platser i kategorier','Bad, campingplatser, golf- och discgolfbanor, fiskesjöar och bergstoppar från OpenStreetMap. Se även sundlaugar.is, tjalda.is, golf.is, folf.is och fiskewebbplatser.'],
+ hv:`<h3>Kategorier som bygger på verkliga platser</h3><p>Vissa kategorier jämför bara platser av rätt typ, inte hela landet:</p>
+<ul><li>⛺ <strong>Camping:</strong> endast registrerade campingplatser. Om du vill tälta någon annanstans, använd ”Bästa vädret” eller ”📍 Välj punkt”.</li>
+<li>♨️ <strong>Bad och badtunnor:</strong> simhallar och badplatser.</li><li>⛳ <strong>Golf</strong> och 🥏 <strong>Discgolf:</strong> registrerade banor.</li>
+<li>🎣 <strong>Fiske:</strong> kända fiskesjöar.</li><li>⛰️ <strong>Fjällvandring:</strong> bergstoppar med svårighetsgrad.</li><li>⛷️ <strong>Skidåkning:</strong> skidområdena.</li></ul>
+<p>Välj därför den kategori som passar det du tänker göra. Andra kategorier, till exempel Norrsken och Cykling, jämför vädret i hela landet.</p>
+<p>I dessa kategorier hämtar sidan först platserna och sedan en separat prognos för varje plats. Första gången kan det därför ta upp till en halv minut innan siffrorna visas. Därefter sparas platserna i din webbläsare i en vecka och laddas snabbare.</p>
+<p>Platser som inte är registrerade i OpenStreetMap visas inte. För att se vädret någon annanstans, använd ”📍 Välj punkt”.</p>
+<h4>Bergens svårighetsgrad</h4><p>🟢 Lätt: lägre toppar under cirka 400 m. 🟡 Medel: cirka 400–900 m. 🔴 Krävande: över cirka 900 m. Graden höjs ett steg om vädret på toppen är dåligt: kraftiga byar, sträng kyla, nederbörd eller moln på toppen. Detta är en grov uppskattning utifrån höjd och väder, inte en bedömning av själva leden. Sätt dig alltid in i leden innan du ger dig av.</p>`},
+pl:{folf:['Disc golf','Porównanie islandzkich pól do disc golfa: najważniejszy jest słaby wiatr i mało porywów, sucho i łagodnie między 9 a 21.','Większość pól jest otwarta cały rok i bezpłatna. Więcej o polach na folf.is.'],
+ veidi:['Wędkarstwo','Porównanie jezior wędkarskich: najważniejszy jest słaby wiatr przy rzucaniu i na łodzi, małe zachmurzenie i łagodnie, między 7 a 22.','Sezony, zezwolenia i zasady różnią się w zależności od jeziora. Sprawdź Veiðikortið, Veiðiappið lub Veiðiheimar i szanuj prawa właścicieli gruntów.'],
+ fjall:['Wędrówki górskie','Porównanie islandzkich szczytów: mało porywów, bezchmurne szczyty, sucho i dobra widoczność między 8 a 18. Temperatura jest liczona dla wysokości szczytu.','Poziom trudności (🟢 🟡 🔴) to zgrubna ocena na podstawie wysokości szczytu i pogody, a nie ocena szlaku. Zimą sprawdź prognozę lawinową Islandzkiego Instytutu Meteorologicznego i zostaw plan podróży na safetravel.is.'],
+ rjupa:'Sprawdź dozwolone dni i obszary polowań przed wyjazdem. Myśliwi muszą dobrze znać granice gruntów prywatnych i terenów wspólnych; polowanie na gruncie prywatnym wymaga zgody właściciela.',
+ ui:['Więcej na folf.is','Zezwolenia i informacje','Szukaj szlaków na Wikiloc','Łatwo','Średnio','Wymagająco','Trudność','podwyższony z powodu pogody','Pobieranie lokalizacji i prognozy dla każdego miejsca. Za pierwszym razem może to potrwać do pół minuty.','Miejsca w kategoriach','Baseny, pola namiotowe, pola golfowe i do disc golfa, jeziora wędkarskie i szczyty z OpenStreetMap. Zobacz też sundlaugar.is, tjalda.is, golf.is, folf.is i strony wędkarskie.'],
+ hv:`<h3>Kategorie oparte na rzeczywistych miejscach</h3><p>Niektóre kategorie porównują tylko miejsca odpowiedniego typu, a nie cały kraj:</p>
+<ul><li>⛺ <strong>Biwak:</strong> tylko zarejestrowane pola namiotowe. Jeśli chcesz rozbić namiot gdzie indziej, użyj „Najlepsza pogoda” lub „📍 Wybierz punkt”.</li>
+<li>♨️ <strong>Baseny i gorące źródła:</strong> baseny i kąpieliska.</li><li>⛳ <strong>Golf</strong> i 🥏 <strong>Disc golf:</strong> zarejestrowane pola.</li>
+<li>🎣 <strong>Wędkarstwo:</strong> znane jeziora wędkarskie.</li><li>⛰️ <strong>Wędrówki górskie:</strong> szczyty z poziomem trudności.</li><li>⛷️ <strong>Narciarstwo zjazdowe:</strong> ośrodki narciarskie.</li></ul>
+<p>Wybierz więc kategorię pasującą do tego, co planujesz. Inne kategorie, na przykład Zorza polarna i Kolarstwo, porównują pogodę w całym kraju.</p>
+<p>W tych kategoriach strona najpierw pobiera lokalizacje, a potem osobną prognozę dla każdego miejsca. Za pierwszym razem może więc minąć do pół minuty, zanim pojawią się liczby. Potem lokalizacje są przechowywane w przeglądarce przez tydzień i ładują się szybciej.</p>
+<p>Miejsca niezarejestrowane w OpenStreetMap nie są pokazywane. Aby sprawdzić pogodę gdzie indziej, użyj „📍 Wybierz punkt”.</p>
+<h4>Trudność gór</h4><p>🟢 Łatwo: niższe szczyty, poniżej ok. 400 m. 🟡 Średnio: ok. 400–900 m. 🔴 Wymagająco: powyżej ok. 900 m. Poziom rośnie o jeden, jeśli pogoda na szczycie jest zła: silne porywy, duży mróz, opady lub chmury na szczycie. To zgrubna ocena na podstawie wysokości i pogody, a nie ocena samego szlaku. Zawsze zapoznaj się z trasą przed wyjściem.</p>`},
+fr:{folf:['Disc golf','Comparaison des parcours de disc golf d’Islande : vent faible et peu de rafales avant tout, temps sec et doux entre 9 h et 21 h.','La plupart des parcours sont ouverts toute l’année et gratuits. Plus d’informations sur folf.is.'],
+ veidi:['Pêche','Comparaison des lacs de pêche : un vent faible compte le plus pour le lancer et la barque, ciel partiellement nuageux et doux, entre 7 h et 22 h.','Saisons, permis et règles varient d’un lac à l’autre. Consultez Veiðikortið, Veiðiappið ou Veiðiheimar, et respectez les droits des propriétaires.'],
+ fjall:['Randonnée en montagne','Comparaison des sommets d’Islande : peu de rafales, sommets dégagés, temps sec et bonne visibilité entre 8 h et 18 h. La température est calculée pour l’altitude du sommet.','Le niveau de difficulté (🟢 🟡 🔴) est une estimation grossière fondée sur l’altitude du sommet et la météo, pas une évaluation de l’itinéraire. En hiver, consultez le bulletin d’avalanches de l’Office météorologique islandais et déposez un plan de voyage sur safetravel.is.'],
+ rjupa:'Renseignez-vous sur les jours et zones de chasse autorisés avant de partir. Les chasseurs doivent bien connaître les limites des terres privées et des terres communales ; la chasse sur une terre privée nécessite l’autorisation du propriétaire.',
+ ui:['Plus sur folf.is','Permis et informations','Chercher des itinéraires sur Wikiloc','Facile','Moyen','Exigeant','Difficulté','relevé en raison de la météo','Récupération des lieux et d’une prévision pour chacun. La première fois, cela peut prendre jusqu’à une demi-minute.','Lieux par catégorie','Piscines, campings, golfs et parcours de disc golf, lacs de pêche et sommets issus d’OpenStreetMap. Voir aussi sundlaugar.is, tjalda.is, golf.is, folf.is et les sites de pêche.'],
+ hv:`<h3>Catégories fondées sur des lieux réels</h3><p>Certaines catégories ne comparent que des lieux du bon type, et non tout le pays :</p>
+<ul><li>⛺ <strong>Camping :</strong> uniquement les campings enregistrés. Pour camper ailleurs, utilisez « Meilleure météo » ou « 📍 Choisir un point ».</li>
+<li>♨️ <strong>Piscines et bains chauds :</strong> piscines et lieux de baignade.</li><li>⛳ <strong>Golf</strong> et 🥏 <strong>Disc golf :</strong> parcours enregistrés.</li>
+<li>🎣 <strong>Pêche :</strong> lacs de pêche connus.</li><li>⛰️ <strong>Randonnée :</strong> sommets, avec un niveau de difficulté.</li><li>⛷️ <strong>Ski alpin :</strong> les domaines skiables.</li></ul>
+<p>Choisissez donc la catégorie qui correspond à votre projet. Les autres catégories, comme Aurores boréales et Vélo, comparent la météo dans tout le pays.</p>
+<p>Dans ces catégories, la page récupère d’abord les lieux puis une prévision distincte pour chacun. La première fois, il peut donc falloir jusqu’à une demi-minute avant que les chiffres n’apparaissent. Ensuite, les lieux sont conservés une semaine dans votre navigateur et se chargent plus vite.</p>
+<p>Les lieux qui ne sont pas enregistrés dans OpenStreetMap n’apparaissent pas. Pour voir la météo ailleurs, utilisez « 📍 Choisir un point ».</p>
+<h4>Difficulté des montagnes</h4><p>🟢 Facile : sommets bas, sous environ 400 m. 🟡 Moyen : environ 400–900 m. 🔴 Exigeant : au-dessus d’environ 900 m. Le niveau monte d’un cran si la météo au sommet est mauvaise : fortes rafales, gel intense, précipitations ou sommet dans les nuages. Il s’agit d’une estimation grossière fondée sur l’altitude et la météo, pas d’une évaluation de l’itinéraire. Renseignez-vous toujours sur l’itinéraire avant de partir.</p>`},
+zh:{folf:['飞盘高尔夫','比较冰岛各飞盘高尔夫球场：9:00 至 21:00 之间风小、阵风少最重要，干燥温和。','大多数球场全年开放且免费。更多球场信息见 folf.is。'],
+ veidi:['钓鱼','比较各钓鱼湖泊：7:00 至 22:00 之间，风小对抛竿和乘船最重要，少云且温和。','各湖泊的钓鱼季节、许可证和规定不同。请查看 Veiðikortið、Veiðiappið 或 Veiðiheimar，并尊重土地所有者的权利。'],
+ fjall:['登山徒步','比较冰岛各山峰：8:00 至 18:00 之间阵风少、山顶无云、干燥且能见度好。气温按山顶海拔计算。','难度等级（🟢 🟡 🔴）是根据山峰高度和天气的粗略估计，并非对路线的评估。冬季请查看冰岛气象局的雪崩预报，并在 safetravel.is 留下行程计划。'],
+ rjupa:'出发前请了解允许狩猎的日期和区域。猎人必须清楚了解私有土地与公共土地的边界；在私有土地上狩猎需获得土地所有者许可。',
+ ui:['在 folf.is 查看更多','许可证和信息','在 Wikiloc 搜索步道','容易','中等','有挑战','难度','因天气调高','正在获取各地点的位置和预报。首次加载可能需要半分钟。','各类别中的地点','游泳池、露营地、高尔夫和飞盘高尔夫球场、钓鱼湖泊和山峰数据来自 OpenStreetMap。另见 sundlaugar.is、tjalda.is、golf.is、folf.is 和钓鱼网站。'],
+ hv:`<h3>基于真实地点的类别</h3><p>部分类别只比较相应类型的地点，而不是全国范围：</p>
+<ul><li>⛺ <strong>露营：</strong>仅限登记的露营地。如果你打算在其他地方露营，请使用“最佳天气”或“📍 选择地点”。</li>
+<li>♨️ <strong>泳池与温泉：</strong>游泳池和温泉浴场。</li><li>⛳ <strong>高尔夫</strong>和 🥏 <strong>飞盘高尔夫：</strong>登记的球场。</li>
+<li>🎣 <strong>钓鱼：</strong>知名钓鱼湖泊。</li><li>⛰️ <strong>登山徒步：</strong>山峰，并附难度等级。</li><li>⛷️ <strong>高山滑雪：</strong>各滑雪场。</li></ul>
+<p>因此请选择与你的计划相符的类别。其他类别（如北极光和骑行）比较的是全国范围的天气。</p>
+<p>在这些类别中，页面需要先获取地点位置，再分别获取每个地点的预报。因此首次加载可能需要半分钟才会显示数据。之后地点位置会在浏览器中保存一周，加载更快。</p>
+<p>未在 OpenStreetMap 登记的地点不会显示。如需查看其他地点的天气，请使用“📍 选择地点”。</p>
+<h4>山峰难度</h4><p>🟢 容易：较低的山峰，约 400 米以下。🟡 中等：约 400–900 米。🔴 有挑战：约 900 米以上。如果山顶天气恶劣（强阵风、严寒、降水或山顶有云），难度会提高一级。这是根据高度和天气的粗略估计，并非对路线本身的评估。出发前请务必了解路线。</p>`},
+es:{folf:['Disc golf','Comparación de los campos de disc golf de Islandia: lo más importante es poco viento y pocas rachas, seco y templado entre las 9:00 y las 21:00.','La mayoría de los campos abren todo el año y son gratuitos. Más información en folf.is.'],
+ veidi:['Pesca','Comparación de lagos de pesca: el viento flojo es lo más importante para lanzar y en barca, poco nuboso y templado, entre las 7:00 y las 22:00.','Las temporadas, permisos y normas varían según el lago. Consulta Veiðikortið, Veiðiappið o Veiðiheimar, y respeta los derechos de los propietarios.'],
+ fjall:['Senderismo de montaña','Comparación de las cumbres de Islandia: pocas rachas, cumbres despejadas, seco y con buena visibilidad entre las 8:00 y las 18:00. La temperatura se calcula para la altitud de la cumbre.','El nivel de dificultad (🟢 🟡 🔴) es una estimación aproximada basada en la altitud de la cumbre y el tiempo, no una valoración de la ruta. En invierno, consulta el boletín de aludes de la Oficina Meteorológica de Islandia y deja un plan de viaje en safetravel.is.'],
+ rjupa:'Infórmate de los días y zonas de caza permitidos antes de salir. Los cazadores deben conocer bien los límites entre terrenos privados y terrenos comunales; cazar en terreno privado requiere permiso del propietario.',
+ ui:['Más en folf.is','Permisos e información','Buscar rutas en Wikiloc','Fácil','Moderado','Exigente','Dificultad','elevado por el tiempo','Obteniendo ubicaciones y una previsión para cada lugar. La primera vez puede tardar hasta medio minuto.','Lugares por categoría','Piscinas, campings, campos de golf y disc golf, lagos de pesca y cumbres de OpenStreetMap. Ver también sundlaugar.is, tjalda.is, golf.is, folf.is y webs de pesca.'],
+ hv:`<h3>Categorías basadas en lugares reales</h3><p>Algunas categorías solo comparan lugares del tipo adecuado, no todo el país:</p>
+<ul><li>⛺ <strong>Acampada:</strong> solo campings registrados. Si vas a acampar en otro sitio, usa «Mejor tiempo» o «📍 Elegir punto».</li>
+<li>♨️ <strong>Piscinas y pozas termales:</strong> piscinas y lugares de baño.</li><li>⛳ <strong>Golf</strong> y 🥏 <strong>Disc golf:</strong> campos registrados.</li>
+<li>🎣 <strong>Pesca:</strong> lagos de pesca conocidos.</li><li>⛰️ <strong>Senderismo:</strong> cumbres, con nivel de dificultad.</li><li>⛷️ <strong>Esquí alpino:</strong> las estaciones de esquí.</li></ul>
+<p>Elige, por tanto, la categoría que corresponda a lo que vas a hacer. Otras categorías, como Auroras boreales y Ciclismo, comparan el tiempo en todo el país.</p>
+<p>En estas categorías la página obtiene primero las ubicaciones y después una previsión para cada lugar. La primera vez puede tardar hasta medio minuto en aparecer los números. Después, las ubicaciones se guardan en tu navegador durante una semana y cargan más rápido.</p>
+<p>Los lugares no registrados en OpenStreetMap no aparecen. Para ver el tiempo en otro sitio, usa «📍 Elegir punto».</p>
+<h4>Dificultad de las montañas</h4><p>🟢 Fácil: cumbres bajas, por debajo de unos 400 m. 🟡 Moderado: unos 400–900 m. 🔴 Exigente: por encima de unos 900 m. El nivel sube uno si el tiempo en la cumbre es malo: rachas fuertes, helada intensa, precipitación o nubes en la cumbre. Es una estimación aproximada basada en la altitud y el tiempo, no una valoración de la ruta. Infórmate siempre de la ruta antes de salir.</p>`}};
+for(const[mal,a]of Object.entries(I18N_NY)){const L=I18N[mal];if(!L)continue;
+  NY_UI.forEach((k,i)=>L[k]=a.ui[i]);
+  if(L.flokkar){for(const k of['folf','veidi','fjall'])if(a[k])L.flokkar[k]=a[k];if(a.rjupa&&L.flokkar.rjupa)L.flokkar.rjupa=[L.flokkar.rjupa[0],L.flokkar.rjupa[1],a.rjupa];}
+  if(L.sidur)L.sidur.hvernig+=a.hv;}
+
+// ---------------------------------------------------------------- Þýðingar: flokkahópar, tungumálaval, hjólreiðar
+const HOP_L=['hopur_1','hopur_2','hopur_3','hopur_4','veldu_flokk','mal_titill'];
+const I18N_HOP={is:['Veður og slökun','Útivist','Íþróttir','Varúð','Veldu afþreyingu','Skipta um tungumál'],
+  en:['Weather and relaxing','Outdoors','Sports','Caution','Choose an activity','Change language'],
+  da:['Vejr og afslapning','Friluftsliv','Sport','Forsigtighed','Vælg en aktivitet','Skift sprog'],
+  sv:['Väder och avkoppling','Friluftsliv','Sport','Försiktighet','Välj en aktivitet','Byt språk'],
+  pl:['Pogoda i relaks','Na świeżym powietrzu','Sport','Ostrożnie','Wybierz aktywność','Zmień język'],
+  fr:['Météo et détente','Plein air','Sports','Prudence','Choisir une activité','Changer de langue'],
+  zh:['天气与休闲','户外','运动','注意','选择活动','切换语言'],
+  es:['Tiempo y relax','Aire libre','Deportes','Precaución','Elige una actividad','Cambiar idioma']};
+const HJOL_ATH={en:'Cycle only on roads and paths. Cycling off roads and paths can damage fragile nature and is prohibited in many places.',
+  da:'Cykl kun på veje og stier. Cykling uden for veje og stier kan skade sårbar natur og er mange steder forbudt.',
+  sv:'Cykla bara på vägar och stigar. Cykling utanför vägar och stigar kan skada känslig natur och är förbjuden på många platser.',
+  pl:'Jeźdź wyłącznie po drogach i ścieżkach. Jazda poza drogami i ścieżkami może niszczyć wrażliwą przyrodę i w wielu miejscach jest zabroniona.',
+  fr:'Roulez uniquement sur les routes et les sentiers. Rouler hors des routes et sentiers peut abîmer une nature fragile et est interdit à de nombreux endroits.',
+  zh:'请只在道路和小径上骑行。在道路和小径以外骑行会破坏脆弱的自然环境，且在许多地方被禁止。',
+  es:'Circula solo por carreteras y caminos. Circular fuera de carreteras y caminos puede dañar la naturaleza frágil y está prohibido en muchos lugares.'};
+for(const[mal,v]of Object.entries(I18N_HOP))if(I18N[mal])HOP_L.forEach((k,i)=>I18N[mal][k]=v[i]);
+for(const[mal,v]of Object.entries(HJOL_ATH))if(I18N[mal]?.flokkar?.hjol)I18N[mal].flokkar.hjol=[I18N[mal].flokkar.hjol[0],I18N[mal].flokkar.hjol[1],v];
+const SLAGORD={is:'Þitt veður. Þitt ævintýri.',en:'Your weather. Your adventure.',da:'Dit vejr. Dit eventyr.',sv:'Ditt väder. Ditt äventyr.',
+  pl:'Twoja pogoda. Twoja przygoda.',fr:'Votre météo. Votre aventure.',zh:'你的天气，你的冒险。',es:'Tu tiempo. Tu aventura.'};
+for(const[mal,v]of Object.entries(SLAGORD))if(I18N[mal]){I18N[mal].slagord=v;I18N[mal].titill='Vedra';
+  if(I18N[mal].sidur){const[,gamalt]=NAFN_UM[mal];I18N[mal].sidur.um=I18N[mal].sidur.um.replace(gamalt,mal==='is'?'Vedra er':'Vedra');}}
+const FJ_L=['fj_tindar','fj_svaedi','fj_lysing_svaedi','fj_nalaegt'];
+const I18N_FJ={
+is:['Tindar','Svæði','Svæði um allt land borin saman fyrir fjallgöngu: litlar vindhviður, skýlausir tindar, þurrt og gott skyggni milli kl. 8 og 18. Hentar ef fjallið sem þú ætlar á er ekki á listanum.','Nálægt tindinum {n}'],
+en:['Peaks','Areas','Areas across the country compared for hiking: few gusts, cloud-free summits, dry with good visibility between 8:00 and 18:00. Useful if the mountain you have in mind is not on the list.','Near the peak {n}'],
+da:['Toppe','Områder','Områder i hele landet sammenlignet til bjergvandring: få vindstød, skyfri toppe, tørt og god sigtbarhed mellem kl. 8 og 18. Nyttigt, hvis det bjerg, du har i tankerne, ikke er på listen.','Nær toppen {n}'],
+sv:['Toppar','Områden','Områden i hela landet jämförda för fjällvandring: få vindbyar, molnfria toppar, torrt och god sikt mellan kl. 8 och 18. Användbart om berget du tänker på inte finns i listan.','Nära toppen {n}'],
+pl:['Szczyty','Obszary','Porównanie obszarów w całym kraju pod kątem wędrówek: mało porywów, bezchmurne szczyty, sucho i dobra widoczność między 8 a 18. Przydatne, jeśli góry, o której myślisz, nie ma na liście.','W pobliżu szczytu {n}'],
+fr:['Sommets','Zones','Comparaison de zones dans tout le pays pour la randonnée : peu de rafales, sommets dégagés, temps sec et bonne visibilité entre 8 h et 18 h. Utile si la montagne que vous visez ne figure pas dans la liste.','Près du sommet {n}'],
+zh:['山峰','区域','比较全国各区域的登山条件：8:00 至 18:00 之间阵风少、山顶无云、干燥且能见度好。适用于你想去的山不在列表中的情况。','{n}山峰附近'],
+es:['Cumbres','Zonas','Comparación de zonas de todo el país para senderismo: pocas rachas, cumbres despejadas, seco y con buena visibilidad entre las 8:00 y las 18:00. Útil si la montaña que buscas no está en la lista.','Cerca de la cumbre {n}']};
+for(const[mal,v]of Object.entries(I18N_FJ))if(I18N[mal])FJ_L.forEach((k,i)=>I18N[mal][k]=v[i]);
+const SKREF={is:['Hvenær?','Breyta'],en:['When?','Change'],da:['Hvornår?','Skift'],sv:['När?','Ändra'],pl:['Kiedy?','Zmień'],fr:['Quand ?','Changer'],zh:['什么时候？','更改'],es:['¿Cuándo?','Cambiar']};
+for(const[mal,[a,b]]of Object.entries(SKREF))if(I18N[mal]){I18N[mal].hvenaer=a;I18N[mal].breyta=b;}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1380,12 +1620,17 @@ const FLOKKAR = {
     lysing:'Hægur vindur, gott skyggni á heiðum og í fjallshlíðum og þurrt. Nýfallinn snjór hjálpar við að rekja slóð.',
     haed:e=>trap(e,50,200,750,1100),
     thaettir:m=>[[.25,laegra(m.vindur,4,12)],[.10,laegra(m.hvida,10,20)],[.20,laegra(m.lagsky,20,90)],[.10,haerra(m.skyggni,2000,15000)],[.15,laegra(m.urkoma,.2,5)],[.10,trap(m.T,-14,-5,5,11)],[.10,m.snjor==null?null:trap(m.snjor,0,.03,.6,1.2)]],
-    athugasemd:'Kynntu þér leyfða veiðidaga og veiðisvæði áður en þú leggur af stað.'},
-  fjall:{nafn:'Fjallganga',takn:'⛰️',fra:8,til:18,
-    lysing:'Litlar vindhviður, skýlausir tindar, þurrt og gott skyggni milli kl. 8 og 18.',
-    haed:e=>trap(e,100,350,1100,1600),
+    athugasemd:'Kynntu þér leyfða veiðidaga og veiðisvæði áður en þú leggur af stað. Veiðimenn verða að kynna sér vel mörk eignarlanda og almenninga; á eignarlandi þarf leyfi landeiganda.'},
+  veidi:{nafn:'Veiði',takn:'🎣',fra:7,til:22,stadir:'veidi',
+    lysing:'Veiðivötn borin saman: hægur vindur skiptir mestu fyrir köst og bát, hálfskýjað og milt, milli kl. 7 og 22.',
+    athugasemd:'Veiðitímabil, leyfi og reglur eru mismunandi eftir vötnum. Kannaðu á Veiðikortinu, Veiðiappinu eða Veiðiheimum, og virtu rétt landeigenda.',
+    haed:()=>1,
+    thaettir:m=>[[.40,laegra(m.vindur,2,10)],[.15,laegra(m.hvida,8,18)],[.15,laegra(m.urkoma,.5,6)],[.15,trap(m.T,2,8,18,24)],[.15,trap(m.sky,15,40,90,101)]]},
+  fjall:{nafn:'Fjallganga',takn:'⛰️',fra:8,til:18,stadir:'fjoll',
+    lysing:'Fjallatindar landsins bornir saman: litlar vindhviður, skýlausir tindar, þurrt og gott skyggni milli kl. 8 og 18. Hiti er reiknaður fyrir hæð tindsins.',
+    haed:()=>1,
     thaettir:m=>[[.25,laegra(m.hvida,10,22)],[.10,laegra(m.vindur,4,14)],[.20,laegra(m.lagsky,10,80)],[.20,laegra(m.urkoma,0,5)],[.05,haerra(m.skyggni,3000,20000)],[.10,m.sol],[.10,trap(m.T,-10,3,16,24)]],
-    athugasemd:'Að vetri skaltu skoða snjóflóðaspá Veðurstofunnar og skilja eftir ferðaáætlun á safetravel.is.'},
+    athugasemd:'Erfiðleikastig (🟢 🟡 🔴) er gróft mat út frá hæð tinds og veðri, ekki mat á gönguleið. Að vetri skaltu skoða snjóflóðaspá Veðurstofunnar og skilja eftir ferðaáætlun á safetravel.is.'},
   nordurljos:{nafn:'Norðurljós',takn:'🌌',fra:21,til:26,
     lysing:'Heiðskírt og dimmt kvöld, fjarri ljósum þéttbýlis, milli kl. 21 og 2.',
     haed:e=>laegra(e,600,1000),
@@ -1394,7 +1639,8 @@ const FLOKKAR = {
   hjol:{nafn:'Hjólreiðar',takn:'🚴',fra:9,til:19,
     lysing:'Lítill vindur og fáar hviður, þurrt og milt milli kl. 9 og 19.',
     haed:e=>laegra(e,400,800),
-    thaettir:m=>[[.35,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,3)],[.15,trap(m.T,1,11,22,28)],[.10,m.sol]]},
+    thaettir:m=>[[.35,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,3)],[.15,trap(m.T,1,11,22,28)],[.10,m.sol]],
+    athugasemd:'Hjólaðu aðeins á vegum og stígum. Hjólreiðar utan vega og stíga geta valdið skemmdum á viðkvæmri náttúru og eru víða óheimilar.'},
   skidi:{nafn:'Gönguskíði',takn:'🎿',fra:9,til:17,
     lysing:'Nægur snjór, kalt en ekki nístandi, lítill vindur og bjart milli kl. 9 og 17.',
     haed:e=>trap(e,0,100,900,1300),
@@ -1411,6 +1657,11 @@ const FLOKKAR = {
     athugasemd:'Flestir vellir eru opnir frá maí fram í september. Kannaðu opnun og bókaðu rástíma á golf.is.',
     haed:()=>1,
     thaettir:m=>[[.30,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,2)],[.20,trap(m.T,2,12,22,28)],[.10,m.sol]]},
+  folf:{nafn:'Frisbígolf',takn:'🥏',fra:9,til:21,stadir:'folf',
+    lysing:'Frisbígolfvellir landsins bornir saman: lítill vindur og hviður skipta öllu, þurrt og milt milli kl. 9 og 21.',
+    athugasemd:'Flestir vellir eru opnir allt árið og ókeypis. Nánar um vellina á folf.is.',
+    haed:()=>1,
+    thaettir:m=>[[.35,laegra(m.vindur,2,8)],[.20,laegra(m.hvida,6,14)],[.20,laegra(m.urkoma,0,2)],[.15,trap(m.T,0,10,22,28)],[.10,m.sol]]},
   alpaskidi:{nafn:'Skíði',takn:'⛷️',fra:10,til:17,stadir:'skidi',
     lysing:'Skíðasvæði landsins borin saman: nægur snjór, lítill vindur svo lyftur gangi, gott skyggni og hæfilegt frost milli kl. 10 og 17.',
     haed:()=>1,
@@ -1478,6 +1729,9 @@ const geyma={get(k){try{return JSON.parse(localStorage.getItem(k));}catch{return
 {const st=geyma.get('bs:stillingar');if(st){if(FLOKKAR[st.flokkur])S.flokkur=st.flokkur;if(st.fjoldi)S.fjoldi=st.fjoldi;
   if(Array.isArray(st.likon)&&st.likon.length)S.likon=new Set(st.likon.filter(id=>LIKON.some(l=>l.id===id)));}}
 if(![5,10,20].includes(S.fjoldi))S.fjoldi=10;
+S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
+function beitaFjallHam(){const t_=S.fjallHamur==='tindar';FLOKKAR.fjall.stadir=t_?'fjoll':undefined;FLOKKAR.fjall.haed=t_?()=>1:e=>trap(e,100,350,1100,1600);}
+beitaFjallHam();
 const vista=()=>geyma.set('bs:stillingar',{flokkur:S.flokkur,fjoldi:S.fjoldi,likon:[...S.likon]});
 
 // ---------------------------------------------------------------- Gagnaöflun
@@ -1487,7 +1741,8 @@ async function saekjaLikan(likan,punktar=PUNKTAR){
   for(const b of bunkar(punktar,50)){
     const url='https://api.open-meteo.com/v1/forecast?'+new URLSearchParams({
       latitude:b.map(p=>p.lat).join(','),longitude:b.map(p=>p.lon).join(','),hourly:BREYTUR,models:likan,
-      wind_speed_unit:'ms',timezone:'GMT',forecast_days:DAGAR,past_days:FORTID});
+      wind_speed_unit:'ms',timezone:'GMT',forecast_days:DAGAR,past_days:FORTID,
+      ...(b.every(p=>typeof p.ele==='number')?{elevation:b.map(p=>Math.round(p.ele)).join(',')}:{})});
     const r=await fetch(url);
     if(!r.ok){let s='';try{s=(await r.json()).reason||'';}catch{}throw new Error(s||`villa ${r.status}`);}
     let j=await r.json();if(!Array.isArray(j))j=[j];ut.push(...j);
@@ -1647,16 +1902,18 @@ function stigFyrir(m,f,haed){
 }
 function metaPunkt(p,lk,g,f){
   const stig=[],maelir=[];
-  for(const ar of Object.values(lk)){const m=maelikvardar(ar,g.i0,g.i1,p);const st=stigFyrir(m,f,p.haed);if(st!=null){stig.push(st);maelir.push(m);}}
+  for(const ar of Object.values(lk)){const m=maelikvardar(ar,g.i0,g.i1,p);
+    if(p.dT){if(m.T!=null)m.T+=p.dT;if(m.Tmax!=null)m.Tmax+=p.dT;if(m.Tmin!=null)m.Tmin+=p.dT;}const st=stigFyrir(m,f,p.haed);if(st!=null){stig.push(st);maelir.push(m);}}
   if(!stig.length)return null;
   const st=stig.reduce((a,b)=>a+b)/stig.length;
   const dreifing=Math.sqrt(stig.reduce((a,b)=>a+(b-st)**2,0)/stig.length);
   const m={};for(const k of Object.keys(maelir[0]))m[k]=medaltal(maelir.map(x=>x[k]));
   return{...p,stig:+st.toFixed(1),dreifing,m,fjLikana:stig.length};
 }
+let FJNOFN=null,FJNOFN_SAEKIR=false;
 function reikna(){
   const f=FLOKKAR[S.flokkur],g=gluggi();
-  document.getElementById('lysing').textContent=flT(S.flokkur,1);
+  document.getElementById('lysing').textContent=S.flokkur==='fjall'&&S.fjallHamur==='svaedi'?t('fj_lysing_svaedi'):flT(S.flokkur,1);
   if(!S.gogn){return;}
   if(!g){S.nidurstada=[];S.allir=[];teikna(t('tomtLidid'));return;}
   const sv=S.svaedi;
@@ -1673,7 +1930,7 @@ function reikna(){
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
   const rodun=[...allir].sort((a,b)=>b.stig-a.stig),n=f.stadir==='skidi'?SKIDASVAEDI.length:S.fjoldi,
-    minKm=f.stadir==='skidi'?0:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+    minKm=f.stadir==='skidi'?0:f.stadir==='fjoll'?6:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
@@ -1683,6 +1940,10 @@ function reikna(){
   valdir.forEach(a=>a.stada=fyrri.includes(a.id)?'óbreytt':'nýr');
   valdir.sort((a,b)=>b.stig-a.stig);
   geyma.set(lykill,valdir.map(a=>a.id));
+  if(S.flokkur==='fjall'&&S.fjallHamur==='svaedi'){
+    if(!FJNOFN&&!FJNOFN_SAEKIR){FJNOFN_SAEKIR=true;saekjaStadi('fjoll').then(r=>{FJNOFN=r.pts;FJNOFN_SAEKIR=false;if(S.flokkur==='fjall'&&S.fjallHamur==='svaedi')reikna();}).catch(()=>{FJNOFN_SAEKIR=false;});}
+    if(FJNOFN)for(const a of valdir){let b=null,d=15;for(const q of FJNOFN){const x=km(a,q);if(x<d){d=x;b=q;}}if(b)a.nafn=t('fj_nalaegt',{n:b.nafn});}
+  }
   S.nidurstada=valdir;S.virkur=-1;
   teikna(valdir.length?null:t(f.stadir==='skidi'&&sv?'sv_ekkiSkidi':f.stadir&&f.stadir!=='skidi'?'tomt':f.haetta?'tomtHaetta':f.ofugt?'tomtVerst':f.stadir?'tomtSkidi':'tomt'));
 }
@@ -1816,20 +2077,23 @@ function syna(i,fljuga=true){
   const w=vedurtakn(a.m,erNott());
   d.innerHTML=`<p class="vt-lina"><span class="vt-stort" aria-hidden="true">${w.takn}</span>${w.ord}</p><p class="gildi-lina">${gildistexti(a)}</p>
     <p>${t(f.haetta?'haettuvisir':f.ofugt?'ovedursvisir':'stig',{x:fm(a.stig)})} ${ovissa(a)}.</p>
+    ${a.listi==='fjoll'?(()=>{const e=erfidleiki(a);return e?`<p class="erf-lina">${t('erf_titill')}: ${ERF_TAKN[e.n]} <strong>${t('erf_'+e.n)}</strong>${e.h?' ('+t('erf_vedur')+')':''}</p>`:'';})():''}
     ${a.vidv?`<p class="vidv-merki"><i class="vidv-litur vl-${a.vidv}"></i>${t('vid_stad',{x:t(VID_HEITI[a.vidv])})}</p>`:''}
     ${f.haetta?`<p class="smatt">${t('haettaSmatt')}</p>`:''}
     ${a.stod?`<p class="smatt">${t('stodMed',{s:a.stod})}</p>`:''}
     ${maelingTexti(a)}
     <p class="smatt">${hnitTexti(a)}${a.haed!=null?', '+t('haed',{h:Math.round(a.haed)}):''}${f.stadir||a.hl?'':'<br>'+t('reitur')}</p>
     ${f.stadir||f.haetta||f.ofugt||a.hl?'':`<button type="button" class="nakvaemt">${t('finna')}</button>`}
-    <button type="button" class="kl-her">${t('kl_her')}</button>${tenglar(a)}`;
-  d.querySelector('.kl-her').addEventListener('click',()=>{klOpna(true);klSetja(a.lat,a.lon,(a.listi||a.skidasvaedi)?a.nafn:null,true);
-    document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
+    <details class="kl-spjald"><summary>${t('kl_hnappur')}</summary><div class="kl-innihald"></div></details>${tenglar(a)}`;
+  tengjaKlaedi(d,a);
   d.querySelector('.nakvaemt')?.addEventListener('click',e=>finnaNakvaemt(i,e.currentTarget));
   tengjaAfrita(d);
-  if(a.listi){const ytri=LISTA_VEFIR[a.listi];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
-    (a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'')+
-    `<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${LISTA_TAKN[a.listi][0]} ${t(LISTA_TAKN[a.listi][1])}</a>`);}
+  if(a.listi){const ytri=LISTA_VEFIR[a.listi],nafnHreint=a.nafn.replace(/\s*\(\d+ m\)$/,'');
+    const vefur=a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'';
+    const meira=a.listi==='veidi'?`<p class="veidivefir">🎣 ${t('ls_veidi')}: ${VEIDIVEFIR.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join(' ')}</p>`
+      :a.listi==='fjoll'?`<a class="skida-vefur" href="https://www.google.com/search?q=${encodeURIComponent('wikiloc '+nafnHreint+' Iceland')}" target="_blank" rel="noopener">🥾 ${t('ls_wikiloc')}</a>`
+      :`<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${LISTA_TAKN[a.listi][0]} ${t(LISTA_TAKN[a.listi][1])}</a>`;
+    d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',vefur+meira);}
   if(a.skidasvaedi){const sv=SKIDA_VEFIR[a.nafn];d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',
     `<a class="skida-vefur" href="${sv||'https://www.google.com/search?q='+encodeURIComponent('Skíðasvæði '+a.nafn)}" target="_blank" rel="noopener">🎿 ${t(sv?'sk_vefur':'sk_leita')}</a>`);}
   d.insertAdjacentHTML('beforeend',`<div class="naest"><div class="naest-titill">🛟 ${t('on_titill')}</div><p class="kl-smatt">${t('on_leita')}</p></div>`);
@@ -1872,8 +2136,10 @@ function teikna(skilabod){
       st=ofugt?(sk>=60?'st-mikil':sk>=40?'st-midl':'st-litil'):(sk>=80?'st-frab':sk>=60?'st-god':sk>=40?'st-saem':'st-sidri');
     li.innerHTML=`<span class="nr">${i+1}</span>
       <span class="li-efni"><span class="li-nafn"><span class="vt-lita" title="${w.ord}" aria-label="${w.ord}">${w.takn}</span><span class="nafn">${a.nafn}</span></span>
-      <span class="gildi">${gildistexti(a)}</span></span>
-      <span class="stig"><span class="stigpill ${st}">${fm(a.stig,0)}</span><small class="${a.stada==='nýr'?'nytt':''}">${t(a.stada==='nýr'?'nyr':'obreytt')}</small></span>`;
+      ${a.listi==='fjoll'?erfMerki(a):''}<span class="gildi">${gildistexti(a)}</span></span>
+      <span class="stig"><span class="stigpill ${st}">${fm(a.stig,0)}</span><small class="${a.stada==='nýr'?'nytt':''}">${t(a.stada==='nýr'?'nyr':'obreytt')}</small>
+        <button type="button" class="li-kl" title="${t('kl_hnappur')}" aria-label="${t('kl_hnappur')}">👕</button></span>`;
+    li.querySelector('.li-kl').onclick=e=>{e.stopPropagation();KLOPID=true;syna(i);};
     li.onclick=()=>syna(i);li.onkeydown=e=>{if(e.key==='Enter')syna(i);};listi.appendChild(li);
   });
   const g=gluggi(),man=g?new Date(g.a).getUTCMonth():0;
@@ -1906,7 +2172,7 @@ function heimildakassi(){
     <dt>⚠️ ${t('hk_vidv')}</dt><dd>${t(vidvVirk?'hk_vidvT':'hk_vidvOvirkt')} ${ytri(VID_SLOD,'vedur.is')}</dd>
     ${S.heimildir.includes('@vi')?`<dt>📍 ${t('hk_stod')}</dt><dd>${t('hk_stodT')}</dd>`:''}
     <dt>🏠 ${t('hk_on')}</dt><dd>${t('hk_onT')} ${ytri('https://www.openstreetmap.org','openstreetmap.org')}</dd>
-    <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')} ${ytri('https://rastimar.golf.is/vellir','golf.is')}</dd>
+    <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')} ${ytri('https://rastimar.golf.is/vellir','golf.is')} ${ytri('https://www.folf.is','folf.is')}</dd>
     <dt>🗺️ ${t('hk_kort')}</dt><dd>${t('hk_kortT')} ${ytri('https://opentopomap.org','opentopomap.org')}</dd></dl>
     ${S.villur.length?`<p class="villa">${t('hk_villa',{x:S.villur.join('; ')})}</p>`:''}
     <p class="kl-smatt">${tm?t('hk_uppf',{t:tm})+' ':''}${S.sott&&!S.demo?t('hk_naesta',{t:(()=>{const n=new Date(S.sott.getTime()+36e5);return`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;})()})+' ':''}</p>
@@ -1936,6 +2202,14 @@ function naestHtml(ut){
   return`<div class="naest-titill">🛟 ${t('on_titill')}</div>${ut?`<ul>${lina('🏨','gisting')}${lina('🛖','skali')}${lina('🏘️','byggd')}</ul><p class="kl-smatt">${t('on_beint')}</p>`:`<p class="kl-smatt">${t('on_villa')}</p>`}
     <a class="neyd" href="tel:112">🆘 ${t('on_neyd')}</a>`;
 }
+const ERF_TAKN=['','🟢','🟡','🔴'];
+function erfidleiki(a){
+  const e=a.ele??a.haed;if(e==null)return null;
+  let n=e<400?1:e<900?2:3,h=false;const m=a.m||{};
+  if((m.hvida??0)>=15||(m.T??5)<=-6||(m.urkoma??0)>=3||(m.lagsky??0)>=80){if(n<3){n++;h=true;}}
+  return{n,h};
+}
+const erfMerki=a=>{const e=erfidleiki(a);return e?`<span class="erf erf-${e.n}" title="${t('erf_titill')}">${ERF_TAKN[e.n]} ${t('erf_'+e.n)}</span>`:'';};
 function maelingTexti(a){
   let b=null,d=21;
   for(const st of S.vi?.stodvar||[]){if(!st.maeling)continue;const x=km(a,st);if(x<d){d=x;b=st;}}
@@ -1954,11 +2228,11 @@ function taknskyring(){
     kafli(t('tk_vedur'),[['☀️','sol'],['🌤️','lett'],['⛅','skyjad'],['☁️','alsk'],['🌧️','rigning'],['🌨️','slydda'],['❄️','snjokoma'],['🌫️','thoka'],['🌙','heid'],['💨','hvasst']].map(([i,k])=>r(i,stor(vt(k)))))+
     kafli(t('tk_gildi'),[['🌡️','hiti'],['💨','vindur'],['🌬️','hvidur'],['💧','urkoma'],['☀️','sol'],['☁️','sky'],['📏','snjor'],['🌙','nott'],['❄️','nysnjor'],['🌧️','regnSnjo']].map(([i,k])=>r(i,lb(k))))+
     kafli(t('tk_annad'),[
-      r('<span class="pinni tk-pinni">1</span>',t('tk_rautt')),r('<span class="minn-punktur tk-blar"></span>',t('tk_blar')),
+      r('<span class="pinni tk-pinni">1</span>',t('tk_rautt')),
       r('<span class="pinni litill tk-pinni">★</span>',t('tk_stjarna')),r('📡',t('tk_mael')),r('🛟',t('on_titill')),
       r('🏨',t('on_gisting')),r('🛖',t('on_skali')),r('🏘️',t('on_byggd')),r('🆘',t('on_neyd')),
       r('🧭',an(t('lf_hnappur'))),r('🚗',t('lf_faerd')),r('⚠️',t('tk_hal')),r('👕',an(t('kl_hnappur'))),
-      r('⬚',t('tk_svaedi')),r('<span class="vp-nal tk-nal"><span class="vp-hofud"><span></span></span></span>',t('vp_titill')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),
+      r('⬚',t('tk_svaedi')),r('<span class="vp-nal tk-nal"><span class="vp-hofud"><span></span></span></span>',t('vp_titill')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),r('🥏',t('ls_folf')),r('🎣',t('ls_veidi')),r('🥾',t('ls_wikiloc')),r('🟢',t('erf_1')),r('🟡',t('erf_2')),r('🔴',t('erf_3')),
       r('🎿',t('sk_vefur')),r('🇮🇸',t('vi_titill')),r('💡',t('kl_gottAdVita'))])+
     kafli(t('tk_einkunn'),[
       r('<span class="stigpill st-frab">85</span>',t('tk_frab')),r('<span class="stigpill st-god">70</span>',t('tk_god')),
@@ -2074,7 +2348,7 @@ function myrkurFyrir(p){const dR=km(p,{lat:64.13,lon:-21.9}),dA=km(p,{lat:65.68,
 function klaednadur(fk,m,p,g){
   const T=m.T??5,W=m.vindur??3,G=m.hvida??W*1.5,P=m.urkoma??0,SD=m.snjor??0,sol=m.sol??0;
   const F=vindkaeling(T,W),man=new Date(g.a).getUTCMonth(),klst=Math.max(1,(g.b-g.a)/36e5);
-  const virk={fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2}[fk]??0;
+  const virk={fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2,folf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2,veidi:-2}[fk]??0;
   const Te=F+virk+kyrr,fot=new Set(),med=[],vita=[];
   const blautt=P>=1||P/klst>=.3,mjogBlautt=P>=4,hvasst=W>=8||G>=15,snjor=SD>=.05,dimmt=man>=9||man<=1;
   // Efri hluti eftir upplifuðum hita, leiðréttum fyrir hreyfingu
@@ -2115,13 +2389,15 @@ function klaednadur(fk,m,p,g){
     case 'utilega':{const Tn=vindkaeling(m.Tmin??T,W);med.push(['svefnpoki',Math.round(Math.min(Tn,10)-5)]);
       if(hvasst||G>=12)med.push('tjald');med.push('aukasokkar');if((m.Tmin??T)<6){med.push('hitabrusi');fot.delete('husa');fot.add('thykkhufa');}break;}
     case 'rjupa':med.push('appelsinugult','simi','aukalag','vatn');break;
-    case 'fjall':{med.push('aukalag','vatn','simi');const h=Math.round(((p.haed??100)+700)/100)*100;
-      vita.push(kn('fjallhiti',{h,T:fm(T-4.5,0)}));break;}
+    case 'fjall':{med.push('aukalag','vatn','simi');if(p.ele==null){const h=Math.round(((p.haed??100)+700)/100)*100;
+      vita.push(kn('fjallhiti',{h,T:fm(T-4.5,0)}));}break;}
     case 'nordurljos':med.push('handhitarar','hitabrusi');if(Te<5){fot.delete('ulpa');fot.add('dunulpa');}break;
     case 'hjol':fot.add('hjalmur');if(T<12)fot.add('hjolahanskar');if(dimmt)med.push('endurskin');fot.delete('ulpa');if(!fot.has('skel'))fot.add('vindjakki');break;
     case 'skidi':fot.delete('ulpa');fot.delete('dunulpa');fot.delete('skel');fot.add('vindjakki');fot.add('ullarbolur');med.push('vatn','aukalag');break;
     case 'alpaskidi':fot.add('hjalmur');fot.add('skidagleraugu');if(Te<0){fot.delete('vettlingar');fot.add('luffur');}break;
     case 'sund':fot.clear();fot.add('sundfot');fot.add('inniskor');if(T<3)fot.add('thykkhufa');vita.push(kn('sund'));break;
+    case 'folf':med.push('vatn');if(sol>=.4)fot.add('derhufa');break;
+    case 'veidi':med.push('hitabrusi','vatn','aukalag');if(blautt)fot.add('regnbuxur');if(sol>=.4)med.push('solgleraugu');break;
     case 'golf':med.push('vatn');if(sol>=.4)fot.add('derhufa');if(blautt)fot.add('regnbuxur');break;
     case 'snjoflod':med.push('snjoflodabun');break;
     case 'verst':med.unshift('heima');break;
@@ -2204,23 +2480,25 @@ function klTeikna(){
     ${r.vita.length?`<h4>${t('kl_gottAdVita')}</h4><ul class="kl-vita">${r.vita.map(v=>`<li><span aria-hidden="true">💡</span><span>${v}</span></li>`).join('')}</ul>`:''}
     <p class="kl-smatt">${t('kl_fyrirvari')}</p>`;
 }
-// Stýringar
-document.getElementById('kl-opna').onclick=()=>klOpna();
-document.getElementById('kl-gps').onclick=()=>{
-  if(!navigator.geolocation){KL.skilabod='kl_gpsVilla';klTeikna();return;}
-  navigator.geolocation.getCurrentPosition(pos=>{const{latitude:la,longitude:lo,accuracy:n}=pos.coords;
-      klSetja(la,lo,null,false,n).then(()=>{if(KL.stadur)kort.flyTo([la,lo],Math.max(kort.getZoom(),n>3000?9:11),{duration:.8});});},
-    ()=>{KL.skilabod='kl_gpsVilla';klTeikna();},{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
-};
-document.getElementById('kl-kort').onclick=()=>{
-  KL.velja=true;KL.skilabod=null;kortEl.classList.add('velja');klTeikna();
-  if(matchMedia('(max-width:820px)').matches)kortEl.scrollIntoView({block:'start',behavior:'smooth'});
-};
-kort.on('click',e=>{if(!KL.velja||VP.velja)return;KL.velja=false;kortEl.classList.remove('velja');klSetja(e.latlng.lat,e.latlng.lng);});
-{const dl=document.getElementById('kl-stadir');for(const n of [...KL_STADIR.keys()].sort((a,b)=>a.localeCompare(b,'is'))){const o=document.createElement('option');o.value=n;dl.appendChild(o);}}
-document.getElementById('kl-leit').addEventListener('change',e=>{const n=e.target.value.trim(),h=KL_STADIR.get(n)||[...KL_STADIR].find(([k])=>k.toLowerCase()===n.toLowerCase())?.[1];
-  if(h){klSetja(h[0],h[1],KL_STADIR.has(n)?n:[...KL_STADIR.keys()].find(k=>k.toLowerCase()===n.toLowerCase()),true);kort.flyTo(h,Math.max(kort.getZoom(),10),{duration:.8});}});
-{const v=geyma.get('bs:stadur');if(v&&typeof v.lat==='number')KL.stadur=v;}
+// Klæðnaður birtist nú í upplýsingaspjaldi hvers staðar (ekki lengur „mín staðsetning“)
+try{localStorage.removeItem('bs:stadur');}catch{}
+let KLOPID=false;
+function klHtml(a,g){
+  const m=a.m,r=klaednadur(S.flokkur,m,a,g);
+  const vv=verstaVidv(a,vidvVirkar(g.a,g.b));if(vv)r.vita.unshift(kn('vidv',{x:t(VID_HEITI[vv.litur])}));
+  const atridi=x=>{const k=Array.isArray(x)?x[0]:x;return`<li><span aria-hidden="true">${KL_EMOJI[k]||'•'}</span><span>${kt(k,{x:Array.isArray(x)?x[1]:''})}</span></li>`;};
+  return `<p class="kl-adst">${t('kl_adstaedur',{T:fm(m.T),F:fm(r.F),W:fm(m.vindur),G:fm(m.hvida,0),P:fm(m.urkoma)})}</p>
+    <h4>${t('kl_klaedast')}</h4><ul>${r.fot.map(atridi).join('')}</ul>
+    ${r.med.length?`<h4>${t('kl_takaMed')}</h4><ul>${r.med.map(atridi).join('')}</ul>`:''}
+    ${r.vita.length?`<h4>${t('kl_gottAdVita')}</h4><ul class="kl-vita">${r.vita.map(v=>`<li><span aria-hidden="true">💡</span><span>${v}</span></li>`).join('')}</ul>`:''}
+    <p class="kl-smatt">${t('kl_fyrirvari')}</p>`;
+}
+function tengjaKlaedi(d,a){
+  const det=d.querySelector('.kl-spjald');if(!det)return;
+  const fylla=()=>{const g=gluggi();det.querySelector('.kl-innihald').innerHTML=g?klHtml(a,g):`<p class="kl-smatt">${t('tomtLidid')}</p>`;};
+  det.addEventListener('toggle',()=>{KLOPID=det.open;if(det.open){fylla();setTimeout(()=>det.scrollIntoView({block:'nearest',behavior:'smooth'}),30);}});
+  if(KLOPID){det.open=true;fylla();}
+}
 
 // ---------------------------------------------------------------- Sundlaugar og tjaldsvæði (OpenStreetMap)
 const ISL_BOX='63.2,-24.6,66.6,-13.4';
@@ -2228,10 +2506,19 @@ const OSM_FYRIRSPURNIR={
   sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|customers|no)$"](${ISL_BOX});`+
        `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
        `nwr["amenity"="public_bath"](${ISL_BOX}););out tags geom;`,
+  folf:`[out:json][timeout:60];(nwr["leisure"="disc_golf_course"](${ISL_BOX});nwr["sport"="disc_golf"](${ISL_BOX});node["disc_golf"~"^(basket|hole|tee)$"](${ISL_BOX}););out tags geom;`,
+  fjoll:`[out:json][timeout:120];(node["natural"~"^(peak|volcano)$"]["name"](${ISL_BOX});nwr["natural"~"^(mountain_range|ridge)$"]["name"](${ISL_BOX}););out body geom;`,
+  veidi:null,
   golf:`[out:json][timeout:60];(nwr["leisure"="golf_course"](${ISL_BOX}););out tags geom;`,
   tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out tags geom;`};
 // Varalisti ef OpenStreetMap svarar ekki (hnit eru nálgun)
 const VARALISTAR={
+  folf:[["Klambratún",64.1370,-21.9120],["Laugardalur",64.1420,-21.8700],["Gufunes",64.1400,-21.7900],["Fossvogsdalur",64.1080,-21.8700],
+    ["Víðistaðatún, Hafnarfirði",64.0720,-21.9600],["Kjarnaskógur, Akureyri",65.6550,-18.1000]],
+  fjoll:[["Esja",64.255,-21.630,914],["Skarðsheiði",64.475,-21.700,1053],["Úlfarsfell",64.140,-21.705,296],["Helgafell",64.020,-21.860,340],["Keilir",63.942,-22.170,378],["Vífilsfell",64.020,-21.555,655],
+    ["Hengill",64.080,-21.320,803],["Akrafjall",64.330,-21.950,643],["Kirkjufell",64.941,-23.306,463],["Snæfellsjökull",64.808,-23.776,1446],["Hekla",63.992,-19.666,1491],
+    ["Eyjafjallajökull",63.620,-19.620,1651],["Súlur",65.633,-18.226,1213],["Herðubreið",65.177,-16.350,1682],["Snæfell",64.800,-15.560,1833],
+    ["Búlandstindur",64.700,-14.430,1069],["Hvannadalshnúkur",64.014,-16.677,2110]],
   golf:[["Grafarholtsvöllur",64.1180,-21.7700],["Korpúlfsstaðavöllur",64.1500,-21.7600],["Hvaleyrarvöllur, Hafnarfirði",64.0750,-21.9900],
     ["Urriðavöllur, Garðabæ",64.0670,-21.8900],["Hlíðavöllur, Mosfellsbæ",64.1720,-21.7150],["Brautarholtsvöllur",64.2150,-21.8800],
     ["Hólmsvöllur í Leiru",64.0360,-22.5900],["Garðavöllur, Akranesi",64.3200,-22.0400],["Hamarsvöllur, Borgarnesi",64.5600,-21.8800],
@@ -2247,8 +2534,17 @@ const VARALISTAR={
     ["Landmannalaugar",63.9910,-19.0620],["Básar, Þórsmörk",63.6750,-19.4800],["Húsafell",64.6990,-20.8690],["Hamrar, Akureyri",65.6500,-18.1050],
     ["Tjaldsvæðið á Egilsstöðum",65.2630,-14.4000],["Tjaldsvæðið í Vík",63.4200,-19.0000],["Kirkjubæjarklaustur",63.7880,-18.0570],["Tjaldsvæðið á Höfn",64.2560,-15.2050],
     ["Reykjahlíð, Mývatni",65.6450,-16.9150],["Tjaldsvæðið í Stykkishólmi",65.0700,-22.7300],["Tungudalur, Ísafirði",66.0640,-23.1750],["Varmahlíð",65.5530,-19.4500]]};
-const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is',golf:'https://rastimar.golf.is/vellir'};
-const LISTA_TAKN={sund:['♨️','ls_sund'],tjald:['⛺','ls_tjalda'],golf:['⛳','ls_golf']};
+const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is',golf:'https://rastimar.golf.is/vellir',folf:'https://www.folf.is/folfvellir-a-islandi-4/'};
+// Veiðivötn: nafn og áætluð hnit; nákvæm staðsetning sótt úr OpenStreetMap eftir nafni
+const VEIDIVOTN=[["Þingvallavatn",64.18,-21.15],["Úlfljótsvatn",64.105,-21.05],["Elliðavatn",64.085,-21.765],["Vífilsstaðavatn",64.081,-21.872],
+  ["Hafravatn",64.125,-21.645],["Reynisvatn",64.123,-21.735],["Kleifarvatn",63.93,-21.985],["Hlíðarvatn",63.87,-21.62],["Meðalfellsvatn",64.32,-21.605],
+  ["Skorradalsvatn",64.515,-21.42],["Langavatn",64.76,-21.70],["Hítarvatn",64.83,-21.97],["Baulárvallavatn",64.895,-22.99],["Hraunsfjarðarvatn",64.915,-23.02],
+  ["Haukadalsvatn",65.05,-21.62],["Arnarvatn stóra",64.93,-20.52],["Vesturhópsvatn",65.53,-20.77],["Hóp",65.47,-20.62],["Svínavatn",65.53,-20.04],
+  ["Ölvesvatn",65.96,-20.07],["Ljósavatn",65.725,-17.67],["Kringluvatn",65.85,-17.30],["Hraunhafnarvatn",66.49,-16.05],["Sænautavatn",65.33,-15.53],
+  ["Urriðavatn",65.30,-14.43],["Syðridalsvatn",66.14,-23.30],["Frostastaðavatn",64.02,-19.04],["Þórisvatn",64.25,-18.90]];
+OSM_FYRIRSPURNIR.veidi=`[out:json][timeout:90];(nwr["natural"="water"]["name"~"^(${VEIDIVOTN.map(v=>v[0]).join('|')})$"](${ISL_BOX}););out tags geom;`;
+const VEIDIVEFIR=[['Veiðikortið','https://veidikortid.is'],['Veiðiappið','https://veidiappid.is/kort/votn'],['Veiðiheimar','https://veidiheimar.is/veidisvaedi/']];
+const LISTA_TAKN={sund:['♨️','ls_sund'],tjald:['⛺','ls_tjalda'],golf:['⛳','ls_golf'],folf:['🥏','ls_folf']};
 const LISTAR={};
 // Punktur innan útlína (ekki miðja umlykjandi ferhyrnings, sem lendir oft úti á sjó við strönd)
 function innriPunktur(hringir){
@@ -2271,11 +2567,15 @@ function innriPunktur(hringir){
 function stadsetningOSM(e){
   if(e.type==='node')return e.lat!=null?[e.lat,e.lon]:null;
   const hr=[];
-  if(e.geometry)hr.push(e.geometry.filter(Boolean).map(g=>[g.lon,g.lat]));
+  if(e.geometry){const g=e.geometry.filter(Boolean);
+    const lokud=g.length>=4&&g[0].lat===g[g.length-1].lat&&g[0].lon===g[g.length-1].lon;
+    if(!lokud&&g.length>=2){const m=g[Math.floor(g.length/2)];return[m.lat,m.lon];}
+    hr.push(g.map(x=>[x.lon,x.lat]));}
   if(e.members){
     const ytri=e.members.filter(m=>m.geometry&&m.role!=='inner').map(m=>m.geometry.filter(Boolean).map(g=>[g.lon,g.lat]));
     const lokadir=ytri.filter(r=>r.length>=4&&r[0][0]===r[r.length-1][0]&&r[0][1]===r[r.length-1][1]);
-    if(lokadir.length)hr.push(...lokadir);else if(ytri.length)hr.push(ytri.flat());
+    if(lokadir.length)hr.push(...lokadir);
+    else if(ytri.length){const l=ytri.reduce((a,b)=>b.length>a.length?b:a);const m=l[Math.floor(l.length/2)];if(m)return[m[1],m[0]];}
   }
   const gild=hr.filter(h=>h.length>=3);
   if(gild.length)return innriPunktur(gild);
@@ -2283,8 +2583,14 @@ function stadsetningOSM(e){
   if(e.bounds)return[(e.bounds.minlat+e.bounds.maxlat)/2,(e.bounds.minlon+e.bounds.maxlon)/2];
   return null;
 }
+function veidivotnUr(osm){
+  return VEIDIVOTN.map(([n,la,lo],i)=>{
+    let b=null,d=30;for(const p of osm){if(p.nafn!==n)continue;const x=km(p,{lat:la,lon:lo});if(x<d){d=x;b=p;}}
+    return{id:`veidi:${i}`,lat:b?b.lat:la,lon:b?b.lon:lo,nafn:n,vefur:null};
+  });
+}
 async function saekjaStadi(lykill){
-  const geymt=geyma.get('bs:listi2:'+lykill);
+  const geymt=geyma.get('bs:listi4:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const r=await fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(OSM_FYRIRSPURNIR[lykill]));
@@ -2292,16 +2598,35 @@ async function saekjaStadi(lykill){
     const j=await r.json(),pts=[];
     for(const e of j.elements||[]){
       const st=stadsetningOSM(e),tg=e.tags||{};if(!st)continue;const[la,lo]=st;
-      const p={id:`${lykill}:${e.type[0]}${e.id}`,lat:+la.toFixed(5),lon:+lo.toFixed(5),nafn:tg.name||tg['name:is']||tg['name:en']||null,vefur:tg.website||tg['contact:website']||null};
-      const naer=pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
+      const ele=parseFloat(String(tg.ele||'').replace(',','.'));
+      const p={id:`${lykill}:${e.type[0]}${e.id}`,lat:+la.toFixed(5),lon:+lo.toFixed(5),nafn:tg.name||tg['name:is']||tg['name:en']||null,vefur:tg.website||tg['contact:website']||null,ele:isFinite(ele)?ele:null};
+      if(tg.disc_golf&&!tg.leisure){(window._korfur??=[]).push(p);continue;}
+      const naer=lykill==='fjoll'?null:pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
       if(naer){if(!naer.nafn&&p.nafn)naer.nafn=p.nafn;if(!naer.vefur&&p.vefur)naer.vefur=p.vefur;continue;}
       pts.push(p);
     }
+    if(lykill==='folf'){ // körfur sem ekki tilheyra skráðum velli: klasar með minnst 3 körfur verða vellir
+      const korfur=(window._korfur||[]).filter(k=>!pts.some(v=>km(v,k)<.6));window._korfur=[];
+      const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
+      klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
+    }
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi4:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
-    geyma.set('bs:listi2:'+lykill,{t:Date.now(),pts});
+    if(lykill==='fjoll'){
+      // Sleppa lágum hólum; sameina tind og eldfjall með sama nafni (hæsta heldur sér)
+      const eftirNafni=new Map();
+      for(const p of pts){if(p.ele!=null&&p.ele<200)continue;const k=p.nafn;const l=eftirNafni.get(k)||[];
+        const tvifari=l.find(q=>km(q,p)<4);if(tvifari){if((p.ele??0)>(tvifari.ele??0))Object.assign(tvifari,{lat:p.lat,lon:p.lon,ele:p.ele});continue;}
+        l.push(p);eftirNafni.set(k,l);}
+      pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
+      for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
+    }
+    geyma.set('bs:listi4:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
-    return{pts:VARALISTAR[lykill].map(([n,la,lo],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,nafn:n,vefur:null})),vara:true};
+    if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
+    return{pts:VARALISTAR[lykill].map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,
+      nafn:ele?`${n} (${ele} m)`:n,vefur:null})),vara:true};
   }
 }
 async function hladaLista(lykill){
@@ -2311,16 +2636,22 @@ async function hladaLista(lykill){
   for(const p of pts){p.myrkur=myrkurFyrir(p);p.listi=lykill;}
   // Veðurgögn sótt fyrir um 5 km net, svo nálægir staðir deili spá
   const syni=new Map();
-  for(const p of pts){const k=`${(Math.round(p.lat*20)/20).toFixed(2)},${(Math.round(p.lon*20)/20).toFixed(2)}`;p.syni='ls:'+k;
-    if(!syni.has(p.syni))syni.set(p.syni,{id:p.syni,lat:+k.split(',')[0],lon:+k.split(',')[1],haed:null});}
+  let upp=lykill==='fjoll'?10:20;
+  for(;;){syni.clear();
+    for(const p of pts){const k=`${(Math.round(p.lat*upp)/upp).toFixed(2)},${(Math.round(p.lon*upp)/upp).toFixed(2)}`;p.syni='ls:'+k;
+      if(!syni.has(p.syni))syni.set(p.syni,{id:p.syni,lat:+k.split(',')[0],lon:+k.split(',')[1],haed:null,_e:[]});
+      if(p.ele!=null)syni.get(p.syni)._e.push(p.ele);}
+    if(syni.size<=200||upp<=2.5)break;upp/=2;}
+  if(lykill==='fjoll')for(const x of syni.values())x.ele=x._e.length?x._e.reduce((a,b)=>a+b)/x._e.length:null;
   const sp=[...syni.values()],gs={};
   if(S.demo||!S.gogn||!S.heimildir.some(h=>LIKON.some(l=>l.nafn===h)))gerviSvaedi(sp,gs);
   else{
     const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
-    await Promise.allSettled(likon.map(id=>saekjaLikan(id,sp).then(sv=>umbreyta(sv,id,gs,sp))));
+    for(const id of likon){try{umbreyta(await saekjaLikan(id,sp),id,gs,sp);}catch{}}
     if(!Object.keys(gs).length)gerviSvaedi(sp,gs);
   }
-  const gogn={};for(const p of pts){if(gs[p.syni])gogn[p.id]=gs[p.syni];p.haed=syni.get(p.syni).haed;if(!p.nafn)p.nafn=naestiBaer(p);}
+  const gogn={};for(const p of pts){if(gs[p.syni])gogn[p.id]=gs[p.syni];const sx=syni.get(p.syni);p.haed=p.ele??sx.haed;
+    p.dT=(p.ele!=null&&sx.ele!=null)?-.0065*(p.ele-sx.ele):0;if(!p.nafn)p.nafn=naestiBaer(p);}
   LISTAR[lykill]={pts,gogn,vara,saekir:false};
   reikna();
 }
@@ -2451,8 +2782,8 @@ function synaPunkt(fljuga=false){
     ${maelingTexti(a)}
     ${spaYfirDaginn(VP.gogn)}
     <p class="smatt">${hnitTexti(a)}${a.haed!=null?', '+t('haed',{h:Math.round(a.haed)}):''}<br>${t('vp_dragdu')}</p>
-    <button type="button" class="kl-her">${t('kl_her')}</button>${tenglar(a)}`;
-  d.querySelector('.kl-her').addEventListener('click',()=>{klOpna(true);klSetja(p.lat,p.lon,null,true);document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
+    <details class="kl-spjald"><summary>${t('kl_hnappur')}</summary><div class="kl-innihald"></div></details>${tenglar(a)}`;
+  tengjaKlaedi(d,{...a,lat:p.lat,lon:p.lon});
   tengjaAfrita(d);
   d.insertAdjacentHTML('beforeend',`<div class="naest"><div class="naest-titill">🛟 ${t('on_titill')}</div><p class="kl-smatt">${t('on_leita')}</p></div>`);
   const nEl=d.querySelector('.naest');
@@ -2468,6 +2799,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&VP.velja)vpLjuka();});
 
 document.getElementById('sv-velja').onclick=svHefja;
 document.getElementById('sv-hreinsa').onclick=()=>hreinsaLeit();
+document.getElementById('hreinsa2').onclick=()=>hreinsaLeit();
 // Byrja upp á nýtt: hreinsa svæði, nákvæmari leit, spjald og val á korti; flokkur, dagur og staðsetning haldast
 function hreinsaLeit(){
   if(SV.velja)svLjuka();
@@ -2527,7 +2859,7 @@ function teiknaSvaediKassa(){
   box.hidden=false;const best=S.nidurstada[0];
   box.innerHTML=`<strong>${t('sv_titill')}</strong><button type="button" class="sv-allt">${t('sv_hreinsa')}</button>${best?`<button type="button" class="sv-kl">${t('sv_klaedi')}</button>`:''}`;
   box.querySelector('.sv-allt').onclick=()=>hreinsaSvaedi();
-  box.querySelector('.sv-kl')?.addEventListener('click',()=>{klOpna(true);klSetja(best.lat,best.lon,null,true);document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
+  box.querySelector('.sv-kl')?.addEventListener('click',()=>{KLOPID=true;syna(0,true);});
 }
 
 // ---------------------------------------------------------------- Topp 5 / 10 / 20
@@ -2537,14 +2869,41 @@ function teiknaTop(){
 }
 
 // ---------------------------------------------------------------- Stýringar
+const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','utilega','hjol','veidi','rjupa']],
+  ['hopur_3',['golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
 function teiknaFlokka(){
   const r=document.getElementById('flokkar');r.replaceChildren();
-  for(const[k,f]of Object.entries(FLOKKAR)){
-    const b=document.createElement('button');b.type='button';b.className='flokkur';b.textContent=`${f.takn} ${flT(k,0)}`;
-    b.setAttribute('aria-pressed',k===S.flokkur);b.onclick=()=>{S.flokkur=k;vista();document.title=t('titill')===flT(k,0)?t('titill'):`${t('titill')} – ${flT(k,0)}`;teiknaFlokka();velDagSjalfkrafa();teiknaDaga();reikna();};
-    r.appendChild(b);
+  const iHop=new Set(FLOKKAHOPAR.flatMap(h=>h[1]));
+  const hopar=FLOKKAHOPAR.map(([h,k])=>[h,[...k]]);
+  for(const k of Object.keys(FLOKKAR))if(!iHop.has(k))hopar[0][1].push(k);
+  for(const[hk,lyklar]of hopar){
+    const g=document.createElement('div');g.className='flokkahopur';
+    const heiti=document.createElement('span');heiti.className='hopheiti';heiti.textContent=t(hk);g.appendChild(heiti);
+    const raed=document.createElement('div');raed.className='hopflokkar';
+    for(const k of lyklar){const f=FLOKKAR[k];if(!f)continue;
+      const b=document.createElement('button');b.type='button';b.className='flokkur';b.innerHTML=`<span class="ft-takn" aria-hidden="true">${f.takn}</span><span class="ft-nafn">${flT(k,0)}</span>`;
+      b.setAttribute('aria-pressed',k===S.flokkur);
+      b.onclick=()=>{S.flokkur=k;vista();document.title=t('titill')===flT(k,0)?t('titill'):`${t('titill')} – ${flT(k,0)}`;
+        r.classList.remove('opid');document.getElementById('flokkahnappur').setAttribute('aria-expanded','false');
+        teiknaFlokka();velDagSjalfkrafa();teiknaDaga();reikna();};
+      raed.appendChild(b);}
+    g.appendChild(raed);r.appendChild(g);
+  }
+  const fh=document.getElementById('flokkahnappur'),f=FLOKKAR[S.flokkur];
+  fh.innerHTML=`<span class="fh-takn" aria-hidden="true">${f.takn}</span><span class="fh-val">${flT(S.flokkur,0)}</span><span class="fh-breyta">${t('breyta')} <span class="fh-or" aria-hidden="true">▾</span></span>`;
+  fh.setAttribute('aria-label',`${t('veldu_flokk')}: ${flT(S.flokkur,0)}`);
+  fh.onclick=e=>{e.stopPropagation();const opid=r.classList.toggle('opid');fh.setAttribute('aria-expanded',opid);};
+  // Undirval fyrir fjallgöngu
+  const u=document.getElementById('undirval');u.hidden=S.flokkur!=='fjall';
+  if(S.flokkur==='fjall'){
+    u.innerHTML=`<button type="button" data-h="tindar" aria-pressed="${S.fjallHamur==='tindar'}">⛰️ ${t('fj_tindar')}</button><button type="button" data-h="svaedi" aria-pressed="${S.fjallHamur==='svaedi'}">🗺️ ${t('fj_svaedi')}</button>`;
+    u.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(S.fjallHamur===b.dataset.h)return;S.fjallHamur=b.dataset.h;geyma.set('bs:fjallhamur',S.fjallHamur);
+      beitaFjallHam();teiknaFlokka();reikna();});
   }
 }
+// Loka flokkavali þegar smellt er utan þess eða ýtt á Esc
+document.addEventListener('click',e=>{const r=document.getElementById('flokkar');if(r?.classList.contains('opid')&&!e.target.closest('.flokkaval')){r.classList.remove('opid');document.getElementById('flokkahnappur').setAttribute('aria-expanded','false');}});
+addEventListener('keydown',e=>{if(e.key!=='Escape')return;const r=document.getElementById('flokkar');if(r?.classList.contains('opid')){r.classList.remove('opid');const fh=document.getElementById('flokkahnappur');fh.setAttribute('aria-expanded','false');fh.focus();}});
 function velDagSjalfkrafa(){ if(S.dagur===0&&S.timar.length&&!gluggi())S.dagur=1; }
 function teiknaDaga(){
   const r=document.getElementById('dagar');r.replaceChildren();if(!S.timar.length)return;
@@ -2574,6 +2933,7 @@ function thydaFast(){
   document.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.i18nAria)));
   document.querySelectorAll('[data-i18n-ph]').forEach(e=>e.placeholder=t(e.dataset.i18nPh));
   if(typeof teiknaTop==='function')teiknaTop();
+  {const mm=document.getElementById('mal-merki');if(mm)mm.title=t('mal_titill');}
   const svb=document.getElementById('sv-velja');if(svb)svb.textContent=t(SV.velja?'sv_haetta':'sv_hnappur');
   const vpb=document.getElementById('vp-velja');if(vpb&&typeof VP!=='undefined')vpb.textContent=t(VP.velja?'sv_haetta':'vp_hnappur');
   document.title=t('titill')===flT(S.flokkur,0)?t('titill'):`${t('titill')} – ${flT(S.flokkur,0)}`;
@@ -2582,7 +2942,14 @@ function thydaFast(){
 const malVal=document.getElementById('mal');
 for(const[k,v]of Object.entries(I18N)){const o=document.createElement('option');o.value=k;o.textContent=v.nafn;malVal.appendChild(o);}
 malVal.value=LANG;
+// Tillaga um tungumál fyrir gesti með vafra á öðru máli
+{const tb=document.getElementById('mal-tillaga');let geymt=null;try{geymt=localStorage.getItem('bs:mal');}catch{}
+ const vafra=(navigator.languages||[navigator.language||'']).map(x=>String(x).slice(0,2).toLowerCase()).find(x=>I18N[x]);
+ if(!geymt&&vafra&&vafra!==LANG&&!geyma.get('bs:maltill')){
+   tb.hidden=false;tb.innerHTML=`<span>🌐 ${I18N[vafra].nafn}?</span><span class="mt-x" aria-label="✕">✕</span>`;
+   tb.onclick=e=>{tb.hidden=true;geyma.set('bs:maltill',true);if(!e.target.closest('.mt-x')){malVal.value=vafra;malVal.onchange();}};}}
 malVal.onchange=()=>{
+  document.getElementById('mal-tillaga').hidden=true;
   LANG=malVal.value;geyma.set('bs:mal',LANG);
   PUNKTAR.forEach(p=>p.nafn=naestiBaer(p));S.svaedi?.pts?.forEach(p=>p.nafn=naestiBaer(p));
   thydaFast();teiknaFlokka();teiknaDaga();teiknaStillingar();reikna();if(S.gogn&&!S.nidurstada.length&&!gluggi())teikna(t('tomtLidid'));leid();
