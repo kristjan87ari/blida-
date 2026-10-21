@@ -163,7 +163,7 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 #stillingar{border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:12px 0 0}
 #stillingar summary{font-size:14px}
 .vidv-ovirkt{margin:10px 0 0}
-.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 90px);display:flex;flex-direction:column;
+.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 200px);display:flex;flex-direction:column;
   background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.22);overflow:hidden}
 .sp-haus{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line);flex:none}
 .sp-brjota{flex:1;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0;background:none;border:0;padding:10px 4px 10px 12px;text-align:left;cursor:default}
@@ -185,6 +185,19 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .tk-blar{width:18px;height:18px;cursor:auto}
 .tk-i .vidv-litur{width:16px;height:16px;margin:0}
 #sida h4{font-size:15px;margin:18px 0 6px}
+.vp-nal{position:relative;width:30px;height:40px}
+.vp-hofud{position:absolute;left:3px;top:2px;width:24px;height:24px;background:#2b8a3e;border:3px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.vp-hofud span{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff}
+.tk-nal{transform:scale(.8);height:34px}
+.vp-merki{flex:none;width:14px;height:14px;background:#2b8a3e;border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 1px #2b8a3e}
+.sp-nafn small{font-weight:400;font-size:12.5px;color:var(--muted)}
+#kort.punktaval,#kort.punktaval .leaflet-grab,#kort.punktaval .leaflet-interactive{cursor:crosshair}
+.klst-titill{font-weight:500;font-size:13px;margin:10px 0 4px}
+.klst-rod{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.klst{flex:1 0 46px;display:flex;flex-direction:column;align-items:center;gap:1px;background:var(--chip);border-radius:8px;padding:5px 2px;font-size:12px;font-variant-numeric:tabular-nums}
+.klst-t{color:var(--muted);font-size:11px}
+.klst-i{font-size:18px;line-height:1.2}
+.klst-v{color:var(--muted);font-size:11px}
 .maeling{font-size:13px;background:var(--chip);border-radius:7px;padding:5px 8px;margin:6px 0}
 #vi-stada h4,.lk-titill{font-size:13px;margin:10px 0 4px}
 .vi-listi{list-style:none;margin:0 0 4px;padding:0}
@@ -1200,6 +1213,133 @@ zh:{f:['高尔夫','比较冰岛各高尔夫球场：9:00 至 20:00 之间风小
 es:{f:['Golf','Comparación de los campos de golf de Islandia: viento flojo, seco y templado entre las 9:00 y las 20:00.','La mayoría de los campos abren de mayo a septiembre. Consulta la apertura y reserva hora de salida en golf.is.'],ui:['Horas de salida en golf.is','Piscinas, campings y campos de golf','OpenStreetMap. Ver también sundlaugar.is, tjalda.is y golf.is.','Obteniendo ubicaciones…']}};
 for(const[mal,a]of Object.entries(I18N_GOLF)){const L=I18N[mal];if(!L)continue;
   ['ls_golf','hk_listar','hk_listarT','ls_saeki'].forEach((k,i)=>L[k]=a.ui[i]);if(a.f&&L.flokkar)L.flokkar.golf=a.f;}
+// ---------------------------------------------------------------- Þýðingar: uppfærslur og nákvæmni
+const I18N_NAKV={
+is:{ui:['Næsta sjálfvirka uppfærsla um kl. {t}.','Um uppfærslur og nákvæmni'],h:`<h3 id="nakvaemni">Uppfærslur og nákvæmni</h3>
+<p><strong>Hve oft gögnin uppfærast</strong></p>
+<table class="einkunnir"><tr><th>Veðurlíkön</th><td>Keyrð nokkrum sinnum á sólarhring. Ný spá berst nokkrum klukkustundum eftir hverja keyrslu.</td></tr>
+<tr><th>Þessi síða</th><td>Sækir nýjustu spá þegar hún er opnuð, þegar ýtt er á „Sækja nýjustu spá“ og sjálfkrafa á klukkutíma fresti meðan hún er opin.</td></tr>
+<tr><th>Veðurstofa Íslands</th><td>Stöðvaspár, mælingar og viðvaranir eru sóttar á tveggja tíma fresti. Mæling getur því verið tveggja til þriggja klukkustunda gömul; eldri mælingar en sex klukkustunda eru ekki sýndar.</td></tr>
+<tr><th>Staðir</th><td>Staðsetningar sundlauga, tjaldsvæða og golfvalla koma úr OpenStreetMap og eru geymdar í vafranum í viku.</td></tr></table>
+<p><strong>Hversu nákvæm er spáin</strong></p>
+<ul><li><strong>Tími:</strong> Spá fyrir næsta sólarhring er áreiðanlegust. Tveir til þrír dagar fram í tímann gefa góða vísbendingu, en fjórir til fimm dagar eru fyrst og fremst til viðmiðunar.</li>
+<li><strong>Hiti:</strong> Skeikar oft um 1–2 °C næsta sólarhringinn, meira þegar lengra er spáð. Hiti er leiðréttur fyrir hæð staðarins.</li>
+<li><strong>Vindur:</strong> Erfiðasti þátturinn á Íslandi. Vindstrengir við fjöll og firði og skjól í dölum sjást illa í líkönum, og hviður eru sérstaklega óvissar.</li>
+<li><strong>Úrkoma og ský:</strong> Hvort og hvenær rignir er óvissara en hve mikið. Skúrir, þoka og lágskýjafar eru staðbundin og erfið að spá fyrir um.</li>
+<li><strong>Upplausn:</strong> Líkönin reikna veður í reitum sem eru frá um 2 km (HARMONIE-AROME) upp í um 25 km (ECMWF). Síðan sýnir reiti sem eru um 28 × 23 km, eða allt niður í um 4 km þegar svæði er valið. Gil, skjól og tindar innan reits geta verið mjög ólík.</li>
+<li><strong>Snjódýpt:</strong> Kemur úr líkönum og getur skeikað miklu.</li></ul>
+<p>Þegar líkönin eru ósammála stendur „óvissa“ við staðinn. Mælingar Veðurstofunnar (📡) sýna hvernig veðrið er í raun, og gott er að bera þær saman við spána.</p>`},
+en:{ui:['Next automatic update around {t}.','About updates and accuracy'],h:`<h3 id="nakvaemni">Updates and accuracy</h3>
+<p><strong>How often the data is updated</strong></p>
+<table class="einkunnir"><tr><th>Weather models</th><td>Run several times a day. A new forecast arrives a few hours after each run.</td></tr>
+<tr><th>This site</th><td>Fetches the latest forecast when opened, when you press “Get latest forecast”, and automatically every hour while open.</td></tr>
+<tr><th>Icelandic Met Office</th><td>Station forecasts, measurements and warnings are fetched every two hours. A measurement may therefore be two to three hours old; measurements older than six hours are not shown.</td></tr>
+<tr><th>Places</th><td>Locations of pools, campsites and golf courses come from OpenStreetMap and are stored in your browser for a week.</td></tr></table>
+<p><strong>How accurate the forecast is</strong></p>
+<ul><li><strong>Time:</strong> The forecast for the next 24 hours is the most reliable. Two to three days ahead gives a good indication, while four to five days are mainly for reference.</li>
+<li><strong>Temperature:</strong> Often within 1–2 °C for the next 24 hours, more further ahead. Temperature is corrected for the elevation of the place.</li>
+<li><strong>Wind:</strong> The hardest factor in Iceland. Wind funnelling around mountains and fjords and shelter in valleys are poorly captured by models, and gusts are especially uncertain.</li>
+<li><strong>Precipitation and cloud:</strong> Whether and when it rains is more uncertain than how much. Showers, fog and low cloud are local and hard to forecast.</li>
+<li><strong>Resolution:</strong> The models calculate weather in cells from about 2 km (HARMONIE-AROME) to about 25 km (ECMWF). The site shows cells of about 28 × 23 km, or down to about 4 km when an area is selected. Valleys, sheltered spots and summits within a cell can differ greatly.</li>
+<li><strong>Snow depth:</strong> Comes from models and can be far off.</li></ul>
+<p>When the models disagree, “uncertainty” is shown next to the place. Met Office measurements (📡) show what the weather actually is, and it is worth comparing them with the forecast.</p>`},
+da:{ui:['Næste automatiske opdatering omkring kl. {t}.','Om opdateringer og nøjagtighed'],h:`<h3 id="nakvaemni">Opdateringer og nøjagtighed</h3>
+<p><strong>Hvor ofte data opdateres</strong></p>
+<table class="einkunnir"><tr><th>Vejrmodeller</th><td>Køres flere gange i døgnet. En ny prognose kommer nogle timer efter hver kørsel.</td></tr>
+<tr><th>Denne side</th><td>Henter den nyeste prognose, når den åbnes, når du trykker på »Hent nyeste prognose«, og automatisk hver time, mens den er åben.</td></tr>
+<tr><th>Islands vejrtjeneste</th><td>Stationsprognoser, målinger og varsler hentes hver anden time. En måling kan derfor være to til tre timer gammel; målinger ældre end seks timer vises ikke.</td></tr>
+<tr><th>Steder</th><td>Placeringer af svømmebade, campingpladser og golfbaner kommer fra OpenStreetMap og gemmes i din browser i en uge.</td></tr></table>
+<p><strong>Hvor nøjagtig prognosen er</strong></p>
+<ul><li><strong>Tid:</strong> Prognosen for det næste døgn er mest pålidelig. To til tre dage frem giver en god indikation, mens fire til fem dage primært er vejledende.</li>
+<li><strong>Temperatur:</strong> Ofte inden for 1–2 °C det næste døgn, mere længere frem. Temperaturen er korrigeret for stedets højde.</li>
+<li><strong>Vind:</strong> Den sværeste faktor i Island. Vindstrømme ved fjelde og fjorde og læ i dale fanges dårligt af modellerne, og vindstød er særligt usikre.</li>
+<li><strong>Nedbør og skyer:</strong> Om og hvornår det regner, er mere usikkert end hvor meget. Byger, tåge og lave skyer er lokale og svære at forudsige.</li>
+<li><strong>Opløsning:</strong> Modellerne beregner vejret i felter fra ca. 2 km (HARMONIE-AROME) til ca. 25 km (ECMWF). Siden viser felter på ca. 28 × 23 km, eller ned til ca. 4 km, når et område er valgt. Dale, læ og toppe inden for et felt kan være meget forskellige.</li>
+<li><strong>Snedybde:</strong> Kommer fra modeller og kan være meget unøjagtig.</li></ul>
+<p>Når modellerne er uenige, står der »usikkerhed« ved stedet. Vejrtjenestens målinger (📡) viser, hvordan vejret faktisk er, og det er godt at sammenligne dem med prognosen.</p>`},
+sv:{ui:['Nästa automatiska uppdatering runt kl. {t}.','Om uppdateringar och noggrannhet'],h:`<h3 id="nakvaemni">Uppdateringar och noggrannhet</h3>
+<p><strong>Hur ofta data uppdateras</strong></p>
+<table class="einkunnir"><tr><th>Vädermodeller</th><td>Körs flera gånger per dygn. En ny prognos kommer några timmar efter varje körning.</td></tr>
+<tr><th>Denna sida</th><td>Hämtar den senaste prognosen när den öppnas, när du trycker på ”Hämta senaste prognos” och automatiskt varje timme medan den är öppen.</td></tr>
+<tr><th>Isländska meteorologiska institutet</th><td>Stationsprognoser, mätningar och varningar hämtas varannan timme. En mätning kan därför vara två till tre timmar gammal; mätningar äldre än sex timmar visas inte.</td></tr>
+<tr><th>Platser</th><td>Platser för bad, campingplatser och golfbanor kommer från OpenStreetMap och sparas i din webbläsare i en vecka.</td></tr></table>
+<p><strong>Hur noggrann prognosen är</strong></p>
+<ul><li><strong>Tid:</strong> Prognosen för det närmaste dygnet är mest tillförlitlig. Två till tre dagar framåt ger en god fingervisning, medan fyra till fem dagar främst är vägledande.</li>
+<li><strong>Temperatur:</strong> Ofta inom 1–2 °C det närmaste dygnet, mer längre fram. Temperaturen är korrigerad för platsens höjd.</li>
+<li><strong>Vind:</strong> Den svåraste faktorn på Island. Vindstråk vid fjäll och fjordar och lä i dalar fångas dåligt av modellerna, och byar är särskilt osäkra.</li>
+<li><strong>Nederbörd och moln:</strong> Om och när det regnar är mer osäkert än hur mycket. Skurar, dimma och låga moln är lokala och svåra att förutsäga.</li>
+<li><strong>Upplösning:</strong> Modellerna beräknar vädret i rutor från cirka 2 km (HARMONIE-AROME) till cirka 25 km (ECMWF). Sidan visar rutor på cirka 28 × 23 km, eller ned till cirka 4 km när ett område är valt. Dalar, lä och toppar inom en ruta kan skilja sig mycket.</li>
+<li><strong>Snödjup:</strong> Kommer från modeller och kan vara långt ifrån verkligheten.</li></ul>
+<p>När modellerna är oense står det ”osäkerhet” vid platsen. Institutets mätningar (📡) visar hur vädret faktiskt är, och det är bra att jämföra dem med prognosen.</p>`},
+pl:{ui:['Następna automatyczna aktualizacja około {t}.','O aktualizacjach i dokładności'],h:`<h3 id="nakvaemni">Aktualizacje i dokładność</h3>
+<p><strong>Jak często dane są aktualizowane</strong></p>
+<table class="einkunnir"><tr><th>Modele pogodowe</th><td>Uruchamiane kilka razy na dobę. Nowa prognoza pojawia się kilka godzin po każdym przebiegu.</td></tr>
+<tr><th>Ta strona</th><td>Pobiera najnowszą prognozę po otwarciu, po naciśnięciu „Pobierz najnowszą prognozę” i automatycznie co godzinę, gdy jest otwarta.</td></tr>
+<tr><th>Islandzki Instytut Meteorologiczny</th><td>Prognozy dla stacji, pomiary i ostrzeżenia są pobierane co dwie godziny. Pomiar może więc mieć dwie do trzech godzin; pomiary starsze niż sześć godzin nie są pokazywane.</td></tr>
+<tr><th>Miejsca</th><td>Lokalizacje basenów, pól namiotowych i pól golfowych pochodzą z OpenStreetMap i są przechowywane w przeglądarce przez tydzień.</td></tr></table>
+<p><strong>Jak dokładna jest prognoza</strong></p>
+<ul><li><strong>Czas:</strong> Prognoza na najbliższą dobę jest najbardziej wiarygodna. Dwa–trzy dni naprzód dają dobrą wskazówkę, a cztery–pięć dni służą głównie orientacji.</li>
+<li><strong>Temperatura:</strong> Często w granicach 1–2 °C na najbliższą dobę, dalej większy błąd. Temperatura jest korygowana o wysokość miejsca.</li>
+<li><strong>Wiatr:</strong> Najtrudniejszy czynnik na Islandii. Wzmocnienia wiatru przy górach i fiordach oraz osłonięte doliny są słabo odwzorowane w modelach, a porywy są szczególnie niepewne.</li>
+<li><strong>Opady i chmury:</strong> Czy i kiedy będzie padać, jest bardziej niepewne niż ile. Przelotne opady, mgła i niskie chmury są lokalne i trudne do prognozowania.</li>
+<li><strong>Rozdzielczość:</strong> Modele liczą pogodę w polach od ok. 2 km (HARMONIE-AROME) do ok. 25 km (ECMWF). Strona pokazuje pola ok. 28 × 23 km, a po wybraniu obszaru nawet ok. 4 km. Doliny, osłonięte miejsca i szczyty w obrębie pola mogą się bardzo różnić.</li>
+<li><strong>Pokrywa śnieżna:</strong> Pochodzi z modeli i może być bardzo niedokładna.</li></ul>
+<p>Gdy modele się różnią, przy miejscu widnieje „niepewność”. Pomiary instytutu (📡) pokazują, jaka pogoda jest naprawdę, i warto porównać je z prognozą.</p>`},
+fr:{ui:['Prochaine mise à jour automatique vers {t}.','Mises à jour et précision'],h:`<h3 id="nakvaemni">Mises à jour et précision</h3>
+<p><strong>Fréquence de mise à jour des données</strong></p>
+<table class="einkunnir"><tr><th>Modèles météo</th><td>Calculés plusieurs fois par jour. Une nouvelle prévision arrive quelques heures après chaque calcul.</td></tr>
+<tr><th>Ce site</th><td>Récupère la dernière prévision à l’ouverture, lorsque vous appuyez sur « Obtenir la dernière prévision », et automatiquement toutes les heures tant qu’il est ouvert.</td></tr>
+<tr><th>Office météorologique islandais</th><td>Les prévisions par station, les mesures et les alertes sont récupérées toutes les deux heures. Une mesure peut donc dater de deux à trois heures ; les mesures de plus de six heures ne sont pas affichées.</td></tr>
+<tr><th>Lieux</th><td>Les emplacements des piscines, campings et golfs proviennent d’OpenStreetMap et sont conservés dans votre navigateur pendant une semaine.</td></tr></table>
+<p><strong>Précision de la prévision</strong></p>
+<ul><li><strong>Échéance :</strong> La prévision pour les prochaines 24 heures est la plus fiable. Deux à trois jours donnent une bonne indication, quatre à cinq jours servent surtout de repère.</li>
+<li><strong>Température :</strong> Souvent à 1–2 °C près pour les prochaines 24 heures, davantage au-delà. La température est corrigée selon l’altitude du lieu.</li>
+<li><strong>Vent :</strong> Le facteur le plus difficile en Islande. Les couloirs de vent autour des montagnes et des fjords et les abris dans les vallées sont mal représentés par les modèles, et les rafales sont particulièrement incertaines.</li>
+<li><strong>Précipitations et nuages :</strong> Savoir s’il pleuvra et quand est plus incertain que la quantité. Averses, brouillard et nuages bas sont locaux et difficiles à prévoir.</li>
+<li><strong>Résolution :</strong> Les modèles calculent la météo dans des cases d’environ 2 km (HARMONIE-AROME) à environ 25 km (ECMWF). Le site affiche des cases d’environ 28 × 23 km, ou jusqu’à environ 4 km lorsqu’une zone est choisie. Vallées, abris et sommets d’une même case peuvent être très différents.</li>
+<li><strong>Hauteur de neige :</strong> Provient des modèles et peut être très imprécise.</li></ul>
+<p>Lorsque les modèles divergent, « incertitude » est indiqué à côté du lieu. Les mesures de l’Office (📡) montrent la météo réelle ; il est utile de les comparer à la prévision.</p>`},
+zh:{ui:['下次自动更新约在 {t}。','关于更新和准确性'],h:`<h3 id="nakvaemni">更新与准确性</h3>
+<p><strong>数据多久更新一次</strong></p>
+<table class="einkunnir"><tr><th>天气模型</th><td>每天运行数次。每次运行后数小时会有新的预报。</td></tr>
+<tr><th>本网站</th><td>在打开时、点击“获取最新预报”时，以及打开期间每小时自动获取最新预报。</td></tr>
+<tr><th>冰岛气象局</th><td>站点预报、实测数据和预警每两小时获取一次。因此实测数据可能已有两到三小时；超过六小时的实测数据不会显示。</td></tr>
+<tr><th>地点</th><td>游泳池、露营地和高尔夫球场的位置来自 OpenStreetMap，并在浏览器中保存一周。</td></tr></table>
+<p><strong>预报有多准确</strong></p>
+<ul><li><strong>时间：</strong>未来 24 小时的预报最可靠。两到三天后的预报有较好的参考价值，四到五天后的预报主要用于参考。</li>
+<li><strong>气温：</strong>未来 24 小时通常误差在 1–2 °C 以内，时间越远误差越大。气温已按地点海拔进行校正。</li>
+<li><strong>风：</strong>在冰岛最难预报。山地和峡湾周围的强风带以及山谷中的避风处在模型中表现不佳，阵风尤其不确定。</li>
+<li><strong>降水和云：</strong>是否下雨以及何时下雨比降雨量更难确定。阵雨、雾和低云具有局地性，难以预报。</li>
+<li><strong>分辨率：</strong>模型的计算网格从约 2 公里（HARMONIE-AROME）到约 25 公里（ECMWF）不等。网站显示约 28 × 23 公里的网格，选择区域时可细至约 4 公里。同一网格内的山谷、避风处和山顶可能差别很大。</li>
+<li><strong>积雪深度：</strong>来自模型，可能有很大误差。</li></ul>
+<p>当模型之间存在分歧时，地点旁会标注“不确定”。冰岛气象局的实测数据（📡）显示实际天气，值得与预报对比。</p>`},
+es:{ui:['Próxima actualización automática hacia las {t}.','Sobre actualizaciones y precisión'],h:`<h3 id="nakvaemni">Actualizaciones y precisión</h3>
+<p><strong>Con qué frecuencia se actualizan los datos</strong></p>
+<table class="einkunnir"><tr><th>Modelos meteorológicos</th><td>Se ejecutan varias veces al día. Una nueva previsión llega unas horas después de cada ejecución.</td></tr>
+<tr><th>Esta página</th><td>Obtiene la última previsión al abrirse, al pulsar «Obtener la última previsión» y automáticamente cada hora mientras está abierta.</td></tr>
+<tr><th>Oficina Meteorológica de Islandia</th><td>Las previsiones por estación, las mediciones y los avisos se obtienen cada dos horas. Una medición puede tener por tanto dos o tres horas; no se muestran mediciones de más de seis horas.</td></tr>
+<tr><th>Lugares</th><td>Las ubicaciones de piscinas, campings y campos de golf proceden de OpenStreetMap y se guardan en tu navegador durante una semana.</td></tr></table>
+<p><strong>Qué tan precisa es la previsión</strong></p>
+<ul><li><strong>Plazo:</strong> La previsión para las próximas 24 horas es la más fiable. De dos a tres días da una buena indicación, mientras que de cuatro a cinco días sirve sobre todo de referencia.</li>
+<li><strong>Temperatura:</strong> A menudo con un margen de 1–2 °C para las próximas 24 horas, mayor más adelante. La temperatura se corrige según la altitud del lugar.</li>
+<li><strong>Viento:</strong> El factor más difícil en Islandia. Los corredores de viento junto a montañas y fiordos y el abrigo en los valles se reflejan mal en los modelos, y las rachas son especialmente inciertas.</li>
+<li><strong>Precipitación y nubes:</strong> Si lloverá y cuándo es más incierto que cuánto. Chubascos, niebla y nubes bajas son locales y difíciles de prever.</li>
+<li><strong>Resolución:</strong> Los modelos calculan el tiempo en celdas de unos 2 km (HARMONIE-AROME) a unos 25 km (ECMWF). La página muestra celdas de unos 28 × 23 km, o de hasta unos 4 km al elegir una zona. Valles, lugares resguardados y cumbres dentro de una celda pueden ser muy distintos.</li>
+<li><strong>Espesor de nieve:</strong> Procede de modelos y puede ser muy impreciso.</li></ul>
+<p>Cuando los modelos discrepan, aparece «incertidumbre» junto al lugar. Las mediciones de la Oficina (📡) muestran el tiempo real, y conviene compararlas con la previsión.</p>`}};
+for(const[mal,a]of Object.entries(I18N_NAKV)){const L=I18N[mal];if(!L)continue;
+  L.hk_naesta=a.ui[0];L.hk_nakv=a.ui[1];if(L.sidur)L.sidur.hvernig+=a.h;}
+
+const VP_L=['vp_hnappur','vp_hjalp','vp_titill','vp_klst','vp_dragdu'];
+const I18N_VP={is:['📍 Velja punkt','Smelltu á kortið þar sem þú vilt sjá veðrið.','Valinn punktur','Spá yfir daginn','Dragðu grænu nálina til að skoða annan stað.'],
+  en:['📍 Pick a point','Click the map where you want to see the weather.','Selected point','Forecast through the day','Drag the green pin to check another spot.'],
+  da:['📍 Vælg punkt','Klik på kortet, hvor du vil se vejret.','Valgt punkt','Prognose gennem dagen','Træk den grønne nål for at se et andet sted.'],
+  sv:['📍 Välj punkt','Klicka på kartan där du vill se vädret.','Vald punkt','Prognos under dagen','Dra den gröna nålen för att se en annan plats.'],
+  pl:['📍 Wybierz punkt','Kliknij na mapie miejsce, w którym chcesz sprawdzić pogodę.','Wybrany punkt','Prognoza w ciągu dnia','Przeciągnij zieloną pinezkę, aby sprawdzić inne miejsce.'],
+  fr:['📍 Choisir un point','Cliquez sur la carte là où vous voulez voir la météo.','Point choisi','Prévision au fil de la journée','Faites glisser l’épingle verte pour voir un autre endroit.'],
+  zh:['📍 选择地点','在地图上点击你想查看天气的位置。','所选地点','全天预报','拖动绿色图钉可查看其他地点。'],
+  es:['📍 Elegir punto','Haz clic en el mapa donde quieras ver el tiempo.','Punto elegido','Previsión a lo largo del día','Arrastra el alfiler verde para ver otro lugar.']};
+for(const[mal,v]of Object.entries(I18N_VP))if(I18N[mal])VP_L.forEach((k,i)=>I18N[mal][k]=v[i]);
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1435,6 +1575,7 @@ async function saekjaAllt(){
     klSaekja().then(klTeikna);}
   if(S.svaedi&&!S.svaedi.tomt)veljaSvaedi(S.svaedi.b);
   for(const k in LISTAR)if(LISTAR[k].pts)LISTAR[k].gogn=null;
+  if(typeof VP!=='undefined'&&VP.p)vpSetja(VP.p.lat,VP.p.lon);
   if(FLOKKAR[S.flokkur].stadir&&FLOKKAR[S.flokkur].stadir!=='skidi')reikna();
 }
 
@@ -1652,7 +1793,7 @@ kortEl.appendChild(spjald);
 L.DomEvent.disableClickPropagation(spjald);L.DomEvent.disableScrollPropagation(spjald);
 const erSimi=()=>matchMedia('(max-width:820px)').matches;
 function lokaSpjaldi(){
-  spjald.hidden=true;S.virkur=-1;
+  spjald.hidden=true;S.virkur=-1;if(typeof VP!=='undefined')VP.opinn=false;
   if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
   document.querySelectorAll('#listi li').forEach(li=>li.classList.remove('virkur'));
   document.querySelectorAll('.pinni.valinn').forEach(p=>p.classList.remove('valinn'));
@@ -1713,6 +1854,7 @@ function midjaFyrirOfanSpjald(a){
 function teikna(skilabod){
   const f=FLOKKAR[S.flokkur];
   reitaLag.clearLayers();punktaLag.clearLayers();nakvLag.clearLayers();teiknaVidvaranir();
+  const vpVarOpinn=typeof VP!=='undefined'&&VP.opinn;
   if(typeof lokaSpjaldi==='function')lokaSpjaldi();
   if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
   kortEl.classList.toggle('haetta',!!(f.haetta||f.ofugt));
@@ -1753,6 +1895,7 @@ function teikna(skilabod){
   document.getElementById('timi').textContent=S.sott?t('sott',{t:tm})+(g?t('gildir',{b:bil(g.a,g.b)}):''):t('saeki');
   document.getElementById('timi2').textContent=document.getElementById('timi').textContent;
   teiknaSvaediKassa();klTeikna();
+  if(vpVarOpinn&&VP.p)synaPunkt(false);
 }
 
 function heimildakassi(){
@@ -1766,7 +1909,9 @@ function heimildakassi(){
     <dt>♨️ ${t('hk_listar')}</dt><dd>${t('hk_listarT')} ${ytri('https://sundlaugar.is','sundlaugar.is')} ${ytri('https://tjalda.is','tjalda.is')} ${ytri('https://rastimar.golf.is/vellir','golf.is')}</dd>
     <dt>🗺️ ${t('hk_kort')}</dt><dd>${t('hk_kortT')} ${ytri('https://opentopomap.org','opentopomap.org')}</dd></dl>
     ${S.villur.length?`<p class="villa">${t('hk_villa',{x:S.villur.join('; ')})}</p>`:''}
-    <p class="kl-smatt">${tm?t('hk_uppf',{t:tm})+' ':''}<a href="#um">${t('hk_meira')}</a></p></details>`;
+    <p class="kl-smatt">${tm?t('hk_uppf',{t:tm})+' ':''}${S.sott&&!S.demo?t('hk_naesta',{t:(()=>{const n=new Date(S.sott.getTime()+36e5);return`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;})()})+' ':''}</p>
+    <p class="kl-smatt"><a href="#hvernig" data-akkeri="nakvaemni">${t('hk_nakv')}</a></p>
+    <p class="kl-smatt"><a href="#um">${t('hk_meira')}</a></p></details>`;
 }
 const NAEST=new Map();
 function saekjaNaest(a){
@@ -1813,7 +1958,7 @@ function taknskyring(){
       r('<span class="pinni litill tk-pinni">★</span>',t('tk_stjarna')),r('📡',t('tk_mael')),r('🛟',t('on_titill')),
       r('🏨',t('on_gisting')),r('🛖',t('on_skali')),r('🏘️',t('on_byggd')),r('🆘',t('on_neyd')),
       r('🧭',an(t('lf_hnappur'))),r('🚗',t('lf_faerd')),r('⚠️',t('tk_hal')),r('👕',an(t('kl_hnappur'))),
-      r('⬚',t('tk_svaedi')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),
+      r('⬚',t('tk_svaedi')),r('<span class="vp-nal tk-nal"><span class="vp-hofud"><span></span></span></span>',t('vp_titill')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),
       r('🎿',t('sk_vefur')),r('🇮🇸',t('vi_titill')),r('💡',t('kl_gottAdVita'))])+
     kafli(t('tk_einkunn'),[
       r('<span class="stigpill st-frab">85</span>',t('tk_frab')),r('<span class="stigpill st-god">70</span>',t('tk_god')),
@@ -2071,7 +2216,7 @@ document.getElementById('kl-kort').onclick=()=>{
   KL.velja=true;KL.skilabod=null;kortEl.classList.add('velja');klTeikna();
   if(matchMedia('(max-width:820px)').matches)kortEl.scrollIntoView({block:'start',behavior:'smooth'});
 };
-kort.on('click',e=>{if(!KL.velja)return;KL.velja=false;kortEl.classList.remove('velja');klSetja(e.latlng.lat,e.latlng.lng);});
+kort.on('click',e=>{if(!KL.velja||VP.velja)return;KL.velja=false;kortEl.classList.remove('velja');klSetja(e.latlng.lat,e.latlng.lng);});
 {const dl=document.getElementById('kl-stadir');for(const n of [...KL_STADIR.keys()].sort((a,b)=>a.localeCompare(b,'is'))){const o=document.createElement('option');o.value=n;dl.appendChild(o);}}
 document.getElementById('kl-leit').addEventListener('change',e=>{const n=e.target.value.trim(),h=KL_STADIR.get(n)||[...KL_STADIR].find(([k])=>k.toLowerCase()===n.toLowerCase())?.[1];
   if(h){klSetja(h[0],h[1],KL_STADIR.has(n)?n:[...KL_STADIR.keys()].find(k=>k.toLowerCase()===n.toLowerCase()),true);kort.flyTo(h,Math.max(kort.getZoom(),10),{duration:.8});}});
@@ -2189,7 +2334,7 @@ function stadaListi(lykill){
 const SV={velja:false,byrjun:null,px:null,dragt:null,rammi:null};
 const SvaediStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar svaedistjorn');
-  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button>`;
+  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="vp-velja" data-i18n="vp_hnappur">📍 Velja punkt</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button>`;
   L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d;}});
 new SvaediStjorn({position:'topleft'}).addTo(kort);
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
@@ -2197,6 +2342,7 @@ const popW=()=>Math.min(300,innerWidth-70);
 
 function svHefja(){
   if(SV.velja){svLjuka();return;}
+  if(typeof VP!=='undefined'&&VP.velja)vpLjuka();
   KL.velja=false;kortEl.classList.remove('velja');
   SV.velja=true;kortEl.classList.add('svaedaval');
   kort.dragging.disable();kort.touchZoom.disable();kort.doubleClickZoom.disable();kort.boxZoom.disable();
@@ -2235,11 +2381,97 @@ kortEl.addEventListener('pointerup',e=>{
   svLjuka();veljaSvaedi(b);
 },true);
 addEventListener('keydown',e=>{if(e.key==='Escape'&&SV.velja)svLjuka();});
+// ---------------------------------------------------------------- Velja punkt: veðrið á völdum stað
+const VP={velja:false,merki:null,p:null,gogn:null,opinn:false,saekir:false};
+const graenNal=L.divIcon({className:'',html:'<div class="vp-nal"><div class="vp-hofud"><span></span></div></div>',iconSize:[30,40],iconAnchor:[15,38]});
+function vpHefja(){
+  if(VP.velja){vpLjuka();return;}
+  if(SV.velja)svLjuka();KL.velja=false;kortEl.classList.remove('velja');
+  VP.velja=true;kortEl.classList.add('punktaval');
+  const b=document.getElementById('vp-velja');b.setAttribute('aria-pressed','true');b.textContent=t('sv_haetta');
+  svHjalp.textContent=t('vp_hjalp');svHjalp.style.display='block';
+  if(erSimi())kortEl.scrollIntoView({block:'start',behavior:'smooth'});
+}
+function vpLjuka(){
+  VP.velja=false;kortEl.classList.remove('punktaval');
+  const b=document.getElementById('vp-velja');b.setAttribute('aria-pressed','false');b.textContent=t('vp_hnappur');
+  svHjalp.style.display='none';
+}
+async function vpSetja(lat,lon){
+  if(!vidIsland(lat,lon)){svHjalp.textContent=t('kl_utanIslands');svHjalp.style.display='block';setTimeout(()=>{if(!VP.velja&&!SV.velja)svHjalp.style.display='none';},3000);return;}
+  VP.p={id:'vp',lat,lon,haed:null};VP.p.myrkur=myrkurFyrir(VP.p);VP.gogn=null;
+  if(VP.merki)VP.merki.setLatLng([lat,lon]);
+  else{VP.merki=L.marker([lat,lon],{icon:graenNal,draggable:true,zIndexOffset:900,title:t('vp_titill')}).addTo(kort);
+    VP.merki.on('dragend',e=>{const ll=e.target.getLatLng();vpSetja(ll.lat,ll.lng);});
+    VP.merki.on('click',()=>synaPunkt(false));}
+  VP.saekir=true;synaPunkt(false);
+  const p=VP.p,gogn={};
+  if(S.demo||!S.gogn||!S.heimildir.some(h=>LIKON.some(l=>l.nafn===h))){const r=naestaReit(lat,lon);if(r){gogn.vp=S.gogn[r.id];p.haed=r.haed;}}
+  else{const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
+    await Promise.allSettled(likon.map(id=>saekjaLikan(id,[p]).then(sv=>umbreyta(sv,id,gogn,[p]))));
+    if(!gogn.vp){const r=naestaReit(lat,lon);if(r){gogn.vp=S.gogn[r.id];p.haed=r.haed;}}}
+  if(VP.p!==p)return; // annar punktur valinn á meðan
+  VP.gogn=gogn.vp||null;VP.saekir=false;
+  if(VP.opinn)synaPunkt(false);
+}
+function spaYfirDaginn(lk){
+  const[a,b]=dagBil(),t0=Date.parse(S.timar[0]+'Z'),nu=Math.floor(Date.now()/36e5)*36e5,reitir=[];
+  for(let h=6;h<24;h+=3){
+    const ts=a+h*36e5;if(ts+3*36e5<=nu)continue;
+    const i0=Math.round((ts-t0)/36e5);if(i0<0||i0+3>S.timar.length)continue;
+    const maelar=Object.values(lk).map(ar=>maelikvardar(ar,i0,i0+3,VP.p));
+    const m={};for(const k of Object.keys(maelar[0]))m[k]=medaltal(maelar.map(x=>x[k]));
+    const w=vedurtakn(m,h>=21||h<6);
+    reitir.push(`<div class="klst"><span class="klst-t">${L_().klS(h)}</span><span class="klst-i" title="${w.ord}">${w.takn}</span><span>${fm(m.T,0)}°</span><span class="klst-v">${fm(m.vindur,0)} m/s</span></div>`);
+  }
+  return reitir.length?`<p class="klst-titill">${t('vp_klst')}</p><div class="klst-rod">${reitir.join('')}</div>`:'';
+}
+function synaPunkt(fljuga=false){
+  if(!VP.p)return;
+  lokaSpjaldi();VP.opinn=true;
+  const f=FLOKKAR[S.flokkur],p=VP.p,nafn=naestiBaer(p),d=spjald.querySelector('.sp-efni');
+  const titill=(stig,st)=>`<span class="vp-merki" aria-hidden="true"></span><span class="sp-nafn">${t('vp_titill')}<br><small>${nafn}</small></span>${stig!=null?`<span class="stigpill ${st}">${fm(stig,0)}</span>`:''}`;
+  spjald.hidden=false;spjald.classList.remove('samanbrotid');
+  const g=gluggi();
+  if(VP.saekir||!VP.gogn||!g){
+    document.getElementById('sp-titill').innerHTML=titill(null);
+    d.innerHTML=`<p class="kl-smatt">${!g?t('tomtLidid'):t(VP.saekir?'kl_saeki':'tomt')}</p>`;
+    if(erSimi())midjaFyrirOfanSpjald(p);return;
+  }
+  let a=metaPunkt(p,VP.gogn,g,f);
+  if(!a){document.getElementById('sp-titill').innerHTML=titill(null);d.innerHTML=`<p class="kl-smatt">${t('tomt')}</p>`;return;}
+  a={...a,nafn};
+  if(!f.ofugt&&!f.haetta){const v=verstaVidv(a,vidvVirkar(g.a,g.b));if(v){a.vidv=v.litur;a.stig=+(a.stig*VID_STUDULL[v.litur]).toFixed(1);}}
+  const sk=a.stig,ofugt=f.haetta||f.ofugt,st=ofugt?(sk>=60?'st-mikil':sk>=40?'st-midl':'st-litil'):(sk>=80?'st-frab':sk>=60?'st-god':sk>=40?'st-saem':'st-sidri');
+  document.getElementById('sp-titill').innerHTML=titill(sk,st);
+  const w=vedurtakn(a.m,erNott());
+  d.innerHTML=`<p class="vt-lina"><span class="vt-stort" aria-hidden="true">${w.takn}</span>${w.ord}</p><p class="gildi-lina">${gildistexti(a)}</p>
+    <p>${f.takn} ${flT(S.flokkur,0)}: ${t(f.haetta?'haettuvisir':f.ofugt?'ovedursvisir':'stig',{x:fm(a.stig)})} ${ovissa(a)}.</p>
+    ${a.vidv?`<p class="vidv-merki"><i class="vidv-litur vl-${a.vidv}"></i>${t('vid_stad',{x:t(VID_HEITI[a.vidv])})}</p>`:''}
+    ${maelingTexti(a)}
+    ${spaYfirDaginn(VP.gogn)}
+    <p class="smatt">${hnitTexti(a)}${a.haed!=null?', '+t('haed',{h:Math.round(a.haed)}):''}<br>${t('vp_dragdu')}</p>
+    <button type="button" class="kl-her">${t('kl_her')}</button>${tenglar(a)}`;
+  d.querySelector('.kl-her').addEventListener('click',()=>{klOpna(true);klSetja(p.lat,p.lon,null,true);document.querySelector('.klaedi').scrollIntoView({block:'start',behavior:'smooth'});});
+  tengjaAfrita(d);
+  d.insertAdjacentHTML('beforeend',`<div class="naest"><div class="naest-titill">🛟 ${t('on_titill')}</div><p class="kl-smatt">${t('on_leita')}</p></div>`);
+  const nEl=d.querySelector('.naest');
+  saekjaNaest(a).then(ut=>{if(VP.opinn&&VP.p===p)nEl.innerHTML=naestHtml(ut);}).catch(()=>{if(VP.opinn&&VP.p===p)nEl.innerHTML=naestHtml(null);});
+  spjald.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.i18nAria)));
+  if(fljuga)kort.flyTo([p.lat,p.lon],Math.max(kort.getZoom(),9),{duration:.6});
+  if(erSimi())midjaFyrirOfanSpjald(p);
+}
+function vpFjarlaegja(){if(VP.merki){kort.removeLayer(VP.merki);VP.merki=null;}VP.p=null;VP.gogn=null;VP.opinn=false;if(VP.velja)vpLjuka();}
+document.getElementById('vp-velja').onclick=vpHefja;
+kort.on('click',e=>{if(!VP.velja)return;vpLjuka();vpSetja(e.latlng.lat,e.latlng.lng);});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&VP.velja)vpLjuka();});
+
 document.getElementById('sv-velja').onclick=svHefja;
 document.getElementById('sv-hreinsa').onclick=()=>hreinsaLeit();
 // Byrja upp á nýtt: hreinsa svæði, nákvæmari leit, spjald og val á korti; flokkur, dagur og staðsetning haldast
 function hreinsaLeit(){
   if(SV.velja)svLjuka();
+  vpFjarlaegja();
   KL.velja=false;kortEl.classList.remove('velja');
   nakvLag.clearLayers();kort.closePopup();
   if(typeof lokaSpjaldi==='function')lokaSpjaldi();
@@ -2343,6 +2575,7 @@ function thydaFast(){
   document.querySelectorAll('[data-i18n-ph]').forEach(e=>e.placeholder=t(e.dataset.i18nPh));
   if(typeof teiknaTop==='function')teiknaTop();
   const svb=document.getElementById('sv-velja');if(svb)svb.textContent=t(SV.velja?'sv_haetta':'sv_hnappur');
+  const vpb=document.getElementById('vp-velja');if(vpb&&typeof VP!=='undefined')vpb.textContent=t(VP.velja?'sv_haetta':'vp_hnappur');
   document.title=t('titill')===flT(S.flokkur,0)?t('titill'):`${t('titill')} – ${flT(S.flokkur,0)}`;
   const g=document.getElementById('gestir');if(g.dataset.n)g.textContent=t('gestir',{n:g.dataset.n});
 }
@@ -2366,6 +2599,8 @@ function leid(){
   else setTimeout(()=>kort.invalidateSize(),30);
 }
 addEventListener('hashchange',leid);
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-akkeri]');if(!a)return;
+  const akkeri=a.dataset.akkeri;setTimeout(()=>document.getElementById(akkeri)?.scrollIntoView({block:'start'}),60);});
 
 // ---------------------------------------------------------------- Gestateljari
 // Í claude.ai: innbyggð „room“-tenging. Á eigin vefsvæði: Firebase Realtime Database (sjá LESTU_MIG.md).
