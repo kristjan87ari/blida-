@@ -1580,6 +1580,16 @@ es:['Cumbres','Zonas','Comparación de zonas de todo el país para senderismo: p
 for(const[mal,v]of Object.entries(I18N_FJ))if(I18N[mal])FJ_L.forEach((k,i)=>I18N[mal][k]=v[i]);
 const SKREF={is:['Hvenær?','Breyta'],en:['When?','Change'],da:['Hvornår?','Skift'],sv:['När?','Ändra'],pl:['Kiedy?','Zmień'],fr:['Quand ?','Changer'],zh:['什么时候？','更改'],es:['¿Cuándo?','Cambiar']};
 for(const[mal,[a,b]]of Object.entries(SKREF))if(I18N[mal]){I18N[mal].hvenaer=a;I18N[mal].breyta=b;}
+const OM_L=['om_bid','om_upptekin','om_villa'];
+const I18N_OM={is:['Bíð eftir veðurþjónustunni, um {s} sek.…','Veðurþjónustan er upptekin. Reyni aftur eftir {s} sek.','Veðurþjónustan svarar ekki í augnablikinu vegna of margra beiðna. Síðan reynir sjálfkrafa aftur eftir tvær mínútur.'],
+  en:['Waiting for the weather service, about {s} s…','The weather service is busy. Retrying in {s} s.','The weather service is not responding right now because of too many requests. The page will retry automatically in two minutes.'],
+  da:['Venter på vejrtjenesten, ca. {s} sek.…','Vejrtjenesten er optaget. Prøver igen om {s} sek.','Vejrtjenesten svarer ikke lige nu på grund af for mange forespørgsler. Siden prøver automatisk igen om to minutter.'],
+  sv:['Väntar på vädertjänsten, cirka {s} s…','Vädertjänsten är upptagen. Försöker igen om {s} s.','Vädertjänsten svarar inte just nu på grund av för många förfrågningar. Sidan försöker automatiskt igen om två minuter.'],
+  pl:['Czekam na serwis pogodowy, ok. {s} s…','Serwis pogodowy jest zajęty. Ponowna próba za {s} s.','Serwis pogodowy nie odpowiada z powodu zbyt wielu zapytań. Strona automatycznie spróbuje ponownie za dwie minuty.'],
+  fr:['En attente du service météo, environ {s} s…','Le service météo est occupé. Nouvel essai dans {s} s.','Le service météo ne répond pas pour le moment en raison d’un trop grand nombre de requêtes. La page réessaiera automatiquement dans deux minutes.'],
+  zh:['正在等待天气服务，约 {s} 秒…','天气服务繁忙，{s} 秒后重试。','由于请求过多，天气服务暂时无响应。页面将在两分钟后自动重试。'],
+  es:['Esperando al servicio meteorológico, unos {s} s…','El servicio meteorológico está ocupado. Reintentando en {s} s.','El servicio meteorológico no responde ahora por exceso de solicitudes. La página volverá a intentarlo automáticamente en dos minutos.']};
+for(const[mal,v]of Object.entries(I18N_OM))if(I18N[mal])OM_L.forEach((k,i)=>I18N[mal][k]=v[i]);
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -1736,6 +1746,27 @@ const vista=()=>geyma.set('bs:stillingar',{flokkur:S.flokkur,fjoldi:S.fjoldi,lik
 
 // ---------------------------------------------------------------- Gagnaöflun
 const bunkar=(a,n)=>{const r=[];for(let i=0;i<a.length;i+=n)r.push(a.slice(i,i+n));return r;};
+// ---- Open-Meteo: geymsla í vafra (IndexedDB), hraðatakmörkun og endurtekning við 429
+// Open-Meteo leyfir um 600 staðsetningar á mínútu og 5000 á klukkustund frá hverri IP-tölu.
+const OM_MINUTA=560,OM_KLST=3600,OM_GEYMSLA=45*6e4,OM_THVINGA=10*6e4;
+const omSaga=[];let omThvinga=false;
+const sofa=ms=>new Promise(r=>setTimeout(r,ms));
+let omDbLof=null;
+function omDb(){return omDbLof??=new Promise((ok,villa)=>{try{const r=indexedDB.open('vedra',1);r.onupgradeneeded=()=>r.result.createObjectStore('om');r.onsuccess=()=>ok(r.result);r.onerror=()=>villa(r.error);}catch(e){villa(e);}});}
+async function omLesa(k){try{const db=await omDb();return await new Promise(ok=>{const q=db.transaction('om').objectStore('om').get(k);q.onsuccess=()=>ok(q.result||null);q.onerror=()=>ok(null);});}catch{return null;}}
+async function omSkrifa(k,v){try{const db=await omDb();db.transaction('om','readwrite').objectStore('om').put(v,k);}catch{}}
+async function omHreinsaGamalt(){try{const db=await omDb();const st=db.transaction('om','readwrite').objectStore('om');const q=st.openCursor();
+  q.onsuccess=()=>{const c=q.result;if(!c)return;if(!c.value||Date.now()-c.value.t>3*36e5)c.delete();c.continue();};}catch{}}
+omHreinsaGamalt();
+function synaOmStodu(txt){const tk=document.getElementById('tilkynning');if(!tk)return;if(txt){tk.textContent=txt;tk.style.display='block';tk.dataset.om='1';}
+  else if(tk.dataset.om){tk.style.display='none';delete tk.dataset.om;}}
+async function biddEftirKvota(n){
+  for(;;){const nu=Date.now();while(omSaga.length&&nu-omSaga[0][0]>36e5)omSaga.shift();
+    const minuta=omSaga.filter(x=>nu-x[0]<6e4).reduce((a,x)=>a+x[1],0),klst=omSaga.reduce((a,x)=>a+x[1],0);
+    if(minuta+n<=OM_MINUTA&&klst+n<=OM_KLST){omSaga.push([nu,n]);synaOmStodu(null);return;}
+    const elst=klst+n>OM_KLST?omSaga[0][0]+36e5:(omSaga.find(x=>nu-x[0]<6e4)?.[0]??nu)+6e4;
+    const bid=Math.max(1000,elst-nu+300);synaOmStodu(t('om_bid',{s:Math.ceil(bid/1000)}));await sofa(Math.min(bid,5000));}
+}
 async function saekjaLikan(likan,punktar=PUNKTAR){
   const ut=[];
   for(const b of bunkar(punktar,50)){
@@ -1743,9 +1774,20 @@ async function saekjaLikan(likan,punktar=PUNKTAR){
       latitude:b.map(p=>p.lat).join(','),longitude:b.map(p=>p.lon).join(','),hourly:BREYTUR,models:likan,
       wind_speed_unit:'ms',timezone:'GMT',forecast_days:DAGAR,past_days:FORTID,
       ...(b.every(p=>typeof p.ele==='number')?{elevation:b.map(p=>Math.round(p.ele)).join(',')}:{})});
-    const r=await fetch(url);
-    if(!r.ok){let s='';try{s=(await r.json()).reason||'';}catch{}throw new Error(s||`villa ${r.status}`);}
-    let j=await r.json();if(!Array.isArray(j))j=[j];ut.push(...j);
+    const geymt=await omLesa(url);
+    if(geymt&&Date.now()-geymt.t<(omThvinga?OM_THVINGA:OM_GEYMSLA)){ut.push(...geymt.j);continue;}
+    let j=null;
+    for(let tilraun=0;;tilraun++){
+      await biddEftirKvota(b.length);
+      const r=await fetch(url);
+      if(r.status===429&&tilraun<2){const bid=(+r.headers.get('Retry-After')||[15,40][tilraun]);synaOmStodu(t('om_upptekin',{s:bid}));await sofa(bid*1000);continue;}
+      if(!r.ok){let s_='';try{s_=(await r.json()).reason||'';}catch{}
+        if(r.status===429&&geymt){ut.push(...geymt.j);j=null;break;} // eldri geymd gögn frekar en ekkert
+        const v=new Error(s_||`villa ${r.status}`);v.status=r.status;throw v;}
+      j=await r.json();if(!Array.isArray(j))j=[j];break;
+    }
+    synaOmStodu(null);
+    if(j){omSkrifa(url,{t:Date.now(),j});ut.push(...j);}
   }
   return ut;
 }
@@ -1811,7 +1853,9 @@ async function saekjaAllt(){
   const takki=document.getElementById('saekja');takki.disabled=true;
   document.getElementById('saekja-texti').textContent=t('saeki');
   const gogn={},heimildir=[],villur=[];S.timar=[];ALLIR_STADIR.forEach(p=>{p.haed=null;p.stod=null;});
-  const nidur=await Promise.allSettled([...S.likon].map(async id=>{const svor=await saekjaLikan(id,ALLIR_STADIR);return{id,svor};}));
+  const nidur=[];
+  for(const id of S.likon){try{nidur.push({status:'fulfilled',value:{id,svor:await saekjaLikan(id,ALLIR_STADIR)}});}catch(e){nidur.push({status:'rejected',reason:e});if(e.status===429)break;}}
+  omThvinga=false;
   nidur.forEach((n,i)=>{const id=[...S.likon][i],nafn=LIKON.find(l=>l.id===id).nafn;
     if(n.status==='fulfilled'){umbreyta(n.value.svor,id,gogn,ALLIR_STADIR);heimildir.push(nafn);}else villur.push(`${nafn} (${n.reason.message})`);});
   ALLIR_STADIR.forEach(p=>{if(p.haed!=null&&p.haed<=0)delete gogn[p.id];});
@@ -1819,6 +1863,13 @@ async function saekjaAllt(){
     S.demo=false;
     const vi=await saekjaVedurIs();
     S.vi=vi;if(vi){baetaVidVedurIs(vi,gogn);heimildir.push('@vi');}
+  }else if(nidur.some(n=>n.reason?.status)){
+    // Þjónustan svaraði með villu (t.d. 429): sýna aldrei gervigögn á alvöru síðunni
+    takki.disabled=false;document.getElementById('saekja-texti').textContent=t('saekja');
+    S.villur=villur;synaOmStodu(t('om_villa'));
+    clearTimeout(saekjaAllt._endurt);saekjaAllt._endurt=setTimeout(saekjaAllt,12e4);
+    if(S.gogn)reikna();else teikna(t('om_villa'));
+    return;
   }else{
     S.demo=true;gerviGogn(gogn);heimildir.push('@gervi');
   }
@@ -2155,8 +2206,8 @@ function teikna(skilabod){
    document.getElementById('vi-stada').innerHTML=`<h4>🇮🇸 ${t('vi_titill')}</h4><ul class="vi-listi">${
      lina(nS>0,nS?t('vi_spa',{n:nS}):t('hk_stod')+': '+t('vi_ekki'))}${lina(nM>0,nM?t('vi_mael',{n:nM}):'')}${lina(vv,vv?t('vi_vidv'):t('hk_vidv')+': '+t('vi_ekki'))}</ul>`.replace(/<li class="ekki"><span aria-hidden="true">–<\/span><span><\/span><\/li>/,'');}
   const tk=document.getElementById('tilkynning');
-  tk.style.display=S.demo?'block':'none';
-  tk.textContent=S.demo?t('demo'):'';
+  if(!tk.dataset.om)tk.style.display=S.demo?'block':'none';
+  if(!tk.dataset.om)tk.textContent=S.demo?t('demo'):'';
   const tm=S.sott?`${String(S.sott.getHours()).padStart(2,'0')}:${String(S.sott.getMinutes()).padStart(2,'0')}`:'';
   document.getElementById('timi').textContent=S.sott?t('sott',{t:tm})+(g?t('gildir',{b:bil(g.a,g.b)}):''):t('saeki');
   document.getElementById('timi2').textContent=document.getElementById('timi').textContent;
@@ -2285,9 +2336,8 @@ async function finnaNakvaemt(i,takki){
   try{
     if(S.demo)gerviNakvaemt(a,smar,gogn);
     else{
-      const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
-      const nidur=await Promise.allSettled(likon.map(id=>saekjaLikan(id,smar).then(svor=>umbreyta(svor,id,gogn,smar))));
-      if(!nidur.some(n=>n.status==='fulfilled'))throw new Error(nidur[0]?.reason?.message||'engin svör');
+      await saekjaFyrirPunkta(smar,gogn);
+      if(!Object.keys(gogn).length)throw new Error('engin svör');
     }
   }catch(e){takki.disabled=false;takki.textContent=t('mistokst',{e:e.message});return;}
   const nidurstodur=smar.filter(p=>gogn[p.id]&&!(p.haed!=null&&p.haed<=0)).map(p=>metaPunkt(p,gogn[p.id],g,f)).filter(Boolean)
@@ -2641,14 +2691,13 @@ async function hladaLista(lykill){
     for(const p of pts){const k=`${(Math.round(p.lat*upp)/upp).toFixed(2)},${(Math.round(p.lon*upp)/upp).toFixed(2)}`;p.syni='ls:'+k;
       if(!syni.has(p.syni))syni.set(p.syni,{id:p.syni,lat:+k.split(',')[0],lon:+k.split(',')[1],haed:null,_e:[]});
       if(p.ele!=null)syni.get(p.syni)._e.push(p.ele);}
-    if(syni.size<=200||upp<=2.5)break;upp/=2;}
+    if(syni.size<=120||upp<=2.5)break;upp/=2;}
   if(lykill==='fjoll')for(const x of syni.values())x.ele=x._e.length?x._e.reduce((a,b)=>a+b)/x._e.length:null;
   const sp=[...syni.values()],gs={};
   if(S.demo||!S.gogn||!S.heimildir.some(h=>LIKON.some(l=>l.nafn===h)))gerviSvaedi(sp,gs);
   else{
-    const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
-    for(const id of likon){try{umbreyta(await saekjaLikan(id,sp),id,gs,sp);}catch{}}
-    if(!Object.keys(gs).length)gerviSvaedi(sp,gs);
+    await saekjaFyrirPunkta(sp,gs);
+    if(!Object.keys(gs).length)naestaReitGogn(sp,gs);
   }
   const gogn={};for(const p of pts){if(gs[p.syni])gogn[p.id]=gs[p.syni];const sx=syni.get(p.syni);p.haed=p.ele??sx.haed;
     p.dT=(p.ele!=null&&sx.ele!=null)?-.0065*(p.ele-sx.ele):0;if(!p.nafn)p.nafn=naestiBaer(p);}
@@ -2812,6 +2861,18 @@ function hreinsaLeit(){
   klTeikna();
 }
 
+// Spá fyrir marga punkta með fáum beiðnum: aðeins nákvæmasta líkanið (HARMONIE, 2,5 km) er sótt
+// fyrir hvern punkt; grófari líkön (ECMWF ~25 km, ICON) eru tekin úr næsta reit, sem hefur sömu upplausn.
+async function saekjaFyrirPunkta(pts,gogn){
+  const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
+  const nakv=likon.includes('dmi_harmonie_arome_europe')?['dmi_harmonie_arome_europe']:likon.slice(0,1);
+  for(const id of nakv){try{umbreyta(await saekjaLikan(id,pts),id,gogn,pts);}catch(e){}}
+  for(const p of pts){const r=naestaReit(p.lat,p.lon);if(!r)continue;const gr=S.gogn?.[r.id];if(!gr)continue;
+    for(const id of likon){if(nakv.includes(id)||!gr[id])continue;(gogn[p.id]??={})[id]=gr[id];}
+    if(p.haed==null)p.haed=r.haed;}
+}
+// Varaleið á alvöru síðu: raunveruleg spá úr næsta reit (engin tilbúin breyting)
+function naestaReitGogn(pts,gogn){for(const p of pts){const r=naestaReit(p.lat,p.lon);if(r&&S.gogn?.[r.id]){gogn[p.id]=S.gogn[r.id];if(p.haed==null)p.haed=r.haed;}}}
 function gerviSvaedi(pts,gogn){
   for(const p of pts){
     const r=naestaReit(p.lat,p.lon);if(!r)continue;
@@ -2841,9 +2902,8 @@ async function veljaSvaedi(b){
   const gogn={};
   if(S.demo||!S.heimildir.some(h=>LIKON.some(l=>l.nafn===h)))gerviSvaedi(pts,gogn);
   else{
-    const likon=[...S.likon].filter(id=>S.heimildir.includes(LIKON.find(l=>l.id===id).nafn));
-    await Promise.allSettled(likon.map(id=>saekjaLikan(id,pts).then(sv=>umbreyta(sv,id,gogn,pts))));
-    if(!Object.keys(gogn).length)gerviSvaedi(pts,gogn);
+    await saekjaFyrirPunkta(pts,gogn);
+    if(!Object.keys(gogn).length)naestaReitGogn(pts,gogn);
   }
   for(const p of pts)if(p.haed!=null&&p.haed<=0)delete gogn[p.id];
   if(S.svaedi?.b!==b)return; // nýtt svæði valið á meðan
@@ -2869,8 +2929,8 @@ function teiknaTop(){
 }
 
 // ---------------------------------------------------------------- Stýringar
-const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','utilega','hjol','veidi','rjupa']],
-  ['hopur_3',['golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
+const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','utilega','veidi','rjupa']],
+  ['hopur_3',['hjol','golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
 function teiknaFlokka(){
   const r=document.getElementById('flokkar');r.replaceChildren();
   const iHop=new Set(FLOKKAHOPAR.flatMap(h=>h[1]));
@@ -2924,7 +2984,7 @@ function teiknaStillingar(){
     lab.append(c,` ${l.nafn} `);const sm=document.createElement('small');sm.textContent=L_().likon?.[l.id]||l.lysing;lab.append(sm);lv.appendChild(lab);
   }
 }
-document.getElementById('saekja').onclick=saekjaAllt;
+document.getElementById('saekja').onclick=()=>{omThvinga=true;saekjaAllt();};
 
 // ---------------------------------------------------------------- Tungumál
 function thydaFast(){
