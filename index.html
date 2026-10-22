@@ -215,6 +215,19 @@ body.stort-kort .leaflet-control-zoom .stort-opna{background:var(--fokus);color:
 .bae-tt::before{display:none}
 path.baejapunktur{cursor:pointer;transition:stroke-width .15s}
 path.baejapunktur:hover{stroke-width:3;stroke-opacity:.9}
+.leit{position:relative;flex:0 1 300px;min-width:200px;margin-left:auto}
+.leit-takn{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;opacity:.7}
+#stadaleit{width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:7px 12px 7px 32px;font:inherit;font-size:14px}
+#stadaleit:focus{outline:none;border-color:var(--fokus);box-shadow:0 0 0 3px color-mix(in srgb,var(--fokus) 22%,transparent)}
+#leit-tillogur{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:1700;list-style:none;margin:0;padding:4px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,.22);max-height:320px;overflow-y:auto}
+#leit-tillogur[hidden]{display:none}
+#leit-tillogur li{display:grid;grid-template-columns:20px minmax(0,1fr);column-gap:6px;align-items:baseline;padding:7px 9px;border:0;border-radius:8px;font-size:13.5px;cursor:pointer}
+#leit-tillogur li small{grid-column:2;color:var(--muted);font-size:11.5px}
+#leit-tillogur li.v,#leit-tillogur li:hover{background:var(--chip)}
+#leit-tillogur li.gata{color:var(--fokus);border-top:1px solid var(--line);border-radius:0 0 8px 8px}
+path.leit-merki{animation:leitblikk 1s ease-in-out 6}
+@keyframes leitblikk{50%{stroke-opacity:.25;fill-opacity:.05}}
+@media (prefers-reduced-motion:reduce){path.leit-merki{animation:none}}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -582,6 +595,7 @@ details .likan small{color:var(--muted)}
   .kortahluti{gap:8px}
   .flokkalina{gap:8px}
   .simalina{display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .leit{flex:1 1 100%;margin-left:0;min-width:0}
   .skref-2{position:relative}
   .skref-2 .saekja-hopur{position:absolute;top:-5px;right:0}
   .stort-loka{top:calc(54px + env(safe-area-inset-top,0px));font-size:13px;padding:8px 15px}
@@ -684,6 +698,7 @@ details .likan small{color:var(--muted)}
     <div class="simalina"><div class="topval topval-simi" role="group" data-i18n-aria="synaTop"><button type="button" data-n="5">Topp 5</button><button type="button" data-n="10">Topp 10</button><button type="button" data-n="20">Topp 20</button></div>
       <button type="button" id="til-lista" class="til-lista" data-i18n="til_lista">Sjá lista ↓</button></div>
     <div class="lysing-lina"><p class="lysing" id="lysing"></p>
+      <div class="leit" role="search"><span class="leit-takn" aria-hidden="true">🔎</span><input id="stadaleit" type="search" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="leit-tillogur" placeholder="Hvar ertu? Bær eða gata"><ul id="leit-tillogur" role="listbox" hidden></ul></div>
 </div>
   </div>
 </header>
@@ -2133,6 +2148,20 @@ const BAEIR_UM={is:'litlir punktar með daufum rauðum hring fyrir kaupstaði og
   zh:'城镇的小圆点；鼠标悬停时显示名称。开关位于“色块”旁边。',
   es:'pequeños puntos para pueblos y ciudades; el nombre aparece al pasar el ratón. El interruptor está junto a Celdas de color.'};
 for(const[mal,v]of Object.entries(BAEIR_UM)){const L=I18N[mal];if(L?.sidur)L.sidur.um=L.sidur.um.replace('<ul><li><strong>⚠️',`<ul><li><strong>🏘️ ${BAEIR_ROFI[mal]}:</strong> ${v}</li>\n<li><strong>⚠️`);}
+const LEIT={is:['Hvar ertu? Bær eða gata','Leita að stað','Leita að „{q}“ (götur og heimilisföng)','Ekkert fannst','Leita…'],
+  en:['Where are you? Town or street','Search for a place','Search for “{q}” (streets and addresses)','Nothing found','Searching…'],
+  da:['Hvor er du? By eller gade','Søg efter et sted','Søg efter »{q}« (gader og adresser)','Intet fundet','Søger…'],
+  sv:['Var är du? Ort eller gata','Sök efter en plats','Sök efter ”{q}” (gator och adresser)','Inget hittades','Söker…'],
+  pl:['Gdzie jesteś? Miejscowość lub ulica','Szukaj miejsca','Szukaj „{q}” (ulice i adresy)','Nic nie znaleziono','Szukanie…'],
+  fr:['Où êtes-vous ? Ville ou rue','Rechercher un lieu','Rechercher « {q} » (rues et adresses)','Aucun résultat','Recherche…'],
+  zh:['你在哪里？城镇或街道','搜索地点','搜索“{q}”（街道和地址）','未找到结果','正在搜索…'],
+  es:['¿Dónde estás? Pueblo o calle','Buscar un lugar','Buscar «{q}» (calles y direcciones)','No se encontró nada','Buscando…']};
+for(const[mal,v]of Object.entries(LEIT))if(I18N[mal])[I18N[mal].leit_ph,I18N[mal].leit_aria,I18N[mal].leit_gata,I18N[mal].leit_engin,I18N[mal].leit_saeki]=v;
+const LEIT_VILLA={is:'Náði ekki sambandi við götuleitina. Reyndu aftur, eða leitaðu að bæ.',en:'Could not reach the street search. Try again, or search for a town.',
+  da:'Kunne ikke få forbindelse til gadesøgningen. Prøv igen, eller søg efter en by.',sv:'Kunde inte nå gatusökningen. Försök igen, eller sök efter en ort.',
+  pl:'Nie udało się połączyć z wyszukiwarką ulic. Spróbuj ponownie lub wyszukaj miejscowość.',fr:'Impossible de joindre la recherche de rues. Réessayez ou cherchez une ville.',
+  zh:'无法连接街道搜索。请重试，或搜索城镇。',es:'No se pudo conectar con la búsqueda de calles. Inténtalo de nuevo o busca un pueblo.'};
+for(const[mal,v]of Object.entries(LEIT_VILLA))if(I18N[mal])I18N[mal].leit_villa=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -3677,7 +3706,9 @@ const KAUPSTADIR=[
   ["Þorlákshöfn",63.8560,-21.3830],["Eyrarbakki",63.8650,-21.1500],["Stokkseyri",63.8360,-21.0600],["Laugarvatn",64.2140,-20.7300],["Flúðir",64.1350,-20.3100],
   ["Vestmannaeyjar",63.4427,-20.2734]];
 const KAUPSTADA_NOFN=new Set(KAUPSTADIR.map(k=>k[0]));
+let BAEJA_GOGN=[];
 function teiknaBaei(listi){
+  BAEJA_GOGN=listi;
   baejaLag.clearLayers();
   for(const b of listi.sort((x,y)=>(BAE_STAERD[x.teg]||3.5)-(BAE_STAERD[y.teg]||3.5)))
     L.circleMarker([b.lat,b.lon],{pane:'baeir',radius:BAE_STAERD[b.teg]||4,color:'#c0392b',opacity:.55,weight:2,fillColor:'#ffffff',fillOpacity:.95,className:'baejapunktur'})
@@ -3700,6 +3731,50 @@ async function hladaBaei(){
 }
 try{localStorage.removeItem('bs:baeir_osm');localStorage.removeItem('bs:kaupstadir');}catch{}
 setTimeout(hladaBaei,1500);
+// ---------------------------------------------------------------- Leit að stað: bæir af listanum strax, götur og heimilisföng í Nominatim
+{
+  const inp=document.getElementById('stadaleit'),ul=document.getElementById('leit-tillogur');
+  const stofn=x=>String(x).toLowerCase().replace(/þ/g,'th').replace(/ð/g,'d').replace(/æ/g,'ae').replace(/ö/g,'o').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  let tillogur=[],virk=-1,leitMerki=null,leitTimi=null;
+  const synaLista=()=>{ul.hidden=!tillogur.length;inp.setAttribute('aria-expanded',!ul.hidden);
+    ul.innerHTML=tillogur.map((x,i)=>`<li role="option" id="lt-${i}" class="${i===virk?'v':''}${x.gata?' gata':''}" aria-selected="${i===virk}">${x.takn} <span>${x.heiti}</span>${x.smatt?`<small>${x.smatt}</small>`:''}</li>`).join('');
+    if(virk>=0)inp.setAttribute('aria-activedescendant','lt-'+virk);else inp.removeAttribute('aria-activedescendant');
+    ul.querySelectorAll('li').forEach((li,i)=>li.onmousedown=e=>{e.preventDefault();velja(i);});};
+  const uppfaera=()=>{
+    const q=inp.value.trim();virk=-1;if(q.length<2){tillogur=[];synaLista();return;}
+    const s_=stofn(q),listi=(typeof BAEJA_GOGN!=='undefined'&&BAEJA_GOGN.length?BAEJA_GOGN:KAUPSTADIR.map(([n,la,lo])=>({nafn:n,lat:la,lon:lo})));
+    const fundir=listi.map(b=>({b,st:stofn(b.nafn)})).filter(x=>x.st.includes(s_)).sort((a,b)=>(b.st.startsWith(s_)-a.st.startsWith(s_))||a.b.nafn.localeCompare(b.b.nafn,'is')).slice(0,6);
+    tillogur=fundir.map(({b})=>({takn:'🏘️',heiti:b.nafn,lat:b.lat,lon:b.lon,z:11}));
+    tillogur.push({takn:'🔍',heiti:t('leit_gata',{q}),leita:q,gata:true});synaLista();};
+  async function nominatim(q){
+    tillogur=[{takn:'⏳',heiti:t('leit_saeki'),gata:true}];synaLista();
+    try{const r=await fetch('https://nominatim.openstreetmap.org/search?'+new URLSearchParams({format:'jsonv2',countrycodes:'is',limit:6,'accept-language':LANG==='is'?'is':LANG+',is',q}));
+      if(!r.ok)throw new Error(r.status);const j=await r.json();
+      tillogur=j.map(x=>{const h=String(x.display_name).split(',').map(y=>y.trim());
+        return{takn:'📍',heiti:/^\d/.test(h[0])&&h[1]?h[1]+' '+h[0]:h[0],smatt:h.slice(/^\d/.test(h[0])?2:1,4).filter(y=>!/^\d{3}$/.test(y)).join(', '),lat:+x.lat,lon:+x.lon,z:x.addresstype==='road'||x.class==='highway'||x.class==='building'||x.class==='place'&&x.type==='house'?16:14};});
+      if(!tillogur.length)tillogur=[{takn:'🤷',heiti:t('leit_engin'),gata:true}];}
+    catch{tillogur=[{takn:'📡',heiti:t('leit_villa'),gata:true}];}
+    virk=tillogur[0]?.lat!=null?0:-1;synaLista();
+  }
+  function velja(i){const x=tillogur[i];if(!x)return;
+    if(x.leita){nominatim(x.leita);return;}if(x.lat==null)return;
+    inp.value=x.heiti;tillogur=[];synaLista();inp.blur();
+    if(document.body.classList.contains('stort-kort')===false&&erSimi())kortEl.scrollIntoView({block:'start',behavior:'smooth'});
+    kort.flyTo([x.lat,x.lon],x.z||12,{duration:.9});
+    if(leitMerki)kort.removeLayer(leitMerki);clearTimeout(leitTimi);
+    leitMerki=L.circleMarker([x.lat,x.lon],{radius:11,color:'#1c7ed6',weight:3,fillColor:'#1c7ed6',fillOpacity:.15,className:'leit-merki',interactive:false}).addTo(kort);
+    leitTimi=setTimeout(()=>{if(leitMerki){kort.removeLayer(leitMerki);leitMerki=null;}},7000);}
+  inp.addEventListener('input',uppfaera);
+  inp.addEventListener('focus',uppfaera);
+  inp.addEventListener('blur',()=>setTimeout(()=>{tillogur=[];synaLista();},150));
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'&&tillogur.length){e.preventDefault();virk=(virk+1)%tillogur.length;synaLista();}
+    else if(e.key==='ArrowUp'&&tillogur.length){e.preventDefault();virk=(virk-1+tillogur.length)%tillogur.length;synaLista();}
+    else if(e.key==='Enter'){e.preventDefault();if(virk>=0)velja(virk);else if(inp.value.trim().length>=2){const b=tillogur.findIndex(x=>x.lat!=null);b>=0&&!tillogur[b].gata&&stofn(tillogur[b].heiti)===stofn(inp.value.trim())?velja(b):nominatim(inp.value.trim());}}
+    else if(e.key==='Escape'){inp.value='';tillogur=[];synaLista();}});
+  const merkja=()=>{inp.placeholder=t('leit_ph');inp.setAttribute('aria-label',t('leit_aria'));};merkja();addEventListener('vedra:mal',merkja);
+}
+
 setTimeout(()=>{const r=document.getElementById('baejarofi');if(!r)return;r.checked=synaBaei;
   r.onchange=()=>{synaBaei=r.checked;geyma.set('bs:baeir',synaBaei);synaBaei?baejaLag.addTo(kort):kort.removeLayer(baejaLag);};},0);
 const vbLag=L.layerGroup().addTo(kort);
