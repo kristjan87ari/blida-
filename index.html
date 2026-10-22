@@ -190,6 +190,19 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .svaedistjorn button{display:block;width:100%;background:var(--panel);color:var(--text);border:0;padding:7px 10px;font-size:13px;white-space:nowrap;text-align:left}
 .svaedistjorn button+button{border-top:1px solid var(--line)}
 .svaedistjorn{position:relative;overflow:visible!important}
+.sv-i{margin-right:5px}
+.svaedistjorn>button>span,.svaedistjorn>button>i{pointer-events:none} /* smellur lendir alltaf á hnappnum sjálfum */
+.leaflet-control-zoom .stort-opna{display:grid;place-items:center;width:100%;height:30px;padding:0;border:0;border-top:1px solid #ccc;background:var(--panel);color:var(--text);font-size:16px;cursor:pointer;border-radius:0 0 4px 4px}
+.leaflet-control-zoom .stort-opna:hover{background:var(--chip)}
+body.stort-kort{overflow:hidden}
+body.stort-kort #kort{position:fixed!important;inset:0;height:auto!important;min-height:0;z-index:3000}
+.stort-loka{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:1200;background:var(--text);color:var(--bg);border:0;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer}
+.stort-loka[hidden]{display:none}
+body.stort-kort .leaflet-control-zoom .stort-opna{background:var(--fokus);color:#fff}
+.ks-efni[hidden]{display:none!important}
+.ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
+.ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
 .svaedistjorn .lv-opna{display:flex;align-items:center;gap:5px;border-top:1px solid var(--line)}
 .lv-punktur{width:8px;height:8px;border-radius:50%;background:#adb5bd;margin-left:6px;flex:none}
 .lv-opna.a .lv-punktur{background:#2f9e44;box-shadow:0 0 0 2px rgba(47,158,68,.25)}
@@ -248,7 +261,7 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 #stillingar{border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:12px 0 0}
 #stillingar summary{font-size:14px}
 .vidv-ovirkt{margin:10px 0 0}
-.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 240px);display:flex;flex-direction:column;
+.smaspjald{position:absolute;left:12px;bottom:28px;z-index:1001;width:min(360px,calc(100% - 24px));max-height:calc(100% - 275px);display:flex;flex-direction:column;
   background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.22);overflow:hidden}
 .sp-haus{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--line);flex:none}
 .sp-brjota{flex:1;min-width:0;display:flex;flex-direction:column;align-items:stretch;gap:0;background:none;border:0;padding:10px 4px 10px 12px;text-align:left;cursor:default}
@@ -305,7 +318,7 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .vb-skyring{margin-top:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 6px 7px;box-shadow:0 4px 14px rgba(0,0,0,.2);width:224px;color:var(--text)}
 .vb-skyring[hidden]{display:none}
 .vbs-haus{display:flex;align-items:center;justify-content:space-between;padding:0 2px 4px 6px;font-size:12px;color:var(--muted)}
-.vbs-loka{border:0;background:transparent;color:var(--muted);font-size:13px;width:24px;height:24px;border-radius:6px;cursor:pointer}
+.vbs-loka{border:0;background:transparent;color:var(--muted);font-size:15px;width:24px;height:24px;border-radius:6px;cursor:pointer}
 .vbs-loka:hover{background:var(--chip);color:var(--text)}
 .vb-skyring li{display:block;padding:0;border:0;cursor:auto}
 .vb-skyring ul{list-style:none;margin:0;padding:0;display:grid;gap:2px;max-height:40vh;overflow-y:auto}
@@ -317,6 +330,21 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .vbs-t{display:grid;line-height:1.2;min-width:0}
 .vbs-t small{color:var(--muted);font-size:11px}
 .vbs-tomt{font-size:12px;color:var(--muted);margin:2px 6px 4px}
+.vb-sw{position:relative;width:26px;height:15px;border-radius:999px;background:#adb5bd;transition:background .2s;flex:none;margin-left:2px}
+.vb-sw::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .2s}
+.vb-hnappur[aria-pressed="true"] .vb-sw{background:#2b8a3e}
+.vb-hnappur[aria-pressed="true"] .vb-sw::after{transform:translateX(11px)}
+input.sw{appearance:none;-webkit-appearance:none;width:30px;height:17px;border-radius:999px;background:#adb5bd;position:relative;cursor:pointer;flex:none;margin:0;transition:background .2s}
+input.sw::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .2s}
+input.sw:checked{background:#2b8a3e}
+input.sw:checked::after{transform:translateX(13px)}
+input.sw:focus-visible{outline:2px solid var(--fokus);outline-offset:2px}
+.vbs-vidv{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;padding:6px 8px;margin:0 0 5px;background:var(--chip);border-radius:8px;cursor:pointer}
+.vbs-fot{display:flex;gap:5px;margin-top:5px}
+.vbs-fot button{flex:1;margin:0!important}
+.vbs-slokkva{border:1px solid #f2c3a8;background:#fff3ec;color:#a8431a;border-radius:8px;padding:5px;font-size:12.5px;font-weight:500;cursor:pointer}
+.vbs-slokkva:hover{background:#ffe6d8;border-color:#e59a72}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .vbs-slokkva{background:rgba(255,140,90,.12);border-color:rgba(255,140,90,.38);color:#ffb08a}}
 .vbs-nanar{display:block;width:100%;margin-top:4px;border:1px solid var(--line);background:var(--chip);border-radius:8px;padding:5px;font-size:12.5px;color:var(--text);cursor:pointer}
 .vbs-nanar:hover{border-color:var(--fokus)}
 .vb-hnappur .vb-fjoldi{min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--chip);color:var(--muted);font-size:11px;font-weight:700;display:inline-grid;place-items:center}
@@ -539,6 +567,16 @@ details .likan small{color:var(--muted)}
   .kortahluti{gap:8px}
   .flokkalina{gap:8px}
   .simalina{display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .svaedistjorn>button{width:40px;height:38px;padding:0!important;display:grid!important;place-items:center;text-align:center}
+  .svaedistjorn .sv-t,.svaedistjorn .lv-opna [data-i18n="snjorofi"]{display:none}
+  .svaedistjorn .sv-i{margin:0;font-size:17px}
+  .svaedistjorn .lv-opna{position:relative}
+  .svaedistjorn .lv-opna>span[aria-hidden]{font-size:17px}
+  .svaedistjorn .lv-punktur{position:absolute;right:4px;top:4px;margin:0;width:7px;height:7px}
+  .skref-2{position:relative}
+  .skref-2 .saekja-hopur{position:absolute;top:-5px;right:0}
+  .ks-lina .litaskyring{display:none}
+  .stort-loka{top:calc(54px + env(safe-area-inset-top,0px));font-size:13px;padding:8px 15px}
   .lvstjorn.med-merki .lv-hnappur [data-i18n="snjorofi"]{display:none}
   .lvstjorn .merkjaval{bottom:auto;top:calc(100% + 6px)}
   .lvstjorn .mv-grid{grid-template-columns:1fr 1fr}
@@ -2003,6 +2041,79 @@ const VBS={is:['ℹ️ Nánar','Fela af korti','Á kortinu'],en:['ℹ️ Details
   sv:['ℹ️ Detaljer','Dölj från kartan','På kartan'],pl:['ℹ️ Szczegóły','Ukryj z mapy','Na mapie'],fr:['ℹ️ Détails','Masquer de la carte','Sur la carte'],
   zh:['ℹ️ 详情','从地图隐藏','地图上'],es:['ℹ️ Detalles','Ocultar del mapa','En el mapa']};
 for(const[mal,[a,b,c]]of Object.entries(VBS))if(I18N[mal]){I18N[mal].vb_nanar=a;I18N[mal].vb_fela=b;I18N[mal].vb_akorti=c;}
+// ---------------------------------------------------------------- Þýðingar: útihlaup, stórt kort, kortakafli á Um síðuna
+const HLAUP_F={is:['Útihlaup','Hlaupaleiðir, göngustígar, skógarstígar og hlaupabrautir bornar saman: lítill vindur, svalt og þurrt milli kl. 7 og 21.','Hlaupaleiðir koma úr OpenStreetMap. Í hálku og myrkri skaltu velja upplýsta stíga og nota endurskin.'],
+en:['Running','Running routes, footpaths, forest trails and tracks compared: light wind, cool and dry between 7:00 and 21:00.','Routes come from OpenStreetMap. In icy or dark conditions, choose lit paths and wear reflectors.'],
+da:['Løb','Løberuter, gangstier, skovstier og løbebaner sammenlignet: svag vind, køligt og tørt mellem kl. 7 og 21.','Ruterne kommer fra OpenStreetMap. I glat føre og mørke bør du vælge oplyste stier og bruge refleks.'],
+sv:['Löpning','Löparrundor, gångstigar, skogsstigar och löparbanor jämförda: svag vind, svalt och torrt mellan kl. 7 och 21.','Rutterna kommer från OpenStreetMap. Vid halka och mörker, välj upplysta stigar och använd reflexer.'],
+pl:['Bieganie','Porównanie tras biegowych, ścieżek, leśnych duktów i bieżni: słaby wiatr, chłodno i sucho między 7 a 21.','Trasy pochodzą z OpenStreetMap. Przy gołoledzi i po zmroku wybieraj oświetlone ścieżki i noś odblaski.'],
+fr:['Course à pied','Comparaison des parcours de course, sentiers, chemins forestiers et pistes : vent faible, frais et sec entre 7 h et 21 h.','Les parcours proviennent d’OpenStreetMap. Par temps verglacé ou dans l’obscurité, choisissez des chemins éclairés et portez des éléments réfléchissants.'],
+zh:['跑步','比较跑步路线、步道、林间小路和跑道：7:00 至 21:00 之间风小、凉爽且干燥。','路线数据来自 OpenStreetMap。路面结冰或天黑时，请选择有照明的道路并佩戴反光装备。'],
+es:['Correr','Comparación de rutas para correr, senderos, caminos forestales y pistas: viento flojo, fresco y seco entre las 7:00 y las 21:00.','Las rutas proceden de OpenStreetMap. Con hielo o de noche, elige caminos iluminados y lleva elementos reflectantes.']};
+const N6={is:['Hlaupaleiðir','Stækka kortið','✕ Minnka kortið'],en:['Routes','Full-screen map','✕ Exit full screen'],da:['Ruter','Kort i fuld skærm','✕ Luk fuld skærm'],
+  sv:['Rutter','Karta i helskärm','✕ Stäng helskärm'],pl:['Trasy','Mapa na pełnym ekranie','✕ Zamknij pełny ekran'],fr:['Parcours','Carte en plein écran','✕ Quitter le plein écran'],
+  zh:['路线','全屏地图','✕ 退出全屏'],es:['Rutas','Mapa a pantalla completa','✕ Salir de pantalla completa']};
+const KORT_UM={
+is:`<h3>Kortið</h3><p>Neðst til hægri á kortinu er hægt að skipta á milli <strong>Landslags</strong> (landakort með fjöllum, vegum og örnefnum) og <strong>Loftmyndar</strong> (gervihnattamynd), og kveikja eða slökkva á <strong>litareitum</strong>, sem sýna hvar veðrið er betra eða síðra fyrir valinn flokk.</p>
+<ul><li><strong>⚠️ Veðurbreytingar:</strong> efst til hægri. Þar eru líka viðvaranir Veðurstofunnar.</li>
+<li><strong>🌦️ Lifandi veður:</strong> í verkfærastikunni vinstra megin. Grænn punktur þýðir að kveikt sé á því.</li>
+<li><strong>⛶ Stækka kortið:</strong> undir þysjunarhnöppunum. Kortið fyllir þá skjáinn; „✕ Minnka kortið“ efst eða Esc fer til baka.</li></ul>
+<p>Síðan man stillingarnar þínar næst þegar þú kemur.</p>`,
+en:`<h3>The map</h3><p>At the bottom right of the map you can switch between <strong>Terrain</strong> (a map with mountains, roads and place names) and <strong>Satellite</strong> imagery, and turn <strong>colour cells</strong> on or off; they show where the weather is better or poorer for the selected category.</p>
+<ul><li><strong>⚠️ Weather changes:</strong> top right. Icelandic Met Office warnings are there too.</li>
+<li><strong>🌦️ Live weather:</strong> in the toolbar on the left. A green dot means it is on.</li>
+<li><strong>⛶ Full-screen map:</strong> under the zoom buttons. The map then fills the screen; “✕ Exit full screen” at the top or Esc takes you back.</li></ul>
+<p>The site remembers your settings for next time.</p>`,
+da:`<h3>Kortet</h3><p>Nederst til højre på kortet kan du skifte mellem <strong>Terræn</strong> (et kort med bjerge, veje og stednavne) og <strong>Luftfoto</strong> (satellitbilleder) og slå <strong>farvefelter</strong> til eller fra; de viser, hvor vejret er bedre eller dårligere for den valgte kategori.</p>
+<ul><li><strong>⚠️ Vejrændringer:</strong> øverst til højre. Den islandske vejrtjenestes varsler findes også der.</li>
+<li><strong>🌦️ Levende vejr:</strong> i værktøjslinjen til venstre. En grøn prik betyder, at det er slået til.</li>
+<li><strong>⛶ Kort i fuld skærm:</strong> under zoomknapperne. Kortet fylder så skærmen; »✕ Luk fuld skærm« øverst eller Esc fører dig tilbage.</li></ul>
+<p>Siden husker dine indstillinger til næste gang.</p>`,
+sv:`<h3>Kartan</h3><p>Längst ned till höger på kartan kan du växla mellan <strong>Terräng</strong> (en karta med berg, vägar och ortnamn) och <strong>Flygfoto</strong> (satellitbilder) och slå på eller av <strong>färgrutor</strong>, som visar var vädret är bättre eller sämre för vald kategori.</p>
+<ul><li><strong>⚠️ Väderförändringar:</strong> längst upp till höger. Där finns också isländska meteorologiska institutets varningar.</li>
+<li><strong>🌦️ Levande väder:</strong> i verktygsfältet till vänster. En grön prick betyder att det är påslaget.</li>
+<li><strong>⛶ Karta i helskärm:</strong> under zoomknapparna. Kartan fyller då skärmen; ”✕ Stäng helskärm” överst eller Esc tar dig tillbaka.</li></ul>
+<p>Sidan kommer ihåg dina inställningar till nästa gång.</p>`,
+pl:`<h3>Mapa</h3><p>W prawym dolnym rogu mapy można przełączać między <strong>Terenem</strong> (mapa z górami, drogami i nazwami miejsc) a <strong>Zdjęciem satelitarnym</strong> oraz włączać i wyłączać <strong>kolorowe pola</strong>, które pokazują, gdzie pogoda jest lepsza lub gorsza dla wybranej kategorii.</p>
+<ul><li><strong>⚠️ Zmiany pogody:</strong> w prawym górnym rogu. Są tam też ostrzeżenia Islandzkiego Instytutu Meteorologicznego.</li>
+<li><strong>🌦️ Żywa pogoda:</strong> na pasku narzędzi po lewej. Zielona kropka oznacza, że jest włączona.</li>
+<li><strong>⛶ Mapa na pełnym ekranie:</strong> pod przyciskami powiększenia. Mapa wypełnia wtedy ekran; „✕ Zamknij pełny ekran” u góry lub Esc przywraca widok.</li></ul>
+<p>Strona zapamięta Twoje ustawienia na następny raz.</p>`,
+fr:`<h3>La carte</h3><p>En bas à droite de la carte, vous pouvez basculer entre <strong>Relief</strong> (une carte avec montagnes, routes et noms de lieux) et <strong>Satellite</strong>, et activer ou désactiver les <strong>cases colorées</strong>, qui montrent où la météo est meilleure ou moins bonne pour la catégorie choisie.</p>
+<ul><li><strong>⚠️ Changements météo :</strong> en haut à droite. Les alertes de l’Office météorologique islandais s’y trouvent aussi.</li>
+<li><strong>🌦️ Météo animée :</strong> dans la barre d’outils à gauche. Un point vert indique qu’elle est activée.</li>
+<li><strong>⛶ Carte en plein écran :</strong> sous les boutons de zoom. La carte remplit alors l’écran ; « ✕ Quitter le plein écran » en haut ou Échap vous ramène.</li></ul>
+<p>Le site mémorise vos réglages pour la prochaine fois.</p>`,
+zh:`<h3>地图</h3><p>在地图右下角可以在<strong>地形图</strong>（带有山脉、道路和地名的地图）和<strong>卫星图</strong>之间切换，并可开启或关闭<strong>色块</strong>，色块显示所选类别下天气较好或较差的地方。</p>
+<ul><li><strong>⚠️ 天气变化：</strong>位于右上角，冰岛气象局的预警也在这里。</li>
+<li><strong>🌦️ 动态天气：</strong>位于左侧工具栏，绿点表示已开启。</li>
+<li><strong>⛶ 全屏地图：</strong>位于缩放按钮下方。地图会铺满屏幕；点击顶部的“✕ 退出全屏”或按 Esc 即可返回。</li></ul>
+<p>网站会记住你的设置。</p>`,
+es:`<h3>El mapa</h3><p>Abajo a la derecha del mapa puedes cambiar entre <strong>Relieve</strong> (un mapa con montañas, carreteras y topónimos) y <strong>Satélite</strong>, y activar o desactivar las <strong>celdas de color</strong>, que muestran dónde el tiempo es mejor o peor para la categoría elegida.</p>
+<ul><li><strong>⚠️ Cambios del tiempo:</strong> arriba a la derecha. También están los avisos de la Oficina Meteorológica de Islandia.</li>
+<li><strong>🌦️ Tiempo animado:</strong> en la barra de herramientas de la izquierda. Un punto verde indica que está activado.</li>
+<li><strong>⛶ Mapa a pantalla completa:</strong> bajo los botones de zoom. El mapa llena entonces la pantalla; «✕ Salir de pantalla completa» arriba o Esc te devuelve.</li></ul>
+<p>La página recuerda tus ajustes para la próxima vez.</p>`};
+for(const mal of Object.keys(N6)){const L=I18N[mal];if(!L)continue;
+  [L.hl_leidir,L.stort_opna,L.stort_loka]=N6[mal];
+  if(L.flokkar&&mal!=='is')L.flokkar.hlaup=HLAUP_F[mal];
+  if(L.sidur)L.sidur.um=L.sidur.um.replace(/<h3>[^<]*<\/h3><p>[^<]*🗂️[\s\S]*?(?=<h3>)/,KORT_UM[mal]+'\n');}
+
+const VBF={is:['Fela kassann (svæðin haldast á kortinu)','Slökkva á svæðum'],en:['Hide this box (areas stay on the map)','Turn off areas'],
+  da:['Skjul boksen (områderne bliver på kortet)','Slå områder fra'],sv:['Dölj rutan (områdena ligger kvar på kartan)','Stäng av områden'],
+  pl:['Ukryj okno (obszary pozostają na mapie)','Wyłącz obszary'],fr:['Masquer l’encadré (les zones restent sur la carte)','Désactiver les zones'],
+  zh:['隐藏此框（区域仍显示在地图上）','关闭区域显示'],es:['Ocultar el recuadro (las zonas siguen en el mapa)','Desactivar zonas']};
+// Um síðuna: ✕ slekkur ekki lengur; „⏻ Slökkva á svæðum“ gerir það
+const VBF_UM={is:['Svæðin haldast á kortinu þar til þú slekkur á þeim með ✕ eða öðrum smelli á hnappinn.','Svæðin haldast á kortinu þó þú felir kassann með ▾; þú slekkur á þeim með „⏻ Slökkva á svæðum“. Rofinn á ⚠️-hnappnum er grænn á meðan svæðin sjást.'],
+  en:['The areas stay on the map until you turn them off with ✕ or another click on the button.','The areas stay on the map even if you hide the box with ▾; turn them off with “⏻ Turn off areas”. The switch on the ⚠️ button is green while the areas are shown.'],
+  da:['Områderne bliver på kortet, indtil du slår dem fra med ✕ eller et nyt klik på knappen.','Områderne bliver på kortet, selv hvis du skjuler boksen med ▾; slå dem fra med »⏻ Slå områder fra«. Kontakten på ⚠️-knappen er grøn, mens områderne vises.'],
+  sv:['Områdena ligger kvar på kartan tills du stänger av dem med ✕ eller ett nytt klick på knappen.','Områdena ligger kvar på kartan även om du döljer rutan med ▾; stäng av dem med ”⏻ Stäng av områden”. Reglaget på ⚠️-knappen är grönt medan områdena visas.'],
+  pl:['Obszary pozostają na mapie, dopóki ich nie wyłączysz przyciskiem ✕ lub ponownym kliknięciem.','Obszary pozostają na mapie, nawet gdy ukryjesz okno przyciskiem ▾; wyłączysz je przyciskiem „⏻ Wyłącz obszary”. Przełącznik na przycisku ⚠️ jest zielony, gdy obszary są widoczne.'],
+  fr:['Les zones restent sur la carte jusqu’à ce que vous les désactiviez avec ✕ ou un nouveau clic sur le bouton.','Les zones restent sur la carte même si vous masquez l’encadré avec ▾ ; désactivez-les avec « ⏻ Désactiver les zones ». L’interrupteur du bouton ⚠️ est vert tant que les zones sont affichées.'],
+  zh:['区域会一直显示在地图上，直到你用 ✕ 或再次点击按钮将其关闭。','即使用 ▾ 隐藏此框，区域仍会显示在地图上；点击“⏻ 关闭区域显示”即可关闭。区域显示时，⚠️ 按钮上的开关为绿色。'],
+  es:['Las zonas permanecen en el mapa hasta que las desactives con ✕ o con otro clic en el botón.','Las zonas permanecen en el mapa aunque ocultes el recuadro con ▾; desactívalas con «⏻ Desactivar zonas». El interruptor del botón ⚠️ está en verde mientras se muestran las zonas.']};
+for(const mal of Object.keys(VBF)){const L=I18N[mal];if(!L)continue;[L.vb_felakassa,L.vb_slokkva]=VBF[mal];
+  if(L.sidur)L.sidur.um=L.sidur.um.replace(VBF_UM[mal][0],VBF_UM[mal][1]);}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2064,6 +2175,11 @@ const FLOKKAR = {
     haed:e=>laegra(e,400,800),
     thaettir:m=>[[.35,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,3)],[.15,trap(m.T,1,11,22,28)],[.10,m.sol]],
     athugasemd:'Hjólaðu aðeins á vegum og stígum. Hjólreiðar utan vega og stíga geta valdið skemmdum á viðkvæmri náttúru og eru víða óheimilar.'},
+  hlaup:{nafn:'Útihlaup',takn:'🏃',fra:7,til:21,stadir:'hlaup',
+    lysing:'Hlaupaleiðir, göngustígar, skógarstígar og hlaupabrautir bornar saman: lítill vindur, svalt og þurrt milli kl. 7 og 21.',
+    athugasemd:'Hlaupaleiðir koma úr OpenStreetMap. Í hálku og myrkri skaltu velja upplýsta stíga og nota endurskin.',
+    haed:()=>1,
+    thaettir:m=>[[.30,laegra(m.vindur,2,10)],[.25,trap(m.T,-3,5,14,22)],[.25,laegra(m.urkoma,0,2)],[.10,laegra(m.hvida,8,16)],[.10,m.sol]]},
   skidi:{nafn:'Gönguskíði',takn:'🎿',fra:9,til:17,
     lysing:'Nægur snjór, kalt en ekki nístandi, lítill vindur og bjart milli kl. 9 og 17.',
     haed:e=>trap(e,0,100,900,1300),
@@ -2156,13 +2272,16 @@ const S={flokkur:'almennt',dagur:0,timar:[],gogn:null,heimildir:[],villur:[],ved
   likon:new Set(LIKON.filter(l=>l.sjalfgefid).map(l=>l.id)),fjoldi:8,nidurstada:[],virkur:-1};
 const geyma={get(k){try{return JSON.parse(localStorage.getItem(k));}catch{return null;}},
   set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}};
-{const st=geyma.get('bs:stillingar');if(st){if(FLOKKAR[st.flokkur])S.flokkur=st.flokkur;if(st.fjoldi)S.fjoldi=st.fjoldi;
+{const st=geyma.get('bs:stillingar');if(st){/* Besta veðrið er alltaf fyrsta val þegar síðan opnast */if(st.fjoldi)S.fjoldi=st.fjoldi;
   if(Array.isArray(st.likon)&&st.likon.length)S.likon=new Set(st.likon.filter(id=>LIKON.some(l=>l.id===id)));}}
 if(![5,10,20].includes(S.fjoldi))S.fjoldi=10;
 S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
 function beitaFjallHam(){const t_=S.fjallHamur==='tindar';FLOKKAR.fjall.stadir=t_?'fjoll':undefined;FLOKKAR.fjall.haed=t_?()=>1:e=>trap(e,100,350,1100,1600);}
 beitaFjallHam();
 S.skidiHamur=geyma.get('bs:skidihamur')==='skidasvaedi'?'skidasvaedi':'svaedi';
+S.hlaupHamur=geyma.get('bs:hlauphamur')==='svaedi'?'svaedi':'leidir';
+function beitaHlaupHam(){FLOKKAR.hlaup.stadir=S.hlaupHamur==='leidir'?'hlaup':undefined;}
+beitaHlaupHam();
 function beitaSkidiHam(){FLOKKAR.skidi.stadir=S.skidiHamur==='skidasvaedi'?'gonguskidi':undefined;}
 beitaSkidiHam();
 const vista=()=>geyma.set('bs:stillingar',{flokkur:S.flokkur,fjoldi:S.fjoldi,likon:[...S.likon]});
@@ -2463,15 +2582,12 @@ kort.on('zoomend',()=>{kort.getPane('reitir').style.opacity=kort.getZoom()>=10?.
 const Stjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','kortastjorn');
   d.innerHTML=`<div class="grunnval" role="group" data-i18n-aria="kortagrunnur">
-      <button type="button" data-g="landslag" data-i18n="landslag">Landslag</button><button type="button" data-g="mynd" data-i18n="loftmynd">Loftmynd</button></div><button type="button" class="ks-hnappur" aria-expanded="false"><span class="ks-takn" aria-hidden="true">🗂️</span><span class="ks-texti"><strong data-i18n="kortalog">Kortalög</strong><small data-i18n="ks_skyring">Smelltu til að breyta kortinu</small></span><span class="ks-or" aria-hidden="true">▾</span></button><div class="ks-efni">
-    <label><input type="checkbox" id="reitarofi"> <span data-i18n="litareitir">Litareitir</span></label>
+      <button type="button" data-g="landslag" data-i18n="landslag">Landslag</button><button type="button" data-g="mynd" data-i18n="loftmynd">Loftmynd</button></div><div class="ks-lina"><label><input type="checkbox" id="reitarofi"> <span data-i18n="litareitir">Litareitir</span></label>
+    <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div></div>
+  <div class="ks-efni" hidden>
     <label><input type="checkbox" id="vidvrofi"> <span data-i18n="vidvaranir">Viðvaranir</span></label>
     <label><input type="checkbox" id="snjorofi"> <span>🌦️ <span data-i18n="snjorofi">Lifandi veður</span></span></label>
-    <div class="merkjaval" role="group" data-i18n-aria="mt_hopur"></div>
-    <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div></div>`;
-  {const opid=geyma.get('bs:ksopid')===true,kh=d.querySelector('.ks-hnappur');d.classList.toggle('lokad',!opid);kh.setAttribute('aria-expanded',opid);
-   if(!geyma.get('bs:ksseed'))d.classList.add('kynning');
-   kh.onclick=()=>{const o=d.classList.toggle('lokad')===false;kh.setAttribute('aria-expanded',o);geyma.set('bs:ksopid',o);d.classList.remove('kynning');geyma.set('bs:ksseed',true);};}
+    <div class="merkjaval" role="group" data-i18n-aria="mt_hopur"></div></div>`;
   L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);
   const merkja=()=>d.querySelectorAll('[data-g]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.g===grunnur));
   d.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{
@@ -2481,7 +2597,7 @@ const Stjorn=L.Control.extend({onAdd(){
   rofi.onchange=()=>{synaReiti=rofi.checked;geyma.set('bs:reitir',synaReiti);synaReiti?reitaLag.addTo(kort):kort.removeLayer(reitaLag);};
   const vr=d.querySelector('#vidvrofi');vr.checked=synaVidv;
   vr.onchange=()=>{synaVidv=vr.checked;geyma.set('bs:vidv',synaVidv);synaVidv?vidvLag.addTo(kort):kort.removeLayer(vidvLag);
-    const sv=document.querySelector('.vb-rofi-vidv');if(sv)sv.checked=synaVidv;};
+    const sv=document.querySelector('.vb-rofi-vidv');if(sv)sv.checked=synaVidv;const sv2=document.querySelector('.vbs-vidvrofi');if(sv2)sv2.checked=synaVidv;};
   const sr=d.querySelector('#snjorofi'),mv=d.querySelector('.merkjaval');
   const teiknaMerkjaval=()=>{mv.classList.toggle('ovirkt',!synaSnjo);
     mv.innerHTML=`<p class="mv-hint">${t('mv_hint')}</p><div class="mv-grid">${MERKI_TEG.map(k=>{const a=MERKI_VAL.has(k);
@@ -2592,7 +2708,7 @@ function syna(i,fljuga=true){
   if(a.listi){const ytri=LISTA_VEFIR[a.listi],nafnHreint=a.nafn.replace(/\s*\(\d+ m\)$/,'');
     const vefur=a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'';
     const meira=a.listi==='veidi'?`<div class="veidileyfi"><p>🎫 <strong>${t('ls_veidileyfi')}</strong></p><p class="veidivefir">${VEIDIVEFIR.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</p></div>`
-      :a.listi==='fjoll'?`<a class="skida-vefur" href="${wikilocSlod(a.lat-.08,a.lon-.17,a.lat+.08,a.lon+.17)}" target="_blank" rel="noopener">🥾 ${t('wl_kring')}</a>`
+      :(a.listi==='fjoll'||a.listi==='hlaup')?`<a class="skida-vefur" href="${wikilocSlod(a.lat-.08,a.lon-.17,a.lat+.08,a.lon+.17)}" target="_blank" rel="noopener">🥾 ${t('wl_kring')}</a>`
       :`<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${LISTA_TAKN[a.listi][0]} ${t(LISTA_TAKN[a.listi][1])}</a>`;
     d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',vefur+meira);}
   if(S.flokkur==='fjall'&&!a.listi)d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',`<a class="skida-vefur" href="${wikilocSlod(a.lat-(a.hl??.125),a.lon-(a.hn??.25),a.lat+(a.hl??.125),a.lon+(a.hn??.25))}" target="_blank" rel="noopener">🥾 ${t('wl_kring')}</a>`);
@@ -2743,7 +2859,7 @@ function taknskyring(){
       r('<span class="pinni litill tk-pinni">★</span>',t('tk_stjarna')),r('📡',t('tk_mael')),r('🛟',t('on_titill')),
       r('🏨',t('on_gisting')),r('🛖',t('on_skali')),r('🏘️',t('on_byggd')),r('🆘',t('on_neyd')),
       r('🧭',an(t('lf_hnappur'))),r('🚗',t('lf_faerd')),r('⚠️',t('tk_hal')),r('👕',an(t('kl_hnappur'))),
-      r('⬚',t('tk_svaedi')),r('<span class="vp-nal tk-nal"><span class="vp-hofud"><span></span></span></span>',t('vp_titill')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),r('🗂️',t('kortalog')+': '+t('ks_skyring')),r('🌦️',t('snjorofi')+': '+MERKI_TEG.map(k=>MERKI_TAKN[k]+' '+t('mt_'+k)).join(', ')),r('🥏',t('ls_folf')),r('🎣',t('ls_veidi')),r('🥾',t('ls_wikiloc')),r('🟢',t('erf_1')),r('🟡',t('erf_2')),r('🔴',t('erf_3')),
+      r('⬚',t('tk_svaedi')),r('<span class="vp-nal tk-nal"><span class="vp-hofud"><span></span></span></span>',t('vp_titill')),r('↺',an(t('hreinsa'))),r('🔗',t('ls_vefur')),r('♨️',t('ls_sund')),r('⛺',t('ls_tjalda')),r('⛳',t('ls_golf')),r('⛶',t('stort_opna')),r('🌦️',t('snjorofi')+': '+MERKI_TEG.map(k=>MERKI_TAKN[k]+' '+t('mt_'+k)).join(', ')),r('🥏',t('ls_folf')),r('🎣',t('ls_veidi')),r('🥾',t('ls_wikiloc')),r('🟢',t('erf_1')),r('🟡',t('erf_2')),r('🔴',t('erf_3')),
       r('🎿',t('sk_vefur')),r('🇮🇸',t('vi_titill')),r('💡',t('kl_gottAdVita'))])+
     kafli(t('tk_einkunn'),[
       r('<span class="stigpill st-frab">85</span>',t('tk_frab')),r('<span class="stigpill st-god">70</span>',t('tk_god')),
@@ -2858,7 +2974,7 @@ function myrkurFyrir(p){const dR=km(p,{lat:64.13,lon:-21.9}),dA=km(p,{lat:65.68,
 function klaednadur(fk,m,p,g){
   const T=m.T??5,W=m.vindur??3,G=m.hvida??W*1.5,P=m.urkoma??0,SD=m.snjor??0,sol=m.sol??0;
   const F=vindkaeling(T,W),man=new Date(g.a).getUTCMonth(),klst=Math.max(1,(g.b-g.a)/36e5);
-  const virk={fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2,folf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2,veidi:-2}[fk]??0;
+  const virk={hlaup:7,fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2,folf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2,veidi:-2}[fk]??0;
   const Te=F+virk+kyrr,fot=new Set(),med=[],vita=[];
   const blautt=P>=1||P/klst>=.3,mjogBlautt=P>=4,hvasst=W>=8||G>=15,snjor=SD>=.05,dimmt=man>=9||man<=1;
   // Efri hluti eftir upplifuðum hita, leiðréttum fyrir hreyfingu
@@ -3016,6 +3132,7 @@ const OSM_FYRIRSPURNIR={
   sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|customers|no)$"](${ISL_BOX});`+
        `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
        `nwr["amenity"="public_bath"](${ISL_BOX}););out body center qt;`,
+  hlaup:`[out:json][timeout:90];(relation["route"~"^(running|hiking|foot|fitness_trail)$"]["name"](${ISL_BOX});way["leisure"="track"]["sport"~"running|athletics"](${ISL_BOX});way["highway"~"^(path|footway|track)$"]["name"]["access"!~"^(private|no)$"](${ISL_BOX}););out tags center qt;`,
   folf:`[out:json][timeout:60];(nwr["leisure"="disc_golf_course"](${ISL_BOX});nwr["sport"="disc_golf"](${ISL_BOX});node["disc_golf"~"^(basket|hole|tee)$"](${ISL_BOX}););out body center qt;`,
   fjoll:`[out:json][timeout:120];(node["natural"~"^(peak|volcano)$"]["name"](${ISL_BOX});nwr["natural"~"^(mountain_range|ridge)$"]["name"](${ISL_BOX}););out body geom;`,
   veidi:null,
@@ -3023,6 +3140,8 @@ const OSM_FYRIRSPURNIR={
   tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out body center qt;`};
 // Varalisti ef OpenStreetMap svarar ekki (hnit eru nálgun)
 const VARALISTAR={
+  hlaup:[["Elliðaárdalur",64.1150,-21.8300],["Heiðmörk",64.0600,-21.7800],["Ægisíða",64.1420,-21.9550],["Laugardalur",64.1420,-21.8700],
+    ["Öskjuhlíð",64.1260,-21.9200],["Fossvogsdalur",64.1080,-21.8700],["Hvaleyrarvatn",64.0450,-21.9700],["Kjarnaskógur",65.6540,-18.1000]],
   folf:[["Klambratún",64.1370,-21.9120],["Laugardalur",64.1420,-21.8700],["Gufunes",64.1400,-21.7900],["Fossvogsdalur",64.1080,-21.8700],
     ["Víðistaðatún, Hafnarfirði",64.0720,-21.9600],["Kjarnaskógur, Akureyri",65.6550,-18.1000]],
   fjoll:[["Esja",64.255,-21.630,914],["Skarðsheiði",64.475,-21.700,1053],["Úlfarsfell",64.140,-21.705,296],["Helgafell",64.020,-21.860,340],["Keilir",63.942,-22.170,378],["Vífilsfell",64.020,-21.555,655],
@@ -3118,7 +3237,7 @@ let forsott=false;
 async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
-  for(const k of['tjald','sund','golf','folf','veidi']){
+  for(const k of['tjald','sund','golf','folf','veidi','hlaup']){
     if(geyma.get('bs:listi5:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
@@ -3134,7 +3253,7 @@ async function saekjaStadi_(lykill){
       const ele=parseFloat(String(tg.ele||'').replace(',','.'));
       const p={id:`${lykill}:${e.type[0]}${e.id}`,lat:+la.toFixed(5),lon:+lo.toFixed(5),nafn:tg.name||tg['name:is']||tg['name:en']||null,vefur:tg.website||tg['contact:website']||null,ele:isFinite(ele)?ele:null};
       if(tg.disc_golf&&!tg.leisure){(window._korfur??=[]).push(p);continue;}
-      const naer=lykill==='fjoll'?null:pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
+      const naer=(lykill==='fjoll'||lykill==='hlaup')?null:pts.find(q=>km(q,p)<.35);  // sameina potta og laugar á sama stað
       if(naer){if(!naer.nafn&&p.nafn)naer.nafn=p.nafn;if(!naer.vefur&&p.vefur)naer.vefur=p.vefur;continue;}
       pts.push(p);
     }
@@ -3145,6 +3264,11 @@ async function saekjaStadi_(lykill){
     }
     if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi5:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
+    if(lykill==='hlaup'){ // sami stígur í mörgum bútum: einn punktur á hvert nafn innan 3 km
+      const eftirNafni=new Map();
+      for(const p of pts){const l=eftirNafni.get(p.nafn)||[];if(l.some(q=>km(q,p)<3))continue;l.push(p);eftirNafni.set(p.nafn,l);}
+      pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
+    }
     if(lykill==='fjoll'){
       // Sleppa lágum hólum; sameina tind og eldfjall með sama nafni (hæsta heldur sér)
       const eftirNafni=new Map();
@@ -3209,7 +3333,30 @@ const SvaediStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar svaedistjorn');
   d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="vp-velja" data-i18n="vp_hnappur">📍 Velja punkt</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button><button type="button" id="lv-opna" class="lv-opna" aria-expanded="false" aria-haspopup="true"><span aria-hidden="true">🌦️</span> <span data-i18n="snjorofi">Lifandi veður</span><i class="lv-punktur" aria-hidden="true"></i></button><div class="lv-gluggi" hidden></div>`;
   L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d;}});
+// Stækka kortið: kortið fyllir skjáinn; skýr hnappur efst til að fara til baka
+const StortStjorn=L.Control.extend({onAdd(){const d=L.DomUtil.create('div','leaflet-bar stortstjorn');
+  d.innerHTML='<button type="button" id="stort-opna" class="stort-opna"><span aria-hidden="true">⛶</span></button>';L.DomEvent.disableClickPropagation(d);return d;}});
+{const st=new StortStjorn({position:'topleft'}).addTo(kort).getContainer(),zm=document.querySelector('.leaflet-control-zoom');
+ if(zm){zm.appendChild(st.querySelector('#stort-opna'));st.remove();}} // ⛶ beint undir − í þysjunarstikunni
 new SvaediStjorn({position:'topleft'}).addTo(kort);
+{const lokaH=document.createElement('button');lokaH.type='button';lokaH.id='stort-loka';lokaH.className='stort-loka';lokaH.hidden=true;kortEl.appendChild(lokaH);
+ L.DomEvent.disableClickPropagation(lokaH);
+ const snerting=matchMedia('(pointer:coarse)').matches;
+ const merkja=()=>{const b=document.getElementById('stort-opna');b.title=t('stort_opna');b.setAttribute('aria-label',t('stort_opna'));lokaH.textContent=t('stort_loka');};
+ const stilla=a=>{document.body.classList.toggle('stort-kort',a);lokaH.hidden=!a;
+   if(snerting){a?kort.dragging.enable():kort.dragging.disable();}
+   setTimeout(()=>kort.invalidateSize(),60);if(!a)kortEl.scrollIntoView({block:'start'});};
+ document.getElementById('stort-opna').onclick=()=>stilla(!document.body.classList.contains('stort-kort'));
+ lokaH.onclick=()=>stilla(false);
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('stort-kort'))stilla(false);});
+ merkja();addEventListener('vedra:mal',merkja);}
+{const sv=document.querySelector('.svaedistjorn');
+ const skipta=()=>{sv.querySelectorAll(':scope > button:not(.lv-opna)').forEach(b=>{if(b.querySelector('.sv-t'))return;
+   const tx=b.textContent.trim();if(!tx)return;
+   const m=tx.match(/^([^\p{L}\p{N}]+?)\s+([\s\S]+)$/u),takn=m?m[1]:'✕',heiti=m?m[2]:tx;
+   b.innerHTML=`<span class="sv-i" aria-hidden="true">${takn}</span><span class="sv-t">${heiti}</span>`;b.title=heiti;b.setAttribute('aria-label',heiti);});};
+ // Endurbyggja eftir að smellur hefur klárast (annars missir kortið tengingu við hnappinn og telur smellinn á kortið)
+ skipta();let bid=null;new MutationObserver(()=>{clearTimeout(bid);bid=setTimeout(skipta,0);}).observe(sv,{subtree:true,childList:true,characterData:true});}
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
 const popW=()=>Math.min(300,innerWidth-70);
 
@@ -3494,7 +3641,7 @@ const LvStjorn=L.Control.extend({onAdd(){
 new LvStjorn({position:matchMedia('(max-width:820px)').matches?'topright':'bottomright'}).addTo(kort);
 const VbStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar vbstjorn');
-  d.innerHTML=`<button type="button" id="vb-hnappur" class="vb-hnappur"><span aria-hidden="true">⚠️</span> <span data-i18n="vb_hnappur">Veðurbreytingar</span> <span class="vb-fjoldi">0</span></button>`;
+  d.innerHTML=`<button type="button" id="vb-hnappur" class="vb-hnappur"><span aria-hidden="true">⚠️</span> <span data-i18n="vb_hnappur">Veðurbreytingar</span> <span class="vb-fjoldi">0</span><span class="vb-sw" aria-hidden="true"></span></button>`;
   L.DomEvent.disableClickPropagation(d);return d;}});
 new VbStjorn({position:'topright'}).addTo(kort);
 // ⚠️-hnappurinn kveikir og slekkur á svæðunum á kortinu; lítil skýring birtist undir honum
@@ -3504,19 +3651,23 @@ function setjaVbFokus(teg,blikk=false){VB_FOKUS=teg;if(!VB_SV_SYNA){VB_SV_SYNA=t
 function teiknaVbSkyringu(){
   const st=document.querySelector('.vbstjorn'),b=document.getElementById('vb-hnappur');if(!st||!b)return;
   let el=st.querySelector('.vb-skyring');if(!el){el=document.createElement('div');el.className='vb-skyring';st.appendChild(el);}
-  b.setAttribute('aria-pressed',VB_SV_SYNA);el.hidden=!VB_SV_SYNA;if(!VB_SV_SYNA)return;
-  el.innerHTML=`<div class="vbs-haus"><strong>${t('vb_akorti')}</strong><button type="button" class="vbs-loka" title="${t('vb_fela')}" aria-label="${t('vb_fela')}">✕</button></div>`+
+  b.setAttribute('aria-pressed',VB_SV_SYNA);el.hidden=!VB_SV_SYNA||(typeof VB_KASSI!=='undefined'&&!VB_KASSI);if(el.hidden)return;
+  el.innerHTML=`<div class="vbs-haus"><strong>${t('vb_akorti')}</strong><button type="button" class="vbs-loka" title="${t('vb_felakassa')}" aria-label="${t('vb_felakassa')}">▾</button></div>
+    <label class="vbs-vidv"><span>⚠️ ${t('vb_vidv')}</span><input type="checkbox" class="sw vbs-vidvrofi" ${synaVidv?'checked':''}></label>`+
     (VB.atridi.length?`<ul>${VB.atridi.map((a,i)=>`<li><button type="button" class="vbs-lina${VB_FOKUS&&VB_FOKUS===a.teg?' v':''}${VB_FOKUS&&VB_FOKUS!==a.teg?' d':''}" data-i="${i}" style="--vb-lit:${a.vidv?'#e8590c':(VB_LITIR[a.teg]||'#e8590c')}">
       <i class="vbs-lit" aria-hidden="true"></i><span aria-hidden="true">${a.takn}</span><span class="vbs-t">${a.titill}${a.hvenaer?`<small>${a.hvenaer}</small>`:''}</span></button></li>`).join('')}</ul>`
      :`<p class="vbs-tomt">${t('vb_engar')}</p>`)+
-    `<button type="button" class="vbs-nanar">${t('vb_nanar')}</button>`;
-  el.querySelector('.vbs-loka').onclick=()=>setjaVbSyna(false);
+    `<div class="vbs-fot"><button type="button" class="vbs-nanar">${t('vb_nanar')}</button><button type="button" class="vbs-slokkva">⏻ ${t('vb_slokkva')}</button></div>`;
+  el.querySelector('.vbs-loka').onclick=()=>{VB_KASSI=false;teiknaVbSkyringu();};
+  el.querySelector('.vbs-slokkva').onclick=()=>setjaVbSyna(false);
+  el.querySelector('.vbs-vidvrofi').onchange=e=>{const r=document.getElementById('vidvrofi');if(r){r.checked=e.target.checked;r.onchange();}};
   el.querySelector('.vbs-nanar').onclick=()=>synaVedurbreytingar();
   el.querySelectorAll('.vbs-lina').forEach(x=>x.onclick=()=>{const a=VB.atridi[+x.dataset.i];
     if(a.vidv){if(!synaVidv){const r=document.getElementById('vidvrofi');if(r){r.checked=true;r.onchange();}}return;}
     setjaVbFokus(VB_FOKUS===a.teg?null:a.teg,VB_FOKUS!==a.teg);});
 }
-document.getElementById('vb-hnappur').onclick=()=>setjaVbSyna(!VB_SV_SYNA);
+let VB_KASSI=true;
+document.getElementById('vb-hnappur').onclick=()=>{if(!VB_SV_SYNA){VB_KASSI=true;setjaVbSyna(true);}else{VB_KASSI=!VB_KASSI;teiknaVbSkyringu();}};
 {const st=document.querySelector('.vbstjorn');if(st){L.DomEvent.disableScrollPropagation(st);}}
 // Lifandi veður: hnappur í verkfærastikunni vinstra megin; rofi og tákn í litlum glugga við hliðina
 {const lv=document.querySelector('.lvstjorn'),mv=document.querySelector('.kortastjorn .merkjaval'),lab=document.getElementById('snjorofi')?.closest('label');
@@ -3547,8 +3698,8 @@ function synaVedurbreytingar(endurnyja=false){
   const d=spjald.querySelector('.sp-efni');
   // Samanbrjótanlegur listi: ein lína á tegund; smellur opnar nánari upplýsingar og dregur svæðið fram á kortinu
   spjald.classList.add('vb-ham');
-  const rofar=`<div class="vb-rofar"><label><input type="checkbox" class="vb-rofi-sv" ${VB_SV_SYNA?'checked':''}> ${t('vb_lita')}</label>
-    <label><input type="checkbox" class="vb-rofi-vidv" ${synaVidv?'checked':''}> ⚠️ ${t('vb_vidv')}</label></div>`;
+  const rofar=`<div class="vb-rofar"><label><input type="checkbox" class="sw vb-rofi-sv" ${VB_SV_SYNA?'checked':''}> ${t('vb_lita')}</label>
+    <label><input type="checkbox" class="sw vb-rofi-vidv" ${synaVidv?'checked':''}> ⚠️ ${t('vb_vidv')}</label></div>`;
   d.innerHTML=VB.atridi.length?`${rofar}<p class="vb-smelltu">${t('vb_smelltu')}</p><ul class="vb-listi">${VB.atridi.map((a,i)=>`<li class="vb-${a.teg}" style="--vb-lit:${VB_LITIR[a.teg]||'#e8590c'}">
       <button type="button" class="vb-lina" aria-expanded="false" data-i="${i}"><span class="vb-i" aria-hidden="true">${a.takn}</span>
         <span class="vb-lt"><strong>${a.titill}</strong>${a.hvenaer?`<small>🕒 ${a.hvenaer}</small>`:''}</span><span class="vb-or" aria-hidden="true">▾</span></button>
@@ -3696,7 +3847,7 @@ function teiknaTop(){
 
 // ---------------------------------------------------------------- Stýringar
 const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','utilega','veidi','rjupa']],
-  ['hopur_3',['hjol','golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
+  ['hopur_3',['hjol','hlaup','golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
 function teiknaFlokka(){
   const r=document.getElementById('flokkar');r.replaceChildren();
   const iHop=new Set(FLOKKAHOPAR.flatMap(h=>h[1]));
@@ -3720,7 +3871,12 @@ function teiknaFlokka(){
   fh.setAttribute('aria-label',`${t('veldu_flokk')}: ${flT(S.flokkur,0)}`);
   fh.onclick=e=>{e.stopPropagation();const opid=r.classList.toggle('opid');fh.setAttribute('aria-expanded',opid);};
   // Undirval fyrir fjallgöngu
-  const u=document.getElementById('undirval');u.hidden=S.flokkur!=='fjall'&&S.flokkur!=='skidi';
+  const u=document.getElementById('undirval');u.hidden=!['fjall','skidi','hlaup'].includes(S.flokkur);
+  if(S.flokkur==='hlaup'){
+    u.innerHTML=`<button type="button" data-h="leidir" aria-pressed="${S.hlaupHamur==='leidir'}">🏃 ${t('hl_leidir')}</button><button type="button" data-h="svaedi" aria-pressed="${S.hlaupHamur==='svaedi'}">🗺️ ${t('fj_svaedi')}</button>`;
+    u.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(S.hlaupHamur===b.dataset.h)return;S.hlaupHamur=b.dataset.h;geyma.set('bs:hlauphamur',S.hlaupHamur);
+      beitaHlaupHam();teiknaFlokka();reikna();});
+  }
   if(S.flokkur==='skidi'){
     u.innerHTML=`<button type="button" data-h="svaedi" aria-pressed="${S.skidiHamur==='svaedi'}">🗺️ ${t('fj_svaedi')}</button><button type="button" data-h="skidasvaedi" aria-pressed="${S.skidiHamur==='skidasvaedi'}">🎿 ${t('gs_skidasvaedi')}</button>`;
     u.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(S.skidiHamur===b.dataset.h)return;S.skidiHamur=b.dataset.h;geyma.set('bs:skidihamur',S.skidiHamur);
