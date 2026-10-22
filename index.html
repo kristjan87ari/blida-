@@ -211,6 +211,10 @@ body.stort-kort #kort{position:fixed!important;inset:0;height:auto!important;min
 .stort-loka[hidden]{display:none}
 body.stort-kort .leaflet-control-zoom .stort-opna{background:var(--fokus);color:#fff}
 .ks-efni[hidden]{display:none!important}
+.bae-tt{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:12.5px;font-weight:500;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.bae-tt::before{display:none}
+path.baejapunktur{cursor:pointer;transition:stroke-width .15s}
+path.baejapunktur:hover{stroke-width:3;stroke-opacity:.9}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -2118,6 +2122,17 @@ const VBF_UM={is:['Svæðin haldast á kortinu þar til þú slekkur á þeim me
   es:['Las zonas permanecen en el mapa hasta que las desactives con ✕ o con otro clic en el botón.','Las zonas permanecen en el mapa aunque ocultes el recuadro con ▾; desactívalas con «⏻ Desactivar zonas». El interruptor del botón ⚠️ está en verde mientras se muestran las zonas.']};
 for(const mal of Object.keys(VBF)){const L=I18N[mal];if(!L)continue;[L.vb_felakassa,L.vb_slokkva]=VBF[mal];
   if(L.sidur)L.sidur.um=L.sidur.um.replace(VBF_UM[mal][0],VBF_UM[mal][1]);}
+const BAEIR_ROFI={is:'Bæir',en:'Towns',da:'Byer',sv:'Orter',pl:'Miejscowości',fr:'Localités',zh:'城镇',es:'Localidades'};
+for(const[mal,v]of Object.entries(BAEIR_ROFI))if(I18N[mal])I18N[mal].baeir_rofi=v;
+const BAEIR_UM={is:'litlir punktar með daufum rauðum hring fyrir kaupstaði og stærri bæi; nafnið birtist þegar músin fer yfir punkt. Rofinn er við hliðina á Litareitum.',
+  en:'small dots with a faint red ring for the main towns; the name appears when you hover over a dot. The switch is next to Colour cells.',
+  da:'små prikker for byer; navnet vises, når du holder musen over en prik. Kontakten er ved siden af Farvefelter.',
+  sv:'små prickar för orter och städer; namnet visas när du håller muspekaren över en prick. Reglaget finns bredvid Färgrutor.',
+  pl:'małe kropki oznaczające miejscowości; nazwa pojawia się po najechaniu kursorem. Przełącznik jest obok Kolorowych pól.',
+  fr:'petits points pour les villes et villages ; le nom apparaît au survol. L’interrupteur se trouve à côté des Cases colorées.',
+  zh:'城镇的小圆点；鼠标悬停时显示名称。开关位于“色块”旁边。',
+  es:'pequeños puntos para pueblos y ciudades; el nombre aparece al pasar el ratón. El interruptor está junto a Celdas de color.'};
+for(const[mal,v]of Object.entries(BAEIR_UM)){const L=I18N[mal];if(L?.sidur)L.sidur.um=L.sidur.um.replace('<ul><li><strong>⚠️',`<ul><li><strong>🏘️ ${BAEIR_ROFI[mal]}:</strong> ${v}</li>\n<li><strong>⚠️`);}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2576,7 +2591,7 @@ for(const t of Object.values(GRUNNAR)){
   t.on('tileerror',()=>{if(!flisarOk&&++flisaVillur>=2&&!kort.hasLayer(varaland)){varaland.addTo(kort);kortEl.classList.add('an-flisa');}});
 }
 kort.createPane('vidv').style.zIndex=380;
-const vidvLag=L.layerGroup().addTo(kort);let synaVidv=geyma.get('bs:vidv')!==false;if(!synaVidv)kort.removeLayer(vidvLag);
+const vidvLag=L.layerGroup().addTo(kort);let synaVidv=true; // alltaf á þegar síðan opnastif(!synaVidv)kort.removeLayer(vidvLag);
 const reitaLag=L.layerGroup().addTo(kort),punktaLag=L.layerGroup().addTo(kort),nakvLag=L.layerGroup().addTo(kort);
 let reitaramma=null,synaReiti=geyma.get('bs:reitir')!==false;
 if(!synaReiti)kort.removeLayer(reitaLag);
@@ -2587,6 +2602,7 @@ const Stjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','kortastjorn');
   d.innerHTML=`<div class="grunnval" role="group" data-i18n-aria="kortagrunnur">
       <button type="button" data-g="landslag" data-i18n="landslag">Landslag</button><button type="button" data-g="mynd" data-i18n="loftmynd">Loftmynd</button></div><div class="ks-lina"><label><input type="checkbox" id="reitarofi"> <span data-i18n="litareitir">Litareitir</span></label>
+    <label><input type="checkbox" id="baejarofi"> <span>🏘️ <span data-i18n="baeir_rofi">Bæir</span></span></label>
     <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div></div>
   <div class="ks-efni" hidden>
     <label><input type="checkbox" id="vidvrofi"> <span data-i18n="vidvaranir">Viðvaranir</span></label>
@@ -3625,6 +3641,67 @@ function baeirIgrennd(pts,max=4){
 }
 const VB_LITIR={kolnun:'#15aabf',halka:'#e03131',snjor:'#339af0',vindur:'#868e96',urkoma:'#1c7ed6',naeturfrost:'#5c7cfa',frost:'#74c0fc'};
 kort.createPane('vbsv').style.zIndex=390;
+// ---------------------------------------------------------------- Bæir og borgir: litlir punktar með nafni við músarbendingu
+kort.createPane('baeir').style.zIndex=420;
+const baejaLag=L.layerGroup();let synaBaei=geyma.get('bs:baeir')!==false;if(synaBaei)baejaLag.addTo(kort);
+const BAE_STAERD={city:5.5,town:4};
+// Varalisti: helstu kaupstaðir og bæir (ef OpenStreetMap svarar ekki)
+const KAUPSTADIR=[
+  // Höfuðborgarsvæðið
+  ["Reykjavík",64.1466,-21.9426,"city"],["Kópavogur",64.1124,-21.9013],["Hafnarfjörður",64.0671,-21.9377],["Garðabær",64.0886,-21.9224],
+  ["Mosfellsbær",64.1667,-21.7000],["Seltjarnarnes",64.1530,-22.0020],["Álftanes",64.0990,-22.0050],
+  // Suðurnes
+  ["Reykjanesbær",63.9998,-22.5583],["Grindavík",63.8424,-22.4338],["Sandgerði",64.0380,-22.7080],["Garður",64.0670,-22.6480],["Vogar",63.9810,-22.3840],
+  // Vesturland
+  ["Akranes",64.3218,-22.0749],["Borgarnes",64.5383,-21.9206],["Hvanneyri",64.5640,-21.7620],["Búðardalur",65.1100,-21.7660],
+  ["Stykkishólmur",65.0752,-22.7298],["Grundarfjörður",64.9240,-23.2580],["Ólafsvík",64.8945,-23.7059],["Hellissandur",64.9130,-23.8480],
+  // Vestfirðir
+  ["Reykhólar",65.4460,-22.2060],["Patreksfjörður",65.5960,-23.9862],["Tálknafjörður",65.6330,-23.8250],["Bíldudalur",65.6840,-23.6010],
+  ["Þingeyri",65.8730,-23.4930],["Flateyri",66.0510,-23.5080],["Suðureyri",66.1300,-23.5330],["Ísafjörður",66.0750,-23.1240],
+  ["Bolungarvík",66.1500,-23.2500],["Súðavík",66.0330,-22.9830],["Hólmavík",65.7060,-21.6770],["Drangsnes",65.6890,-21.4470],
+  // Norðurland vestra
+  ["Hvammstangi",65.3950,-20.9450],["Blönduós",65.6603,-20.2794],["Skagaströnd",65.8260,-20.3200],["Sauðárkrókur",65.7461,-19.6394],
+  ["Varmahlíð",65.5530,-19.4500],["Hofsós",65.8960,-19.4130],["Siglufjörður",66.1528,-18.9113],
+  // Norðurland eystra
+  ["Ólafsfjörður",66.0731,-18.6517],["Dalvík",65.9702,-18.5286],["Hrísey",66.0000,-18.3800],["Akureyri",65.6835,-18.0878],
+  ["Svalbarðseyri",65.7500,-18.0800],["Grenivík",65.9470,-18.1800],["Laugar",65.7200,-17.3700],["Reykjahlíð",65.6450,-16.9100],
+  ["Húsavík",66.0449,-17.3389],["Kópasker",66.3000,-16.4500],["Raufarhöfn",66.4550,-15.9460],["Þórshöfn",66.1980,-15.3300],["Grímsey",66.5400,-18.0000],
+  // Austurland
+  ["Vopnafjörður",65.7560,-14.8300],["Bakkagerði",65.5220,-13.8100],["Egilsstaðir",65.2653,-14.3948],["Fellabær",65.2760,-14.4200],
+  ["Seyðisfjörður",65.2590,-14.0095],["Neskaupstaður",65.1475,-13.6869],["Eskifjörður",65.0736,-14.0158],["Reyðarfjörður",65.0318,-14.2187],
+  ["Fáskrúðsfjörður",64.9330,-14.0170],["Stöðvarfjörður",64.8300,-13.8700],["Breiðdalsvík",64.7900,-14.0100],["Djúpivogur",64.6560,-14.2850],
+  // Suðausturland
+  ["Höfn",64.2539,-15.2082],["Kirkjubæjarklaustur",63.7900,-18.0600],
+  // Suðurland
+  ["Vík",63.4186,-19.0060],["Hvolsvöllur",63.7529,-20.2245],["Hella",63.8350,-20.4000],["Selfoss",63.9333,-20.9971],["Hveragerði",64.0003,-21.1867],
+  ["Þorlákshöfn",63.8560,-21.3830],["Eyrarbakki",63.8650,-21.1500],["Stokkseyri",63.8360,-21.0600],["Laugarvatn",64.2140,-20.7300],["Flúðir",64.1350,-20.3100],
+  ["Vestmannaeyjar",63.4427,-20.2734]];
+const KAUPSTADA_NOFN=new Set(KAUPSTADIR.map(k=>k[0]));
+function teiknaBaei(listi){
+  baejaLag.clearLayers();
+  for(const b of listi.sort((x,y)=>(BAE_STAERD[x.teg]||3.5)-(BAE_STAERD[y.teg]||3.5)))
+    L.circleMarker([b.lat,b.lon],{pane:'baeir',radius:BAE_STAERD[b.teg]||4,color:'#c0392b',opacity:.55,weight:2,fillColor:'#ffffff',fillOpacity:.95,className:'baejapunktur'})
+      .bindTooltip(b.nafn,{direction:'top',offset:[0,-5],className:'bae-tt'}).addTo(baejaLag);
+}
+async function hladaBaei(){
+  const geymt=geyma.get('bs:kaupstadir2');
+  if(geymt&&Date.now()-geymt.t<30*864e5&&geymt.l?.length){teiknaBaei(geymt.l);return;}
+  // Varalisti strax (helstu kaupstaðir), svo OpenStreetMap ef það svarar
+  teiknaBaei(KAUPSTADIR.map(([n,la,lo,teg])=>({nafn:n,lat:la,lon:lo,teg:teg||'town'})));
+  if(S.demo)return;
+  try{
+    const j=await overpass(`[out:json][timeout:40];node["place"~"^(city|town|village)$"]["name"](${ISL_BOX});out body;`,20000);
+    const l=(j.elements||[]).filter(e=>e.lat!=null&&e.tags?.name&&(e.tags.place==='city'||e.tags.place==='town'||KAUPSTADA_NOFN.has(e.tags.name)))
+      .map(e=>({nafn:e.tags.name,lat:+e.lat.toFixed(4),lon:+e.lon.toFixed(4),teg:e.tags.place==='city'?'city':'town'}));
+    // Bæir af listanum sem ekki fundust í OpenStreetMap: bæta þeim við með hnitum listans
+    for(const[n,la,lo,teg]of KAUPSTADIR)if(!l.some(x=>x.nafn===n||km(x,{lat:la,lon:lo})<.8))l.push({nafn:n,lat:la,lon:lo,teg:teg||'town'});
+    if(l.length>10){geyma.set('bs:kaupstadir2',{t:Date.now(),l});teiknaBaei(l);}
+  }catch{}
+}
+try{localStorage.removeItem('bs:baeir_osm');localStorage.removeItem('bs:kaupstadir');}catch{}
+setTimeout(hladaBaei,1500);
+setTimeout(()=>{const r=document.getElementById('baejarofi');if(!r)return;r.checked=synaBaei;
+  r.onchange=()=>{synaBaei=r.checked;geyma.set('bs:baeir',synaBaei);synaBaei?baejaLag.addTo(kort):kort.removeLayer(baejaLag);};},0);
 const vbLag=L.layerGroup().addTo(kort);
 let VB_SV_SYNA=geyma.get('bs:vbsv')===true,VB_FOKUS=null;
 function teiknaVbSvaedi(fokus=null,blikk=false){
