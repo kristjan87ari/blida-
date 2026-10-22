@@ -192,6 +192,17 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .svaedistjorn{position:relative;overflow:visible!important}
 .sv-i{margin-right:5px}
 .svaedistjorn>button>span,.svaedistjorn>button>i{pointer-events:none} /* smellur lendir alltaf á hnappnum sjálfum */
+.svaedistjorn>button{position:relative;width:40px;height:38px;padding:0!important;display:grid!important;place-items:center;text-align:center}
+.svaedistjorn .sv-t,.svaedistjorn .lv-opna [data-i18n="snjorofi"]{display:none}
+.svaedistjorn .sv-i{margin:0;font-size:17px}
+.svaedistjorn .lv-opna>span[aria-hidden]{font-size:17px}
+.svaedistjorn .lv-punktur{position:absolute;right:4px;top:4px;margin:0;width:7px;height:7px}
+.ks-lina .litaskyring{display:none}
+@media (hover:hover){
+  .svaedistjorn>button:hover::after{content:attr(aria-label);position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%);
+    background:var(--text);color:var(--bg);font-size:12px;font-weight:500;white-space:nowrap;padding:4px 9px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.25);pointer-events:none;z-index:1200}
+  .svaedistjorn:has(.lv-gluggi:not([hidden])) .lv-opna:hover::after{display:none}
+}
 .leaflet-control-zoom .stort-opna{display:grid;place-items:center;width:100%;height:30px;padding:0;border:0;border-top:1px solid #ccc;background:var(--panel);color:var(--text);font-size:16px;cursor:pointer;border-radius:0 0 4px 4px}
 .leaflet-control-zoom .stort-opna:hover{background:var(--chip)}
 body.stort-kort{overflow:hidden}
@@ -567,15 +578,8 @@ details .likan small{color:var(--muted)}
   .kortahluti{gap:8px}
   .flokkalina{gap:8px}
   .simalina{display:flex;align-items:center;gap:8px;justify-content:space-between}
-  .svaedistjorn>button{width:40px;height:38px;padding:0!important;display:grid!important;place-items:center;text-align:center}
-  .svaedistjorn .sv-t,.svaedistjorn .lv-opna [data-i18n="snjorofi"]{display:none}
-  .svaedistjorn .sv-i{margin:0;font-size:17px}
-  .svaedistjorn .lv-opna{position:relative}
-  .svaedistjorn .lv-opna>span[aria-hidden]{font-size:17px}
-  .svaedistjorn .lv-punktur{position:absolute;right:4px;top:4px;margin:0;width:7px;height:7px}
   .skref-2{position:relative}
   .skref-2 .saekja-hopur{position:absolute;top:-5px;right:0}
-  .ks-lina .litaskyring{display:none}
   .stort-loka{top:calc(54px + env(safe-area-inset-top,0px));font-size:13px;padding:8px 15px}
   .lvstjorn.med-merki .lv-hnappur [data-i18n="snjorofi"]{display:none}
   .lvstjorn .merkjaval{bottom:auto;top:calc(100% + 6px)}
@@ -3354,7 +3358,7 @@ new SvaediStjorn({position:'topleft'}).addTo(kort);
  const skipta=()=>{sv.querySelectorAll(':scope > button:not(.lv-opna)').forEach(b=>{if(b.querySelector('.sv-t'))return;
    const tx=b.textContent.trim();if(!tx)return;
    const m=tx.match(/^([^\p{L}\p{N}]+?)\s+([\s\S]+)$/u),takn=m?m[1]:'✕',heiti=m?m[2]:tx;
-   b.innerHTML=`<span class="sv-i" aria-hidden="true">${takn}</span><span class="sv-t">${heiti}</span>`;b.title=heiti;b.setAttribute('aria-label',heiti);});};
+   b.innerHTML=`<span class="sv-i" aria-hidden="true">${takn}</span><span class="sv-t">${heiti}</span>`;b.removeAttribute('title');b.setAttribute('aria-label',heiti);});};
  // Endurbyggja eftir að smellur hefur klárast (annars missir kortið tengingu við hnappinn og telur smellinn á kortið)
  skipta();let bid=null;new MutationObserver(()=>{clearTimeout(bid);bid=setTimeout(skipta,0);}).observe(sv,{subtree:true,childList:true,characterData:true});}
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
@@ -3675,6 +3679,7 @@ document.getElementById('vb-hnappur').onclick=()=>{if(!VB_SV_SYNA){VB_KASSI=true
  if(gl&&hn){gl.append(hn);if(mv)gl.append(mv);lv?.remove();}
  if(lab)lab.hidden=true;
  if(op&&gl){
+   const heiti=()=>{op.setAttribute('aria-label',t('snjorofi'));};heiti();addEventListener('vedra:mal',heiti);
    const merkja=()=>op.classList.toggle('a',synaSnjo);merkja();addEventListener('vedra:lifandi',merkja);
    const loka=()=>{gl.hidden=true;op.setAttribute('aria-expanded','false');};
    op.onclick=e=>{e.stopPropagation();const o=gl.hidden;gl.hidden=!o;op.setAttribute('aria-expanded',o);if(o)gl.style.top=op.offsetTop+'px';};
