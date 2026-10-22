@@ -189,6 +189,21 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 #kort.velja .leaflet-grab,#kort.velja .leaflet-interactive{cursor:crosshair}
 .svaedistjorn button{display:block;width:100%;background:var(--panel);color:var(--text);border:0;padding:7px 10px;font-size:13px;white-space:nowrap;text-align:left}
 .svaedistjorn button+button{border-top:1px solid var(--line)}
+.svaedistjorn{position:relative;overflow:visible!important}
+.svaedistjorn .lv-opna{display:flex;align-items:center;gap:5px;border-top:1px solid var(--line)}
+.lv-punktur{width:8px;height:8px;border-radius:50%;background:#adb5bd;margin-left:6px;flex:none}
+.lv-opna.a .lv-punktur{background:#2f9e44;box-shadow:0 0 0 2px rgba(47,158,68,.25)}
+.lv-gluggi{position:absolute;left:calc(100% + 8px);top:0;z-index:1100;display:grid;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 8px 8px;box-shadow:0 6px 20px rgba(0,0,0,.25);color:var(--text);width:max-content;max-width:290px}
+.lv-gluggi[hidden]{display:none}
+.svaedistjorn .lv-gluggi button{border-top:0}
+.lv-gluggi .lv-hnappur{display:flex;border:0;box-shadow:none;background:transparent;padding:4px 2px;justify-content:space-between;width:100%;gap:10px;font-weight:500}
+.lv-gluggi .merkjaval{margin:0;display:block}
+.lv-gluggi .mv-hint{display:block;margin:0 0 4px}
+.lv-gluggi .mv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
+.svaedistjorn .lv-gluggi .merkjaval button{display:flex;width:auto;padding:4px 6px;border:1px solid var(--line);border-radius:8px}
+.svaedistjorn .lv-gluggi .lv-hnappur,.svaedistjorn .lv-gluggi .lv-hnappur[aria-pressed]{background:transparent;color:var(--text)}
+.svaedistjorn .lv-gluggi .merkjaval button[aria-pressed="false"]{background:transparent;color:var(--muted)}
+.svaedistjorn .lv-gluggi .merkjaval button[aria-pressed="true"]{background:color-mix(in srgb,var(--fokus) 12%,transparent);color:var(--text);border-color:var(--fokus)}
 .svaedistjorn button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
 #kort.svaedaval,#kort.svaedaval .leaflet-grab,#kort.svaedaval .leaflet-interactive{cursor:crosshair}
 #kort.svaedaval{touch-action:none}
@@ -286,6 +301,24 @@ button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid
 .lv-hnappur[aria-pressed="true"] .lv-rofi::after{transform:translateX(12px)}
 .sv-wikiloc{display:inline-block;margin-top:4px;font-size:13px}
 .vb-hnappur{display:inline-flex;align-items:center;gap:5px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:5px 9px 5px 10px;font-size:12.5px;box-shadow:0 1px 5px rgba(0,0,0,.25);cursor:pointer}
+.vb-hnappur[aria-pressed="true"]{border-color:#e8590c;box-shadow:0 0 0 2px rgba(232,89,12,.25),0 1px 5px rgba(0,0,0,.25)}
+.vb-skyring{margin-top:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 6px 7px;box-shadow:0 4px 14px rgba(0,0,0,.2);width:224px;color:var(--text)}
+.vb-skyring[hidden]{display:none}
+.vbs-haus{display:flex;align-items:center;justify-content:space-between;padding:0 2px 4px 6px;font-size:12px;color:var(--muted)}
+.vbs-loka{border:0;background:transparent;color:var(--muted);font-size:13px;width:24px;height:24px;border-radius:6px;cursor:pointer}
+.vbs-loka:hover{background:var(--chip);color:var(--text)}
+.vb-skyring li{display:block;padding:0;border:0;cursor:auto}
+.vb-skyring ul{list-style:none;margin:0;padding:0;display:grid;gap:2px;max-height:40vh;overflow-y:auto}
+.vbs-lina{display:grid;grid-template-columns:4px 20px minmax(0,1fr);gap:6px;align-items:center;width:100%;border:0;background:transparent;border-radius:8px;padding:5px 6px 5px 4px;text-align:left;color:var(--text);cursor:pointer;font-size:12.5px}
+.vbs-lina:hover{background:var(--chip)}
+.vbs-lina.v{background:color-mix(in srgb,var(--vb-lit) 14%,transparent)}
+.vbs-lina.d{opacity:.55}
+.vbs-lit{align-self:stretch;border-radius:3px;background:var(--vb-lit)}
+.vbs-t{display:grid;line-height:1.2;min-width:0}
+.vbs-t small{color:var(--muted);font-size:11px}
+.vbs-tomt{font-size:12px;color:var(--muted);margin:2px 6px 4px}
+.vbs-nanar{display:block;width:100%;margin-top:4px;border:1px solid var(--line);background:var(--chip);border-radius:8px;padding:5px;font-size:12.5px;color:var(--text);cursor:pointer}
+.vbs-nanar:hover{border-color:var(--fokus)}
 .vb-hnappur .vb-fjoldi{min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--chip);color:var(--muted);font-size:11px;font-weight:700;display:inline-grid;place-items:center}
 .vb-hnappur.virk .vb-fjoldi{background:#e8590c;color:#fff}
 .vb-listi{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:6px}
@@ -317,11 +350,13 @@ path.vb-blikk{animation:vbblikk .45s ease-in-out 6 alternate}
 @media (prefers-reduced-motion:reduce){path.vb-blikk{animation:none}}
 .lvstjorn.med-merki{display:flex;align-items:center;gap:4px;background:var(--panel)!important;border:1px solid var(--line)!important;border-radius:999px;padding:2px 4px 2px 0;box-shadow:0 1px 5px rgba(0,0,0,.25)!important}
 .lvstjorn.med-merki .lv-hnappur{border:0;box-shadow:none;background:transparent}
-.lvstjorn .merkjaval{margin:0;padding-left:6px;border-left:1px solid var(--line)}
-.lvstjorn .mv-hint,.lvstjorn .mv-n{display:none}
-.lvstjorn .mv-grid{display:flex;gap:2px;grid-template-columns:none}
-.lvstjorn .merkjaval button{position:relative;width:28px;height:28px;padding:0;justify-content:center;border-radius:50%}
-.lvstjorn .mv-v{position:absolute;right:-3px;bottom:-3px;width:12px;height:12px;font-size:7px;background:var(--panel)}
+.lvstjorn.med-merki{position:relative}
+.lv-velja{width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--text);font-size:11px;display:grid;place-items:center;padding:0;cursor:pointer;flex:none}
+.lv-velja:hover{border-color:var(--fokus);color:var(--fokus)}
+.lv-velja span{transition:transform .2s}
+.lvstjorn.lv-opid .lv-velja span{transform:rotate(180deg)}
+.lvstjorn .merkjaval{display:none;position:absolute;right:0;bottom:calc(100% + 6px);width:250px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.lvstjorn.lv-opid .merkjaval{display:block}
 .vb-ham .vb-listi li{padding:0;gap:0;overflow:hidden}
 .vb-lina{display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:0;padding:7px 8px;text-align:left;color:var(--text);cursor:pointer}
 .vb-lina:hover{background:var(--chip)}
@@ -504,8 +539,11 @@ details .likan small{color:var(--muted)}
   .kortahluti{gap:8px}
   .flokkalina{gap:8px}
   .simalina{display:flex;align-items:center;gap:8px;justify-content:space-between}
-  .lvstjorn .merkjaval button{width:26px;height:26px}
   .lvstjorn.med-merki .lv-hnappur [data-i18n="snjorofi"]{display:none}
+  .lvstjorn .merkjaval{bottom:auto;top:calc(100% + 6px)}
+  .lvstjorn .mv-grid{grid-template-columns:1fr 1fr}
+  .lvstjorn .mv-n{display:inline}
+  .lvstjorn .merkjaval button{justify-content:flex-start;gap:5px;padding:4px 6px}
   .smaspjald.vb-ham{width:auto}
   .mv-grid{grid-template-columns:repeat(3,1fr)}
   .mv-n{display:none}
@@ -1789,49 +1827,57 @@ fr:['Gel nocturne','Jusqu’à {x} °C après une journée douce','Routes probab
 zh:['夜间霜冻','温和的白天过后低至 {x} °C','道路可能结冰','降水或路面潮湿，气温接近冰点','时间','{a}:00–{b}:00','约 {a}:00','仅显示可能影响安全的天气。基于全国天气模型预报，并非官方预警。请务必查看 vedur.is、umferdin.is 和 safetravel.is。'],
 es:['Helada nocturna','Hasta {x} °C tras un día templado','Probable hielo en las carreteras','Precipitación o carreteras mojadas cerca de cero grados','Cuándo','de {a}:00 a {b}:00','hacia las {a}:00','Solo el tiempo que puede afectar a la seguridad. Según la previsión de los modelos para todo el país; no son avisos oficiales. Consulta siempre vedur.is, umferdin.is y safetravel.is.']};
 const OR_UM={
-is:`<h3>Veðurbreytingar og öryggi</h3><p>Undir „⚡ Veðurbreytingar“ á kortinu birtist aðeins veður sem getur skipt máli fyrir öryggi á völdum degi: snjókoma, líkur á hálku á vegum, næturfrost, mikil úrkoma, hvassviðri og mikið frost, auk viðvarana Veðurstofunnar. Við hvert atriði stendur hvar og hvenær dagsins það er spáð, og hægt er að skoða svæðið á kortinu. Upplýsingarnar eru reiknaðar sjálfvirkt úr spám veðurlíkana og eru ekki opinberar viðvaranir.</p>
+is:`<h3>Veðurbreytingar og öryggi</h3><p>Undir „⚠️ Veðurbreytingar“ á kortinu birtist aðeins veður sem getur skipt máli fyrir öryggi á völdum degi: snjókoma, líkur á hálku á vegum, næturfrost, mikil úrkoma, hvassviðri og mikið frost, auk viðvarana Veðurstofunnar. Við hvert atriði stendur hvar og hvenær dagsins það er spáð, og hægt er að skoða svæðið á kortinu. Upplýsingarnar eru reiknaðar sjálfvirkt úr spám veðurlíkana og eru ekki opinberar viðvaranir.</p>
+<p>Smelltu á ⚠️-hnappinn til að lita svæðin á kortinu. Þá birtist lítil skýring með einni línu á hverja tegund; smellur á línu dregur svæðið fram, og „ℹ️ Nánar“ opnar allar upplýsingar. Svæðin haldast á kortinu þar til þú slekkur á þeim með ✕ eða öðrum smelli á hnappinn.</p>
 <p><strong>Vedra og Fjallverk bera enga ábyrgð á upplýsingunum sem hér birtast, hvorki á réttmæti þeirra né á ákvörðunum sem teknar eru út frá þeim.</strong> Spár geta breyst hratt, og staðbundnar aðstæður eins og hálka, vindstrengir og snjóflóðahætta geta verið allt aðrar en líkönin sýna. Áður en lagt er af stað skaltu alltaf kynna þér:</p>
 <ul><li><a href="https://www.vedur.is" target="_blank" rel="noopener">vedur.is</a>: opinberar veðurspár og viðvaranir Veðurstofu Íslands, þar á meðal snjóflóðaspá.</li>
 <li><a href="https://umferdin.is" target="_blank" rel="noopener">umferdin.is</a>: færð og ástand vega hjá Vegagerðinni.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>: ferðaráð og viðvaranir Slysavarnafélagsins Landsbjargar, þar sem einnig er hægt að skilja eftir ferðaáætlun.</li></ul>
 <p>Í neyð skaltu alltaf hringja í <strong>112</strong>.</p>`,
-en:`<h3>Weather changes and safety</h3><p>Under “⚡ Weather changes” on the map, only weather that can matter for safety on the selected day is shown: snowfall, likely icy roads, night frost, heavy precipitation, strong winds and hard frost, as well as Icelandic Met Office warnings. Each item shows where and at what time of day it is forecast, and you can view the area on the map. The information is calculated automatically from weather model forecasts and is not an official warning.</p>
+en:`<h3>Weather changes and safety</h3><p>Under “⚠️ Weather changes” on the map, only weather that can matter for safety on the selected day is shown: snowfall, likely icy roads, night frost, heavy precipitation, strong winds and hard frost, as well as Icelandic Met Office warnings. Each item shows where and at what time of day it is forecast, and you can view the area on the map. The information is calculated automatically from weather model forecasts and is not an official warning.</p>
+<p>Click the ⚠️ button to colour the areas on the map. A small legend then appears with one line per type; clicking a line highlights its area, and “ℹ️ Details” opens all the information. The areas stay on the map until you turn them off with ✕ or another click on the button.</p>
 <p><strong>Vedra and Fjallverk accept no responsibility for the information shown here, neither for its accuracy nor for decisions made on the basis of it.</strong> Forecasts can change quickly, and local conditions such as icy roads, wind gusts and avalanche danger can be very different from what the models show. Before you set off, always check:</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>: official forecasts and warnings from the Icelandic Met Office, including the avalanche forecast.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>: road conditions from the Icelandic Road Administration.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>: travel advice and alerts from ICE-SAR, where you can also leave a travel plan.</li></ul>
 <p>In an emergency, always call <strong>112</strong>.</p>`,
-da:`<h3>Vejrændringer og sikkerhed</h3><p>Under »⚡ Vejrændringer« på kortet vises kun vejr, der kan have betydning for sikkerheden på den valgte dag: snefald, sandsynligt glatte veje, nattefrost, kraftig nedbør, hård vind og hård frost samt varsler fra den islandske vejrtjeneste. Ved hvert punkt står det, hvor og hvornår på dagen det er forudsagt, og du kan se området på kortet. Oplysningerne beregnes automatisk ud fra vejrmodellernes prognoser og er ikke officielle varsler.</p>
+da:`<h3>Vejrændringer og sikkerhed</h3><p>Under »⚠️ Vejrændringer« på kortet vises kun vejr, der kan have betydning for sikkerheden på den valgte dag: snefald, sandsynligt glatte veje, nattefrost, kraftig nedbør, hård vind og hård frost samt varsler fra den islandske vejrtjeneste. Ved hvert punkt står det, hvor og hvornår på dagen det er forudsagt, og du kan se området på kortet. Oplysningerne beregnes automatisk ud fra vejrmodellernes prognoser og er ikke officielle varsler.</p>
+<p>Klik på ⚠️-knappen for at farve områderne på kortet. Så vises en lille forklaring med én linje pr. type; et klik på en linje fremhæver området, og »ℹ️ Detaljer« åbner alle oplysninger. Områderne bliver på kortet, indtil du slår dem fra med ✕ eller et nyt klik på knappen.</p>
 <p><strong>Vedra og Fjallverk påtager sig intet ansvar for de oplysninger, der vises her, hverken for deres rigtighed eller for beslutninger truffet på grundlag af dem.</strong> Prognoser kan ændre sig hurtigt, og lokale forhold som glatte veje, vindstød og lavinefare kan være helt anderledes, end modellerne viser. Før du tager af sted, bør du altid tjekke:</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>: officielle prognoser og varsler fra den islandske vejrtjeneste, herunder lavineprognosen.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>: vejforhold fra den islandske vejdirektorat.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>: rejseråd og advarsler fra ICE-SAR, hvor du også kan efterlade en rejseplan.</li></ul>
 <p>I en nødsituation skal du altid ringe <strong>112</strong>.</p>`,
-sv:`<h3>Väderförändringar och säkerhet</h3><p>Under ”⚡ Väderförändringar” på kartan visas endast väder som kan påverka säkerheten den valda dagen: snöfall, trolig halka på vägarna, nattfrost, kraftig nederbörd, hård vind och sträng kyla samt varningar från isländska meteorologiska institutet. För varje punkt anges var och när på dagen det är prognostiserat, och du kan se området på kartan. Uppgifterna beräknas automatiskt utifrån vädermodellernas prognoser och är inte officiella varningar.</p>
+sv:`<h3>Väderförändringar och säkerhet</h3><p>Under ”⚠️ Väderförändringar” på kartan visas endast väder som kan påverka säkerheten den valda dagen: snöfall, trolig halka på vägarna, nattfrost, kraftig nederbörd, hård vind och sträng kyla samt varningar från isländska meteorologiska institutet. För varje punkt anges var och när på dagen det är prognostiserat, och du kan se området på kartan. Uppgifterna beräknas automatiskt utifrån vädermodellernas prognoser och är inte officiella varningar.</p>
+<p>Klicka på ⚠️-knappen för att färga områdena på kartan. Då visas en liten förklaring med en rad per typ; ett klick på en rad markerar området, och ”ℹ️ Detaljer” öppnar all information. Områdena ligger kvar på kartan tills du stänger av dem med ✕ eller ett nytt klick på knappen.</p>
 <p><strong>Vedra och Fjallverk tar inget ansvar för de uppgifter som visas här, varken för deras riktighet eller för beslut som fattas utifrån dem.</strong> Prognoser kan ändras snabbt, och lokala förhållanden som halka, vindbyar och lavinfara kan vara helt annorlunda än modellerna visar. Innan du ger dig av bör du alltid kontrollera:</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>: officiella prognoser och varningar från isländska meteorologiska institutet, inklusive lavinprognosen.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>: väglag från isländska vägverket.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>: reseråd och varningar från ICE-SAR, där du också kan lämna en färdplan.</li></ul>
 <p>Ring alltid <strong>112</strong> i en nödsituation.</p>`,
-pl:`<h3>Zmiany pogody i bezpieczeństwo</h3><p>W „⚡ Zmiany pogody” na mapie pokazywana jest tylko pogoda istotna dla bezpieczeństwa w wybranym dniu: opady śniegu, prawdopodobna gołoledź na drogach, przymrozki nocne, intensywne opady, silny wiatr i silny mróz, a także ostrzeżenia Islandzkiego Instytutu Meteorologicznego. Przy każdej pozycji podano, gdzie i o jakiej porze dnia jest prognozowana, a obszar można obejrzeć na mapie. Informacje są obliczane automatycznie na podstawie prognoz modeli pogodowych i nie są oficjalnymi ostrzeżeniami.</p>
+pl:`<h3>Zmiany pogody i bezpieczeństwo</h3><p>W „⚠️ Zmiany pogody” na mapie pokazywana jest tylko pogoda istotna dla bezpieczeństwa w wybranym dniu: opady śniegu, prawdopodobna gołoledź na drogach, przymrozki nocne, intensywne opady, silny wiatr i silny mróz, a także ostrzeżenia Islandzkiego Instytutu Meteorologicznego. Przy każdej pozycji podano, gdzie i o jakiej porze dnia jest prognozowana, a obszar można obejrzeć na mapie. Informacje są obliczane automatycznie na podstawie prognoz modeli pogodowych i nie są oficjalnymi ostrzeżeniami.</p>
+<p>Kliknij przycisk ⚠️, aby pokolorować obszary na mapie. Pojawi się mała legenda z jednym wierszem na każdy typ; kliknięcie wiersza wyróżnia obszar, a „ℹ️ Szczegóły” otwiera wszystkie informacje. Obszary pozostają na mapie, dopóki ich nie wyłączysz przyciskiem ✕ lub ponownym kliknięciem.</p>
 <p><strong>Vedra i Fjallverk nie ponoszą żadnej odpowiedzialności za prezentowane tu informacje, ani za ich prawidłowość, ani za decyzje podjęte na ich podstawie.</strong> Prognozy mogą się szybko zmieniać, a lokalne warunki, takie jak gołoledź, porywy wiatru i zagrożenie lawinowe, mogą znacznie różnić się od tego, co pokazują modele. Przed wyjazdem zawsze sprawdź:</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>: oficjalne prognozy i ostrzeżenia Islandzkiego Instytutu Meteorologicznego, w tym prognozę lawinową.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>: stan dróg według islandzkiej administracji drogowej.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>: porady i ostrzeżenia dla podróżnych od ICE-SAR, gdzie można też zostawić plan podróży.</li></ul>
 <p>W nagłym wypadku zawsze dzwoń pod <strong>112</strong>.</p>`,
-fr:`<h3>Changements météo et sécurité</h3><p>Sous « ⚡ Changements météo » sur la carte, seule la météo pouvant compter pour la sécurité le jour choisi est affichée : chutes de neige, routes probablement verglacées, gel nocturne, fortes précipitations, vent fort et gel intense, ainsi que les alertes de l’Office météorologique islandais. Pour chaque élément, le lieu et le moment de la journée sont indiqués, et vous pouvez voir la zone sur la carte. Ces informations sont calculées automatiquement à partir des prévisions des modèles météo et ne constituent pas des alertes officielles.</p>
+fr:`<h3>Changements météo et sécurité</h3><p>Sous « ⚠️ Changements météo » sur la carte, seule la météo pouvant compter pour la sécurité le jour choisi est affichée : chutes de neige, routes probablement verglacées, gel nocturne, fortes précipitations, vent fort et gel intense, ainsi que les alertes de l’Office météorologique islandais. Pour chaque élément, le lieu et le moment de la journée sont indiqués, et vous pouvez voir la zone sur la carte. Ces informations sont calculées automatiquement à partir des prévisions des modèles météo et ne constituent pas des alertes officielles.</p>
+<p>Cliquez sur le bouton ⚠️ pour colorer les zones sur la carte. Une petite légende apparaît alors avec une ligne par type ; cliquer sur une ligne met sa zone en évidence, et « ℹ️ Détails » ouvre toutes les informations. Les zones restent sur la carte jusqu’à ce que vous les désactiviez avec ✕ ou un nouveau clic sur le bouton.</p>
 <p><strong>Vedra et Fjallverk déclinent toute responsabilité quant aux informations affichées ici, tant pour leur exactitude que pour les décisions prises sur leur base.</strong> Les prévisions peuvent changer rapidement, et les conditions locales comme le verglas, les rafales et le risque d’avalanche peuvent être très différentes de ce qu’indiquent les modèles. Avant de partir, consultez toujours :</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a> : prévisions et alertes officielles de l’Office météorologique islandais, y compris le bulletin d’avalanches.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a> : état des routes selon l’administration routière islandaise.</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a> : conseils et alertes de voyage d’ICE-SAR, où vous pouvez aussi déposer un plan de voyage.</li></ul>
 <p>En cas d’urgence, appelez toujours le <strong>112</strong>.</p>`,
-zh:`<h3>天气变化与安全</h3><p>地图上的“⚡ 天气变化”只显示所选日期可能影响安全的天气：降雪、道路可能结冰、夜间霜冻、强降水、大风和严寒，以及冰岛气象局的预警。每项都会注明预报的地点和时间，并可在地图上查看该区域。这些信息由天气模型预报自动计算，并非官方预警。</p>
+zh:`<h3>天气变化与安全</h3><p>地图上的“⚠️ 天气变化”只显示所选日期可能影响安全的天气：降雪、道路可能结冰、夜间霜冻、强降水、大风和严寒，以及冰岛气象局的预警。每项都会注明预报的地点和时间，并可在地图上查看该区域。这些信息由天气模型预报自动计算，并非官方预警。</p>
+<p>点击 ⚠️ 按钮即可在地图上标示区域。随后会出现一个小图例，每种类型一行；点击某行可突出显示相应区域，“ℹ️ 详情”可打开全部信息。区域会一直显示在地图上，直到你用 ✕ 或再次点击按钮将其关闭。</p>
 <p><strong>Vedra 和 Fjallverk 对此处显示的信息不承担任何责任，包括信息的准确性以及据此作出的决定。</strong>天气预报可能迅速变化，结冰路面、阵风和雪崩危险等局地情况可能与模型显示的大不相同。出发前请务必查看：</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>：冰岛气象局的官方预报和预警，包括雪崩预报。</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>：冰岛道路管理局发布的路况信息。</li>
 <li><a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>：冰岛搜救协会（ICE-SAR）的出行建议和警示，也可在此留下行程计划。</li></ul>
 <p>紧急情况下请务必拨打 <strong>112</strong>。</p>`,
-es:`<h3>Cambios del tiempo y seguridad</h3><p>En «⚡ Cambios del tiempo» del mapa solo aparece el tiempo que puede afectar a la seguridad el día elegido: nevadas, probable hielo en las carreteras, heladas nocturnas, precipitación intensa, viento fuerte y helada intensa, además de los avisos de la Oficina Meteorológica de Islandia. Cada elemento indica dónde y a qué hora del día está previsto, y puedes ver la zona en el mapa. La información se calcula automáticamente a partir de las previsiones de los modelos y no constituye un aviso oficial.</p>
+es:`<h3>Cambios del tiempo y seguridad</h3><p>En «⚠️ Cambios del tiempo» del mapa solo aparece el tiempo que puede afectar a la seguridad el día elegido: nevadas, probable hielo en las carreteras, heladas nocturnas, precipitación intensa, viento fuerte y helada intensa, además de los avisos de la Oficina Meteorológica de Islandia. Cada elemento indica dónde y a qué hora del día está previsto, y puedes ver la zona en el mapa. La información se calcula automáticamente a partir de las previsiones de los modelos y no constituye un aviso oficial.</p>
+<p>Haz clic en el botón ⚠️ para colorear las zonas en el mapa. Aparecerá una pequeña leyenda con una línea por tipo; al hacer clic en una línea se resalta su zona, y «ℹ️ Detalles» abre toda la información. Las zonas permanecen en el mapa hasta que las desactives con ✕ o con otro clic en el botón.</p>
 <p><strong>Vedra y Fjallverk no asumen ninguna responsabilidad por la información que se muestra aquí, ni por su exactitud ni por las decisiones tomadas a partir de ella.</strong> Las previsiones pueden cambiar con rapidez, y las condiciones locales, como el hielo, las rachas de viento y el peligro de aludes, pueden ser muy distintas de lo que muestran los modelos. Antes de salir, consulta siempre:</p>
 <ul><li><a href="https://en.vedur.is" target="_blank" rel="noopener">vedur.is</a>: previsiones y avisos oficiales de la Oficina Meteorológica de Islandia, incluido el boletín de aludes.</li>
 <li><a href="https://umferdin.is/en" target="_blank" rel="noopener">umferdin.is</a>: estado de las carreteras de la Administración de Carreteras de Islandia.</li>
@@ -1943,16 +1989,20 @@ for(const[mal,v]of Object.entries(I18N_NY2)){const L=I18N[mal];if(!L)continue;
   ['vb_kolnun','vb_kolnunT','gs_skidasvaedi','gs_lysing','wl_svaedi','wl_kring'].forEach((k,i)=>L[k]=v[i]);}
 
 const VB_LITA={is:'Lita svæði á korti',en:'Colour areas on map',da:'Farv områder på kortet',sv:'Färga områden på kartan',pl:'Koloruj obszary na mapie',fr:'Colorer les zones sur la carte',zh:'在地图上标示区域',es:'Colorear zonas en el mapa'};
-const LV_UM={is:'Lifandi veður hefur sína eigin hnapparöð rétt hjá „⚠️ Veðurbreytingum“: þar kveikir þú og slekkur á hreyfimerkjunum og velur hver birtast.',
-  en:'Live weather has its own row of buttons next to “⚠️ Weather changes”: there you turn the animated symbols on and off and choose which are shown.',
-  da:'Levende vejr har sin egen knaprække ved siden af »⚠️ Vejrændringer«: her slår du de animerede symboler til og fra og vælger, hvilke der vises.',
-  sv:'Levande väder har en egen knapprad bredvid ”⚠️ Väderförändringar”: där slår du på och av de animerade symbolerna och väljer vilka som visas.',
-  pl:'Żywa pogoda ma własny rząd przycisków obok „⚠️ Zmiany pogody”: tam włączasz i wyłączasz animowane symbole i wybierasz, które mają być widoczne.',
-  fr:'La météo animée a sa propre rangée de boutons à côté de « ⚠️ Changements météo » : vous y activez ou désactivez les symboles animés et choisissez ceux qui s’affichent.',
-  zh:'动态天气在“⚠️ 天气变化”旁边有单独的一排按钮：可在此开启或关闭动态符号，并选择显示哪些。',
-  es:'El tiempo animado tiene su propia fila de botones junto a «⚠️ Cambios del tiempo»: ahí activas o desactivas los símbolos animados y eliges cuáles se muestran.'};
+const LV_UM={is:'Lifandi veður er hnappur í verkfærastikunni vinstra megin á kortinu, undir „Hreinsa leit“. Grænn punktur þýðir að kveikt sé á því. Smellur opnar lítinn glugga þar sem þú kveikir og slekkur á hreyfimerkjunum og velur hver birtast.',
+en:'Live weather is a button in the toolbar on the left of the map, under “Clear search”. A green dot means it is on. Click it to open a small window where you turn the animated symbols on and off and choose which are shown.',
+da:'Levende vejr er en knap i værktøjslinjen til venstre på kortet. En grøn prik betyder, at det er slået til. Klik for at åbne et lille vindue, hvor du slår de animerede symboler til og fra og vælger, hvilke der vises.',
+sv:'Levande väder är en knapp i verktygsfältet till vänster på kartan. En grön prick betyder att det är påslaget. Klicka för att öppna ett litet fönster där du slår på och av de animerade symbolerna och väljer vilka som visas.',
+pl:'Żywa pogoda to przycisk na pasku narzędzi po lewej stronie mapy. Zielona kropka oznacza, że jest włączona. Kliknij, aby otworzyć małe okno, w którym włączasz i wyłączasz animowane symbole i wybierasz, które mają być widoczne.',
+fr:'La météo animée est un bouton dans la barre d’outils à gauche de la carte. Un point vert indique qu’elle est activée. Cliquez pour ouvrir une petite fenêtre où vous activez ou désactivez les symboles animés et choisissez ceux qui s’affichent.',
+zh:'动态天气是地图左侧工具栏中的一个按钮。绿点表示已开启。点击可打开一个小窗口，在其中开启或关闭动态符号，并选择显示哪些。',
+es:'El tiempo animado es un botón en la barra de herramientas a la izquierda del mapa. Un punto verde indica que está activado. Haz clic para abrir una pequeña ventana donde activas o desactivas los símbolos animados y eliges cuáles se muestran.'};
 for(const mal of Object.keys(VB_LITA)){const L=I18N[mal];if(!L)continue;L.vb_lita=VB_LITA[mal];
   if(L.sidur)L.sidur.um=L.sidur.um.replace(/\n?<li><strong>🌦️[^<]*<\/strong>[\s\S]*?<\/li><\/ul>/,'</ul>\n<p>'+LV_UM[mal]+'</p>');}
+const VBS={is:['ℹ️ Nánar','Fela af korti','Á kortinu'],en:['ℹ️ Details','Hide from map','On the map'],da:['ℹ️ Detaljer','Skjul fra kortet','På kortet'],
+  sv:['ℹ️ Detaljer','Dölj från kartan','På kartan'],pl:['ℹ️ Szczegóły','Ukryj z mapy','Na mapie'],fr:['ℹ️ Détails','Masquer de la carte','Sur la carte'],
+  zh:['ℹ️ 详情','从地图隐藏','地图上'],es:['ℹ️ Detalles','Ocultar del mapa','En el mapa']};
+for(const[mal,[a,b,c]]of Object.entries(VBS))if(I18N[mal]){I18N[mal].vb_nanar=a;I18N[mal].vb_fela=b;I18N[mal].vb_akorti=c;}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2504,7 +2554,7 @@ kortEl.appendChild(spjald);
 L.DomEvent.disableClickPropagation(spjald);L.DomEvent.disableScrollPropagation(spjald);
 const erSimi=()=>matchMedia('(max-width:820px)').matches;
 function lokaSpjaldi(){
-  spjald.hidden=true;delete spjald.dataset.vb;spjald.classList.remove('vb-ham');if(typeof vbLag!=='undefined')vbLag.clearLayers();S.virkur=-1;if(typeof VP!=='undefined')VP.opinn=false;
+  spjald.hidden=true;delete spjald.dataset.vb;spjald.classList.remove('vb-ham');if(typeof vbLag!=='undefined'){if(typeof VB_SV_SYNA!=='undefined'&&VB_SV_SYNA)teiknaVbSvaedi(VB_FOKUS);else vbLag.clearLayers();}S.virkur=-1;if(typeof VP!=='undefined')VP.opinn=false;
   if(reitaramma){kort.removeLayer(reitaramma);reitaramma=null;}
   document.querySelectorAll('#listi li').forEach(li=>li.classList.remove('virkur'));
   document.querySelectorAll('.pinni.valinn').forEach(p=>p.classList.remove('valinn'));
@@ -3157,7 +3207,7 @@ function stadaListi(lykill){
 const SV={velja:false,byrjun:null,px:null,dragt:null,rammi:null};
 const SvaediStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar svaedistjorn');
-  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="vp-velja" data-i18n="vp_hnappur">📍 Velja punkt</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button>`;
+  d.innerHTML=`<button type="button" id="sv-velja" data-i18n="sv_hnappur">⬚ Velja svæði</button><button type="button" id="vp-velja" data-i18n="vp_hnappur">📍 Velja punkt</button><button type="button" id="sv-hreinsa" data-i18n="hreinsa">↺ Hreinsa leit</button><button type="button" id="lv-opna" class="lv-opna" aria-expanded="false" aria-haspopup="true"><span aria-hidden="true">🌦️</span> <span data-i18n="snjorofi">Lifandi veður</span><i class="lv-punktur" aria-hidden="true"></i></button><div class="lv-gluggi" hidden></div>`;
   L.DomEvent.disableClickPropagation(d);L.DomEvent.disableScrollPropagation(d);return d;}});
 new SvaediStjorn({position:'topleft'}).addTo(kort);
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
@@ -3319,8 +3369,8 @@ function vedurbreytingar(){
        const sky=dk.reduce((a,k)=>a+C[k],0)/dk.length;if(sky>=90&&vott<.3&&sol<.15)skyKorn.push({p,x:sky});}}
     {const wmax=Math.max(...W);if(wmax>=13)vindKorn.push({p,x:wmax});}
     {const tk=V.filter(v=>v<1000).length;if(tk>=3)thokuKorn.push({p,x:tk});}
-    // Aðeins óvenjulegt eða skyndilegt: mikill snjór í byggð, eða snjór þar sem ekki snjóaði daginn áður; á hálendi aðeins mjög mikill snjór
-    if((lag&&(sf>=5||(sf>=2&&g1&&g1.sf<.5)))||(!lag&&sf>=15))L_.snjor.push({p,x:sf,klst:klst(k=>SF[k]>=.2)});
+    // Snjókoma í byggð: 3 cm eða meira, eða 1 cm þar sem ekki snjóaði daginn áður; á hálendi 10 cm eða meira
+    if((lag&&(sf>=3||(sf>=1&&g1&&g1.sf<.5)))||(!lag&&sf>=10))L_.snjor.push({p,x:sf,klst:klst(k=>SF[k]>=.2)});
     if(pr>=30)L_.urkoma.push({p,x:pr,klst:klst(k=>P[k]>=2)});
     const gm=lag?22:30;if(gmax>=gm)L_.vindur.push({p,x:gmax,klst:klst(k=>G[k]>=gm)});
     if(lag){
@@ -3425,7 +3475,7 @@ function baeirIgrennd(pts,max=4){
 const VB_LITIR={kolnun:'#15aabf',halka:'#e03131',snjor:'#339af0',vindur:'#868e96',urkoma:'#1c7ed6',naeturfrost:'#5c7cfa',frost:'#74c0fc'};
 kort.createPane('vbsv').style.zIndex=390;
 const vbLag=L.layerGroup().addTo(kort);
-let VB_SV_SYNA=geyma.get('bs:vbsv')!==false;
+let VB_SV_SYNA=geyma.get('bs:vbsv')===true,VB_FOKUS=null;
 function teiknaVbSvaedi(fokus=null,blikk=false){
   vbLag.clearLayers();if(!VB_SV_SYNA)return;
   for(const a of VB.atridi){if(a.vidv||!a.pts)continue;
@@ -3441,19 +3491,49 @@ const LvStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar lvstjorn');
   d.innerHTML=`<button type="button" id="lv-hnappur" class="lv-hnappur" aria-pressed="${synaSnjo}"><span aria-hidden="true">🌦️</span> <span data-i18n="snjorofi">Lifandi veður</span><span class="lv-rofi" aria-hidden="true"></span></button>`;
   L.DomEvent.disableClickPropagation(d);d.querySelector('button').onclick=()=>setjaLifandi(!synaSnjo);return d;}});
-new LvStjorn({position:'topright'}).addTo(kort);
+new LvStjorn({position:matchMedia('(max-width:820px)').matches?'topright':'bottomright'}).addTo(kort);
 const VbStjorn=L.Control.extend({onAdd(){
   const d=L.DomUtil.create('div','leaflet-bar vbstjorn');
   d.innerHTML=`<button type="button" id="vb-hnappur" class="vb-hnappur"><span aria-hidden="true">⚠️</span> <span data-i18n="vb_hnappur">Veðurbreytingar</span> <span class="vb-fjoldi">0</span></button>`;
   L.DomEvent.disableClickPropagation(d);return d;}});
 new VbStjorn({position:'topright'}).addTo(kort);
-document.getElementById('vb-hnappur').onclick=()=>synaVedurbreytingar();
-// Táknhnappar lifandi veðurs fara inn í „🌦️ Lifandi veður“-stýringuna; gamli gátreiturinn er falinn (samstilltur áfram)
+// ⚠️-hnappurinn kveikir og slekkur á svæðunum á kortinu; lítil skýring birtist undir honum
+function setjaVbSyna(a){VB_SV_SYNA=a;geyma.set('bs:vbsv',a);if(!a)VB_FOKUS=null;teiknaVbSvaedi(VB_FOKUS);teiknaVbSkyringu();
+  const r=document.querySelector('.vb-rofi-sv');if(r)r.checked=a;}
+function setjaVbFokus(teg,blikk=false){VB_FOKUS=teg;if(!VB_SV_SYNA){VB_SV_SYNA=true;geyma.set('bs:vbsv',true);}teiknaVbSvaedi(teg,blikk);teiknaVbSkyringu();}
+function teiknaVbSkyringu(){
+  const st=document.querySelector('.vbstjorn'),b=document.getElementById('vb-hnappur');if(!st||!b)return;
+  let el=st.querySelector('.vb-skyring');if(!el){el=document.createElement('div');el.className='vb-skyring';st.appendChild(el);}
+  b.setAttribute('aria-pressed',VB_SV_SYNA);el.hidden=!VB_SV_SYNA;if(!VB_SV_SYNA)return;
+  el.innerHTML=`<div class="vbs-haus"><strong>${t('vb_akorti')}</strong><button type="button" class="vbs-loka" title="${t('vb_fela')}" aria-label="${t('vb_fela')}">✕</button></div>`+
+    (VB.atridi.length?`<ul>${VB.atridi.map((a,i)=>`<li><button type="button" class="vbs-lina${VB_FOKUS&&VB_FOKUS===a.teg?' v':''}${VB_FOKUS&&VB_FOKUS!==a.teg?' d':''}" data-i="${i}" style="--vb-lit:${a.vidv?'#e8590c':(VB_LITIR[a.teg]||'#e8590c')}">
+      <i class="vbs-lit" aria-hidden="true"></i><span aria-hidden="true">${a.takn}</span><span class="vbs-t">${a.titill}${a.hvenaer?`<small>${a.hvenaer}</small>`:''}</span></button></li>`).join('')}</ul>`
+     :`<p class="vbs-tomt">${t('vb_engar')}</p>`)+
+    `<button type="button" class="vbs-nanar">${t('vb_nanar')}</button>`;
+  el.querySelector('.vbs-loka').onclick=()=>setjaVbSyna(false);
+  el.querySelector('.vbs-nanar').onclick=()=>synaVedurbreytingar();
+  el.querySelectorAll('.vbs-lina').forEach(x=>x.onclick=()=>{const a=VB.atridi[+x.dataset.i];
+    if(a.vidv){if(!synaVidv){const r=document.getElementById('vidvrofi');if(r){r.checked=true;r.onchange();}}return;}
+    setjaVbFokus(VB_FOKUS===a.teg?null:a.teg,VB_FOKUS!==a.teg);});
+}
+document.getElementById('vb-hnappur').onclick=()=>setjaVbSyna(!VB_SV_SYNA);
+{const st=document.querySelector('.vbstjorn');if(st){L.DomEvent.disableScrollPropagation(st);}}
+// Lifandi veður: hnappur í verkfærastikunni vinstra megin; rofi og tákn í litlum glugga við hliðina
 {const lv=document.querySelector('.lvstjorn'),mv=document.querySelector('.kortastjorn .merkjaval'),lab=document.getElementById('snjorofi')?.closest('label');
- if(lv&&mv){lv.append(mv);lv.classList.add('med-merki');}if(lab)lab.hidden=true;}
+ const gl=document.querySelector('.lv-gluggi'),op=document.getElementById('lv-opna'),hn=document.getElementById('lv-hnappur');
+ if(gl&&hn){gl.append(hn);if(mv)gl.append(mv);lv?.remove();}
+ if(lab)lab.hidden=true;
+ if(op&&gl){
+   const merkja=()=>op.classList.toggle('a',synaSnjo);merkja();addEventListener('vedra:lifandi',merkja);
+   const loka=()=>{gl.hidden=true;op.setAttribute('aria-expanded','false');};
+   op.onclick=e=>{e.stopPropagation();const o=gl.hidden;gl.hidden=!o;op.setAttribute('aria-expanded',o);if(o)gl.style.top=op.offsetTop+'px';};
+   document.addEventListener('click',e=>{if(!gl.hidden&&e.target.isConnected&&!e.target.closest('.lv-gluggi')&&!e.target.closest('#lv-opna'))loka();});
+   addEventListener('keydown',e=>{if(e.key==='Escape'&&!gl.hidden){loka();op.focus();}});}}
 let VB={atridi:[],snjor:[]};
 function teiknaVedurbreytingar(){
   VB=vedurbreytingar();teiknaVedurmerki(VB);
+  if(VB_FOKUS&&!VB.atridi.some(a=>a.teg===VB_FOKUS))VB_FOKUS=null;
+  if(VB_SV_SYNA)teiknaVbSvaedi(VB_FOKUS);else vbLag.clearLayers();teiknaVbSkyringu();
   const fj=new Set(VB.atridi.map(x=>x.teg)).size,b=document.getElementById('vb-hnappur');
   b.querySelector('.vb-fjoldi').textContent=fj;b.classList.toggle('virk',fj>0);
   b.querySelector('[data-i18n]').textContent=t('vb_hnappur');
@@ -3479,16 +3559,15 @@ function synaVedurbreytingar(endurnyja=false){
         ${a.pts||a.vidv?`<button type="button" class="vb-syna" data-i="${i}">🗺️ ${t('vb_syna')}</button>`:''}</div></li>`).join('')}</ul>`
     :`${rofar}<p class="kl-smatt">${t('vb_engar')}</p>`;
   d.insertAdjacentHTML('beforeend',`<p class="kl-smatt vb-sk">${t('vb_stutt')} <a href="#um">${t('lesaMeira')}</a></p>`);
-  teiknaVbSvaedi();
-  d.querySelector('.vb-rofi-sv').onchange=e=>{VB_SV_SYNA=e.target.checked;geyma.set('bs:vbsv',VB_SV_SYNA);
-    const o=d.querySelector('.vb-lina[aria-expanded="true"]');const a=o?VB.atridi[+o.dataset.i]:null;teiknaVbSvaedi(a&&!a.vidv?a.teg:null);};
+  setjaVbSyna(true);
+  d.querySelector('.vb-rofi-sv').onchange=e=>setjaVbSyna(e.target.checked);
   d.querySelector('.vb-rofi-vidv').onchange=e=>{const r=document.getElementById('vidvrofi');if(r){r.checked=e.target.checked;r.onchange();}};
   // „Sýna á korti“: færir kortið aðeins ef svæðið sést ekki (þysjar aldrei inn), og lætur það blikka
   d.querySelectorAll('.vb-syna').forEach(b=>b.onclick=()=>{const a=VB.atridi[+b.dataset.i];
     let bb=null;
     if(a.vidv){try{if(vidvLag.getLayers().length)bb=L.featureGroup(vidvLag.getLayers()).getBounds();}catch{}}
     else bb=L.latLngBounds(a.pts.map(e=>[e.p.lat-(e.p.hl??.125),e.p.lon-(e.p.hn??.25)]).concat(a.pts.map(e=>[e.p.lat+(e.p.hl??.125),e.p.lon+(e.p.hn??.25)])));
-    if(!a.vidv){if(!VB_SV_SYNA){VB_SV_SYNA=true;geyma.set('bs:vbsv',true);d.querySelector('.vb-rofi-sv').checked=true;}teiknaVbSvaedi(a.teg,true);}
+    if(!a.vidv){setjaVbFokus(a.teg,true);d.querySelector('.vb-rofi-sv').checked=true;}
     if(bb?.isValid()){const sp=erSimi()?{paddingTopLeft:[20,20],paddingBottomRight:[20,(spjald.classList.contains('samanbrotid')?70:spjald.offsetHeight)+20]}
         :{paddingTopLeft:[spjald.offsetWidth+40,30],paddingBottomRight:[30,30]};
       const syn=kort.getBounds();if(!syn.contains(bb))kort.flyToBounds(bb,{...sp,maxZoom:kort.getZoom(),duration:.6});}
@@ -3496,8 +3575,8 @@ function synaVedurbreytingar(endurnyja=false){
   d.querySelectorAll('.vb-lina').forEach(b=>b.onclick=()=>{
     const i=+b.dataset.i,a=VB.atridi[i],opna=b.getAttribute('aria-expanded')!=='true';
     d.querySelectorAll('.vb-lina').forEach(x=>{x.setAttribute('aria-expanded','false');x.nextElementSibling.hidden=true;x.parentElement.classList.remove('vb-valid');});
-    if(opna){b.setAttribute('aria-expanded','true');b.nextElementSibling.hidden=false;b.parentElement.classList.add('vb-valid');teiknaVbSvaedi(a.vidv?null:a.teg);}
-    else teiknaVbSvaedi();});
+    if(opna){b.setAttribute('aria-expanded','true');b.nextElementSibling.hidden=false;b.parentElement.classList.add('vb-valid');setjaVbFokus(a.vidv?null:a.teg);}
+    else setjaVbFokus(null);});
   spjald.hidden=false;if(!endurnyja)spjald.classList.remove('samanbrotid');
   spjald.querySelectorAll('[data-i18n-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.i18nAria)));
 }
