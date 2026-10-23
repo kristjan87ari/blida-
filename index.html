@@ -3201,8 +3201,8 @@ const OSM_FYRIRSPURNIR={
   sund:`[out:json][timeout:60];(nwr["leisure"="swimming_pool"]["name"]["access"!~"^(private|no)$"](${ISL_BOX});`+
        `nwr["leisure"="sports_centre"]["sport"~"swimming"](${ISL_BOX});nwr["leisure"="water_park"](${ISL_BOX});`+
        `nwr["amenity"="public_bath"](${ISL_BOX});`+
-       `nwr["name"~"([Ss]undlaug|[Ss]undhöll|laug$)"]["leisure"]["access"!~"^(private|no)$"](${ISL_BOX});`+
-       `nwr["name"~"([Ss]undlaug|[Ss]undhöll)"]["building"](${ISL_BOX}););out body center qt;`,
+       `nwr["sport"="swimming"]["name"]["access"!~"^(private|no)$"](${ISL_BOX});`+
+       `nwr["leisure"="sports_centre"]["name"~"[Ll]aug|[Hh]öll"](${ISL_BOX}););out body center qt;`,
   hlaup:`[out:json][timeout:90];(relation["route"~"^(running|hiking|foot|fitness_trail)$"]["name"](${ISL_BOX});way["leisure"="track"]["sport"~"running|athletics"](${ISL_BOX});way["highway"~"^(path|footway|track)$"]["name"]["access"!~"^(private|no)$"](${ISL_BOX}););out tags center qt;`,
   folf:`[out:json][timeout:60];(nwr["leisure"="disc_golf_course"](${ISL_BOX});nwr["sport"="disc_golf"](${ISL_BOX});node["disc_golf"~"^(basket|hole|tee)$"](${ISL_BOX}););out body center qt;`,
   fjoll:`[out:json][timeout:120];(node["natural"~"^(peak|volcano)$"]["name"](${ISL_BOX});nwr["natural"~"^(mountain_range|ridge)$"]["name"](${ISL_BOX}););out body geom;`,
@@ -3225,18 +3225,50 @@ const VARALISTAR={
     ["Svarfhólsvöllur, Selfossi",63.9300,-20.9600],["Strandarvöllur, Hellu",63.8200,-20.3300],["Kiðjabergsvöllur",64.0200,-20.7400],
     ["Vestmannaeyjavöllur",63.4280,-20.2800],["Jaðarsvöllur, Akureyri",65.6650,-18.1200],["Katlavöllur, Húsavík",66.0350,-17.3300],
     ["Ekkjufellsvöllur, Fellabæ",65.2900,-14.4500],["Silfurnesvöllur, Höfn",64.2550,-15.2000],["Tungudalsvöllur, Ísafirði",66.0630,-23.1800]],
-  sund:[["Laugardalslaug",64.1465,-21.8800],["Sundhöll Reykjavíkur",64.1430,-21.9230],["Vesturbæjarlaug",64.1470,-21.9670],["Sundlaug Kópavogs",64.1110,-21.9050],
-    ["Ásvallalaug, Hafnarfirði",64.0560,-21.9900],["Sundlaug Akureyrar",65.6800,-18.0960],["Sundhöll Selfoss",63.9360,-20.9970],["Sundlaugin á Hofsósi",65.8980,-19.4130],
-    ["Sundlaugin á Egilsstöðum",65.2640,-14.4050],["Jarðböðin við Mývatn",65.6310,-16.8480],["Gamla laugin, Flúðum",64.1370,-20.3090],["Bláa lónið",63.8800,-22.4490],
-    ["Sundlaug Húsavíkur",66.0440,-17.3420],["Sundlaugin á Höfn",64.2520,-15.2100],["Sundhöll Ísafjarðar",66.0710,-23.1250],["Sundlaugin í Stykkishólmi",65.0730,-22.7270],
-    ["Krossneslaug",66.0530,-21.5100],["Sundlaug Vestmannaeyja",63.4370,-20.2750],
-    ["Sundlaug Seltjarnarness",64.1530,-21.9950],["Árbæjarlaug",64.1170,-21.7900],["Breiðholtslaug",64.1070,-21.8350],["Grafarvogslaug",64.1400,-21.7750],
-    ["Salalaug, Kópavogi",64.0930,-21.8830],["Lágafellslaug, Mosfellsbæ",64.1650,-21.7050],["Sundhöll Hafnarfjarðar",64.0680,-21.9520],
-    ["Álftaneslaug",64.1000,-22.0100],["Ásgarðslaug, Garðabæ",64.0850,-21.9200],["Jaðarsbakkalaug, Akranesi",64.3180,-22.0700]],
+  sund:null,
   tjald:[["Tjaldsvæðið í Laugardal",64.1440,-21.8710],["Þingvellir, Leirar",64.2800,-21.0900],["Skaftafell",64.0160,-16.9660],["Ásbyrgi",66.0200,-16.5000],
     ["Landmannalaugar",63.9910,-19.0620],["Básar, Þórsmörk",63.6750,-19.4800],["Húsafell",64.6990,-20.8690],["Hamrar, Akureyri",65.6500,-18.1050],
     ["Tjaldsvæðið á Egilsstöðum",65.2630,-14.4000],["Tjaldsvæðið í Vík",63.4200,-19.0000],["Kirkjubæjarklaustur",63.7880,-18.0570],["Tjaldsvæðið á Höfn",64.2560,-15.2050],
     ["Reykjahlíð, Mývatni",65.6450,-16.9150],["Tjaldsvæðið í Stykkishólmi",65.0700,-22.7300],["Tungudalur, Ísafirði",66.0640,-23.1750],["Varmahlíð",65.5530,-19.4500]]};
+const SUNDLAUGAR=[
+  // Höfuðborgarsvæðið
+  ["Laugardalslaug",64.1465,-21.8800],["Sundhöll Reykjavíkur",64.1430,-21.9230],["Vesturbæjarlaug",64.1470,-21.9670],["Árbæjarlaug",64.1170,-21.7900],
+  ["Breiðholtslaug",64.1070,-21.8350],["Grafarvogslaug",64.1400,-21.7750],["Dalslaug, Úlfarsárdal",64.1450,-21.7400],["Klébergslaug, Kjalarnesi",64.2400,-21.7700],
+  ["Sundlaug Seltjarnarness",64.1530,-21.9950],["Sundlaug Kópavogs",64.1120,-21.9050],["Salalaug, Kópavogi",64.0930,-21.8830],["Ásgarðslaug, Garðabæ",64.0850,-21.9200],
+  ["Álftaneslaug",64.1000,-22.0100],["Sundhöll Hafnarfjarðar",64.0680,-21.9520],["Ásvallalaug, Hafnarfirði",64.0560,-21.9900],["Lágafellslaug, Mosfellsbæ",64.1650,-21.7050],["Varmárlaug, Mosfellsbæ",64.1630,-21.6900],
+  // Suðurnes
+  ["Vatnaveröld, Reykjanesbæ",63.9950,-22.5600],["Sundlaug Grindavíkur",63.8420,-22.4350],["Sundlaug Sandgerðis",64.0380,-22.7080],["Sundlaugin í Garði",64.0670,-22.6480],
+  ["Sundlaugin í Vogum",63.9810,-22.3840],["Bláa lónið",63.8800,-22.4490],
+  // Vesturland
+  ["Jaðarsbakkalaug, Akranesi",64.3180,-22.0700],["Sundlaug Borgarness",64.5390,-21.9150],["Sundlaugin Varmalandi",64.7200,-21.6000],["Sundlaugin Kleppjárnsreykjum",64.6600,-21.4300],
+  ["Sundlaugin Húsafelli",64.6990,-20.8690],["Krauma",64.6700,-21.4000],["Sundlaugin í Stykkishólmi",65.0730,-22.7270],["Sundlaug Grundarfjarðar",64.9240,-23.2580],
+  ["Sundlaug Ólafsvíkur",64.8940,-23.7100],["Lýsuhólslaug",64.8500,-23.2500],["Sundlaugin Laugum í Sælingsdal",65.2700,-21.7800],["Guðrúnarlaug",65.2680,-21.7700],
+  // Vestfirðir
+  ["Sundhöll Ísafjarðar",66.0710,-23.1250],["Sundlaug Bolungarvíkur",66.1500,-23.2500],["Sundlaug Flateyrar",66.0510,-23.5080],["Sundlaug Suðureyrar",66.1300,-23.5330],
+  ["Sundlaug Þingeyrar",65.8730,-23.4930],["Sundlaug Patreksfjarðar",65.5960,-23.9862],["Sundlaug Tálknafjarðar",65.6330,-23.8250],["Pollurinn, Tálknafirði",65.6490,-23.8550],
+  ["Sundlaug Bíldudals",65.6840,-23.6010],["Birkimelur, Barðaströnd",65.5300,-23.1500],["Sundlaugin Reykhólum",65.4460,-22.2060],["Sundlaugin á Hólmavík",65.7060,-21.6770],
+  ["Gvendarlaug, Bjarnarfirði",65.7500,-21.5200],["Krossneslaug",66.0530,-21.5100],["Sundlaugin Reykjanesi við Djúp",65.9200,-22.4300],
+  // Norðurland vestra
+  ["Sundlaugin á Hvammstanga",65.3950,-20.9450],["Sundlaug Blönduóss",65.6600,-20.2800],["Sundlaugin Húnavöllum",65.5300,-20.1200],["Sundlaugin á Skagaströnd",65.8260,-20.3200],
+  ["Sundlaug Sauðárkróks",65.7460,-19.6400],["Sundlaugin í Varmahlíð",65.5530,-19.4500],["Sundlaugin á Hofsósi",65.8980,-19.4130],["Sundhöll Siglufjarðar",66.1530,-18.9110],
+  // Norðurland eystra
+  ["Sundlaug Ólafsfjarðar",66.0730,-18.6520],["Sundlaug Dalvíkur",65.9700,-18.5290],["Sundlaug Hríseyjar",66.0000,-18.3800],["Sundlaug Akureyrar",65.6800,-18.0960],
+  ["Glerárlaug, Akureyri",65.6900,-18.1100],["Hrafnagilslaug",65.5800,-18.1200],["Þelamerkurlaug",65.7900,-18.2500],["Sundlaug Grenivíkur",65.9470,-18.1800],
+  ["Sundlaugin á Laugum",65.7200,-17.3700],["Jarðböðin við Mývatn",65.6310,-16.8480],["Sundlaugin í Reykjahlíð",65.6450,-16.9100],["Sundlaug Húsavíkur",66.0440,-17.3420],
+  ["GeoSea, Húsavík",66.0530,-17.3500],["Sundlaugin í Lundi, Öxarfirði",66.0700,-16.4800],["Sundlaug Raufarhafnar",66.4550,-15.9460],["Sundlaug Þórshafnar",66.1980,-15.3300],
+  // Austurland
+  ["Sundlaug Vopnafjarðar",65.7560,-14.8300],["Selárlaug, Vopnafirði",65.8000,-14.8500],["Sundlaugin á Egilsstöðum",65.2640,-14.4050],["Vök Baths",65.2900,-14.5200],
+  ["Sundlaugin Hallormsstað",65.1000,-14.7400],["Sundhöll Seyðisfjarðar",65.2590,-14.0095],["Sundlaug Neskaupstaðar",65.1475,-13.6869],["Sundlaug Eskifjarðar",65.0736,-14.0158],
+  ["Sundlaug Fáskrúðsfjarðar",64.9330,-14.0170],["Sundlaug Stöðvarfjarðar",64.8300,-13.8700],["Sundlaug Breiðdalsvíkur",64.7900,-14.0100],["Sundlaug Djúpavogs",64.6560,-14.2850],
+  // Suðausturland
+  ["Sundlaugin á Höfn",64.2520,-15.2100],["Sundlaugin Hofgarði, Öræfum",63.9700,-16.6800],["Sundlaugin á Kirkjubæjarklaustri",63.7900,-18.0600],
+  // Suðurland
+  ["Sundlaugin í Vík",63.4186,-19.0060],["Seljavallalaug",63.5650,-19.6100],["Sundlaugin á Hvolsvelli",63.7529,-20.2245],["Sundlaugin á Hellu",63.8350,-20.4000],
+  ["Sundlaugin Laugalandi í Holtum",63.8900,-20.4700],["Sundhöll Selfoss",63.9360,-20.9970],["Sundlaugin í Laugaskarði, Hveragerði",64.0030,-21.1800],
+  ["Sundlaugin í Þorlákshöfn",63.8560,-21.3830],["Sundlaugin á Stokkseyri",63.8360,-21.0600],["Sundlaugin á Borg, Grímsnesi",64.0700,-20.7100],
+  ["Sundlaugin í Reykholti, Biskupstungum",64.1700,-20.4400],["Sundlaugin á Laugarvatni",64.2140,-20.7300],["Laugarvatn Fontana",64.2150,-20.7280],
+  ["Sundlaugin á Flúðum",64.1350,-20.3100],["Gamla laugin, Flúðum",64.1370,-20.3090],["Sundlaugin í Brautarholti, Skeiðum",64.0300,-20.4700],["Sundlaug Vestmannaeyja",63.4370,-20.2750]];
+VARALISTAR.sund=SUNDLAUGAR;
 const LISTA_VEFIR={sund:'https://sundlaugar.is',tjald:'https://tjalda.is',golf:'https://rastimar.golf.is/vellir',folf:'https://www.folf.is/folfvellir-a-islandi-4/'};
 // Veiðivötn: nafn og áætluð hnit; nákvæm staðsetning sótt úr OpenStreetMap eftir nafni
 const VEIDIVOTN=[["Þingvallavatn",64.18,-21.15],["Úlfljótsvatn",64.105,-21.05],["Elliðavatn",64.085,-21.765],["Vífilsstaðavatn",64.081,-21.872],
@@ -3312,16 +3344,16 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi','hlaup']){
-    if(geyma.get('bs:listi6:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi8:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
 }
 async function saekjaStadi_(lykill){
-  const geymt=geyma.get('bs:listi6:'+lykill);
+  const geymt=geyma.get('bs:listi8:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
-    const j=await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:25000),pts=[];
+    const j=await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
     for(const e of j.elements||[]){
       const st=stadsetningOSM(e),tg=e.tags||{};if(!st)continue;const[la,lo]=st;
       const ele=parseFloat(String(tg.ele||'').replace(',','.'));
@@ -3336,8 +3368,11 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi6:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi8:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
+    if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
+      SUNDLAUGAR.forEach(([n,la,lo],i)=>{if(!pts.some(q=>km(q,{lat:la,lon:lo})<1.2))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
+    }
     if(lykill==='hlaup'){ // sami stígur í mörgum bútum: einn punktur á hvert nafn innan 3 km
       const eftirNafni=new Map();
       for(const p of pts){const l=eftirNafni.get(p.nafn)||[];if(l.some(q=>km(q,p)<3))continue;l.push(p);eftirNafni.set(p.nafn,l);}
@@ -3352,10 +3387,11 @@ async function saekjaStadi_(lykill){
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi6:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi8:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
+    if(lykill==='sund')return{pts:SUNDLAUGAR.map(([n,la,lo],i)=>({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null})),vara:false};
     return{pts:VARALISTAR[lykill].map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,
       nafn:ele?`${n} (${ele} m)`:n,vefur:null})),vara:true};
   }
@@ -3364,7 +3400,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi6:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi8:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
@@ -3391,7 +3427,11 @@ async function hladaLista(lykill){
     p.dT=(p.ele!=null&&sx.ele!=null)?-.0065*(p.ele-sx.ele):0;if(!p.nafn)p.nafn=naestiBaer(p);}
   LISTAR[lykill]={pts,gogn,vara,saekir:false};
   reikna();
+  // Varalisti notaður: reyna aftur í bakgrunni eftir 45 sek. (mest þrisvar) og skipta í heildarlistann ef hann kemur
+  if(vara&&(TILRAUNIR[lykill]=(TILRAUNIR[lykill]||0)+1)<=3)setTimeout(()=>{if(LISTAR[lykill]?.vara&&!LISTAR[lykill].saekir){delete LISTAR[lykill];
+    if(FLOKKAR[S.flokkur]?.stadir===lykill)reikna();}},45000);
 }
+const TILRAUNIR={};
 const listaPunktar=l=>l?.pts||l?.bradaPts||[];
 function stadaListi(lykill){
   if(lykill==='skidi')return{pts:SKIDASVAEDI,gogn:S.gogn};
