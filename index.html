@@ -2432,7 +2432,10 @@ S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
 const HAEDBIL_LYKLAR=['oll','lag','mid','har'];
 S.fjallHaed=HAEDBIL_LYKLAR.includes(geyma.get('bs:fjallhaed2'))?geyma.get('bs:fjallhaed2'):'oll';
 const iHaedbili=x=>{const e=x.ele;switch(S.fjallHaed){
-  case'lag':return e!=null&&e<300;case'mid':return e!=null&&e>=300&&e<=700;case'har':return e!=null&&e>700;default:return e==null||e>=80;}};
+  case'lag':return e!=null&&e<300;case'mid':return e!=null&&e>=300&&e<=700;case'har':return e!=null&&e>700;default:return e==null||e>=(S.svaedi?80:200);}};
+// Hæðir í þéttbýli (undir 250 m) eru ekki tillögur: innan 10 km frá miðbæ Reykjavíkur, 2,5 km frá öðrum bæjum
+const iThettbyli=x=>x.ele!=null&&x.ele<250&&(typeof BAEJA_GOGN!=='undefined'&&BAEJA_GOGN.length?BAEJA_GOGN:KAUPSTADIR.map(([n,la,lo,teg])=>({lat:la,lon:lo,teg})))
+  .some(b=>km(x,b)<(b.teg==='city'?10:2.5));
 function teiknaHaedval(){
   const el=document.getElementById('haedval');if(!el)return;
   const syna=S.flokkur==='fjall'&&S.fjallHamur==='tindar';el.hidden=!syna;if(!syna)return;
@@ -2689,7 +2692,7 @@ function reikna(){
   let frambod,uppspretta;
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
     // Fjöll: á landslistanum aðeins 200 m og hærri; á afmörkuðu svæði líka minni fjöll (frá 80 m)
-    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||!iHaedbili(x))));uppspretta=l.gogn;}
+    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||!iHaedbili(x)||iThettbyli(x))));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
