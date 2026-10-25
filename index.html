@@ -228,6 +228,17 @@ path.baejapunktur:hover{stroke-width:3;stroke-opacity:.9}
 path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 @keyframes leitblikk{50%{stroke-opacity:.25;fill-opacity:.05}}
 @media (prefers-reduced-motion:reduce){path.leit-merki{animation:none}}
+.gl-li{display:inline-block;font-size:11.5px;color:var(--muted);margin-top:3px}
+.gl-yfirlit{margin:8px 0;padding:8px 10px;background:var(--chip);border-radius:9px;font-size:13px}
+.gl-yfirlit p{margin:2px 0}
+.gl-titill{font-weight:700;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:6px!important}
+.gl-afangar{list-style:none;margin:2px 0 4px;padding:0;display:grid;gap:3px}
+.gl-afangar li{display:grid!important;grid-template-columns:12px 1fr;gap:7px;align-items:baseline;padding:0!important;border:0!important;cursor:auto;font-size:13px}
+.gl-afangar i{width:10px;height:10px;border-radius:50%;transform:translateY(1px)}
+.gl-afangar small{color:var(--muted)}
+.gl-utan{color:#c2410c;font-weight:500}
+.gl-besti{margin-top:6px!important}
+.gl-ar{color:#1c7ed6}
 .abyrgd{background:#fff4e6;border:1px solid #ffc078;border-left:4px solid #f76707;border-radius:8px;padding:7px 10px;margin:8px 0;font-size:13px;line-height:1.45}
 .abyrgd p{margin:0}
 .abyrgd details{margin-top:3px}
@@ -681,7 +692,7 @@ details .likan small{color:var(--muted)}
 <body>
 <header>
   <div class="topp">
-    <h1 class="vm-h1"><a href="#" class="vorumerki" aria-label="Vedra"><svg class="merki" viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="12" r="5.2" class="m-sol"/><path class="m-fjall" d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z"/><path class="m-snjor" d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z"/><path class="m-vindur" d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4"/></svg><span class="vm-texti"><span class="vm-nafn">Vedra</span><span class="vm-slagord" data-i18n="slagord">Þitt veður. Þitt ævintýri.</span></span></a></h1>
+    <h1 class="vm-h1"><a href="./" class="vorumerki" onclick="event.preventDefault();location.reload()" aria-label="Vedra"><svg class="merki" viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="12" r="5.2" class="m-sol"/><path class="m-fjall" d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z"/><path class="m-snjor" d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z"/><path class="m-vindur" d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4"/></svg><span class="vm-texti"><span class="vm-nafn">Vedra</span><span class="vm-slagord" data-i18n="slagord">Þitt veður. Þitt ævintýri.</span></span></a></h1>
     <nav class="valmynd">
       <a href="#" data-sida="" data-i18n="nav_kort">Kort</a>
       <a href="#hvernig" data-sida="hvernig" data-i18n="nav_hvernig">Hvernig virkar þetta</a>
@@ -2201,6 +2212,26 @@ es:['Bajo tu responsabilidad','El senderismo de montaña es siempre bajo tu prop
 for(const[mal,v]of Object.entries(ABYRGD))if(I18N[mal])[I18N[mal].ab_titill,I18N[mal].ab_stutt,I18N[mal].ab_lang,I18N[mal].ab_meira]=v;
 const abyrgdHtml=()=>`<div class="abyrgd"><p><strong>⛑️ ${t('ab_titill')}</strong> ${t('ab_stutt')}</p>
   <details><summary>${t('ab_meira')}</summary><p>${t('ab_lang').replace('safetravel.is','<a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>')}</p></details></div>`;
+// ---------------------------------------------------------------- Þýðingar: gönguleiðir
+const GL_F={is:['Gönguleiðir','Klassískar gönguleiðir bornar saman, áfanga fyrir áfanga á réttum degi: litlar vindhviður, þurrt og gott skyggni. Versti áfanginn vegur þyngst.','Flestar hálendisleiðir eru aðeins opnar frá júlí fram í september. Línurnar á kortinu eru einfaldaðar og henta ekki til rötunar.'],
+en:['Hiking trails','Classic hiking trails compared stage by stage on the right day: few gusts, dry with good visibility. The worst stage counts most.','Most highland trails are only open from July to September. The lines on the map are simplified and not suitable for navigation.'],
+da:['Vandreruter','Klassiske vandreruter sammenlignet etape for etape på den rigtige dag: få vindstød, tørt og god sigtbarhed. Den værste etape vægter mest.','De fleste højlandsruter er kun åbne fra juli til september. Linjerne på kortet er forenklede og egner sig ikke til navigation.'],
+sv:['Vandringsleder','Klassiska vandringsleder jämförda etapp för etapp på rätt dag: få vindbyar, torrt och god sikt. Den sämsta etappen väger tyngst.','De flesta högländsleder är bara öppna från juli till september. Linjerna på kartan är förenklade och inte avsedda för navigering.'],
+pl:['Szlaki trekkingowe','Porównanie klasycznych szlaków etap po etapie we właściwym dniu: mało porywów, sucho i dobra widoczność. Najgorszy etap liczy się najbardziej.','Większość szlaków w interiorze jest otwarta tylko od lipca do września. Linie na mapie są uproszczone i nie nadają się do nawigacji.'],
+fr:['Randonnées','Comparaison des grandes randonnées étape par étape, le bon jour : peu de rafales, temps sec et bonne visibilité. L’étape la plus difficile compte le plus.','La plupart des itinéraires des hautes terres ne sont ouverts que de juillet à septembre. Les lignes sur la carte sont simplifiées et ne conviennent pas à la navigation.'],
+zh:['徒步路线','按天逐段比较经典徒步路线：阵风少、干燥且能见度好。最差的路段权重最大。','大多数高地路线仅在 7 月至 9 月开放。地图上的线路为简化示意，不适合导航。'],
+es:['Rutas de senderismo','Comparación de rutas clásicas etapa por etapa en el día correspondiente: pocas rachas, seco y con buena visibilidad. La peor etapa es la que más cuenta.','La mayoría de las rutas de las tierras altas solo abren de julio a septiembre. Las líneas del mapa están simplificadas y no sirven para orientarse.']};
+const GL_L=['gl_dagur','gl_besti','gl_utan','gl_lengd','gl_lengd1','gl_spa','gl_ar','gl_afangar','gl_nobesti'];
+const GL_T={is:['Dagur {n}','Besti upphafsdagur','Utan tímabils: leiðin er yfirleitt opin {t}.','{km} km, {d} dagar','{km} km, 1 dagur','Spáin nær ekki yfir alla daga leiðarinnar.','Talsverð úrkoma á leiðinni: ár geta vaxið og vöð orðið hættuleg.','Áfangar','Spáin nær ekki nógu langt til að meta upphafsdag.'],
+en:['Day {n}','Best start day','Out of season: the trail is usually open {t}.','{km} km, {d} days','{km} km, 1 day','The forecast does not cover all days of the trail.','Considerable precipitation on the trail: rivers may rise and crossings become dangerous.','Stages','The forecast does not reach far enough to suggest a start day.'],
+da:['Dag {n}','Bedste startdag','Uden for sæsonen: ruten er normalt åben {t}.','{km} km, {d} dage','{km} km, 1 dag','Prognosen dækker ikke alle rutens dage.','Betydelig nedbør på ruten: elve kan stige, og vadesteder kan blive farlige.','Etaper','Prognosen rækker ikke langt nok til at foreslå en startdag.'],
+sv:['Dag {n}','Bästa startdag','Utanför säsong: leden är oftast öppen {t}.','{km} km, {d} dagar','{km} km, 1 dag','Prognosen täcker inte ledens alla dagar.','Betydande nederbörd längs leden: älvar kan stiga och vadställen bli farliga.','Etapper','Prognosen sträcker sig inte tillräckligt långt för att föreslå en startdag.'],
+pl:['Dzień {n}','Najlepszy dzień startu','Poza sezonem: szlak jest zwykle otwarty {t}.','{km} km, {d} dni','{km} km, 1 dzień','Prognoza nie obejmuje wszystkich dni szlaku.','Znaczne opady na szlaku: rzeki mogą wezbrać, a brody stać się niebezpieczne.','Etapy','Prognoza nie sięga wystarczająco daleko, by zaproponować dzień startu.'],
+fr:['Jour {n}','Meilleur jour de départ','Hors saison : l’itinéraire est généralement ouvert {t}.','{km} km, {d} jours','{km} km, 1 jour','La prévision ne couvre pas tous les jours de l’itinéraire.','Précipitations importantes sur l’itinéraire : les rivières peuvent monter et les gués devenir dangereux.','Étapes','La prévision ne va pas assez loin pour suggérer un jour de départ.'],
+zh:['第 {n} 天','最佳出发日','非开放季节：该路线通常在{t}开放。','{km} 公里，{d} 天','{km} 公里，1 天','预报未覆盖路线的所有天数。','沿途降水较多：河水可能上涨，涉水点可能变得危险。','路段','预报时长不足，无法推荐出发日。'],
+es:['Día {n}','Mejor día de inicio','Fuera de temporada: la ruta suele estar abierta {t}.','{km} km, {d} días','{km} km, 1 día','La previsión no cubre todos los días de la ruta.','Precipitación considerable en la ruta: los ríos pueden crecer y los vados volverse peligrosos.','Etapas','La previsión no alcanza lo suficiente para sugerir un día de inicio.']};
+for(const mal of Object.keys(GL_T)){const L=I18N[mal];if(!L)continue;GL_L.forEach((k,i)=>L[k]=GL_T[mal][i]);if(L.flokkar&&mal!=='is')L.flokkar.gongur=GL_F[mal];}
+
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2262,6 +2293,10 @@ const FLOKKAR = {
     haed:e=>laegra(e,400,800),
     thaettir:m=>[[.35,laegra(m.vindur,2,9)],[.15,laegra(m.hvida,8,16)],[.25,laegra(m.urkoma,0,3)],[.15,trap(m.T,1,11,22,28)],[.10,m.sol]],
     athugasemd:'Hjólaðu aðeins á vegum og stígum. Hjólreiðar utan vega og stíga geta valdið skemmdum á viðkvæmri náttúru og eru víða óheimilar.'},
+  gongur:{nafn:'Gönguleiðir',takn:'🥾',fra:8,til:18,stadir:'gongur',
+    lysing:'Klassískar gönguleiðir bornar saman, áfanga fyrir áfanga á réttum degi: litlar vindhviður, þurrt og gott skyggni. Versti áfanginn vegur þyngst.',
+    athugasemd:'Flestar hálendisleiðir eru aðeins opnar frá júlí fram í september. Línurnar á kortinu eru einfaldaðar og henta ekki til rötunar.',
+    haed:()=>1,thaettir:m=>FLOKKAR.fjall.thaettir(m)},
   hlaup:{nafn:'Útihlaup',takn:'🏃',fra:7,til:21,stadir:'hlaup',
     lysing:'Hlaupaleiðir, göngustígar, skógarstígar og hlaupabrautir bornar saman: lítill vindur, svalt og þurrt milli kl. 7 og 21.',
     athugasemd:'Hlaupaleiðir koma úr OpenStreetMap. Í hálku og myrkri skaltu velja upplýsta stíga og nota endurskin.',
@@ -2613,13 +2648,14 @@ function reikna(){
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
     frambod=l.pts.filter(x=>!sv||sv.b.contains([x.lat,x.lon]));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
+  if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
   if(!f.ofugt&&!f.haetta){const vg=vidvVirkar(g.a,g.b);
     if(vg.length)for(const a of allir){const v=verstaVidv(a,vg);if(v){a.vidv=v.litur;a.stig=+(a.stig*VID_STUDULL[v.litur]).toFixed(1);}}}
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
   const rodun=[...allir].sort((a,b)=>b.stig-a.stig),n=f.stadir==='skidi'?SKIDASVAEDI.length:f.stadir==='gonguskidi'?GONGUSKIDI.length:S.fjoldi,
-    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi')?0:f.stadir==='sund'?.8:f.stadir==='fjoll'?3:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.8:f.stadir==='fjoll'?3:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
@@ -2782,7 +2818,8 @@ function syna(i,fljuga=true){
   d.innerHTML=`<p class="vt-lina"><span class="vt-stort" aria-hidden="true">${w.takn}</span>${w.ord}</p><p class="gildi-lina">${gildistexti(a)}</p>
     <p>${t(f.haetta?'haettuvisir':f.ofugt?'ovedursvisir':'stig',{x:fm(a.stig)})} ${ovissa(a)}.</p>
     ${(f.haetta||f.ofugt)?'':`<p class="likur-lina">📊 ${t('lk_lang',{p:likur(a)})}</p>`}
-    ${S.flokkur==='fjall'?abyrgdHtml():''}
+    ${S.flokkur==='gongur'&&a.leid?glHtml(a):''}
+    ${(S.flokkur==='fjall'||S.flokkur==='gongur')?abyrgdHtml():''}
     ${a.listi==='fjoll'?(()=>{const e=erfidleiki(a);return e?`<p class="erf-lina">${t('erf_titill')}: ${ERF_TAKN[e.n]} <strong>${t('erf_'+e.n)}</strong>${e.h?' ('+t('erf_vedur')+')':''}</p>`:'';})():''}
     ${a.vidv?`<p class="vidv-merki"><i class="vidv-litur vl-${a.vidv}"></i>${t('vid_stad',{x:t(VID_HEITI[a.vidv])})}</p>`:''}
     ${f.haetta?`<p class="smatt">${t('haettaSmatt')}</p>`:''}
@@ -2796,7 +2833,8 @@ function syna(i,fljuga=true){
   tengjaAfrita(d);
   if(a.listi){const ytri=LISTA_VEFIR[a.listi],nafnHreint=a.nafn.replace(/\s*\(\d+ m\)$/,'');
     const vefur=a.vefur?`<a class="skida-vefur" href="${/^https?:/.test(a.vefur)?a.vefur:'https://'+a.vefur}" target="_blank" rel="noopener">🔗 ${t('ls_vefur')}</a>`:'';
-    const meira=a.listi==='veidi'?`<div class="veidileyfi"><p>🎫 <strong>${t('ls_veidileyfi')}</strong></p><p class="veidivefir">${VEIDIVEFIR.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</p></div>`
+    const meira=a.listi==='gongur'?''
+      :a.listi==='veidi'?`<div class="veidileyfi"><p>🎫 <strong>${t('ls_veidileyfi')}</strong></p><p class="veidivefir">${VEIDIVEFIR.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</p></div>`
       :(a.listi==='fjoll'||a.listi==='hlaup')?`<a class="skida-vefur" href="${wikilocSlod(a.lat-.08,a.lon-.17,a.lat+.08,a.lon+.17)}" target="_blank" rel="noopener">🥾 ${t('wl_kring')}</a>`
       :`<a class="skida-vefur" href="${ytri}" target="_blank" rel="noopener">${LISTA_TAKN[a.listi][0]} ${t(LISTA_TAKN[a.listi][1])}</a>`;
     d.querySelector('.tenglar').insertAdjacentHTML('beforebegin',vefur+meira);}
@@ -2849,7 +2887,7 @@ function teikna(skilabod){
       st=ofugt?(sk>=60?'st-mikil':sk>=40?'st-midl':'st-litil'):(sk>=80?'st-frab':sk>=60?'st-god':sk>=40?'st-saem':'st-sidri');
     li.innerHTML=`<span class="nr" style="background:${radLitur(i,S.nidurstada.length)}">${i+1}</span>
       <span class="li-efni"><span class="li-nafn"><span class="vt-lita" title="${w.ord}" aria-label="${w.ord}">${w.takn}</span><span class="nafn">${a.nafn}</span></span>
-      ${a.listi==='fjoll'?erfMerki(a):''}<span class="gildi">${gildistexti(a)}</span>${(f.haetta||f.ofugt)?'':`<span class="likur" title="${t('lk_skyring')}">📊 ${t('lk_stutt',{p:likur(a)})}</span>`}</span>
+      ${a.listi==='fjoll'?erfMerki(a):''}${a.leid?`<span class="gl-li">🥾 ${a.leid.dagar.length>1?t('gl_lengd',{km:a.leid.km,d:a.leid.dagar.length}):t('gl_lengd1',{km:a.leid.km})}${a.innan?'':' 📅'}</span>`:''}<span class="gildi">${gildistexti(a)}</span>${(f.haetta||f.ofugt)?'':`<span class="likur" title="${t('lk_skyring')}">📊 ${t('lk_stutt',{p:likur(a)})}</span>`}</span>
       <span class="stig"><span class="stigpill ${st}">${fm(a.stig,0)}</span><small class="${a.stada==='nýr'?'nytt':''}">${t(a.stada==='nýr'?'nyr':'obreytt')}</small>
         <button type="button" class="li-kl" title="${t('kl_hnappur')}" aria-label="${t('kl_hnappur')}">👕</button></span>`;
     li.querySelector('.li-kl').onclick=e=>{e.stopPropagation();KLOPID=true;syna(i);};
@@ -2877,6 +2915,7 @@ function teikna(skilabod){
   document.getElementById('timi2').textContent=document.getElementById('timi').textContent;
   teiknaSvaediKassa();klTeikna();
   if(typeof teiknaVedurbreytingar==='function')teiknaVedurbreytingar();
+  if(typeof teiknaGonguleidir==='function')teiknaGonguleidir();
   if(vbVarOpinn)synaVedurbreytingar(true);
   if(vpVarOpinn&&VP.p)synaPunkt(false);
 }
@@ -3064,7 +3103,7 @@ function myrkurFyrir(p){const dR=km(p,{lat:64.13,lon:-21.9}),dA=km(p,{lat:65.68,
 function klaednadur(fk,m,p,g){
   const T=m.T??5,W=m.vindur??3,G=m.hvida??W*1.5,P=m.urkoma??0,SD=m.snjor??0,sol=m.sol??0;
   const F=vindkaeling(T,W),man=new Date(g.a).getUTCMonth(),klst=Math.max(1,(g.b-g.a)/36e5);
-  const virk={hlaup:7,fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2,folf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2,veidi:-2}[fk]??0;
+  const virk={gongur:4,hlaup:7,fjall:4,hjol:5,skidi:6,alpaskidi:3,rjupa:3,golf:2,folf:2}[fk]??0,kyrr={nordurljos:-4,utilega:-1,verst:-2,veidi:-2}[fk]??0;
   const Te=F+virk+kyrr,fot=new Set(),med=[],vita=[];
   const blautt=P>=1||P/klst>=.3,mjogBlautt=P>=4,hvasst=W>=8||G>=15,snjor=SD>=.05,dimmt=man>=9||man<=1;
   // Efri hluti eftir upplifuðum hita, leiðréttum fyrir hreyfingu
@@ -3226,7 +3265,7 @@ const OSM_FYRIRSPURNIR={
        `nwr["leisure"="sports_centre"]["name"~"[Ll]aug|[Hh]öll"](${ISL_BOX}););out body center qt;`,
   hlaup:`[out:json][timeout:90];(relation["route"~"^(running|hiking|foot|fitness_trail)$"]["name"](${ISL_BOX});way["leisure"="track"]["sport"~"running|athletics"](${ISL_BOX});way["highway"~"^(path|footway|track)$"]["name"]["access"!~"^(private|no)$"](${ISL_BOX}););out tags center qt;`,
   folf:`[out:json][timeout:60];(nwr["leisure"="disc_golf_course"](${ISL_BOX});nwr["sport"="disc_golf"](${ISL_BOX});node["disc_golf"~"^(basket|hole|tee)$"](${ISL_BOX}););out body center qt;`,
-  fjoll:`[out:json][timeout:120];(node["natural"~"^(peak|volcano|hill)$"]["name"](${ISL_BOX});nwr["natural"~"^(mountain_range|ridge)$"]["name"](${ISL_BOX}););out body geom;`,
+  fjoll:`[out:json][timeout:120];(node["natural"~"^(peak|volcano)$"]["name"](${ISL_BOX});nwr["natural"~"^(mountain_range|ridge)$"]["name"](${ISL_BOX}););out body geom;`,
   veidi:null,
   golf:`[out:json][timeout:60];(nwr["leisure"="golf_course"](${ISL_BOX}););out tags geom;`,
   tjald:`[out:json][timeout:60];(nwr["tourism"~"^(camp_site|caravan_site)$"]["access"!~"^(private|no)$"](${ISL_BOX}););out body center qt;`};
@@ -3365,13 +3404,14 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi','hlaup']){
-    if(geyma.get('bs:listi9:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi10:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
 }
 async function saekjaStadi_(lykill){
-  const geymt=geyma.get('bs:listi9:'+lykill);
+  if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
+  const geymt=geyma.get('bs:listi10:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const j=await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
@@ -3389,7 +3429,7 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi9:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi10:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
     if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
       SUNDLAUGAR.forEach(([n,la,lo],i)=>{if(!pts.some(q=>km(q,{lat:la,lon:lo})<1.2))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
@@ -3408,7 +3448,7 @@ async function saekjaStadi_(lykill){
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi9:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi10:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
@@ -3421,7 +3461,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi9:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi10:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
@@ -3492,6 +3532,7 @@ new SvaediStjorn({position:'topleft'}).addTo(kort);
    b.innerHTML=`<span class="sv-i" aria-hidden="true">${takn}</span><span class="sv-t">${heiti}</span>`;b.removeAttribute('title');b.setAttribute('aria-label',heiti);});};
  // Endurbyggja eftir að smellur hefur klárast (annars missir kortið tengingu við hnappinn og telur smellinn á kortið)
  skipta();let bid=null;new MutationObserver(()=>{clearTimeout(bid);bid=setTimeout(skipta,0);}).observe(sv,{subtree:true,childList:true,characterData:true});}
+document.querySelector('.vorumerki')?.addEventListener('click',e=>{e.preventDefault();history.replaceState(null,'',location.pathname+location.search);location.reload();});
 const svHjalp=document.createElement('div');svHjalp.id='sv-hjalp';svHjalp.setAttribute('role','status');kortEl.appendChild(svHjalp);
 const popW=()=>Math.min(300,innerWidth-70);
 
@@ -3759,8 +3800,151 @@ function baeirIgrennd(pts,max=4){
     if(best&&!tel.has(best))tel.set(best,NEFNIFALL[best]||best);if(tel.size>=max)break;}
   return[...tel.values()];
 }
-const VB_LITIR={skafr:'#ae3ec9',kolnun:'#15aabf',halka:'#e03131',snjor:'#339af0',vindur:'#868e96',urkoma:'#1c7ed6',naeturfrost:'#5c7cfa',frost:'#74c0fc'};
+const VB_LITIR={skafr:'#ae3ec9',kolnun:'#15aabf',halka:'#e03131',snjor:'#339af0',vindur:'#f76707',urkoma:'#1c7ed6',naeturfrost:'#5c7cfa',frost:'#74c0fc'};
 kort.createPane('vbsv').style.zIndex=390;
+// ---------------------------------------------------------------- Gönguleiðir: áfangar, áningarstaðir (nafn, breidd, lengd, hæð) og tímabil
+// Hnit og hæð eru nálgun, nóg fyrir veðurspá en ekki til rötunar.
+const GONGULEIDIR=[
+ {nafn:'Laugavegurinn',km:55,erf:2,man:[7,9],dagar:[
+   [['Landmannalaugar',63.990,-19.060,600],['Hrafntinnusker',63.933,-19.165,1050]],
+   [['Hrafntinnusker',63.933,-19.165,1050],['Álftavatn',63.857,-19.226,550]],
+   [['Álftavatn',63.857,-19.226,550],['Emstrur',63.766,-19.373,500]],
+   [['Emstrur',63.766,-19.373,500],['Þórsmörk',63.683,-19.516,230]]]},
+ {nafn:'Fimmvörðuháls',km:25,erf:3,man:[6,9],dagar:[
+   [['Skógar',63.529,-19.511,30],['Fimmvörðuháls',63.618,-19.437,1000],['Básar',63.675,-19.484,230]]]},
+ {nafn:'Hellismannaleið',km:56,erf:2,man:[7,9],dagar:[
+   [['Rjúpnavellir',64.000,-19.970,200],['Áfangagil',64.030,-19.690,320]],
+   [['Áfangagil',64.030,-19.690,320],['Landmannahellir',64.040,-19.270,590]],
+   [['Landmannahellir',64.040,-19.270,590],['Landmannalaugar',63.990,-19.060,600]]]},
+ {nafn:'Sveinstindur – Skælingar',km:45,erf:3,man:[7,8],dagar:[
+   [['Sveinstindur',64.083,-18.410,650],['Skælingar',63.980,-18.520,500]],
+   [['Skælingar',63.980,-18.520,500],['Hólaskjól',63.906,-18.607,300]]]},
+ {nafn:'Strútsstígur',km:45,erf:2,man:[7,9],dagar:[
+   [['Hólaskjól',63.906,-18.607,300],['Álftavötn',63.850,-18.700,550]],
+   [['Álftavötn',63.850,-18.700,550],['Strútur',63.836,-18.980,530]],
+   [['Strútur',63.836,-18.980,530],['Hvanngil',63.833,-19.210,600]]]},
+ {nafn:'Lónsöræfi',km:55,erf:3,man:[7,8],dagar:[
+   [['Snæfellsskáli',64.800,-15.620,800],['Geldingafell',64.690,-15.360,850]],
+   [['Geldingafell',64.690,-15.360,850],['Egilssel',64.620,-15.200,700]],
+   [['Egilssel',64.620,-15.200,700],['Múlaskáli',64.556,-15.150,300]],
+   [['Múlaskáli',64.556,-15.150,300],['Stafafell',64.420,-15.020,30]]]},
+ {nafn:'Víknaslóðir',km:50,erf:2,man:[6,9],dagar:[
+   [['Borgarfjörður eystri',65.522,-13.810,20],['Breiðavík',65.470,-13.680,20]],
+   [['Breiðavík',65.470,-13.680,20],['Húsavík eystri',65.390,-13.740,20]],
+   [['Húsavík eystri',65.390,-13.740,20],['Loðmundarfjörður',65.370,-13.880,20]],
+   [['Loðmundarfjörður',65.370,-13.880,20],['Seyðisfjörður',65.259,-14.010,20]]]},
+ {nafn:'Kjalvegur hinn forni',km:40,erf:1,man:[7,8],dagar:[
+   [['Hvítárnes',64.620,-19.770,420],['Þverbrekknamúli',64.730,-19.620,650]],
+   [['Þverbrekknamúli',64.730,-19.620,650],['Þjófadalir',64.800,-19.700,700]],
+   [['Þjófadalir',64.800,-19.700,700],['Hveravellir',64.866,-19.560,640]]]},
+ {nafn:'Hornstrandir: Hesteyri – Hornvík',km:40,erf:3,man:[7,8],dagar:[
+   [['Hesteyri',66.330,-22.870,10],['Hlöðuvík',66.430,-22.650,10]],
+   [['Hlöðuvík',66.430,-22.650,10],['Hornvík',66.430,-22.470,10]]]},
+ {nafn:'Jökulsárgljúfur',km:32,erf:1,man:[6,9],dagar:[
+   [['Dettifoss',65.814,-16.385,300],['Vesturdalur',65.930,-16.530,150]],
+   [['Vesturdalur',65.930,-16.530,150],['Ásbyrgi',66.010,-16.500,50]]]},
+ {nafn:'Leggjabrjótur',km:16,erf:1,man:[5,10],dagar:[
+   [['Botnsdalur',64.430,-21.300,50],['Leggjabrjótur',64.350,-21.200,450],['Þingvellir',64.260,-21.100,100]]]},
+ {nafn:'Hvannadalshnúkur',km:23,erf:3,man:[4,6],dagar:[
+   [['Sandfell',63.990,-16.740,100],['Hvannadalshnúkur',64.014,-16.677,2110]]]},
+ // Hornstrandir
+ {nafn:'Hornstrandir: Veiðileysufjörður – Hornvík',km:13,erf:2,man:[7,8],dagar:[
+   [['Veiðileysufjörður',66.320,-22.500,10],['Hafnarskarð',66.380,-22.480,500],['Hornvík',66.425,-22.470,10]]]},
+ {nafn:'Hornstrandir: Hornvík – Hlöðuvík',km:12,erf:2,man:[7,8],dagar:[
+   [['Hornvík',66.425,-22.470,10],['Atlaskarð',66.420,-22.560,330],['Hlöðuvík',66.425,-22.650,10]]]},
+ {nafn:'Hornstrandir: Aðalvík – Hesteyri',km:12,erf:1,man:[7,8],dagar:[
+   [['Sæból í Aðalvík',66.360,-23.080,10],['Sléttuheiði',66.355,-22.970,300],['Hesteyri',66.330,-22.870,10]]]},
+ {nafn:'Hornstrandir: Hornvík – Reykjarfjörður',km:45,erf:3,man:[7,8],dagar:[
+   [['Hornvík',66.425,-22.470,10],['Smiðjuvík',66.385,-22.300,10]],
+   [['Smiðjuvík',66.385,-22.300,10],['Barðsvík',66.350,-22.200,10]],
+   [['Barðsvík',66.350,-22.200,10],['Reykjarfjörður nyrðri',66.260,-22.080,10]]]},
+ {nafn:'Hornstrandir: Hornbjarg',km:14,erf:2,man:[7,8],dagar:[
+   [['Hornvík',66.425,-22.470,10],['Kálfatindar',66.445,-22.430,530],['Hornbjargsviti',66.412,-22.380,20]]]},
+ // Hálendið
+ {nafn:'Öskjuvegurinn',km:75,erf:3,man:[7,8],dagar:[
+   [['Herðubreiðarlindir',65.190,-16.220,480],['Bræðrafell',65.060,-16.490,900]],
+   [['Bræðrafell',65.060,-16.490,900],['Dreki',65.040,-16.600,770]],
+   [['Dreki',65.040,-16.600,770],['Dyngjufell',65.120,-16.950,1000]],
+   [['Dyngjufell',65.120,-16.950,1000],['Svartárkot',65.330,-17.240,400]]]},
+ {nafn:'Askja og Víti',km:8,erf:1,man:[7,9],dagar:[
+   [['Vikraborgir',65.030,-16.720,1100],['Víti',65.045,-16.750,1100]]]},
+ {nafn:'Kerlingarfjöll: Hveradalir',km:10,erf:2,man:[7,9],dagar:[
+   [['Ásgarður',64.680,-19.320,700],['Hveradalir',64.665,-19.290,1000]]]},
+ {nafn:'Landmannalaugar: Bláhnúkur',km:6,erf:2,man:[7,9],dagar:[
+   [['Landmannalaugar',63.990,-19.060,600],['Bláhnúkur',63.978,-19.040,940]]]},
+ {nafn:'Snæfell',km:13,erf:3,man:[7,8],dagar:[
+   [['Snæfellsskáli',64.820,-15.650,850],['Snæfell',64.800,-15.560,1833]]]},
+ {nafn:'Hekla',km:15,erf:3,man:[6,9],dagar:[
+   [['Skjólkvíar',64.010,-19.750,500],['Hekla',63.990,-19.670,1491]]]},
+ // Suðurland og Vatnajökull
+ {nafn:'Kristínartindar, Skaftafelli',km:18,erf:2,man:[5,9],dagar:[
+   [['Skaftafell',64.016,-16.966,100],['Kristínartindar',64.060,-16.950,1126]]]},
+ {nafn:'Snæfellsjökull',km:12,erf:3,man:[4,7],dagar:[
+   [['Jökulháls',64.790,-23.730,750],['Snæfellsjökull',64.808,-23.776,1446]]]},
+ // Suðvesturland
+ {nafn:'Glymur',km:7,erf:1,man:[5,10],dagar:[
+   [['Botnsdalur',64.385,-21.340,60],['Glymur',64.390,-21.250,350]]]},
+ {nafn:'Síldarmannagötur',km:15,erf:1,man:[5,10],dagar:[
+   [['Hvalfjarðarbotn',64.390,-21.430,10],['Síldarmannabrekkur',64.430,-21.420,450],['Skorradalur',64.470,-21.420,60]]]},
+ {nafn:'Esja: Þverfellshorn',km:7,erf:2,man:[1,12],dagar:[
+   [['Esjustofa',64.210,-21.710,30],['Þverfellshorn',64.237,-21.680,780]]]},
+ {nafn:'Reykjadalur',km:8,erf:1,man:[1,12],dagar:[
+   [['Hveragerði',64.022,-21.210,150],['Reykjadalur',64.030,-21.215,350]]]},
+ {nafn:'Hengill: Vörðuskeggi',km:13,erf:2,man:[5,10],dagar:[
+   [['Sleggjubeinsdalur',64.040,-21.400,280],['Vörðuskeggi',64.080,-21.320,803]]]},
+ // Austurland
+ {nafn:'Stórurð',km:13,erf:2,man:[7,9],dagar:[
+   [['Vatnsskarð',65.530,-13.950,430],['Stórurð',65.550,-13.970,500]]]}];
+const GONGU_PUNKTAR=(()=>{const m=new Map();for(const l of GONGULEIDIR)for(const d of l.dagar)for(const[n,la,lo,ele]of d)
+  if(!m.has(n))m.set(n,{id:'gl:'+n,nafn:n,lat:la,lon:lo,ele,vefur:null});return[...m.values()];})();
+function gluggiDags(d,f){
+  if(!S.timar.length)return null;const t0=Date.parse(S.timar[0]+'Z'),d0=idag()+d*864e5,a=d0+f.fra*36e5,b=d0+f.til*36e5;
+  const i0=Math.max(0,Math.round((a-t0)/36e5)),i1=Math.min(S.timar.length,Math.round((b-t0)/36e5));
+  return i1-i0>=3?{i0,i1,a,b}:null;}
+function metaLeid(leid,upphaf,l,f){
+  const afangar=[];
+  leid.dagar.forEach(stage=>{const k=afangar.length,g=gluggiDags(upphaf+k,f);
+    const nid=!g?[]:stage.map(([n])=>{const p=l.pts.find(x=>x.id==='gl:'+n);const lk=p&&l.gogn?.[p.id];return lk?metaPunkt(p,lk,g,f):null;}).filter(Boolean);
+    if(!nid.length){afangar.push(null);return;}
+    const v=nid.reduce((a,b)=>b.stig<a.stig?b:a);
+    afangar.push({stig:v.stig,m:v.m,dreifing:v.dreifing,fjLikana:v.fjLikana,urkoma:Math.max(...nid.map(x=>x.m.urkoma||0)),fra:stage[0][0],til:stage[stage.length-1][0],dagur:upphaf+k});});
+  const til=afangar.filter(Boolean);if(!til.length)return null;
+  const minS=Math.min(...til.map(a=>a.stig)),medal=til.reduce((s,a)=>s+a.stig,0)/til.length;
+  return{stig:.6*minS+.4*medal,afangar,verst:til.reduce((a,b)=>b.stig<a.stig?b:a),fullt:til.length===leid.dagar.length};}
+function metaGonguleidir(l,f,sv){
+  const ut=[],man=new Date(idag()+S.dagur*864e5).getUTCMonth()+1;
+  GONGULEIDIR.forEach((leid,r)=>{
+    const pts=leid.dagar.flat();
+    if(sv&&!pts.some(([,la,lo])=>sv.b.contains([la,lo])))return;
+    const m=metaLeid(leid,S.dagur,l,f);if(!m)return;
+    let besti=null;for(let d=0;d<5;d++){const x=metaLeid(leid,d,l,f);if(x&&x.fullt&&(!besti||x.stig>besti.stig))besti={d,stig:x.stig};}
+    const innan=man>=leid.man[0]&&man<=leid.man[1];
+    ut.push({id:'leid:'+r,nafn:leid.nafn,lat:pts[0][1],lon:pts[0][2],haed:Math.max(...pts.map(p=>p[3])),
+      stig:+(m.stig*(innan?1:.6)).toFixed(1),m:m.verst.m,dreifing:m.verst.dreifing,fjLikana:m.verst.fjLikana,
+      leid,afangar:m.afangar,besti,innan,fullt:m.fullt,listi:'gongur',myrkur:0});});
+  return ut;}
+const glLitur=s=>s==null?'#adb5bd':s>=70?'#2b8a3e':s>=50?'#e8a400':'#e03131';
+const glDagHeiti=d=>document.querySelectorAll('#dagar .dagur')[d]?.textContent||t('gl_dagur',{n:d+1});
+const glManudir=leid=>{const f=new Intl.DateTimeFormat(LANG==='zh'?'zh-CN':LANG,{month:'long'});const n=k=>f.format(new Date(Date.UTC(2026,k-1,15)));return`${n(leid.man[0])}–${n(leid.man[1])}`;};
+function glHtml(a){
+  const d=a.leid.dagar.length,urk=a.afangar.some(x=>x&&x.urkoma>=15);
+  return`<div class="gl-yfirlit"><p class="gl-lengd">🥾 ${d>1?t('gl_lengd',{km:a.leid.km,d}):t('gl_lengd1',{km:a.leid.km})}</p>
+    ${a.innan?'':`<p class="gl-utan">📅 ${t('gl_utan',{t:glManudir(a.leid)})}</p>`}
+    <p class="gl-titill">${t('gl_afangar')}</p><ol class="gl-afangar">${a.afangar.map((x,k)=>`<li><i style="background:${glLitur(x?.stig)}"></i>
+      <span><strong>${glDagHeiti(S.dagur+k)}:</strong> ${a.leid.dagar[k][0][0]} → ${a.leid.dagar[k][a.leid.dagar[k].length-1][0]}${x?` <small>(${fm(x.stig,0)})</small>`:''}</span></li>`).join('')}</ol>
+    ${a.fullt?'':`<p class="kl-smatt">${t('gl_spa')}</p>`}
+    <p class="gl-besti">⭐ ${a.besti?`${t('gl_besti')}: <strong>${glDagHeiti(a.besti.d)}</strong> (${fm(a.besti.stig,0)})`:t('gl_nobesti')}</p>
+    ${urk?`<p class="gl-ar">🌊 ${t('gl_ar')}</p>`:''}</div>`;}
+const gongLag=L.layerGroup().addTo(kort);
+function teiknaGonguleidir(){
+  gongLag.clearLayers();if(S.flokkur!=='gongur')return;
+  for(const a of S.nidurstada||[]){if(!a.leid)continue;
+    a.leid.dagar.forEach((stage,k)=>{const ll=stage.map(([,la,lo])=>[la,lo]);
+      L.polyline(ll,{color:'#fff',weight:7,opacity:.75,interactive:false}).addTo(gongLag);
+      L.polyline(ll,{color:glLitur(a.afangar[k]?.stig),weight:4,opacity:.95,dashArray:a.afangar[k]?null:'4 6'})
+        .bindTooltip(`${a.nafn}: ${glDagHeiti(S.dagur+k)}`,{sticky:true}).addTo(gongLag);});}
+}
+
 // ---------------------------------------------------------------- Bæir og borgir: litlir punktar með nafni við músarbendingu
 kort.createPane('baeir').style.zIndex=420;
 const baejaLag=L.layerGroup();let synaBaei=geyma.get('bs:baeir')!==false;if(synaBaei)baejaLag.addTo(kort);
@@ -4098,7 +4282,7 @@ function teiknaTop(){
 }
 
 // ---------------------------------------------------------------- Stýringar
-const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','utilega','veidi','rjupa']],
+const FLOKKAHOPAR=[['hopur_1',['almennt','sund','nordurljos']],['hopur_2',['fjall','gongur','utilega','veidi','rjupa']],
   ['hopur_3',['hjol','hlaup','golf','folf','alpaskidi','skidi']],['hopur_4',['verst','snjoflod']]];
 function teiknaFlokka(){
   const r=document.getElementById('flokkar');r.replaceChildren();
