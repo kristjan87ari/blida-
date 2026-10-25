@@ -257,6 +257,52 @@ def saekja_vidvaranir():
     return vidvaranir
 
 
+# ---------------------------------------------------------------- Fjallalisti (vikulega) úr OpenStreetMap
+# Síðan les fjoll.json af vedra.is svo hún þurfi ekki að spyrja OpenStreetMap í hvert sinn
+# (OpenStreetMap-þjónninn takmarkar fjölda fyrirspurna frá hverjum notanda).
+OVERPASS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+FJALLA_FYRIRSPURN = ('[out:json][timeout:180];('
+    'node["natural"~"^(peak|volcano)$"]["name"](63.2,-24.6,66.6,-13.4);'
+    'nwr["natural"~"^(mountain_range|ridge)$"]["name"](63.2,-24.6,66.6,-13.4););out center tags;')
+
+
+def saekja_fjoll():
+    villa = None
+    for slod in OVERPASS:
+        try:
+            gogn = urllib.parse.urlencode({"data": FJALLA_FYRIRSPURN}).encode()
+            with urllib.request.urlopen(urllib.request.Request(slod, data=gogn, headers=UA), timeout=200) as r:
+                j = json.loads(r.read())
+            ut = []
+            for e in j.get("elements", []):
+                tg = e.get("tags") or {}
+                nafn = tg.get("name") or tg.get("name:is")
+                la = e.get("lat", (e.get("center") or {}).get("lat"))
+                lo = e.get("lon", (e.get("center") or {}).get("lon"))
+                if not nafn or la is None or lo is None:
+                    continue
+                t = {"name": nafn}
+                if tg.get("ele"):
+                    t["ele"] = tg["ele"]
+                # Allt verður „node“ með hnitum; auðkenni haldast einkvæm (n/w/r + númer)
+                ut.append({"type": "node", "id": e["type"][0] + str(e["id"]), "lat": round(la, 5), "lon": round(lo, 5), "tags": t})
+            if len(ut) < 500:
+                raise RuntimeError(f"of fáir tindar ({len(ut)})")
+            return ut
+        except Exception as e:
+            villa = e
+    raise RuntimeError(f"OpenStreetMap svaraði ekki: {villa}")
+
+
+def fjoll_gomul(skra="fjoll.json", dagar=7):
+    try:
+        with open(skra, encoding="utf-8") as f:
+            t = datetime.strptime(json.load(f)["uppfaert"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        return (datetime.now(timezone.utc) - t).days >= dagar
+    except Exception:
+        return True
+
+
 def vista(skra, gogn):
     with open(skra, "w", encoding="utf-8") as f:
         json.dump(gogn, f, ensure_ascii=False)
@@ -282,6 +328,15 @@ def main():
         # Skrifum villuskrá svo síðan sýni aldrei gamlar eða rangar viðvaranir sem gildar
         vista("vidvaranir.json", {"uppfaert": nu, "villa": True, "vidvaranir": []})
         print(f"Viðvaranir mistókust: {e}")
+    if fjoll_gomul():
+        try:
+            fjoll = saekja_fjoll()
+            vista("fjoll.json", {"uppfaert": nu, "elements": fjoll})
+            print(f"Fjallalisti uppfærður: {len(fjoll)} tindar og fjallgarðar")
+        except Exception as e:
+            print(f"Fjallalisti mistókst (síðan spyr þá OpenStreetMap beint): {e}")
+    else:
+        print("Fjallalisti er nýlegur, ekki sóttur")
 
 
 if __name__ == "__main__":

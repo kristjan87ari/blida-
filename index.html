@@ -3403,18 +3403,23 @@ let forsott=false;
 async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
-  for(const k of['tjald','sund','golf','folf','veidi','hlaup']){
+  for(const k of['tjald','sund','golf','folf','veidi']){
     if(geyma.get('bs:listi10:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
+}
+// Fjallalistinn úr eigin gagnasafni (fjoll.json, uppfært vikulega af sjálfvirkninni á GitHub)
+async function fjollSkra(){
+  try{const r=await fetch('fjoll.json',{cache:'no-cache'});if(!r.ok)return null;const j=await r.json();
+    return j?.elements?.length>=500?j:null;}catch{return null;}
 }
 async function saekjaStadi_(lykill){
   if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
   const geymt=geyma.get('bs:listi10:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
-    const j=await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
+    const j=(lykill==='fjoll'&&await fjollSkra())||await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
     for(const e of j.elements||[]){
       const st=stadsetningOSM(e),tg=e.tags||{};if(!st)continue;const[la,lo]=st;
       const ele=parseFloat(String(tg.ele||'').replace(',','.'));
