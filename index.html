@@ -2432,7 +2432,20 @@ S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
 const HAEDBIL_LYKLAR=['oll','lag','mid','har'];
 S.fjallHaed=HAEDBIL_LYKLAR.includes(geyma.get('bs:fjallhaed2'))?geyma.get('bs:fjallhaed2'):'oll';
 const iHaedbili=x=>{const e=x.ele;switch(S.fjallHaed){
-  case'lag':return e!=null&&e<300;case'mid':return e!=null&&e>=300&&e<=700;case'har':return e!=null&&e>700;default:return e==null||e>=(S.svaedi?80:200);}};
+  case'lag':return e!=null&&e<300;case'mid':return e!=null&&e>=300&&e<=700;case'har':return e!=null&&e>700;default:return S.svaedi?(e==null||e>=80):(e!=null&&e>=200);}};
+// Eldstöðvakerfi eru skráð sem eldfjöll í OpenStreetMap en eru ekki göngufjöll
+const erEldstodvakerfi=x=>/volcanic system|eldstöðvakerfi/i.test(x.nafn||'');
+// Þekkt göngufjöll fá smá forgang í röðun (6 stig, ekki birt í einkunn). Nafn og staðsetning (innan 4 km) þurfa að passa.
+const THEKKT_FJOLL=[["Esja",64.245,-21.657],["Vífilsfell",64.038,-21.555],["Hengill",64.084,-21.316],["Keilir",63.941,-22.172],["Helgafell",64.016,-21.857],
+  ["Úlfarsfell",64.147,-21.710],["Móskarðshnúkar",64.233,-21.553],["Mosfell",64.190,-21.570],["Skarðsheiði",64.475,-21.700],["Heiðarhorn",64.475,-21.700],
+  ["Akrafjall",64.330,-21.950],["Hafnarfjall",64.505,-21.890],["Botnssúlur",64.395,-21.170],["Ármannsfell",64.330,-21.030],["Skjaldbreiður",64.405,-20.750],
+  ["Ingólfsfjall",63.980,-21.050],["Þorbjörn",63.860,-22.430],["Baula",64.860,-21.430],["Grábrók",64.770,-21.540],["Kirkjufell",64.941,-23.306],
+  ["Stapafell",64.820,-23.620],["Snæfellsjökull",64.808,-23.776],["Kaldbakur",65.830,-23.380],["Tindastóll",65.800,-19.730],["Mælifellshnjúkur",65.405,-19.375],
+  ["Súlur",65.630,-18.200],["Kerling",65.570,-18.250],["Hverfjall",65.605,-16.873],["Vindbelgjarfjall",65.627,-17.080],["Herðubreið",65.177,-16.347],
+  ["Dyrfjöll",65.540,-13.990],["Snæfell",64.800,-15.560],["Búlandstindur",64.700,-14.400],["Eystrahorn",64.400,-14.520],["Kristínartindar",64.060,-16.950],
+  ["Hvannadalshnúkur",64.014,-16.677],["Lómagnúpur",63.980,-17.480],["Eyjafjallajökull",63.630,-19.620],["Þríhyrningur",63.792,-19.950],["Hekla",63.992,-19.666],
+  ["Bláhnúkur",63.978,-19.040],["Brennisteinsalda",63.970,-19.070],["Snækollur",64.648,-19.270],["Strútur",63.830,-18.980],["Helgafell",63.435,-20.260]];
+const erThekkt=x=>x._th??=THEKKT_FJOLL.some(([n,la,lo])=>String(x.nafn).split(' (')[0]===n&&km(x,{lat:la,lon:lo})<4);
 // Hæðir í þéttbýli (undir 250 m) eru ekki tillögur: innan 10 km frá miðbæ Reykjavíkur, 2,5 km frá öðrum bæjum
 const iThettbyli=x=>x.ele!=null&&x.ele<250&&(typeof BAEJA_GOGN!=='undefined'&&BAEJA_GOGN.length?BAEJA_GOGN:KAUPSTADIR.map(([n,la,lo,teg])=>({lat:la,lon:lo,teg})))
   .some(b=>km(x,b)<(b.teg==='city'?10:2.5));
@@ -2692,16 +2705,17 @@ function reikna(){
   let frambod,uppspretta;
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
     // Fjöll: á landslistanum aðeins 200 m og hærri; á afmörkuðu svæði líka minni fjöll (frá 80 m)
-    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||!iHaedbili(x)||iThettbyli(x))));uppspretta=l.gogn;}
+    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||erEldstodvakerfi(x)||!iHaedbili(x)||iThettbyli(x))));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
   if(!f.ofugt&&!f.haetta){const vg=vidvVirkar(g.a,g.b);
     if(vg.length)for(const a of allir){const v=verstaVidv(a,vg);if(v){a.vidv=v.litur;a.stig=+(a.stig*VID_STUDULL[v.litur]).toFixed(1);}}}
+  if(f.stadir==='fjoll')for(const a of allir)a.bonus=erThekkt(a)?6:0;
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
-  const rodun=[...allir].sort((a,b)=>b.stig-a.stig),n=f.stadir==='skidi'?SKIDASVAEDI.length:f.stadir==='gonguskidi'?GONGUSKIDI.length:S.fjoldi,
-    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.8:f.stadir==='fjoll'?3:f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+  const rodun=[...allir].sort((a,b)=>(b.stig+(b.bonus||0))-(a.stig+(a.bonus||0))),n=f.stadir==='skidi'?SKIDASVAEDI.length:f.stadir==='gonguskidi'?GONGUSKIDI.length:S.fjoldi,
+    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.8:f.stadir==='fjoll'?(sv?1.5:6):f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
