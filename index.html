@@ -23,6 +23,8 @@ header{grid-column:1/-1;padding:18px 26px 16px;border-bottom:1px solid var(--lin
 h1{font-size:22px;font-weight:700;margin:0;letter-spacing:-.01em}
 .vorumerki{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
 .merki{width:42px;height:42px;flex:none}
+.vm-merki{display:flex;flex-direction:column;align-items:center;flex:none}
+.vm-ar{font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--muted);line-height:1;margin-top:-3px;padding-left:.16em}
 .m-sol{fill:#f5b700}.m-fjall{fill:#16324f}.m-snjor{fill:#fff}
 .m-vindur{fill:none;stroke:#00b4d8;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .m-fjall{fill:#9cc3e6}:root:not([data-theme="light"]) .m-snjor{fill:#16324f}}
@@ -67,6 +69,18 @@ h1 a{color:inherit;text-decoration:none}
 .undirval button+button{border-left:1px solid var(--line)}
 .undirval button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
 .mal{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--chip);border-radius:8px;padding:0 0 0 8px;cursor:pointer}
+.malval{display:inline-flex;align-items:center;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px;font-size:13px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.malval .mv-k{border:0;background:transparent;color:var(--text);border-radius:999px;padding:4px 10px;font:inherit;font-size:13px;font-weight:600;letter-spacing:.03em;cursor:pointer;min-width:36px}
+.malval .mv-k:hover{background:var(--chip)}
+.malval .mv-k[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.mv-hn{position:relative;display:inline-flex;align-items:center;gap:4px;padding:4px 9px;margin-left:3px;border-left:1px solid var(--line);color:var(--muted);cursor:pointer;border-radius:0 999px 999px 0}
+.mv-hn:hover{background:var(--chip)}
+.mv-hn.v{background:var(--text);color:var(--bg);border-left-color:transparent;border-radius:999px;font-weight:600}
+.mv-hn .mal-takn{font-size:15px}
+.mv-hn .mv-or{font-size:10px}
+.mv-kodi:empty{display:none}
+.mv-hn select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px;border:0}
+.malval:has(select:focus-visible) .mv-hn,.malval .mv-k:focus-visible{outline:2px solid var(--fokus);outline-offset:1px}
 .mal:hover{border-color:var(--fokus)}
 .mal-takn{font-size:15px}
 .mal select{border:0;background:transparent;padding:5px 6px 5px 2px;cursor:pointer}
@@ -630,9 +644,10 @@ details .likan small{color:var(--muted)}
   .topp{gap:4px 10px}
   h1{font-size:19px}
   .merki{width:34px;height:34px}
+  .vm-ar{font-size:9px;margin-top:-2px}
   .vm-nafn{font-size:21px}
   .vm-slagord{font-size:11px;margin-top:2px}
-  .mal{margin-left:auto}
+  .mal,.malval{margin-left:auto}
   .mal select{padding:5px 4px;max-width:120px}
   .gestir{order:3}
   .valmynd{order:4;width:100%;gap:16px;font-size:13px;margin:0}
@@ -708,7 +723,7 @@ details .likan small{color:var(--muted)}
 <body>
 <header>
   <div class="topp">
-    <h1 class="vm-h1"><a href="./" class="vorumerki" onclick="event.preventDefault();location.reload()" aria-label="Vedra"><svg class="merki" viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="12" r="5.2" class="m-sol"/><path class="m-fjall" d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z"/><path class="m-snjor" d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z"/><path class="m-vindur" d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4"/></svg><span class="vm-texti"><span class="vm-nafn">Vedra</span><span class="vm-slagord" data-i18n="slagord">Þitt veður. Þitt ævintýri.</span></span></a></h1>
+    <h1 class="vm-h1"><a href="./" class="vorumerki" onclick="event.preventDefault();location.reload()" aria-label="Vedra"><span class="vm-merki"><svg class="merki" viewBox="0 0 48 48" aria-hidden="true"><circle cx="35" cy="12" r="5.2" class="m-sol"/><path class="m-fjall" d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z"/><path class="m-snjor" d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z"/><path class="m-vindur" d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4"/></svg><span class="vm-ar" aria-hidden="true">2026</span></span><span class="vm-texti"><span class="vm-nafn">Vedra</span><span class="vm-slagord" data-i18n="slagord">Þitt veður. Þitt ævintýri.</span></span></a></h1>
     <nav class="valmynd">
       <a href="#" data-sida="" data-i18n="nav_kort">Kort</a>
       <a href="#hvernig" data-sida="hvernig" data-i18n="nav_hvernig">Hvernig virkar þetta</a>
@@ -716,7 +731,7 @@ details .likan small{color:var(--muted)}
     </nav>
     <span class="gestir" id="gestir" hidden></span>
     <button type="button" id="mal-tillaga" class="mal-tillaga" hidden></button>
-    <label class="mal" id="mal-merki"><span class="mal-takn" aria-hidden="true">🌐</span><span class="sr" data-i18n="mal_titill">Skipta um tungumál</span><select id="mal"></select></label>
+    <div class="malval" role="group" id="malval"><button type="button" class="mv-k" data-mal="is" lang="is">IS</button><button type="button" class="mv-k" data-mal="en" lang="en">EN</button><label class="mv-hn" id="mal-merki"><span class="mal-takn" aria-hidden="true">🌐</span><span class="mv-kodi" aria-hidden="true"></span><span class="mv-or" aria-hidden="true">▾</span><span class="sr" data-i18n="mal_titill">Skipta um tungumál</span><select id="mal"></select></label></div>
   </div>
   <div class="kortahluti">
    <div class="skrefalina">
@@ -4435,6 +4450,14 @@ function thydaFast(){
 const malVal=document.getElementById('mal');
 for(const[k,v]of Object.entries(I18N)){const o=document.createElement('option');o.value=k;o.textContent=v.nafn;malVal.appendChild(o);}
 malVal.value=LANG;
+// Flýtival IS | EN; hnötturinn opnar öll tungumálin (og sýnir kóða ef annað mál er valið)
+{const mv=document.getElementById('malval');
+ const merkja=()=>{mv.setAttribute('aria-label',t('mal_titill'));
+   mv.querySelectorAll('.mv-k').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mal===LANG));
+   const annad=LANG!=='is'&&LANG!=='en',hn=mv.querySelector('.mv-hn');hn.classList.toggle('v',annad);
+   mv.querySelector('.mv-kodi').textContent=annad?(LANG==='zh'?'中文':LANG.toUpperCase()):'';};
+ mv.querySelectorAll('.mv-k').forEach(b=>b.onclick=()=>{if(LANG===b.dataset.mal)return;malVal.value=b.dataset.mal;malVal.onchange();});
+ merkja();addEventListener('vedra:mal',merkja);}
 // Tillaga um tungumál fyrir gesti með vafra á öðru máli
 {const tb=document.getElementById('mal-tillaga');let geymt=null;try{geymt=localStorage.getItem('bs:mal');}catch{}
  const vafra=(navigator.languages||[navigator.language||'']).map(x=>String(x).slice(0,2).toLowerCase()).find(x=>I18N[x]);
