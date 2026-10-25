@@ -246,13 +246,22 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 .abyrgd details p{margin-top:4px}
 .abyrgd a{color:#c2410c}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .abyrgd{background:rgba(247,103,7,.12);border-color:rgba(255,192,120,.4)}:root:not([data-theme="light"]) .abyrgd summary,:root:not([data-theme="light"]) .abyrgd a{color:#ffa94d}}
-.haedval{display:flex;align-items:center;justify-content:flex-end;gap:2px;margin:-4px 0 10px;font-size:12.5px}
+.haedval{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:2px 0;margin:-4px 0 10px;font-size:12.5px}
 .haedval[hidden]{display:none}
 .hv-merki{color:var(--muted);margin-right:6px}
-.haedval button{border:1px solid var(--line);background:transparent;color:var(--text);padding:3px 10px;font-size:12.5px;cursor:pointer;margin-left:-1px}
+.haedval button{border:1px solid var(--line);background:transparent;color:var(--text);padding:3px 9px;font-size:12px;cursor:pointer;margin-left:-1px;white-space:nowrap}
 .haedval button:first-of-type{border-radius:999px 0 0 999px}
 .haedval button:last-of-type{border-radius:0 999px 999px 0}
-.haedval button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.haedval button[data-h="lag"]{background:rgba(47,158,68,.12);border-color:rgba(47,158,68,.38)}
+.haedval button[data-h="mid"]{background:rgba(232,164,0,.14);border-color:rgba(232,164,0,.45)}
+.haedval button[data-h="har"]{background:rgba(214,69,69,.12);border-color:rgba(214,69,69,.38)}
+.haedval button[data-h="oll"]{background:linear-gradient(90deg,rgba(47,158,68,.32),rgba(232,164,0,.34),rgba(214,69,69,.32));border-color:rgba(120,110,90,.55);font-weight:700}
+.haedval button:hover{filter:brightness(.96)}
+.haedval button[aria-pressed="true"]{color:#fff;font-weight:600;position:relative;z-index:1}
+.haedval button[data-h="lag"][aria-pressed="true"]{background:#2f9e44;border-color:#2f9e44}
+.haedval button[data-h="mid"][aria-pressed="true"]{background:#d08c00;border-color:#d08c00}
+.haedval button[data-h="har"][aria-pressed="true"]{background:#d64545;border-color:#d64545}
+.haedval button[data-h="oll"][aria-pressed="true"]{background:linear-gradient(90deg,#2f9e44,#d08c00,#d64545);border-color:#8a6d3b}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -2249,6 +2258,10 @@ const N8={is:['Hæð','Lágmarkshæð fjalla','Gönguferðir eru alltaf á eigin
   zh:['高度','山峰最低高度','徒步旅行风险自负，此列表并不完整。','路线为简化示意，不适合导航。请仔细了解路线、路况、涉水点和危险，携带合适的装备（保暖防水衣物、地图和指南针或 GPS、手机和食物），并在 safetravel.is 留下行程计划。'],
   es:['Altura','Altura mínima de las montañas','Las excursiones son siempre bajo tu propia responsabilidad, y la lista no es exhaustiva.','Las líneas están simplificadas y no sirven para orientarse. Infórmate bien de la ruta, las condiciones, los vados y los peligros, lleva el equipo adecuado (ropa de abrigo e impermeable, mapa y brújula o GPS, teléfono y comida) y deja un plan de viaje en safetravel.is.']};
 for(const[mal,v]of Object.entries(N8))if(I18N[mal])[I18N[mal].fj_haed,I18N[mal].fj_haed_aria,I18N[mal].ab_stutt_g,I18N[mal].ab_lang_g]=v;
+const HAEDBIL={is:['Öll','Undir 300 m','300–700 m','Yfir 700 m'],en:['All','Under 300 m','300–700 m','Over 700 m'],da:['Alle','Under 300 m','300–700 m','Over 700 m'],
+  sv:['Alla','Under 300 m','300–700 m','Över 700 m'],pl:['Wszystkie','Poniżej 300 m','300–700 m','Powyżej 700 m'],fr:['Tous','Moins de 300 m','300–700 m','Plus de 700 m'],
+  zh:['全部','300 米以下','300–700 米','700 米以上'],es:['Todas','Menos de 300 m','300–700 m','Más de 700 m']};
+for(const[mal,v]of Object.entries(HAEDBIL))if(I18N[mal])[I18N[mal].hb_oll,I18N[mal].hb_lag,I18N[mal].hb_mid,I18N[mal].hb_har]=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2415,15 +2428,17 @@ const geyma={get(k){try{return JSON.parse(localStorage.getItem(k));}catch{return
   if(Array.isArray(st.likon)&&st.likon.length)S.likon=new Set(st.likon.filter(id=>LIKON.some(l=>l.id===id)));}}
 if(![5,10,20].includes(S.fjoldi))S.fjoldi=10;
 S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
-// Lágmarkshæð fjalla: val notanda, annars 200 m á landinu og 80 m á afmörkuðu svæði
-S.fjallHaed=[80,200,600].includes(geyma.get('bs:fjallhaed'))?geyma.get('bs:fjallhaed'):null;
-const fjallHaedVirk=()=>S.fjallHaed??(S.svaedi?80:200);
+// Hæðarbil fjalla: Öll (frá 80 m), Undir 300 m, 300–700 m, Yfir 700 m
+const HAEDBIL_LYKLAR=['oll','lag','mid','har'];
+S.fjallHaed=HAEDBIL_LYKLAR.includes(geyma.get('bs:fjallhaed2'))?geyma.get('bs:fjallhaed2'):'oll';
+const iHaedbili=x=>{const e=x.ele;switch(S.fjallHaed){
+  case'lag':return e!=null&&e<300;case'mid':return e!=null&&e>=300&&e<=700;case'har':return e!=null&&e>700;default:return e==null||e>=80;}};
 function teiknaHaedval(){
   const el=document.getElementById('haedval');if(!el)return;
   const syna=S.flokkur==='fjall'&&S.fjallHamur==='tindar';el.hidden=!syna;if(!syna)return;
-  const v=fjallHaedVirk();el.setAttribute('aria-label',t('fj_haed_aria'));
-  el.innerHTML=`<span class="hv-merki">${t('fj_haed')}:</span>`+[80,200,600].map(h=>`<button type="button" data-h="${h}" aria-pressed="${v===h}">${h} m+</button>`).join('');
-  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.fjallHaed=+b.dataset.h;geyma.set('bs:fjallhaed',S.fjallHaed);reikna();});
+  el.setAttribute('aria-label',t('fj_haed'));
+  el.innerHTML=`<span class="hv-merki">${t('fj_haed')}:</span>`+HAEDBIL_LYKLAR.map(k=>`<button type="button" data-h="${k}" aria-pressed="${S.fjallHaed===k}">${t('hb_'+k)}</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.fjallHaed=b.dataset.h;geyma.set('bs:fjallhaed2',S.fjallHaed);reikna();});
 }
 function beitaFjallHam(){const t_=S.fjallHamur==='tindar';FLOKKAR.fjall.stadir=t_?'fjoll':undefined;FLOKKAR.fjall.haed=t_?()=>1:e=>trap(e,100,350,1100,1600);}
 beitaFjallHam();
@@ -2674,8 +2689,7 @@ function reikna(){
   let frambod,uppspretta;
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
     // Fjöll: á landslistanum aðeins 200 m og hærri; á afmörkuðu svæði líka minni fjöll (frá 80 m)
-    const hmin=fjallHaedVirk();
-    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||(x.ele!=null?x.ele<hmin:hmin>200))));uppspretta=l.gogn;}
+    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||!iHaedbili(x))));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
