@@ -2646,7 +2646,8 @@ function reikna(){
   const allir=[];
   let frambod,uppspretta;
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
-    frambod=l.pts.filter(x=>!sv||sv.b.contains([x.lat,x.lon]));uppspretta=l.gogn;}
+    // Fjöll: á landslistanum aðeins 200 m og hærri; á afmörkuðu svæði líka minni fjöll (frá 80 m)
+    frambod=l.pts.filter(x=>sv?sv.b.contains([x.lat,x.lon]):!(f.stadir==='fjoll'&&x.ele!=null&&x.ele<200));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
@@ -3404,7 +3405,7 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi']){
-    if(geyma.get('bs:listi10:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi11:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
@@ -3416,7 +3417,7 @@ async function fjollSkra(){
 }
 async function saekjaStadi_(lykill){
   if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
-  const geymt=geyma.get('bs:listi10:'+lykill);
+  const geymt=geyma.get('bs:listi11:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const j=(lykill==='fjoll'&&await fjollSkra())||await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
@@ -3434,7 +3435,7 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi10:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi11:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
     if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
       SUNDLAUGAR.forEach(([n,la,lo],i)=>{if(!pts.some(q=>km(q,{lat:la,lon:lo})<1.2))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
@@ -3447,13 +3448,13 @@ async function saekjaStadi_(lykill){
     if(lykill==='fjoll'){
       // Sleppa lágum hólum; sameina tind og eldfjall með sama nafni (hæsta heldur sér)
       const eftirNafni=new Map();
-      for(const p of pts){if(p.ele!=null&&p.ele<200)continue;const k=p.nafn;const l=eftirNafni.get(k)||[];
+      for(const p of pts){if(p.ele!=null&&p.ele<80)continue;const k=p.nafn;const l=eftirNafni.get(k)||[];
         const tvifari=l.find(q=>km(q,p)<1.5);if(tvifari){if((p.ele??0)>(tvifari.ele??0))Object.assign(tvifari,{lat:p.lat,lon:p.lon,ele:p.ele});continue;}
         l.push(p);eftirNafni.set(k,l);}
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi10:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi11:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
@@ -3466,7 +3467,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi10:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi11:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
