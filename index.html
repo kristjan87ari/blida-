@@ -246,6 +246,13 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 .abyrgd details p{margin-top:4px}
 .abyrgd a{color:#c2410c}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .abyrgd{background:rgba(247,103,7,.12);border-color:rgba(255,192,120,.4)}:root:not([data-theme="light"]) .abyrgd summary,:root:not([data-theme="light"]) .abyrgd a{color:#ffa94d}}
+.haedval{display:flex;align-items:center;justify-content:flex-end;gap:2px;margin:-4px 0 10px;font-size:12.5px}
+.haedval[hidden]{display:none}
+.hv-merki{color:var(--muted);margin-right:6px}
+.haedval button{border:1px solid var(--line);background:transparent;color:var(--text);padding:3px 10px;font-size:12.5px;cursor:pointer;margin-left:-1px}
+.haedval button:first-of-type{border-radius:999px 0 0 999px}
+.haedval button:last-of-type{border-radius:0 999px 999px 0}
+.haedval button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -740,6 +747,7 @@ details .likan small{color:var(--muted)}
     <h2 id="listatitill">Bestu staðirnir</h2>
     <div class="topval" role="group" data-i18n-aria="synaTop"><button type="button" data-n="5">Topp 5</button><button type="button" data-n="10">Topp 10</button><button type="button" data-n="20">Topp 20</button></div>
   </div>
+  <div id="haedval" class="haedval" role="group" hidden></div>
   <div id="vidv-yfirlit"></div>
   <div id="sv-kassi" class="sv-kassi" hidden></div>
   <p id="flokksathugasemd" class="athuga" hidden></p>
@@ -2210,8 +2218,8 @@ fr:['À vos propres risques','La randonnée en montagne se fait toujours à vos 
 zh:['风险自负','登山徒步风险自负，此列表并不完整。','列表不包含步道、路况或雪崩、落石、冰川裂缝等危险的信息。请仔细了解路线，携带合适的装备（保暖防水衣物、冬季需冰爪和冰镐、地图、手机和食物），并在 safetravel.is 留下行程计划。','阅读更多'],
 es:['Bajo tu responsabilidad','El senderismo de montaña es siempre bajo tu propia responsabilidad, y la lista no es exhaustiva.','No dice nada sobre rutas, condiciones ni peligros como aludes, desprendimientos y grietas glaciares. Infórmate bien de la ruta, lleva el equipo adecuado (ropa de abrigo e impermeable, crampones y piolet en invierno, mapa, teléfono y comida) y deja un plan de viaje en safetravel.is.','Leer más']};
 for(const[mal,v]of Object.entries(ABYRGD))if(I18N[mal])[I18N[mal].ab_titill,I18N[mal].ab_stutt,I18N[mal].ab_lang,I18N[mal].ab_meira]=v;
-const abyrgdHtml=()=>`<div class="abyrgd"><p><strong>⛑️ ${t('ab_titill')}</strong> ${t('ab_stutt')}</p>
-  <details><summary>${t('ab_meira')}</summary><p>${t('ab_lang').replace('safetravel.is','<a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>')}</p></details></div>`;
+const abyrgdHtml=(g=S.flokkur==='gongur')=>`<div class="abyrgd"><p><strong>⛑️ ${t('ab_titill')}</strong> ${t(g?'ab_stutt_g':'ab_stutt')}</p>
+  <details><summary>${t('ab_meira')}</summary><p>${t(g?'ab_lang_g':'ab_lang').replace('safetravel.is','<a href="https://safetravel.is" target="_blank" rel="noopener">safetravel.is</a>')}</p></details></div>`;
 // ---------------------------------------------------------------- Þýðingar: gönguleiðir
 const GL_F={is:['Gönguleiðir','Klassískar gönguleiðir bornar saman, áfanga fyrir áfanga á réttum degi: litlar vindhviður, þurrt og gott skyggni. Versti áfanginn vegur þyngst.','Flestar hálendisleiðir eru aðeins opnar frá júlí fram í september. Línurnar á kortinu eru einfaldaðar og henta ekki til rötunar.'],
 en:['Hiking trails','Classic hiking trails compared stage by stage on the right day: few gusts, dry with good visibility. The worst stage counts most.','Most highland trails are only open from July to September. The lines on the map are simplified and not suitable for navigation.'],
@@ -2232,6 +2240,15 @@ zh:['第 {n} 天','最佳出发日','非开放季节：该路线通常在{t}开�
 es:['Día {n}','Mejor día de inicio','Fuera de temporada: la ruta suele estar abierta {t}.','{km} km, {d} días','{km} km, 1 día','La previsión no cubre todos los días de la ruta.','Precipitación considerable en la ruta: los ríos pueden crecer y los vados volverse peligrosos.','Etapas','La previsión no alcanza lo suficiente para sugerir un día de inicio.']};
 for(const mal of Object.keys(GL_T)){const L=I18N[mal];if(!L)continue;GL_L.forEach((k,i)=>L[k]=GL_T[mal][i]);if(L.flokkar&&mal!=='is')L.flokkar.gongur=GL_F[mal];}
 
+const N8={is:['Hæð','Lágmarkshæð fjalla','Gönguferðir eru alltaf á eigin ábyrgð, og listinn er ekki tæmandi.','Línurnar eru einfaldaðar og henta ekki til rötunar. Kynntu þér leiðina, færð, vöð og hættur vel, taktu réttan búnað (hlý og vatnsheld föt, kort og áttavita eða GPS, síma og nesti) og skildu eftir ferðaáætlun á safetravel.is.'],
+  en:['Height','Minimum mountain height','Hiking trips are always at your own risk, and the list is not exhaustive.','The lines are simplified and not suitable for navigation. Research the route, conditions, river crossings and hazards carefully, bring the right gear (warm, waterproof clothing, a map and compass or GPS, phone and food) and leave a travel plan at safetravel.is.'],
+  da:['Højde','Mindste bjerghøjde','Vandreture sker altid på eget ansvar, og listen er ikke udtømmende.','Linjerne er forenklede og egner sig ikke til navigation. Sæt dig grundigt ind i ruten, forholdene, vadesteder og farer, tag det rette udstyr med (varmt og vandtæt tøj, kort og kompas eller GPS, telefon og mad), og efterlad en rejseplan på safetravel.is.'],
+  sv:['Höjd','Minsta fjällhöjd','Vandringar sker alltid på egen risk, och listan är inte heltäckande.','Linjerna är förenklade och lämpar sig inte för navigering. Sätt dig noga in i leden, förhållandena, vadställen och faror, ta med rätt utrustning (varma och vattentäta kläder, karta och kompass eller GPS, telefon och mat) och lämna en färdplan på safetravel.is.'],
+  pl:['Wysokość','Minimalna wysokość góry','Wędrówki zawsze odbywają się na własne ryzyko, a lista nie jest wyczerpująca.','Linie są uproszczone i nie nadają się do nawigacji. Dokładnie poznaj trasę, warunki, brody i zagrożenia, zabierz odpowiedni sprzęt (ciepłą i wodoodporną odzież, mapę i kompas lub GPS, telefon i jedzenie) i zostaw plan podróży na safetravel.is.'],
+  fr:['Altitude','Altitude minimale des sommets','Les randonnées se font toujours à vos propres risques, et la liste n’est pas exhaustive.','Les tracés sont simplifiés et ne conviennent pas à la navigation. Renseignez-vous bien sur l’itinéraire, les conditions, les gués et les dangers, emportez l’équipement adapté (vêtements chauds et imperméables, carte et boussole ou GPS, téléphone et nourriture) et déposez un plan de voyage sur safetravel.is.'],
+  zh:['高度','山峰最低高度','徒步旅行风险自负，此列表并不完整。','路线为简化示意，不适合导航。请仔细了解路线、路况、涉水点和危险，携带合适的装备（保暖防水衣物、地图和指南针或 GPS、手机和食物），并在 safetravel.is 留下行程计划。'],
+  es:['Altura','Altura mínima de las montañas','Las excursiones son siempre bajo tu propia responsabilidad, y la lista no es exhaustiva.','Las líneas están simplificadas y no sirven para orientarse. Infórmate bien de la ruta, las condiciones, los vados y los peligros, lleva el equipo adecuado (ropa de abrigo e impermeable, mapa y brújula o GPS, teléfono y comida) y deja un plan de viaje en safetravel.is.']};
+for(const[mal,v]of Object.entries(N8))if(I18N[mal])[I18N[mal].fj_haed,I18N[mal].fj_haed_aria,I18N[mal].ab_stutt_g,I18N[mal].ab_lang_g]=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2398,6 +2415,16 @@ const geyma={get(k){try{return JSON.parse(localStorage.getItem(k));}catch{return
   if(Array.isArray(st.likon)&&st.likon.length)S.likon=new Set(st.likon.filter(id=>LIKON.some(l=>l.id===id)));}}
 if(![5,10,20].includes(S.fjoldi))S.fjoldi=10;
 S.fjallHamur=geyma.get('bs:fjallhamur')==='svaedi'?'svaedi':'tindar';
+// Lágmarkshæð fjalla: val notanda, annars 200 m á landinu og 80 m á afmörkuðu svæði
+S.fjallHaed=[80,200,600].includes(geyma.get('bs:fjallhaed'))?geyma.get('bs:fjallhaed'):null;
+const fjallHaedVirk=()=>S.fjallHaed??(S.svaedi?80:200);
+function teiknaHaedval(){
+  const el=document.getElementById('haedval');if(!el)return;
+  const syna=S.flokkur==='fjall'&&S.fjallHamur==='tindar';el.hidden=!syna;if(!syna)return;
+  const v=fjallHaedVirk();el.setAttribute('aria-label',t('fj_haed_aria'));
+  el.innerHTML=`<span class="hv-merki">${t('fj_haed')}:</span>`+[80,200,600].map(h=>`<button type="button" data-h="${h}" aria-pressed="${v===h}">${h} m+</button>`).join('');
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>{S.fjallHaed=+b.dataset.h;geyma.set('bs:fjallhaed',S.fjallHaed);reikna();});
+}
 function beitaFjallHam(){const t_=S.fjallHamur==='tindar';FLOKKAR.fjall.stadir=t_?'fjoll':undefined;FLOKKAR.fjall.haed=t_?()=>1:e=>trap(e,100,350,1100,1600);}
 beitaFjallHam();
 S.skidiHamur=geyma.get('bs:skidihamur')==='skidasvaedi'?'skidasvaedi':'svaedi';
@@ -2647,7 +2674,8 @@ function reikna(){
   let frambod,uppspretta;
   if(f.stadir){const l=stadaListi(f.stadir);if(!l){S.nidurstada=[];S.allir=[];teikna(t('ls_saeki'));return;}
     // Fjöll: á landslistanum aðeins 200 m og hærri; á afmörkuðu svæði líka minni fjöll (frá 80 m)
-    frambod=l.pts.filter(x=>sv?sv.b.contains([x.lat,x.lon]):!(f.stadir==='fjoll'&&x.ele!=null&&x.ele<200));uppspretta=l.gogn;}
+    const hmin=fjallHaedVirk();
+    frambod=l.pts.filter(x=>(!sv||sv.b.contains([x.lat,x.lon]))&&!(f.stadir==='fjoll'&&(oadgengilegt(x)||(x.ele!=null?x.ele<hmin:hmin>200))));uppspretta=l.gogn;}
   else{frambod=sv?sv.pts:PUNKTAR;uppspretta=sv?sv.gogn:S.gogn;}
   if(f.stadir==='gongur'){allir.push(...metaGonguleidir(stadaListi('gongur'),f,sv));frambod=[];}
   for(const p of frambod){const lk=uppspretta?.[p.id];if(!lk)continue;const a=metaPunkt(p,lk,g,f);if(a)allir.push(a);}
@@ -2670,7 +2698,7 @@ function reikna(){
     if(!FJNOFN&&!FJNOFN_SAEKIR){FJNOFN_SAEKIR=true;saekjaStadi('fjoll').then(r=>{FJNOFN=r.pts;FJNOFN_SAEKIR=false;if(S.flokkur==='fjall'&&S.fjallHamur==='svaedi')reikna();}).catch(()=>{FJNOFN_SAEKIR=false;});}
     if(FJNOFN)for(const a of valdir){let b=null,d=15;for(const q of FJNOFN){const x=km(a,q);if(x<d){d=x;b=q;}}if(b)a.nafn=t('fj_nalaegt',{n:b.nafn});}
   }
-  S.nidurstada=valdir;S.virkur=-1;
+  S.nidurstada=valdir;S.virkur=-1;teiknaHaedval();
   teikna(valdir.length?null:t(f.stadir==='skidi'&&sv?'sv_ekkiSkidi':f.stadir&&f.stadir!=='skidi'?'tomt':f.haetta?'tomtHaetta':f.ofugt?'tomtVerst':f.stadir?'tomtSkidi':'tomt'));
 }
 
@@ -2898,7 +2926,7 @@ function teikna(skilabod){
   let ath=flT(S.flokkur,2);
   if(S.flokkur==='nordurljos'&&man>=4&&man<=7)ath=t('bjart')+ath;
   document.getElementById('listatitill').textContent=t(f.haetta||f.ofugt?'lt_verst':'lt_best');
-  if(S.flokkur==='fjall')ath='⛑️ '+t('ab_stutt')+(ath?' '+ath:'');
+  if(S.flokkur==='fjall'||S.flokkur==='gongur')ath='⛑️ '+t(S.flokkur==='gongur'?'ab_stutt_g':'ab_stutt')+(ath?' '+ath:'');
   if(f.stadir&&LISTAR[f.stadir]?.brada)ath=(ath?ath+' ':'')+t('ls_brada');
   else if(f.stadir&&LISTAR[f.stadir]?.vara)ath=(ath?ath+' ':'')+t('ls_vara');
   const fa=document.getElementById('flokksathugasemd');fa.hidden=!ath;fa.innerHTML=ath;fa.classList.toggle('haetta',!!f.haetta);
@@ -3405,19 +3433,24 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi']){
-    if(geyma.get('bs:listi11:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi12:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
 }
 // Fjallalistinn úr eigin gagnasafni (fjoll.json, uppfært vikulega af sjálfvirkninni á GitHub)
+// Eyjar og sker sem ekki er hægt að komast á (byggðar eyjar eins og Heimaey, Grímsey, Hrísey og Flatey haldast inni)
+const OADGENGILEGT=[[63.25,-20.75,63.50,-20.00],[63.55,-23.40,63.80,-22.85],[65.97,-19.60,66.03,-19.45],[64.55,-13.45,64.65,-13.25]];
+const HEIMAEY=[63.395,-20.33,63.465,-20.215];
+const iKassa=(p,[a,b,c,d])=>p.lat>=a&&p.lat<=c&&p.lon>=b&&p.lon<=d;
+const oadgengilegt=p=>OADGENGILEGT.some(k=>iKassa(p,k))&&!iKassa(p,HEIMAEY);
 async function fjollSkra(){
   try{const r=await fetch('fjoll.json',{cache:'no-cache'});if(!r.ok)return null;const j=await r.json();
     return j?.elements?.length>=500?j:null;}catch{return null;}
 }
 async function saekjaStadi_(lykill){
   if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
-  const geymt=geyma.get('bs:listi11:'+lykill);
+  const geymt=geyma.get('bs:listi12:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const j=(lykill==='fjoll'&&await fjollSkra())||await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
@@ -3435,7 +3468,7 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi11:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi12:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
     if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
       SUNDLAUGAR.forEach(([n,la,lo],i)=>{if(!pts.some(q=>km(q,{lat:la,lon:lo})<1.2))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
@@ -3448,13 +3481,13 @@ async function saekjaStadi_(lykill){
     if(lykill==='fjoll'){
       // Sleppa lágum hólum; sameina tind og eldfjall með sama nafni (hæsta heldur sér)
       const eftirNafni=new Map();
-      for(const p of pts){if(p.ele!=null&&p.ele<80)continue;const k=p.nafn;const l=eftirNafni.get(k)||[];
+      for(const p of pts){if(p.ele!=null&&p.ele<80)continue;if(oadgengilegt(p))continue;const k=p.nafn;const l=eftirNafni.get(k)||[];
         const tvifari=l.find(q=>km(q,p)<1.5);if(tvifari){if((p.ele??0)>(tvifari.ele??0))Object.assign(tvifari,{lat:p.lat,lon:p.lon,ele:p.ele});continue;}
         l.push(p);eftirNafni.set(k,l);}
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi11:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi12:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
@@ -3467,7 +3500,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi11:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi12:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
