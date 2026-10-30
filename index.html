@@ -2761,7 +2761,7 @@ function reikna(){
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
   const rodun=[...allir].sort((a,b)=>(b.stig+(b.bonus||0))-(a.stig+(a.bonus||0))),n=f.stadir==='skidi'?SKIDASVAEDI.length:f.stadir==='gonguskidi'?GONGUSKIDI.length:S.fjoldi,
-    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.8:f.stadir==='fjoll'?(sv?1.5:6):f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.3:f.stadir==='fjoll'?(sv?1.5:6):f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
@@ -3407,7 +3407,7 @@ const SUNDLAUGAR=[
   ["Vatnaveröld, Reykjanesbæ",63.9950,-22.5600],["Sundlaug Grindavíkur",63.8420,-22.4350],["Sundlaug Sandgerðis",64.0380,-22.7080],["Sundlaugin í Garði",64.0670,-22.6480],
   ["Sundlaugin í Vogum",63.9810,-22.3840],["Bláa lónið",63.8800,-22.4490],
   // Vesturland
-  ["Jaðarsbakkalaug, Akranesi",64.3180,-22.0700],["Sundlaug Borgarness",64.5390,-21.9150],["Sundlaugin Varmalandi",64.7200,-21.6000],["Sundlaugin Kleppjárnsreykjum",64.6600,-21.4300],
+  ["Jaðarsbakkalaug, Akranesi",64.3180,-22.0700],["Bjarnalaug, Akranesi",64.3197,-22.0762],["Sundlaugin á Hólum í Hjaltadal",65.7330,-19.1120],["Sundlaugin Árskógi",65.9400,-18.3600],["Sundlaug Borgarness",64.5390,-21.9150],["Sundlaugin Varmalandi",64.7200,-21.6000],["Sundlaugin Kleppjárnsreykjum",64.6600,-21.4300],
   ["Sundlaugin Húsafelli",64.6990,-20.8690],["Krauma",64.6700,-21.4000],["Sundlaugin í Stykkishólmi",65.0730,-22.7270],["Sundlaug Grundarfjarðar",64.9240,-23.2580],
   ["Sundlaug Ólafsvíkur",64.8940,-23.7100],["Lýsuhólslaug",64.8500,-23.2500],["Sundlaugin Laugum í Sælingsdal",65.2700,-21.7800],["Guðrúnarlaug",65.2680,-21.7700],
   // Vestfirðir
@@ -3511,7 +3511,7 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi']){
-    if(geyma.get('bs:listi12:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi13:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
@@ -3528,7 +3528,7 @@ async function fjollSkra(){
 }
 async function saekjaStadi_(lykill){
   if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
-  const geymt=geyma.get('bs:listi12:'+lykill);
+  const geymt=geyma.get('bs:listi13:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const j=(lykill==='fjoll'&&await fjollSkra())||await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
@@ -3546,10 +3546,15 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi12:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi13:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
     if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
-      SUNDLAUGAR.forEach(([n,la,lo],i)=>{if(!pts.some(q=>km(q,{lat:la,lon:lo})<1.2))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
+      // Sama laug ef innan 300 m, eða innan 1,2 km og með líkt nafn (svo tvær laugar í sama bæ haldist aðskildar)
+      const ALGENG=new Set(['sundlaug','sundlaugin','laug','laugin','sundhöll','sundhöllin','við','í','á','og']);
+      const stofnar=n=>new Set(String(n).toLowerCase().replace(/[,()]/g,' ').split(/\s+/).filter(w=>w.length>=4&&!ALGENG.has(w)));
+      const likNofn=(a,b)=>{const A=stofnar(a),B=stofnar(b);for(const w of A)if(B.has(w)||[...B].some(x=>x.startsWith(w.slice(0,5))))return true;return false;};
+      SUNDLAUGAR.forEach(([n,la,lo],i)=>{const q0={lat:la,lon:lo};
+        if(!pts.some(q=>{const d=km(q,q0);return d<.3||(d<1.2&&likNofn(q.nafn,n));}))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
     }
     if(lykill==='hlaup'){ // sami stígur í mörgum bútum: einn punktur á hvert nafn innan 3 km
       const eftirNafni=new Map();
@@ -3565,7 +3570,7 @@ async function saekjaStadi_(lykill){
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi12:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi13:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
@@ -3578,7 +3583,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi12:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi13:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
@@ -4281,6 +4286,10 @@ function teiknaVbSkyringu(){
     setjaVbFokus(VB_FOKUS===a.teg?null:a.teg,VB_FOKUS!==a.teg);});
 }
 let VB_KASSI=true;
+// Litli veðurbreytingakassinn lokast við smell hvar sem er utan hans (eða Esc); svæðin haldast á kortinu
+const lokaVbKassa=()=>{if(VB_SV_SYNA&&VB_KASSI){VB_KASSI=false;teiknaVbSkyringu();}};
+document.addEventListener('pointerdown',e=>{if(!VB_KASSI||!e.target.isConnected)return;if(e.target.closest('.vbstjorn'))return;lokaVbKassa();},true);
+addEventListener('keydown',e=>{if(e.key==='Escape')lokaVbKassa();});
 document.getElementById('vb-sw').onclick=e=>{e.stopPropagation();setjaVbSyna(!VB_SV_SYNA);};
 document.getElementById('vb-hnappur').onclick=()=>{if(!VB_SV_SYNA){VB_KASSI=true;setjaVbSyna(true);}else{VB_KASSI=!VB_KASSI;teiknaVbSkyringu();}};
 {const st=document.querySelector('.vbstjorn');if(st){L.DomEvent.disableScrollPropagation(st);}}
