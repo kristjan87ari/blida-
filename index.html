@@ -280,6 +280,16 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 .skali-merki:hover{transform:scale(1.18)}
 .skali-sp p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
 .skali-sp .skali-neyd{color:#c92a2a;font-weight:500}
+.skali-info{display:inline-flex;align-items:center;gap:6px;margin-top:8px;border:1px solid var(--line);background:var(--chip);color:var(--text);border-radius:999px;padding:3px 10px 3px 4px;font:inherit;font-size:12.5px;cursor:pointer}
+.skali-info:hover{border-color:var(--fokus)}
+.si-i{display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#1971c2;color:#fff;font:italic 700 11px Georgia,serif}
+.skali-info[aria-expanded="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.skali-hnit{margin-top:8px;padding:8px 10px;background:var(--chip);border-radius:8px}
+.skali-hnit[hidden]{display:none}
+.skali-hnit p{margin:0;font-size:12.5px;color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.skali-hnit .sh-gms{color:var(--muted);font-size:12px;margin-top:2px}
+.sh-afrita{margin-top:6px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:6px;padding:2px 9px;font:inherit;font-size:12px;cursor:pointer}
+.sh-afrita.ok{border-color:#2f9e44;color:#2f9e44}
 #skala-lina[hidden]{display:none}
 .sk-lina{border-top:1px solid var(--line);margin-top:3px;padding-top:5px}
 .sk-hus{display:inline-flex;vertical-align:-2px;margin-right:2px}
@@ -2293,6 +2303,9 @@ const SKALAR_T={is:['Skálar','Fjallaskáli','Gönguskáli','Skýli','Neyðarsk�
   zh:['山屋','高山小屋','荒野小屋','避难所','紧急避难所','紧急避难所仅供紧急情况使用。请在留言簿上登记。'],
   es:['Refugios','Refugio de montaña','Cabaña','Abrigo','Refugio de emergencia','Los refugios de emergencia son solo para emergencias. Firma el libro de visitas.']};
 const SKYLI_T={is:['Skýli','Veðurskýli'],en:['Shelters','Weather shelter'],da:['Ly','Vejrly'],sv:['Skydd','Väderskydd'],pl:['Schrony','Wiata'],fr:['Abris','Abri météo'],zh:['避难所','避风棚'],es:['Abrigos','Abrigo']};
+const HNIT_T={is:['Hnit','Afrita','Afritað'],en:['Coordinates','Copy','Copied'],da:['Koordinater','Kopiér','Kopieret'],sv:['Koordinater','Kopiera','Kopierat'],
+  pl:['Współrzędne','Kopiuj','Skopiowano'],fr:['Coordonnées','Copier','Copié'],zh:['坐标','复制','已复制'],es:['Coordenadas','Copiar','Copiado']};
+for(const[mal,[a,b,c]]of Object.entries(HNIT_T))if(I18N[mal])[I18N[mal].sk_hnit,I18N[mal].sk_afrita,I18N[mal].sk_afritad]=[a,b,c];
 for(const[mal,[a,b]]of Object.entries(SKYLI_T))if(I18N[mal]){I18N[mal].sk_rofi2=a;I18N[mal].sk_vedur=b;}
 for(const[mal,v]of Object.entries(SKALAR_T))if(I18N[mal])[I18N[mal].sk_rofi,I18N[mal].sk_fjalla,I18N[mal].sk_gongu,I18N[mal].sk_skyli,I18N[mal].sk_neyd,I18N[mal].sk_neyd_ath]=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
@@ -4063,6 +4076,16 @@ const skalaTegund=t=>{const n=t.name||'';
   if(/neyð/i.test(n)||t.shelter_type==='emergency')return'neyd';
   if(t.tourism==='alpine_hut')return'fjalla';if(t.tourism==='wilderness_hut')return'gongu';
   if(t.shelter_type==='weather_shelter')return'vedur';return'skyli';};
+// Hnit: tugabrot (fyrir GPS og síma) og gráður/mínútur/sekúndur
+const gms=x=>{x=Math.abs(x);const g=Math.floor(x),m=Math.floor((x-g)*60),s_=Math.round(((x-g)*60-m)*60);return`${g}°${String(m).padStart(2,'0')}′${String(s_).padStart(2,'0')}″`;};
+const hnitHtml=(la,lo)=>`<div class="skali-hnit" hidden><p class="sh-tuga">${fm(la,5)}° ${t('N')}, ${fm(Math.abs(lo),5)}° ${t('V')}</p>
+  <p class="sh-gms">${gms(la)} ${t('N')}, ${gms(lo)} ${t('V')}</p>
+  <button type="button" class="sh-afrita" data-hnit="${la.toFixed(5)}, ${lo.toFixed(5)}">📋 ${t('sk_afrita')}</button></div>`;
+kort.on('popupopen',e=>{const el=e.popup.getElement();const ib=el?.querySelector('.skali-info');if(!ib)return;
+  const hn=el.querySelector('.skali-hnit');
+  ib.onclick=ev=>{ev.stopPropagation();const o=hn.hidden;hn.hidden=!o;ib.setAttribute('aria-expanded',o);};
+  el.querySelector('.sh-afrita').onclick=async b=>{const k=b.currentTarget;try{await navigator.clipboard.writeText(k.dataset.hnit);}catch{const r=document.createRange();r.selectNodeContents(hn.querySelector('.sh-tuga'));getSelection().removeAllRanges();getSelection().addRange(r);}
+    k.textContent='✓ '+t('sk_afritad');k.classList.add('ok');setTimeout(()=>{k.textContent='📋 '+t('sk_afrita');k.classList.remove('ok');},1800);};});
 function teiknaSkala(){
   skalaLag.clearLayers();skyliLag.clearLayers();if(!skalaGogn)return;
   for(const e of skalaGogn){const tg=e.tags||{},teg=skalaTegund(tg),hopur=(teg==='fjalla'||teg==='gongu')?'skali':'skyli';
@@ -4070,7 +4093,8 @@ function teiknaSkala(){
     const uppl=[t('sk_'+teg),Number.isFinite(ele)?`${Math.round(ele)} m`:'',tg.operator||''].filter(Boolean).join(' · ');
     L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:hopur==='skali'?husSvg(SKALA_LITUR.skali,false):hringSvg(teg==='neyd'),iconSize:[18,18],iconAnchor:hopur==='skali'?[9,15]:[9,9]}),keyboard:false,title:nafn})
       .bindTooltip(`<strong>${nafn}</strong><br><small>${uppl}</small>`,{direction:'top',offset:[0,-12],className:'bae-tt'})
-      .bindPopup(`<div class="skali-sp"><strong>${teg==='neyd'?'🆘':'🛖'} ${nafn}</strong><p>${uppl}</p>${teg==='neyd'?`<p class="skali-neyd">${t('sk_neyd_ath')}</p>`:''}</div>`)
+      .bindPopup(`<div class="skali-sp"><strong>${teg==='neyd'?'🆘':'🛖'} ${nafn}</strong><p>${uppl}</p>${teg==='neyd'?`<p class="skali-neyd">${t('sk_neyd_ath')}</p>`:''}
+        <button type="button" class="skali-info" aria-expanded="false"><span class="si-i" aria-hidden="true">i</span>${t('sk_hnit')}</button>${hnitHtml(e.lat,e.lon)}</div>`,{autoClose:true,closeOnClick:true,minWidth:250,maxWidth:290})
       .addTo(hopur==='skali'?skalaLag:skyliLag);}
 }
 async function hladaSkala(){
