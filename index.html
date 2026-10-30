@@ -281,6 +281,8 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 .skali-sp p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
 .skali-sp .skali-neyd{color:#c92a2a;font-weight:500}
 #skala-lina[hidden]{display:none}
+.sk-lina{border-top:1px solid var(--line);margin-top:3px;padding-top:5px}
+.sk-hus{display:inline-flex;vertical-align:-2px;margin-right:2px}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -2290,6 +2292,8 @@ const SKALAR_T={is:['Skálar','Fjallaskáli','Gönguskáli','Skýli','Neyðarsk�
   fr:['Refuges','Refuge de montagne','Cabane','Abri','Abri d’urgence','Les abris d’urgence sont réservés aux situations d’urgence. Merci de signer le livre d’or.'],
   zh:['山屋','高山小屋','荒野小屋','避难所','紧急避难所','紧急避难所仅供紧急情况使用。请在留言簿上登记。'],
   es:['Refugios','Refugio de montaña','Cabaña','Abrigo','Refugio de emergencia','Los refugios de emergencia son solo para emergencias. Firma el libro de visitas.']};
+const SKYLI_T={is:['Skýli','Veðurskýli'],en:['Shelters','Weather shelter'],da:['Ly','Vejrly'],sv:['Skydd','Väderskydd'],pl:['Schrony','Wiata'],fr:['Abris','Abri météo'],zh:['避难所','避风棚'],es:['Abrigos','Abrigo']};
+for(const[mal,[a,b]]of Object.entries(SKYLI_T))if(I18N[mal]){I18N[mal].sk_rofi2=a;I18N[mal].sk_vedur=b;}
 for(const[mal,v]of Object.entries(SKALAR_T))if(I18N[mal])[I18N[mal].sk_rofi,I18N[mal].sk_fjalla,I18N[mal].sk_gongu,I18N[mal].sk_skyli,I18N[mal].sk_neyd,I18N[mal].sk_neyd_ath]=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
@@ -2796,8 +2800,8 @@ const Stjorn=L.Control.extend({onAdd(){
   d.innerHTML=`<div class="grunnval" role="group" data-i18n-aria="kortagrunnur">
       <button type="button" data-g="landslag" data-i18n="landslag">Landslag</button><button type="button" data-g="mynd" data-i18n="loftmynd">Loftmynd</button></div><div class="ks-lina"><label><input type="checkbox" id="reitarofi"> <span data-i18n="litareitir">Litareitir</span></label>
     <label><input type="checkbox" id="baejarofi"> <span>🏘️ <span data-i18n="baeir_rofi">Bæir</span></span></label>
-    <label id="skala-lina" hidden><input type="checkbox" id="skalarofi"> <span>🛖 <span data-i18n="sk_rofi">Skálar</span></span></label>
-    <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div></div>
+    <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div>
+  <div class="ks-lina sk-lina" id="skala-lina" hidden><label><input type="checkbox" id="skalarofi"> <span class="sk-hus sk-hus1"></span><span data-i18n="sk_rofi">Skálar</span></label><label><input type="checkbox" id="skylirofi"> <span class="sk-hus sk-hus2"></span><span data-i18n="sk_rofi2">Skýli</span></label></div></div>
   <div class="ks-efni" hidden>
     <label><input type="checkbox" id="vidvrofi"> <span data-i18n="vidvaranir">Viðvaranir</span></label>
     <label><input type="checkbox" id="snjorofi"> <span>🌦️ <span data-i18n="snjorofi">Lifandi veður</span></span></label>
@@ -4046,22 +4050,26 @@ function teiknaGonguleidir(){
 }
 
 // ---------------------------------------------------------------- Bæir og borgir: litlir punktar með nafni við músarbendingu
-// ---------------------------------------------------------------- Skálar og skýli: lítil rauð hús (Gönguleiðir, Fjallganga, Rjúpnaveiði)
+// ---------------------------------------------------------------- Skálar (rauð hús) og skýli (appelsínugul hús) í Gönguleiðum, Fjallgöngu og Rjúpnaveiði
 const SKALA_FLOKKAR=['gongur','fjall','rjupa'];
 kort.createPane('skalar').style.zIndex=430;
-const skalaLag=L.layerGroup();let synaSkala=geyma.get('bs:skalar')!==false,skalaGogn=null,skalaSaekir=false;
-const SKALI_SVG=(neyd)=>`<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 2.2 L18.2 9.4 L16.4 9.4 L16.4 17.6 L3.6 17.6 L3.6 9.4 L1.8 9.4 Z" fill="#c92a2a" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>${neyd?'<path d="M10 10.2v5.2M7.4 12.8h5.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>':'<rect x="8.4" y="12.4" width="3.2" height="5.2" rx=".4" fill="#fff" opacity=".9"/>'}</svg>`;
+const skalaLag=L.layerGroup(),skyliLag=L.layerGroup();
+let synaSkala=geyma.get('bs:skalar')!==false,synaSkyli=geyma.get('bs:skyli')!==false,skalaGogn=null,skalaSaekir=false;
+const SKALA_LITUR={skali:'#c92a2a',skyli:'#e8590c'};
+const husSvg=(litur,kross,st=18)=>`<svg viewBox="0 0 20 20" width="${st}" height="${st}" aria-hidden="true"><path d="M10 2.2 L18.2 9.4 L16.4 9.4 L16.4 17.6 L3.6 17.6 L3.6 9.4 L1.8 9.4 Z" fill="${litur}" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>${kross?'<path d="M10 10.2v5.2M7.4 12.8h5.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>':'<rect x="8.4" y="12.4" width="3.2" height="5.2" rx=".4" fill="#fff" opacity=".9"/>'}</svg>`;
 const skalaTegund=t=>{const n=t.name||'';
   if(/neyð/i.test(n)||t.shelter_type==='emergency')return'neyd';
-  if(t.tourism==='alpine_hut')return'fjalla';if(t.tourism==='wilderness_hut')return'gongu';return'skyli';};
+  if(t.tourism==='alpine_hut')return'fjalla';if(t.tourism==='wilderness_hut')return'gongu';
+  if(t.shelter_type==='weather_shelter')return'vedur';return'skyli';};
 function teiknaSkala(){
-  skalaLag.clearLayers();if(!skalaGogn)return;
-  for(const e of skalaGogn){const tg=e.tags||{},teg=skalaTegund(tg),nafn=tg.name||t('sk_'+teg);
-    const ele=parseFloat(tg.ele),uppl=[t('sk_'+teg),Number.isFinite(ele)?`${Math.round(ele)} m`:'',tg.operator||''].filter(Boolean).join(' · ');
-    L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:SKALI_SVG(teg==='neyd'),iconSize:[18,18],iconAnchor:[9,15]}),keyboard:false,title:nafn})
+  skalaLag.clearLayers();skyliLag.clearLayers();if(!skalaGogn)return;
+  for(const e of skalaGogn){const tg=e.tags||{},teg=skalaTegund(tg),hopur=(teg==='fjalla'||teg==='gongu')?'skali':'skyli';
+    const nafn=tg.name||t('sk_'+teg),ele=parseFloat(tg.ele);
+    const uppl=[t('sk_'+teg),Number.isFinite(ele)?`${Math.round(ele)} m`:'',tg.operator||''].filter(Boolean).join(' · ');
+    L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:husSvg(SKALA_LITUR[hopur],teg==='neyd'),iconSize:[18,18],iconAnchor:[9,15]}),keyboard:false,title:nafn})
       .bindTooltip(`<strong>${nafn}</strong><br><small>${uppl}</small>`,{direction:'top',offset:[0,-12],className:'bae-tt'})
       .bindPopup(`<div class="skali-sp"><strong>${teg==='neyd'?'🆘':'🛖'} ${nafn}</strong><p>${uppl}</p>${teg==='neyd'?`<p class="skali-neyd">${t('sk_neyd_ath')}</p>`:''}</div>`)
-      .addTo(skalaLag);}
+      .addTo(hopur==='skali'?skalaLag:skyliLag);}
 }
 async function hladaSkala(){
   if(skalaGogn||skalaSaekir)return;skalaSaekir=true;
@@ -4078,14 +4086,19 @@ async function hladaSkala(){
   }catch{}finally{skalaSaekir=false;}
 }
 function uppfaeraSkala(){
-  const vid=SKALA_FLOKKAR.includes(S.flokkur),lb=document.getElementById('skala-lina'),r=document.getElementById('skalarofi');
-  if(lb)lb.hidden=!vid;if(r)r.checked=synaSkala;
-  const syna=vid&&synaSkala;
-  if(syna){skalaLag.addTo(kort);hladaSkala();}else kort.removeLayer(skalaLag);
+  const vid=SKALA_FLOKKAR.includes(S.flokkur),lb=document.getElementById('skala-lina');
+  if(lb)lb.hidden=!vid;
+  const r1=document.getElementById('skalarofi'),r2=document.getElementById('skylirofi');if(r1)r1.checked=synaSkala;if(r2)r2.checked=synaSkyli;
+  if(vid&&(synaSkala||synaSkyli))hladaSkala();
+  (vid&&synaSkala)?skalaLag.addTo(kort):kort.removeLayer(skalaLag);
+  (vid&&synaSkyli)?skyliLag.addTo(kort):kort.removeLayer(skyliLag);
 }
-setTimeout(()=>{const r=document.getElementById('skalarofi');if(!r)return;
-  r.onchange=()=>{synaSkala=r.checked;geyma.set('bs:skalar',synaSkala);uppfaeraSkala();};uppfaeraSkala();
-  addEventListener('vedra:mal',()=>{if(skalaGogn)teiknaSkala();});},0);
+setTimeout(()=>{const r1=document.getElementById('skalarofi'),r2=document.getElementById('skylirofi');if(!r1||!r2)return;
+  document.querySelector('#skala-lina .sk-hus1').innerHTML=husSvg(SKALA_LITUR.skali,false,15);
+  document.querySelector('#skala-lina .sk-hus2').innerHTML=husSvg(SKALA_LITUR.skyli,true,15);
+  r1.onchange=()=>{synaSkala=r1.checked;geyma.set('bs:skalar',synaSkala);uppfaeraSkala();};
+  r2.onchange=()=>{synaSkyli=r2.checked;geyma.set('bs:skyli',synaSkyli);uppfaeraSkala();};
+  uppfaeraSkala();addEventListener('vedra:mal',()=>{if(skalaGogn)teiknaSkala();});},0);
 
 kort.createPane('baeir').style.zIndex=420;
 const baejaLag=L.layerGroup();let synaBaei=geyma.get('bs:baeir')!==false;if(synaBaei)baejaLag.addTo(kort);
