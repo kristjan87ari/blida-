@@ -293,6 +293,18 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 #skala-lina[hidden]{display:none}
 .sk-lina{border-top:1px solid var(--line);margin-top:3px;padding-top:5px}
 .sk-hus{display:inline-flex;vertical-align:-2px;margin-right:2px}
+.kynningar-svaedi{margin:10px 0 30px}
+.kv-fyrirsogn{margin:0 0 12px;font-size:17px;font-weight:700;color:var(--muted)}
+.kynningar{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.kynning[hidden]{display:none}
+.kynning{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(22,50,79,.08)}
+.kynning video{display:block;width:100%;aspect-ratio:16/9;background:#f3f6f5;object-fit:contain;cursor:pointer}
+.kynning video:not([controls]):hover{filter:brightness(.97)}
+.kynning video:focus-visible{outline:3px solid var(--fokus);outline-offset:-3px}
+.kynning figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:12px 16px;font-size:15px;color:var(--text)}
+.kynning figcaption b{font-weight:700}
+.kv-lengd{color:var(--muted);font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.utgafa{margin-top:24px;font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -2308,6 +2320,37 @@ const HNIT_T={is:['Hnit','Afrita','Afritað'],en:['Coordinates','Copy','Copied']
 for(const[mal,[a,b,c]]of Object.entries(HNIT_T))if(I18N[mal])[I18N[mal].sk_hnit,I18N[mal].sk_afrita,I18N[mal].sk_afritad]=[a,b,c];
 for(const[mal,[a,b]]of Object.entries(SKYLI_T))if(I18N[mal]){I18N[mal].sk_rofi2=a;I18N[mal].sk_vedur=b;}
 for(const[mal,v]of Object.entries(SKALAR_T))if(I18N[mal])[I18N[mal].sk_rofi,I18N[mal].sk_fjalla,I18N[mal].sk_gongu,I18N[mal].sk_skyli,I18N[mal].sk_neyd,I18N[mal].sk_neyd_ath]=v;
+const KV={is:['Svona virkar Vedra (1 mín.)','Útilega og fjallganga: tindar á þínu svæði'],en:['How Vedra works (1 min)','Camping and hiking: peaks in your area'],
+  da:['Sådan virker Vedra (1 min.)','Camping og bjergvandring: tinder i dit område'],sv:['Så fungerar Vedra (1 min)','Camping och fjällvandring: toppar i ditt område'],
+  pl:['Jak działa Vedra (1 min)','Biwakowanie i wędrówki: szczyty w Twojej okolicy'],fr:['Comment fonctionne Vedra (1 min)','Camping et randonnée : les sommets de votre zone'],
+  zh:['Vedra 使用方法（1 分钟）','露营与登山：你所在区域的山峰'],es:['Cómo funciona Vedra (1 min)','Acampada y montaña: cumbres de tu zona']};
+for(const[mal,[a,b]]of Object.entries(KV))if(I18N[mal]){I18N[mal].kv_1=a;I18N[mal].kv_2=b;}
+// Kynningarmyndbönd á „Hvernig virkar þetta“: birtast aðeins ef skrárnar eru í safninu
+const KYNNINGAR=[['kynning.mp4','kv_1'],['kynning_utivist.mp4','kv_2']];
+const KV_SPILA={is:'Spila',en:'Play',da:'Afspil',sv:'Spela',pl:'Odtwórz',fr:'Lire',zh:'播放',es:'Reproducir'};
+for(const[mal,v]of Object.entries(KV_SPILA))if(I18N[mal])I18N[mal].kv_spila=v;
+const KV_MYND={is:'Myndbönd',en:'Videos',da:'Videoer',sv:'Videor',pl:'Filmy',fr:'Vidéos',zh:'视频',es:'Vídeos'};
+for(const[mal,v]of Object.entries(KV_MYND))if(I18N[mal])I18N[mal].kv_myndbond=v;
+// Forsíðumynd: ljós grunnur í litum Vedra, merkið, heitið og spilunarhnappur
+const kvForsida=titill=>{const esc=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"><defs><radialGradient id="g" cx="15%" cy="0%" r="120%"><stop offset="0" stop-color="#d6f1f7"/><stop offset=".7" stop-color="#f3f6f5"/></radialGradient></defs>`+
+    `<rect width="1280" height="720" fill="url(#g)"/><g transform="translate(90 96) scale(3.4)"><circle cx="35" cy="12" r="5.2" fill="#f5b700"/><path d="M2.5 41 L18 14.5 L25.2 26.5 L30.4 18.5 L45.5 41 Z" fill="#16324f"/><path d="M18 14.5 L21.9 21.2 L19.2 19.8 L16.9 21.6 L14.6 20.6 Z" fill="#fff"/><path d="M3.5 31.5 C 12.5 27.2, 19.5 33.6, 28.8 29.2 C 34.8 26.4, 37.2 20.6, 33.2 18.8 C 30.4 17.6, 28.4 20.4, 30.4 22.4" fill="none" stroke="#00b4d8" stroke-width="3.2" stroke-linecap="round"/></g>`+
+    `<text x="96" y="470" font-family="Libre Franklin, Helvetica, Arial, sans-serif" font-size="74" font-weight="800" fill="#16324f">${esc(titill)}</text>`+
+    `<rect x="96" y="500" width="200" height="9" rx="4.5" fill="#f5b700"/><text x="96" y="580" font-family="Libre Franklin, Helvetica, Arial, sans-serif" font-size="34" fill="#4a5d6b">vedra.is</text>`+
+    `<circle cx="1050" cy="360" r="92" fill="#16324f"/><path d="M1022 310 L1022 410 L1108 360 Z" fill="#fff"/></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);};
+const kynningarHtml=()=>`<section class="kynningar-svaedi" aria-label="${t('kv_myndbond')}"><h3 class="kv-fyrirsogn">🎬 ${t('kv_myndbond')}</h3><div class="kynningar">${KYNNINGAR.map(([f,k])=>{const heiti=t(k).replace(/\s*\([^)]*\)\s*$/,'');
+  return `<figure class="kynning" data-skra="${f}" hidden><video src="${f}" preload="metadata" playsinline tabindex="0" role="button" aria-label="${t('kv_spila')}: ${heiti}" poster="${kvForsida(heiti.split(':')[0])}"></video><figcaption><b>${heiti}</b><small class="kv-lengd"></small></figcaption></figure>`;}).join('')}</div></section>`;
+// Myndband birtist aðeins ef skráin er til í safninu
+function synaKynningar(){const svaedi=document.querySelector('.kynningar-svaedi');
+  document.querySelectorAll('.kynning[data-skra]').forEach(f=>{
+    const v=f.querySelector('video'),l=f.querySelector('.kv-lengd');
+    const byrja=()=>{if(v.controls)return;v.controls=true;v.removeAttribute('role');v.setAttribute('aria-label',f.querySelector('b').textContent);v.play().catch(()=>{});};
+    v.addEventListener('click',byrja);v.addEventListener('keydown',e=>{if(!v.controls&&(e.key==='Enter'||e.key===' ')){e.preventDefault();byrja();}});
+    v.addEventListener('loadedmetadata',()=>{const d=Math.round(v.duration);if(Number.isFinite(d)&&d>0)l.textContent='▶ '+Math.floor(d/60)+':'+String(d%60).padStart(2,'0');});
+    fetch(f.dataset.skra,{method:'HEAD',cache:'no-cache'}).then(r=>{if(r.ok)f.hidden=false;else f.remove();}).catch(()=>f.remove())
+      .finally(()=>{if(svaedi&&!svaedi.querySelector('.kynning'))svaedi.remove();});});}
+const VEDRA_UTGAFA='2026-10-31a';try{console.info('Vedra útgáfa',VEDRA_UTGAFA);document.documentElement.dataset.utgafa=VEDRA_UTGAFA;}catch{}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2761,7 +2804,7 @@ function reikna(){
   S.allir=allir;
   // Val með stöðugleika: fyrri punktur heldur sér ef hann er enn nógu góður
   const rodun=[...allir].sort((a,b)=>(b.stig+(b.bonus||0))-(a.stig+(a.bonus||0))),n=f.stadir==='skidi'?SKIDASVAEDI.length:f.stadir==='gonguskidi'?GONGUSKIDI.length:S.fjoldi,
-    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.3:f.stadir==='fjoll'?(sv?1.5:6):f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
+    minKm=(f.stadir==='skidi'||f.stadir==='gonguskidi'||f.stadir==='gongur')?0:f.stadir==='sund'?.1:f.stadir==='fjoll'?(sv?1.5:6):f.stadir?2:sv?Math.min(30,Math.max(1.5,km({lat:sv.b.getSouth(),lon:sv.b.getWest()},{lat:sv.b.getNorth(),lon:sv.b.getEast()})/(S.fjoldi*1.3))):S.fjoldi>=20?22:30,
     lagmark=f.stadir?0:(f.haetta||f.ofugt)?25:sv?0:20;
   const lykill=`bs:val:${S.flokkur}:${new Date(g.a).toISOString().slice(0,10)}${sv?':sv':''}`,fyrri=geyma.get(lykill)||[];
   const threskuldur=rodun.length?rodun[Math.min(n,rodun.length)-1].stig-4:0;
@@ -3511,7 +3554,7 @@ async function forsaekjaStadi(){
   if(forsott||S.demo)return;forsott=true;
   await sofa(4000);
   for(const k of['tjald','sund','golf','folf','veidi']){
-    if(geyma.get('bs:listi13:'+k)||LISTAR[k]?.pts)continue;
+    if(geyma.get('bs:listi14:'+k)||LISTAR[k]?.pts)continue;
     try{await saekjaStadi(k);}catch{}
     await sofa(1500);
   }
@@ -3528,7 +3571,7 @@ async function fjollSkra(){
 }
 async function saekjaStadi_(lykill){
   if(lykill==='gongur')return{pts:GONGU_PUNKTAR.map(p=>({...p})),vara:false};
-  const geymt=geyma.get('bs:listi13:'+lykill);
+  const geymt=geyma.get('bs:listi14:'+lykill);
   if(geymt&&Date.now()-geymt.t<7*864e5&&geymt.pts?.length)return{pts:geymt.pts,vara:false};
   try{
     const j=(lykill==='fjoll'&&await fjollSkra())||await overpass(OSM_FYRIRSPURNIR[lykill],lykill==='fjoll'?60000:45000),pts=[];
@@ -3546,15 +3589,15 @@ async function saekjaStadi_(lykill){
       const klasar=[];for(const k of korfur){const c=klasar.find(c=>km(c,k)<.4);if(c){c.n++;c.lat+=(k.lat-c.lat)/c.n;c.lon+=(k.lon-c.lon)/c.n;}else klasar.push({lat:k.lat,lon:k.lon,n:1});}
       klasar.filter(c=>c.n>=3).forEach((c,i)=>pts.push({id:`folf:k${i}`,lat:+c.lat.toFixed(5),lon:+c.lon.toFixed(5),nafn:null,vefur:null,ele:null}));
     }
-    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi13:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
+    if(lykill==='veidi'){const ut=veidivotnUr(pts);geyma.set('bs:listi14:veidi',{t:Date.now(),pts:ut});return{pts:ut,vara:false};}
     if(!pts.length)throw new Error('tómt');
     if(lykill==='sund'){ // innbyggður listi: bæta við laugum sem OpenStreetMap hefur ekki (innan 1,2 km)
-      // Sama laug ef innan 300 m, eða innan 1,2 km og með líkt nafn (svo tvær laugar í sama bæ haldist aðskildar)
+      // Sama laug ef innan 80 m (sama bygging), eða innan 1,2 km og með líkt nafn (svo tvær laugar í sama bæ haldist aðskildar)
       const ALGENG=new Set(['sundlaug','sundlaugin','laug','laugin','sundhöll','sundhöllin','við','í','á','og']);
       const stofnar=n=>new Set(String(n).toLowerCase().replace(/[,()]/g,' ').split(/\s+/).filter(w=>w.length>=4&&!ALGENG.has(w)));
       const likNofn=(a,b)=>{const A=stofnar(a),B=stofnar(b);for(const w of A)if(B.has(w)||[...B].some(x=>x.startsWith(w.slice(0,5))))return true;return false;};
       SUNDLAUGAR.forEach(([n,la,lo],i)=>{const q0={lat:la,lon:lo};
-        if(!pts.some(q=>{const d=km(q,q0);return d<.3||(d<1.2&&likNofn(q.nafn,n));}))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
+        if(!pts.some(q=>{const d=km(q,q0);return d<.08||(d<1.2&&likNofn(q.nafn,n));}))pts.push({id:`sund:l${i}`,lat:la,lon:lo,nafn:n,vefur:null,ele:null});});
     }
     if(lykill==='hlaup'){ // sami stígur í mörgum bútum: einn punktur á hvert nafn innan 3 km
       const eftirNafni=new Map();
@@ -3570,7 +3613,7 @@ async function saekjaStadi_(lykill){
       pts.length=0;for(const l of eftirNafni.values())pts.push(...l);
       for(const p of pts)if(p.ele)p.nafn=`${p.nafn} (${Math.round(p.ele)} m)`;
     }
-    geyma.set('bs:listi13:'+lykill,{t:Date.now(),pts});
+    geyma.set('bs:listi14:'+lykill,{t:Date.now(),pts});
     return{pts,vara:false};
   }catch{
     if(lykill==='veidi')return{pts:veidivotnUr([]),vara:false};
@@ -3583,7 +3626,7 @@ async function hladaLista(lykill){
   if(LISTAR[lykill]?.saekir)return;
   const fyrri=LISTAR[lykill];LISTAR[lykill]={...(fyrri||{}),saekir:true,gogn:null};
   // Ef listinn er ekki til: sýna strax þekktustu staðina með spá úr næstu reitum (engin bið)
-  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi13:'+lykill)){
+  if(!fyrri?.pts&&!S.demo&&S.gogn&&!geyma.get('bs:listi14:'+lykill)){
     const brada=lykill==='veidi'?veidivotnUr([]):(VARALISTAR[lykill]||[]).map(([n,la,lo,ele],i)=>({id:`${lykill}:v${i}`,lat:la,lon:lo,ele:ele??null,nafn:ele?`${n} (${ele} m)`:n,vefur:null}));
     if(brada.length){const bg={};for(const p of brada){p.myrkur=myrkurFyrir(p);p.listi=lykill;}naestaReitGogn(brada,bg);
       for(const p of brada){if(p.ele!=null)p.haed=p.ele;}
@@ -4582,7 +4625,8 @@ function leid(){
   document.body.classList.toggle('a-sidu',!!sida);
   const el=document.getElementById('sida');el.hidden=!sida;
   document.querySelectorAll('.valmynd a').forEach(a=>a.dataset.sida===sida?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
-  if(sida){document.getElementById('sida-efni').innerHTML=(L_().sidur||I18N.is.sidur)[sida];
+  if(sida){document.getElementById('sida-efni').innerHTML=(L_().sidur||I18N.is.sidur)[sida]+(sida==='um'?`<p class="utgafa">v. ${VEDRA_UTGAFA}</p>`:'');
+    if(sida==='hvernig'){const h2=document.querySelector('#sida-efni h2');if(h2){h2.insertAdjacentHTML('afterend',kynningarHtml());synaKynningar();}}
     if(sida==='um'){const sb=document.querySelector('#sida-efni .samband')?.previousElementSibling;if(sb)sb.insertAdjacentHTML('beforebegin',taknskyring());else document.getElementById('sida-efni').insertAdjacentHTML('beforeend',taknskyring());}el.scrollTop=0;window.scrollTo(0,0);el.focus({preventScroll:true});}
   else setTimeout(()=>kort.invalidateSize(),30);
 }
