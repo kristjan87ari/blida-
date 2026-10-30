@@ -4055,8 +4055,10 @@ const SKALA_FLOKKAR=['gongur','fjall','rjupa'];
 kort.createPane('skalar').style.zIndex=430;
 const skalaLag=L.layerGroup(),skyliLag=L.layerGroup();
 let synaSkala=geyma.get('bs:skalar')!==false,synaSkyli=geyma.get('bs:skyli')!==false,skalaGogn=null,skalaSaekir=false;
-const SKALA_LITUR={skali:'#c92a2a',skyli:'#e8590c'};
+const SKALA_LITUR={skali:'#c92a2a',skyli:'#fcc419'};
 const husSvg=(litur,kross,st=18)=>`<svg viewBox="0 0 20 20" width="${st}" height="${st}" aria-hidden="true"><path d="M10 2.2 L18.2 9.4 L16.4 9.4 L16.4 17.6 L3.6 17.6 L3.6 9.4 L1.8 9.4 Z" fill="${litur}" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>${kross?'<path d="M10 10.2v5.2M7.4 12.8h5.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>':'<rect x="8.4" y="12.4" width="3.2" height="5.2" rx=".4" fill="#fff" opacity=".9"/>'}</svg>`;
+// Skýli: gulur hringur með litlu dökku húsi; neyðarskýli: gulur hringur með krossi
+const hringSvg=(kross,st=18)=>`<svg viewBox="0 0 20 20" width="${st}" height="${st}" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#fcc419" stroke="#fff" stroke-width="1.6"/>${kross?'<path d="M10 5.8v8.4M5.8 10h8.4" stroke="#1f2a2e" stroke-width="2.4" stroke-linecap="round"/>':'<path d="M5.6 11.6 L10 6.6 L14.4 11.6" fill="none" stroke="#1f2a2e" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><rect x="8.6" y="10.6" width="2.8" height="3.6" fill="#1f2a2e"/>'}</svg>`;
 const skalaTegund=t=>{const n=t.name||'';
   if(/neyð/i.test(n)||t.shelter_type==='emergency')return'neyd';
   if(t.tourism==='alpine_hut')return'fjalla';if(t.tourism==='wilderness_hut')return'gongu';
@@ -4066,7 +4068,7 @@ function teiknaSkala(){
   for(const e of skalaGogn){const tg=e.tags||{},teg=skalaTegund(tg),hopur=(teg==='fjalla'||teg==='gongu')?'skali':'skyli';
     const nafn=tg.name||t('sk_'+teg),ele=parseFloat(tg.ele);
     const uppl=[t('sk_'+teg),Number.isFinite(ele)?`${Math.round(ele)} m`:'',tg.operator||''].filter(Boolean).join(' · ');
-    L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:husSvg(SKALA_LITUR[hopur],teg==='neyd'),iconSize:[18,18],iconAnchor:[9,15]}),keyboard:false,title:nafn})
+    L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:hopur==='skali'?husSvg(SKALA_LITUR.skali,false):hringSvg(teg==='neyd'),iconSize:[18,18],iconAnchor:hopur==='skali'?[9,15]:[9,9]}),keyboard:false,title:nafn})
       .bindTooltip(`<strong>${nafn}</strong><br><small>${uppl}</small>`,{direction:'top',offset:[0,-12],className:'bae-tt'})
       .bindPopup(`<div class="skali-sp"><strong>${teg==='neyd'?'🆘':'🛖'} ${nafn}</strong><p>${uppl}</p>${teg==='neyd'?`<p class="skali-neyd">${t('sk_neyd_ath')}</p>`:''}</div>`)
       .addTo(hopur==='skali'?skalaLag:skyliLag);}
@@ -4095,7 +4097,7 @@ function uppfaeraSkala(){
 }
 setTimeout(()=>{const r1=document.getElementById('skalarofi'),r2=document.getElementById('skylirofi');if(!r1||!r2)return;
   document.querySelector('#skala-lina .sk-hus1').innerHTML=husSvg(SKALA_LITUR.skali,false,15);
-  document.querySelector('#skala-lina .sk-hus2').innerHTML=husSvg(SKALA_LITUR.skyli,true,15);
+  document.querySelector('#skala-lina .sk-hus2').innerHTML=hringSvg(false,15);
   r1.onchange=()=>{synaSkala=r1.checked;geyma.set('bs:skalar',synaSkala);uppfaeraSkala();};
   r2.onchange=()=>{synaSkyli=r2.checked;geyma.set('bs:skyli',synaSkyli);uppfaeraSkala();};
   uppfaeraSkala();addEventListener('vedra:mal',()=>{if(skalaGogn)teiknaSkala();});},0);
