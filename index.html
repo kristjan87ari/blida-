@@ -2326,7 +2326,9 @@ const KV={is:['Svona virkar Vedra (1 mín.)','Útilega og fjallganga: tindar á 
   zh:['Vedra 使用方法（1 分钟）','露营与登山：你所在区域的山峰'],es:['Cómo funciona Vedra (1 min)','Acampada y montaña: cumbres de tu zona']};
 for(const[mal,[a,b]]of Object.entries(KV))if(I18N[mal]){I18N[mal].kv_1=a;I18N[mal].kv_2=b;}
 // Kynningarmyndbönd á „Hvernig virkar þetta“: birtast aðeins ef skrárnar eru í safninu
+// Windows bætir stundum .mp4 aftan við nafn sem endar þegar á .mp4, svo síðan leitar að báðum nöfnum
 const KYNNINGAR=[['kynning.mp4','kv_1'],['kynning_utivist.mp4','kv_2']];
+const kvNofn=f=>[f,f+'.mp4',f.replace(/\.mp4$/i,'.MP4')];
 const KV_SPILA={is:'Spila',en:'Play',da:'Afspil',sv:'Spela',pl:'Odtwórz',fr:'Lire',zh:'播放',es:'Reproducir'};
 for(const[mal,v]of Object.entries(KV_SPILA))if(I18N[mal])I18N[mal].kv_spila=v;
 const KV_MYND={is:'Myndbönd',en:'Videos',da:'Videoer',sv:'Videor',pl:'Filmy',fr:'Vidéos',zh:'视频',es:'Vídeos'};
@@ -2340,7 +2342,7 @@ const kvForsida=titill=>{const esc=x=>String(x).replace(/&/g,'&amp;').replace(/<
     `<circle cx="1050" cy="360" r="92" fill="#16324f"/><path d="M1022 310 L1022 410 L1108 360 Z" fill="#fff"/></svg>`;
   return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);};
 const kynningarHtml=()=>`<section class="kynningar-svaedi" aria-label="${t('kv_myndbond')}"><h3 class="kv-fyrirsogn">🎬 ${t('kv_myndbond')}</h3><div class="kynningar">${KYNNINGAR.map(([f,k])=>{const heiti=t(k).replace(/\s*\([^)]*\)\s*$/,'');
-  return `<figure class="kynning" data-skra="${f}" hidden><video src="${f}" preload="metadata" playsinline tabindex="0" role="button" aria-label="${t('kv_spila')}: ${heiti}" poster="${kvForsida(heiti.split(':')[0])}"></video><figcaption><b>${heiti}</b><small class="kv-lengd"></small></figcaption></figure>`;}).join('')}</div></section>`;
+  return `<figure class="kynning" data-skra="${f}" hidden><video preload="metadata" playsinline tabindex="0" role="button" aria-label="${t('kv_spila')}: ${heiti}" poster="${kvForsida(heiti.split(':')[0])}"></video><figcaption><b>${heiti}</b><small class="kv-lengd"></small></figcaption></figure>`;}).join('')}</div></section>`;
 // Myndband birtist aðeins ef skráin er til í safninu
 function synaKynningar(){const svaedi=document.querySelector('.kynningar-svaedi');
   document.querySelectorAll('.kynning[data-skra]').forEach(f=>{
@@ -2348,9 +2350,9 @@ function synaKynningar(){const svaedi=document.querySelector('.kynningar-svaedi'
     const byrja=()=>{if(v.controls)return;v.controls=true;v.removeAttribute('role');v.setAttribute('aria-label',f.querySelector('b').textContent);v.play().catch(()=>{});};
     v.addEventListener('click',byrja);v.addEventListener('keydown',e=>{if(!v.controls&&(e.key==='Enter'||e.key===' ')){e.preventDefault();byrja();}});
     v.addEventListener('loadedmetadata',()=>{const d=Math.round(v.duration);if(Number.isFinite(d)&&d>0)l.textContent='▶ '+Math.floor(d/60)+':'+String(d%60).padStart(2,'0');});
-    fetch(f.dataset.skra,{method:'HEAD',cache:'no-cache'}).then(r=>{if(r.ok)f.hidden=false;else f.remove();}).catch(()=>f.remove())
-      .finally(()=>{if(svaedi&&!svaedi.querySelector('.kynning'))svaedi.remove();});});}
-const VEDRA_UTGAFA='2026-10-31a';try{console.info('Vedra útgáfa',VEDRA_UTGAFA);document.documentElement.dataset.utgafa=VEDRA_UTGAFA;}catch{}
+    (async()=>{for(const n of kvNofn(f.dataset.skra)){try{const r=await fetch(n,{method:'HEAD',cache:'no-cache'});if(r.ok){v.src=n;f.hidden=false;return;}}catch{}}
+      f.remove();if(svaedi&&!svaedi.querySelector('.kynning'))svaedi.remove();})();});}
+const VEDRA_UTGAFA='2026-10-31b';try{console.info('Vedra útgáfa',VEDRA_UTGAFA);document.documentElement.dataset.utgafa=VEDRA_UTGAFA;}catch{}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
