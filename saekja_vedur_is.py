@@ -294,6 +294,41 @@ def saekja_fjoll():
     raise RuntimeError(f"OpenStreetMap svaraði ekki: {villa}")
 
 
+# ---------------------------------------------------------------- Skálar og skýli (vikulega) úr OpenStreetMap
+SKALA_FYRIRSPURN = ('[out:json][timeout:120];('
+    'nwr["tourism"~"^(alpine_hut|wilderness_hut)$"](63.2,-24.6,66.6,-13.4);'
+    'nwr["amenity"="shelter"]["shelter_type"~"^(basic_hut|weather_shelter|rock_shelter|emergency)$"](63.2,-24.6,66.6,-13.4);'
+    'nwr["amenity"="shelter"]["name"~"[Nn]eyðarskýli|[Ss]kýli|[Ss]káli"](63.2,-24.6,66.6,-13.4););out center tags;')
+
+
+def saekja_skala():
+    villa = None
+    for slod in OVERPASS:
+        try:
+            gogn = urllib.parse.urlencode({"data": SKALA_FYRIRSPURN}).encode()
+            with urllib.request.urlopen(urllib.request.Request(slod, data=gogn, headers=UA), timeout=150) as r:
+                j = json.loads(r.read())
+            ut, sed = [], set()
+            for e in j.get("elements", []):
+                tg = e.get("tags") or {}
+                la = e.get("lat", (e.get("center") or {}).get("lat"))
+                lo = e.get("lon", (e.get("center") or {}).get("lon"))
+                if la is None or lo is None:
+                    continue
+                lykill = e["type"][0] + str(e["id"])
+                if lykill in sed:
+                    continue
+                sed.add(lykill)
+                t = {k: tg[k] for k in ("name", "tourism", "amenity", "shelter_type", "ele", "operator") if tg.get(k)}
+                ut.append({"type": "node", "id": lykill, "lat": round(la, 5), "lon": round(lo, 5), "tags": t})
+            if len(ut) < 30:
+                raise RuntimeError(f"of fáir skálar ({len(ut)})")
+            return ut
+        except Exception as e:
+            villa = e
+    raise RuntimeError(f"OpenStreetMap svaraði ekki: {villa}")
+
+
 def fjoll_gomul(skra="fjoll.json", dagar=7):
     try:
         with open(skra, encoding="utf-8") as f:
@@ -328,6 +363,15 @@ def main():
         # Skrifum villuskrá svo síðan sýni aldrei gamlar eða rangar viðvaranir sem gildar
         vista("vidvaranir.json", {"uppfaert": nu, "villa": True, "vidvaranir": []})
         print(f"Viðvaranir mistókust: {e}")
+    if fjoll_gomul("skalar.json"):
+        try:
+            skalar = saekja_skala()
+            vista("skalar.json", {"uppfaert": nu, "elements": skalar})
+            print(f"Skálalisti uppfærður: {len(skalar)} skálar og skýli")
+        except Exception as e:
+            print(f"Skálalisti mistókst (síðan spyr þá OpenStreetMap beint): {e}")
+    else:
+        print("Skálalisti er nýlegur, ekki sóttur")
     if fjoll_gomul():
         try:
             fjoll = saekja_fjoll()

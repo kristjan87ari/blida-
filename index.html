@@ -276,6 +276,11 @@ path.leit-merki{animation:leitblikk 1s ease-in-out 6}
 .haedval button[data-h="mid"][aria-pressed="true"]{background:#d08c00;border-color:#d08c00}
 .haedval button[data-h="har"][aria-pressed="true"]{background:#d64545;border-color:#d64545}
 .haedval button[data-h="oll"][aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.skali-merki{background:none;border:0;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.35));cursor:pointer}
+.skali-merki:hover{transform:scale(1.18)}
+.skali-sp p{margin:3px 0 0;font-size:12.5px;color:var(--muted)}
+.skali-sp .skali-neyd{color:#c92a2a;font-weight:500}
+#skala-lina[hidden]{display:none}
 .ks-lina{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:2px 4px 1px;flex-wrap:wrap}
 .ks-lina label{display:flex;align-items:center;gap:5px;cursor:pointer}
 .ks-lina .litaskyring{margin:0;flex:1;min-width:90px}
@@ -2277,6 +2282,15 @@ const HAEDBIL={is:['Öll','Undir 300 m','300–700 m','Yfir 700 m'],en:['All','U
   sv:['Alla','Under 300 m','300–700 m','Över 700 m'],pl:['Wszystkie','Poniżej 300 m','300–700 m','Powyżej 700 m'],fr:['Tous','Moins de 300 m','300–700 m','Plus de 700 m'],
   zh:['全部','300 米以下','300–700 米','700 米以上'],es:['Todas','Menos de 300 m','300–700 m','Más de 700 m']};
 for(const[mal,v]of Object.entries(HAEDBIL))if(I18N[mal])[I18N[mal].hb_oll,I18N[mal].hb_lag,I18N[mal].hb_mid,I18N[mal].hb_har]=v;
+const SKALAR_T={is:['Skálar','Fjallaskáli','Gönguskáli','Skýli','Neyðarskýli','Neyðarskýli eru aðeins ætluð í neyð. Skráðu notkun í gestabókina.'],
+  en:['Huts','Mountain hut','Wilderness hut','Shelter','Emergency shelter','Emergency shelters are for emergencies only. Please sign the guest book.'],
+  da:['Hytter','Bjerghytte','Vildmarkshytte','Ly','Nødly','Nødly er kun til nødsituationer. Skriv dig i gæstebogen.'],
+  sv:['Stugor','Fjällstuga','Vildmarksstuga','Vindskydd','Nödstuga','Nödstugor är endast för nödsituationer. Skriv in dig i gästboken.'],
+  pl:['Schroniska','Schronisko górskie','Chatka','Schron','Schron ratunkowy','Schrony ratunkowe służą wyłącznie w nagłych wypadkach. Wpisz się do księgi gości.'],
+  fr:['Refuges','Refuge de montagne','Cabane','Abri','Abri d’urgence','Les abris d’urgence sont réservés aux situations d’urgence. Merci de signer le livre d’or.'],
+  zh:['山屋','高山小屋','荒野小屋','避难所','紧急避难所','紧急避难所仅供紧急情况使用。请在留言簿上登记。'],
+  es:['Refugios','Refugio de montaña','Cabaña','Abrigo','Refugio de emergencia','Los refugios de emergencia son solo para emergencias. Firma el libro de visitas.']};
+for(const[mal,v]of Object.entries(SKALAR_T))if(I18N[mal])[I18N[mal].sk_rofi,I18N[mal].sk_fjalla,I18N[mal].sk_gongu,I18N[mal].sk_skyli,I18N[mal].sk_neyd,I18N[mal].sk_neyd_ath]=v;
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -2744,7 +2758,7 @@ function reikna(){
     if(!FJNOFN&&!FJNOFN_SAEKIR){FJNOFN_SAEKIR=true;saekjaStadi('fjoll').then(r=>{FJNOFN=r.pts;FJNOFN_SAEKIR=false;if(S.flokkur==='fjall'&&S.fjallHamur==='svaedi')reikna();}).catch(()=>{FJNOFN_SAEKIR=false;});}
     if(FJNOFN)for(const a of valdir){let b=null,d=15;for(const q of FJNOFN){const x=km(a,q);if(x<d){d=x;b=q;}}if(b)a.nafn=t('fj_nalaegt',{n:b.nafn});}
   }
-  S.nidurstada=valdir;S.virkur=-1;teiknaHaedval();
+  S.nidurstada=valdir;S.virkur=-1;teiknaHaedval();uppfaeraSkala();
   teikna(valdir.length?null:t(f.stadir==='skidi'&&sv?'sv_ekkiSkidi':f.stadir&&f.stadir!=='skidi'?'tomt':f.haetta?'tomtHaetta':f.ofugt?'tomtVerst':f.stadir?'tomtSkidi':'tomt'));
 }
 
@@ -2782,6 +2796,7 @@ const Stjorn=L.Control.extend({onAdd(){
   d.innerHTML=`<div class="grunnval" role="group" data-i18n-aria="kortagrunnur">
       <button type="button" data-g="landslag" data-i18n="landslag">Landslag</button><button type="button" data-g="mynd" data-i18n="loftmynd">Loftmynd</button></div><div class="ks-lina"><label><input type="checkbox" id="reitarofi"> <span data-i18n="litareitir">Litareitir</span></label>
     <label><input type="checkbox" id="baejarofi"> <span>🏘️ <span data-i18n="baeir_rofi">Bæir</span></span></label>
+    <label id="skala-lina" hidden><input type="checkbox" id="skalarofi"> <span>🛖 <span data-i18n="sk_rofi">Skálar</span></span></label>
     <div class="litaskyring"><span>Síðra</span><i></i><span>Betra</span></div></div>
   <div class="ks-efni" hidden>
     <label><input type="checkbox" id="vidvrofi"> <span data-i18n="vidvaranir">Viðvaranir</span></label>
@@ -4031,6 +4046,47 @@ function teiknaGonguleidir(){
 }
 
 // ---------------------------------------------------------------- Bæir og borgir: litlir punktar með nafni við músarbendingu
+// ---------------------------------------------------------------- Skálar og skýli: lítil rauð hús (Gönguleiðir, Fjallganga, Rjúpnaveiði)
+const SKALA_FLOKKAR=['gongur','fjall','rjupa'];
+kort.createPane('skalar').style.zIndex=430;
+const skalaLag=L.layerGroup();let synaSkala=geyma.get('bs:skalar')!==false,skalaGogn=null,skalaSaekir=false;
+const SKALI_SVG=(neyd)=>`<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 2.2 L18.2 9.4 L16.4 9.4 L16.4 17.6 L3.6 17.6 L3.6 9.4 L1.8 9.4 Z" fill="#c92a2a" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>${neyd?'<path d="M10 10.2v5.2M7.4 12.8h5.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>':'<rect x="8.4" y="12.4" width="3.2" height="5.2" rx=".4" fill="#fff" opacity=".9"/>'}</svg>`;
+const skalaTegund=t=>{const n=t.name||'';
+  if(/neyð/i.test(n)||t.shelter_type==='emergency')return'neyd';
+  if(t.tourism==='alpine_hut')return'fjalla';if(t.tourism==='wilderness_hut')return'gongu';return'skyli';};
+function teiknaSkala(){
+  skalaLag.clearLayers();if(!skalaGogn)return;
+  for(const e of skalaGogn){const tg=e.tags||{},teg=skalaTegund(tg),nafn=tg.name||t('sk_'+teg);
+    const ele=parseFloat(tg.ele),uppl=[t('sk_'+teg),Number.isFinite(ele)?`${Math.round(ele)} m`:'',tg.operator||''].filter(Boolean).join(' · ');
+    L.marker([e.lat,e.lon],{pane:'skalar',icon:L.divIcon({className:'skali-merki',html:SKALI_SVG(teg==='neyd'),iconSize:[18,18],iconAnchor:[9,15]}),keyboard:false,title:nafn})
+      .bindTooltip(`<strong>${nafn}</strong><br><small>${uppl}</small>`,{direction:'top',offset:[0,-12],className:'bae-tt'})
+      .bindPopup(`<div class="skali-sp"><strong>${teg==='neyd'?'🆘':'🛖'} ${nafn}</strong><p>${uppl}</p>${teg==='neyd'?`<p class="skali-neyd">${t('sk_neyd_ath')}</p>`:''}</div>`)
+      .addTo(skalaLag);}
+}
+async function hladaSkala(){
+  if(skalaGogn||skalaSaekir)return;skalaSaekir=true;
+  try{
+    const geymt=geyma.get('bs:skalar_osm');
+    if(geymt&&Date.now()-geymt.t<30*864e5&&geymt.l?.length){skalaGogn=geymt.l;}
+    else{
+      let j=null;try{const r=await fetch('skalar.json',{cache:'no-cache'});if(r.ok){const x=await r.json();if(x?.elements?.length>=30)j=x;}}catch{}
+      if(!j&&!S.demo)j=await overpass(`[out:json][timeout:90];(nwr["tourism"~"^(alpine_hut|wilderness_hut)$"](${ISL_BOX});nwr["amenity"="shelter"]["shelter_type"~"^(basic_hut|weather_shelter|rock_shelter|emergency)$"](${ISL_BOX});nwr["amenity"="shelter"]["name"~"[Nn]eyðarskýli|[Ss]kýli|[Ss]káli"](${ISL_BOX}););out center tags;`,45000);
+      if(j){skalaGogn=(j.elements||[]).map(e=>({lat:e.lat??e.center?.lat,lon:e.lon??e.center?.lon,tags:e.tags||{}})).filter(e=>e.lat!=null);
+        if(skalaGogn.length)geyma.set('bs:skalar_osm',{t:Date.now(),l:skalaGogn});}
+    }
+    teiknaSkala();
+  }catch{}finally{skalaSaekir=false;}
+}
+function uppfaeraSkala(){
+  const vid=SKALA_FLOKKAR.includes(S.flokkur),lb=document.getElementById('skala-lina'),r=document.getElementById('skalarofi');
+  if(lb)lb.hidden=!vid;if(r)r.checked=synaSkala;
+  const syna=vid&&synaSkala;
+  if(syna){skalaLag.addTo(kort);hladaSkala();}else kort.removeLayer(skalaLag);
+}
+setTimeout(()=>{const r=document.getElementById('skalarofi');if(!r)return;
+  r.onchange=()=>{synaSkala=r.checked;geyma.set('bs:skalar',synaSkala);uppfaeraSkala();};uppfaeraSkala();
+  addEventListener('vedra:mal',()=>{if(skalaGogn)teiknaSkala();});},0);
+
 kort.createPane('baeir').style.zIndex=420;
 const baejaLag=L.layerGroup();let synaBaei=geyma.get('bs:baeir')!==false;if(synaBaei)baejaLag.addTo(kort);
 const BAE_STAERD={city:5.5,town:4};
