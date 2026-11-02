@@ -2355,7 +2355,7 @@ function synaKynningar(){const svaedi=document.querySelector('.kynningar-svaedi'
     v.addEventListener('loadedmetadata',()=>{const d=Math.round(v.duration);if(Number.isFinite(d)&&d>0)l.textContent='▶ '+Math.floor(d/60)+':'+String(d%60).padStart(2,'0');});
     (async()=>{for(const n of kvNofn(f.dataset.skra)){try{const r=await fetch(n,{method:'HEAD',cache:'no-cache'});if(r.ok){v.src=n;f.hidden=false;return;}}catch{}}
       f.remove();if(svaedi&&!svaedi.querySelector('.kynning'))svaedi.remove();})();});}
-const VEDRA_UTGAFA='2026-10-31d';try{console.info('Vedra útgáfa',VEDRA_UTGAFA);document.documentElement.dataset.utgafa=VEDRA_UTGAFA;}catch{}
+const VEDRA_UTGAFA='2026-10-31e';try{console.info('Vedra útgáfa',VEDRA_UTGAFA);document.documentElement.dataset.utgafa=VEDRA_UTGAFA;}catch{}
 let LANG=(()=>{try{const l=JSON.parse(localStorage.getItem('bs:mal'));if(I18N[l])return l;}catch{}return 'is';})();
 const L_=()=>I18N[LANG];
 const t=(k,v={})=>{const s=L_()[k]??I18N.is[k]??k;return typeof s==='string'?s.replace(/\{(\w+)\}/g,(_,n)=>v[n]??''):s;};
@@ -4665,5 +4665,6 @@ const hladaSkrift=src=>new Promise((ok,villa)=>{const s=document.createElement('
 thydaFast();teiknaFlokka();teiknaStillingar();reikna();leid();saekjaAllt();
 setInterval(()=>{if(!document.hidden)saekjaAllt();},60*60e3);
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e6ff6d69f6eb4a14b9c2fe3ee44c36ed"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
